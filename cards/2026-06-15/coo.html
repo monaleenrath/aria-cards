@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- ARIA_DEPLOY_VERSION=2026-06-16-v34 | all_drivers=12 dim_gs_keys=['Region', 'Therapeutic_Area', 'Drug_Category'] first_dim=Therapeutic_Area tmpl=editorial | yoy_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | df_shape=[65760, 19] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('COGS', 'COGS_USD', 'sum', ''), ('Gross Profit', 'Gross_Profit_USD', 'sum', ''), ('Margin %', 'Margin_Pct', 'mean', ''), ('R&D Spend', 'R&D_Spend_USD', 'sum', ''), ('Marketing Spend', 'Marketing_Spend_USD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('New Prescriptions', 'New_Prescriptions', 'sum', ''), ('Repeat Prescriptions', 'Repeat_Prescriptions', 'sum', ''), ('Avg Selling Price', 'Avg_Selling_Price_USD', 'mean', ''), ('Market Share %', 'Market_Share_Pct', 'mean', ''), ('Patient Adherence %', 'Patient_Adherence_Pct', 'mean', ''), ('Returns', 'Returns_USD', 'sum', ''), ('Samples Distributed', 'Samples_Distributed', 'sum', ''), ('Adverse Events', 'Adverse_Events_Count', 'sum', ''), ('Gross Margin %', '?', 'ratio', 'Gross_Profit_USD')] | yoy_summary={'Revenue': 12, 'COGS': 12, 'Gross Profit': 12, 'Margin %': 12, 'R&D Spend': 12, 'Marketing Spend': 12, 'Units Sold': 12, 'New Prescriptions': 12, 'Repeat Prescriptions': 12, 'Avg Selling Price': 12, 'Market Share %': 12, 'Patient Adherence %': 12, 'Returns': 12, 'Samples Distributed': 12, 'Adverse Events': 12, 'Gross Margin %': 12} | yoy_diag.effective_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | yoy_diag.kpis=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=900 yoy_diag.prior_df_len=900 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Region yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=4 yoy_diag.spot_agg_sample=[('Asia Pacific', 42490424.4), ('Europe', 58511714.19), ('Latin America', 23468184.61)] | df_cat_cols={'Region': 'str/4', 'Therapeutic_Area': 'str/5', 'Drug_Category': 'str/3'} -->
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Region', 'Therapeutic_Area', 'Drug_Category'] first_dim=Therapeutic_Area tmpl=editorial | yoy_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | df_shape=[65760, 19] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('COGS', 'COGS_USD', 'sum', ''), ('Gross Profit', 'Gross_Profit_USD', 'sum', ''), ('Margin %', 'Margin_Pct', 'mean', ''), ('R&D Spend', 'R&D_Spend_USD', 'sum', ''), ('Marketing Spend', 'Marketing_Spend_USD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('New Prescriptions', 'New_Prescriptions', 'sum', ''), ('Repeat Prescriptions', 'Repeat_Prescriptions', 'sum', ''), ('Avg Selling Price', 'Avg_Selling_Price_USD', 'mean', ''), ('Market Share %', 'Market_Share_Pct', 'mean', ''), ('Patient Adherence %', 'Patient_Adherence_Pct', 'mean', ''), ('Returns', 'Returns_USD', 'sum', ''), ('Samples Distributed', 'Samples_Distributed', 'sum', ''), ('Adverse Events', 'Adverse_Events_Count', 'sum', ''), ('Gross Margin %', '?', 'ratio', 'Gross_Profit_USD')] | yoy_summary={'Revenue': 12, 'COGS': 12, 'Gross Profit': 12, 'Margin %': 12, 'R&D Spend': 12, 'Marketing Spend': 12, 'Units Sold': 12, 'New Prescriptions': 12, 'Repeat Prescriptions': 12, 'Avg Selling Price': 12, 'Market Share %': 12, 'Patient Adherence %': 12, 'Returns': 12, 'Samples Distributed': 12, 'Adverse Events': 12, 'Gross Margin %': 12} | yoy_diag.effective_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | yoy_diag.kpis=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=900 yoy_diag.prior_df_len=900 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Region yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=4 yoy_diag.spot_agg_sample=[('Asia Pacific', 42490424.4), ('Europe', 58511714.19), ('Latin America', 23468184.61)] | df_cat_cols={'Region': 'str/4', 'Therapeutic_Area': 'str/5', 'Drug_Category': 'str/3'} -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -182,7 +182,7 @@ canvas     { display:block; }
     </div>
     <!-- Right: primary KPI tall box -->
     <div style="flex:0 0 175px;padding-left:16px;border-left:1px solid #1F2937">
-      <div style="font-size:9px;font-weight:700;color:#64748B;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Units Sold</div><div style="font-size:32px;font-weight:800;color:#F8FAFC;font-family:Georgia,serif;line-height:1.0;margin-bottom:10px">1,825,582</div><div style="display:flex;gap:6px;flex-wrap:wrap"><div style="flex:1;min-width:72px;border:1px solid #F8717155;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">Target</div><div style="font-size:10px;font-weight:800;color:#F87171;margin-top:2px">2,931,121</div><div style="font-size:8px;font-weight:700;color:#F87171;margin-top:1px">▼ 62%</div></div><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">MoM</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 4.8%</div></div><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">YoY</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 10.4%</div></div></div>
+      <div style="font-size:9px;font-weight:700;color:#64748B;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Units Sold</div><div style="font-size:32px;font-weight:800;color:#F8FAFC;font-family:Georgia,serif;line-height:1.0;margin-bottom:10px">1,825,582</div><div style="display:flex;gap:6px;flex-wrap:wrap"><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">MoM</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 4.8%</div></div><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">YoY</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 10.4%</div></div></div>
     </div>
   </div>
 
@@ -190,7 +190,7 @@ canvas     { display:block; }
   <div style="display:flex;gap:0;align-items:flex-start">
     <!-- Left col: Strategic Overview -->
     <div style="flex:0 0 28%;padding-right:14px">
-      <div class="sec">Operational Status</div><div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Units Sold: ▲ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.4%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.5%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 5.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.4%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Patient Adherence %: ▼ 0.8% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 1.1%</span></div><div class="narr">Units Sold closed at 1,825,582 (▲ +10.4% YoY, ▲ +4.8% MoM). Target: 2,931,121 — achieved 62%. Drug_Category → Generic processed Units Sold by $81,262 (+10.9% vs prior). — orders processed — throughput stable, no SLA escalation required today. Throughput at only 62% of target (tar</div>
+      <div class="sec">Operational Status</div><div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Units Sold: ▲ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.4%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.5%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 5.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.4%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Patient Adherence %: ▼ 0.8% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 1.1%</span></div><div class="narr">Units Sold closed at 1,825,582 (▲ +10.4% YoY, ▲ +4.8% MoM). Target: 2,931,121 — achieved 62%. Drug_Category → Generic processed Units Sold by $81,262 (+10.9% vs prior). — orders processed — throughput stable, no SLA escalation required today.</div>
     </div>
     <!-- Vertical separator (always full height of whichever col is taller) -->
     <div style="width:1px;background:#1F2937;flex-shrink:0;align-self:stretch"></div>
@@ -207,7 +207,7 @@ canvas     { display:block; }
       </div>
       <!-- Bottom band: Executive Directive spanning full middle+right width -->
       <div style="padding-top:8px">
-        <div class="sec">Team Action</div><div style="display:flex;flex-wrap:wrap"><div style="display:inline-block;margin-right:18px;margin-bottom:4px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Audit Ship Mode split and flag any nodes below SLA. Owner: Operations + Logistics. Deadline: By next fulfilment cycle. Success metric: fulfilment rate holds above prior 7-day baseline. Stretch target: close the 37.7% shortfall to 2,931,121 before period close.</div></div>
+        <div class="sec">Team Action</div><div style="display:flex;flex-wrap:wrap"><div style="display:inline-block;margin-right:18px;margin-bottom:4px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Audit Ship Mode split and flag any nodes below SLA. Owner: Operations + Logistics. Deadline: By next fulfilment cycle. Success metric: fulfilment rate holds above prior 7-day baseline.</div></div>
       </div>
     </div>
   </div>
@@ -215,7 +215,7 @@ canvas     { display:block; }
   
 <div class="footer">
   <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
-  <div class="footer-text">They will ask about SLA impact — have the Ship Mode split and on-time rate ready before the question lands; lead with data, not with &#x27;we&#x27;re looking into it&#x27;. Target: 62% achieved (target 2,931,121) — 37.7% gap outstanding. Throughput bright spot: Drug_Category → Generic added $81,262 — name it before they ask. If pressed on root cause, lead with the data-quality check result before citing demand shift.</div>
+  <div class="footer-text">They will ask about SLA impact — have the Ship Mode split and on-time rate ready before the question lands; lead with data, not with &#x27;we&#x27;re looking into it&#x27;. Throughput bright spot: Drug_Category → Generic added $81,262 — name it before they ask. If pressed on root cause, lead with the data-quality check result before citing demand shift.</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -226,23 +226,15 @@ if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
 /* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
 var ARIA_CHARTS = {};
 
-var ARIA_DIM_DATA   = {"Region": {"labels": ["North America", "Europe", "Asia Pacific", "Latin America"], "values": [700246.0, 527974.0, 384921.0, 212441.0]}, "Therapeutic_Area": {"labels": ["Oncology", "Cardiology", "Immunology", "Neurology", "Respiratory"], "values": [470830.0, 386035.0, 372171.0, 328606.0, 267940.0]}, "Drug_Category": {"labels": ["Generic", "Biosimilar", "Branded"], "values": [829537.0, 614559.0, 381486.0]}};
-var ARIA_TARGET_BAR = {};
+var ARIA_DIM_DATA = {"Region": {"labels": ["North America", "Europe", "Asia Pacific", "Latin America"], "values": [700246.0, 527974.0, 384921.0, 212441.0]}, "Therapeutic_Area": {"labels": ["Oncology", "Cardiology", "Immunology", "Neurology", "Respiratory"], "values": [470830.0, 386035.0, 372171.0, 328606.0, 267940.0]}, "Drug_Category": {"labels": ["Generic", "Biosimilar", "Branded"], "values": [829537.0, 614559.0, 381486.0]}};
 function ariaEdDim(pill) {
     var dim = pill.getAttribute('data-dim');
     var d   = ARIA_DIM_DATA[dim];
     if (!d) return;
     var chart = ARIA_CHARTS['ed_bar'];
     if (!chart) return;
-    chart.data.labels               = d.labels;
-    chart.data.datasets[0].data     = d.values;
-    // update target scatter markers if dataset[1] exists
-    var tgtMap = ARIA_TARGET_BAR[dim] || {};
-    if (chart.data.datasets.length > 1) {
-        chart.data.datasets[1].data = d.labels.map(function(lbl, i) {
-            return {x: tgtMap[lbl] || 0, y: i};
-        });
-    }
+    chart.data.labels           = d.labels;
+    chart.data.datasets[0].data = d.values;
     chart.update('none');
     var t = document.getElementById('ed-dim-title');
     if (t) t.textContent = dim + ' Breakdown';
@@ -264,15 +256,19 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins:{ legend:{display:false},
                 datalabels:{
                     anchor:'end', align:'right',
-                    formatter:function(v, ctx){
-                        if(ctx.datasetIndex !== 0) return null;
+                    formatter:function(v){
                         return Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
                                Math.abs(v)>=1e3?(v/1e3).toFixed(1)+'K':
                                v.toFixed(0);
                     },
                     color:'#64748B', font:{size:8,weight:'600'}
                 },
-                tooltip:{ callbacks:{ label: ctx => (Math.abs(ctx.raw)>=1e6 ? (ctx.raw>=0?'+':'')+(ctx.raw/1e6).toFixed(1)+'M' : Math.abs(ctx.raw)>=1e3 ? (ctx.raw>=0?'+':'')+(ctx.raw/1e3).toFixed(1)+'K' : ctx.raw.toFixed(0)) } } },
+                tooltip:{ callbacks:{ label: ctx =>
+                    (Math.abs(ctx.raw)>=1e6
+                     ? (ctx.raw>=0?'+':'')+( ctx.raw/1e6).toFixed(1)+'M'
+                     : Math.abs(ctx.raw)>=1e3
+                     ? (ctx.raw>=0?'+':'')+(ctx.raw/1e3).toFixed(1)+'K'
+                     : ctx.raw.toFixed(0)) } } },
             scales:{
                 x:{ display:false, grid:{display:false} },
                 y:{ ticks:{ color:'#64748B', font:{size:9} },
