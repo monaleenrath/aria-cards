@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=19 dim_gs_keys=['Region', 'Plan_Type', 'Content_Type', 'Genre'] first_dim=Genre tmpl=scorecard | yoy_keys=['Revenue', 'Profit', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Margin %', 'Avg Watch Hours', 'Churn Rate'] yoy_lens=[19, 19, 19, 19, 19, 19, 19, 19] | dod_keys=['Revenue', 'Profit', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Margin %', 'Avg Watch Hours', 'Churn Rate'] dod_lens=[19, 19, 19, 19, 19, 19, 19, 19] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Region', 'Plan_Type', 'Content_Type', 'Genre'] | df_shape=[16440, 16] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('Profit', 'Profit_USD', 'sum', ''), ('Active Subscribers', 'Active_Subscribers', 'sum', ''), ('New Subscriptions', 'New_Subscriptions', 'sum', ''), ('Cancellations', 'Cancellations', 'sum', ''), ('Margin %', 'Margin_Pct', 'mean', ''), ('Avg Watch Hours', 'Avg_Watch_Hours_Per_User', 'mean', ''), ('Churn Rate', '?', 'ratio', 'Cancellations')] | yoy_summary={'Revenue': 19, 'Profit': 19, 'Active Subscribers': 19, 'New Subscriptions': 19, 'Cancellations': 19, 'Margin %': 19, 'Avg Watch Hours': 19, 'Churn Rate': 19} | yoy_diag.effective_dims=['Region', 'Plan_Type', 'Content_Type', 'Genre'] | yoy_diag.kpis=['Revenue', 'Profit', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Margin %', 'Avg Watch Hours', 'Churn Rate'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=225 yoy_diag.prior_df_len=225 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Region yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=5 yoy_diag.spot_agg_sample=[('Asia Pacific', 30794242.71), ('Europe', 54766117.29), ('Latin America', 19063742.84)] | df_cat_cols={'Region': 'str/5', 'Plan_Type': 'str/3', 'Content_Type': 'str/5', 'Genre': 'str/10'} -->
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Province', 'Category'] first_dim=Province tmpl=editorial | yoy_keys=['Revenue', 'Gross Profit', 'Transactions', 'Avg Basket', 'Loyalty Members', 'New Loyalty Members', 'Waste', 'Promo Revenue', 'Gross Margin %', 'Promo Mix %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'Gross Profit', 'Transactions', 'Avg Basket', 'Loyalty Members', 'New Loyalty Members', 'Waste', 'Promo Revenue', 'Gross Margin %', 'Promo Mix %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Province', 'Category'] | df_shape=[65760, 16] | kpi_map=[('Revenue', 'Revenue_CAD', 'sum', ''), ('Gross Profit', 'Gross_Profit_CAD', 'sum', ''), ('Transactions', 'Transactions', 'sum', ''), ('Avg Basket', 'Avg_Basket_CAD', 'mean', ''), ('Loyalty Members', 'Loyalty_Members', 'sum', ''), ('New Loyalty Members', 'New_Loyalty_Members', 'sum', ''), ('Waste', 'Waste_CAD', 'sum', ''), ('Promo Revenue', 'Promo_Revenue_CAD', 'sum', ''), ('Gross Margin %', '?', 'ratio', 'Gross_Profit_CAD'), ('Promo Mix %', '?', 'ratio', 'Promo_Revenue_CAD')] | yoy_summary={'Revenue': 12, 'Gross Profit': 12, 'Transactions': 12, 'Avg Basket': 12, 'Loyalty Members': 12, 'New Loyalty Members': 12, 'Waste': 12, 'Promo Revenue': 12, 'Gross Margin %': 12, 'Promo Mix %': 12} | yoy_diag.effective_dims=['Province', 'Category'] | yoy_diag.kpis=['Revenue', 'Gross Profit', 'Transactions', 'Avg Basket', 'Loyalty Members', 'New Loyalty Members', 'Waste', 'Promo Revenue', 'Gross Margin %', 'Promo Mix %'] | yoy_diag.curr_start=2026-04-01 yoy_diag.prior_start=2025-04-01 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=4560 yoy_diag.prior_df_len=4560 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Province yoy_diag.spot_cfg={'column': 'Revenue_CAD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('Alberta', 26509195.28), ('British Columbia', 28740803.06), ('Manitoba', 10118234.45)] | df_cat_cols={'Province': 'str/6', 'Category': 'str/10'} -->
 <html>
 <head>
 <meta charset="utf-8">
 <style>
 
 * { margin:0; padding:0; box-sizing:border-box; }
-html { background:#0B1220; }
+html { background:#F5F0E8; }
 body {
-    background:#0B1220; color:#F8FAFC;
+    background:#F5F0E8; color:#1A1410;
     font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
     font-size:13px; line-height:1.5;
 }
 .card {
-    width:100%; max-width:900px; background:#0B1220;
+    width:100%; max-width:900px; background:#F5F0E8;
     margin:0 auto; display:flex; flex-direction:column;
     padding:20px 28px 0;
 }
 /* ─ Masthead ──────────────────────────────── */
 .mast {
     display:flex; align-items:center; justify-content:space-between;
-    border-bottom:1px solid #1F2937; padding-bottom:10px; margin-bottom:14px;
+    border-bottom:1px solid #D0C8BC; padding-bottom:10px; margin-bottom:14px;
     gap:8px; flex-wrap:wrap;
 }
 .mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
-.mast-mid   { flex:1; text-align:center; color:#64748B; font-size:8px;
+.mast-mid   { flex:1; text-align:center; color:#8B7D70; font-size:8px;
                letter-spacing:3px; font-weight:600; }
 .mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
 .aria-logo  { color:#10B981; font-size:11px; font-weight:800; letter-spacing:4px; }
-.date-lbl   { color:#64748B; font-size:9px; letter-spacing:2px; font-weight:600; }
-.date-range { color:#64748B; font-size:8px; opacity:0.7; }
+.date-lbl   { color:#8B7D70; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#8B7D70; font-size:8px; opacity:0.7; }
 
 /* ─ Section labels ────────────────────────── */
 .sec { font-size:8px; font-weight:700; letter-spacing:3px;
@@ -38,14 +38,14 @@ body {
 /* ─ KPI tiles (original — used by other contexts) ── */
 .kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
 .kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
-              background:#111827; border:1px solid #1F2937;
+              background:#FFFFFF; border:1px solid #D0C8BC;
               border-radius:8px; padding:10px 12px; position:relative;
               overflow:hidden; }
 .kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
               border-radius:50%; }
 .kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
-              color:#64748B; text-transform:uppercase; margin-bottom:5px; }
-.kpi-val   { font-size:20px; font-weight:700; color:#F8FAFC;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#1A1410;
               font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
 .kpi-val.sm{ font-size:15px; }
 .kpi-d     { font-size:9px; font-weight:600; }
@@ -53,18 +53,18 @@ body {
 
 /* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
 .kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-.kpi-tile-v2  { background:#111827; border:1px solid #1F2937;
+.kpi-tile-v2  { background:#FFFFFF; border:1px solid #D0C8BC;
                  border-radius:10px; padding:14px 16px; position:relative;
                  overflow:hidden; }
 .kpi-spark-v2 { height:64px; margin:8px 0 4px; }
 
 /* ─ Mini KPI row (Dossier top) ───────────── */
 .mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
-.mkpi      { flex:1; background:#111827; border:1px solid #1F2937;
+.mkpi      { flex:1; background:#FFFFFF; border:1px solid #D0C8BC;
               border-radius:6px; padding:8px 10px; min-width:0; }
 .mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
-              color:#64748B; text-transform:uppercase; margin-bottom:3px; }
-.mkpi-val  { font-size:14px; font-weight:700; color:#F8FAFC;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#1A1410;
               font-family:Georgia,serif; white-space:nowrap;
               overflow:hidden; text-overflow:ellipsis; }
 .mkpi-d    { font-size:8px; font-weight:600; }
@@ -74,8 +74,8 @@ body {
 canvas     { display:block; }
 
 /* ─ Narrative ────────────────────────────── */
-.narr { font-size:11px; color:#CBD5E1; line-height:1.6; }
-.narr strong { color:#F8FAFC; }
+.narr { font-size:11px; color:#4A3F35; line-height:1.6; }
+.narr strong { color:#1A1410; }
 .stat-pill {
     display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
     font-size:9px; font-weight:700; vertical-align:middle;
@@ -85,10 +85,10 @@ canvas     { display:block; }
 /* ─ Filter panel ─────────────────────────── */
 .filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
 .filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
-                 color:#64748B; text-transform:uppercase; }
+                 color:#8B7D70; text-transform:uppercase; }
 .filter-sel   {
-    font-size:9px; background:#1F2937; color:#F8FAFC;
-    border:1px solid #1F2937; border-radius:5px;
+    font-size:9px; background:#FFFFFF; color:#1A1410;
+    border:1px solid #D0C8BC; border-radius:5px;
     padding:4px 8px; cursor:pointer; outline:none;
     font-family:inherit;
 }
@@ -104,33 +104,33 @@ canvas     { display:block; }
                 border-radius:8px; padding:12px 14px; }
 .action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
                 color:#10B981; margin-bottom:6px; }
-.action-text { font-size:11px; font-weight:700; color:#F8FAFC;
+.action-text { font-size:11px; font-weight:700; color:#1A1410;
                 line-height:1.4; margin-bottom:4px; }
-.action-meta { font-size:9px; color:#64748B; }
+.action-meta { font-size:9px; color:#8B7D70; }
 
 /* ─ Footer ───────────────────────────────── */
-.footer      { background:#111827; margin:14px -28px 0;
-                padding:10px 28px 24px; border-top:1px solid #1F2937; }
+.footer      { background:#EDE8DF; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #D0C8BC; }
 .footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
                 color:#10B981; margin-bottom:4px; }
-.footer-text { font-size:9px; color:#CBD5E1; font-style:italic;
+.footer-text { font-size:9px; color:#4A3F35; font-style:italic;
                 font-family:Georgia,serif; opacity:0.85;
                 line-height:1.6; overflow:visible; white-space:normal; }
 
 /* ─ Editorial specific ───────────────────── */
 .ed-hero     { display:flex; align-items:center; gap:18px;
-                padding:14px 0 12px; border-bottom:1px solid #1F2937;
+                padding:14px 0 12px; border-bottom:1px solid #D0C8BC;
                 margin-bottom:14px; }
-.ed-headline { font-size:20px; font-weight:700; color:#F8FAFC;
+.ed-headline { font-size:20px; font-weight:700; color:#1A1410;
                 font-family:Georgia,serif; line-height:1.25;
                 flex:1; }
-.ed-sub      { font-size:11px; color:#64748B; font-style:italic;
+.ed-sub      { font-size:11px; color:#8B7D70; font-style:italic;
                 margin-top:5px; }
 .ed-col      { flex:1; }
-.ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
-.ed-col + .ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
 .ed-cols     { display:flex; gap:0; }
-.ed-body     { font-size:11px; color:#CBD5E1; line-height:1.65;
+.ed-body     { font-size:11px; color:#4A3F35; line-height:1.65;
                 font-family:Georgia,serif; }
 .ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
 
@@ -138,7 +138,7 @@ canvas     { display:block; }
 .ed-dim-pill {
     font-size:9px; font-weight:700; letter-spacing:0.8px;
     text-transform:uppercase; background:transparent;
-    border:1px solid #1F2937; color:#64748B;
+    border:1px solid #D0C8BC; color:#8B7D70;
     border-radius:10px; padding:3px 10px; cursor:pointer;
     font-family:inherit; transition:all 0.15s;
 }
@@ -161,69 +161,61 @@ canvas     { display:block; }
     
     <div>
       <div class="date-lbl">MON JUN 15 2026</div>
-      <span class="date-range"> &nbsp;Jun 01 → Jun 15 </span>
+      <span class="date-range"> &nbsp;Apr 01 → Jun 15 </span>
     </div>
   </div>
 </div>
-  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Genre" onchange="ariaFilter(this)"><option value="All">Genre: All</option><option value="Drama">Drama</option><option value="Reality">Reality</option><option value="Action">Action</option><option value="Thriller">Thriller</option><option value="Sci-Fi">Sci-Fi</option><option value="Romance">Romance</option></select> <select class="filter-sel" data-dim="Region" onchange="ariaFilter(this)"><option value="All">Region: All</option><option value="North America">North America</option><option value="Europe">Europe</option><option value="Asia Pacific">Asia Pacific</option><option value="Latin America">Latin America</option><option value="Middle East &amp; Africa">Middle East &amp; Africa</option></select> <select class="filter-sel" data-dim="Content_Type" onchange="ariaFilter(this)"><option value="All">Content_Type: All</option><option value="Documentaries">Documentaries</option><option value="Original Series">Original Series</option><option value="Movies">Movies</option><option value="Kids &amp; Family">Kids &amp; Family</option><option value="Licensed Content">Licensed Content</option></select> <select class="filter-sel" data-dim="Plan_Type" onchange="ariaFilter(this)"><option value="All">Plan_Type: All</option><option value="Standard">Standard</option><option value="Premium">Premium</option><option value="Basic (Ads)">Basic (Ads)</option></select> </div>
-  <div class="sec">Performance Scorecard</div>
-  <div class="kpi-grid-v2">
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#34D399"></div>
-  <div class="kpi-name">Revenue</div>
-  <div class="kpi-val sm" id="sc_kv_0" data-orig="$201,232,243">$201,232,243</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_0"></canvas></div>
-  <div class="kpi-d" id="sc_md_0" data-orig="▼ 4.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 4.0% MoM</div>
-  <div class="kpi-d" id="sc_yd_0" data-orig="▲ 10.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.3% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#34D399"></div>
-  <div class="kpi-name">Profit</div>
-  <div class="kpi-val sm" id="sc_kv_1" data-orig="$71,646,710">$71,646,710</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_1"></canvas></div>
-  <div class="kpi-d" id="sc_md_1" data-orig="▼ 3.8% MoM" data-oc="#F87171" style="color:#F87171">▼ 3.8% MoM</div>
-  <div class="kpi-d" id="sc_yd_1" data-orig="▲ 10.2% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.2% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#F87171"></div>
-  <div class="kpi-name">Margin %</div>
-  <div class="kpi-val " id="sc_kv_2" data-orig="35.63">35.63</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_2"></canvas></div>
-  <div class="kpi-d" id="sc_md_2" data-orig="▼ 0.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.1% MoM</div>
-  <div class="kpi-d" id="sc_yd_2" data-orig="▼ 0.0% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.0% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#F87171"></div>
-  <div class="kpi-name">Churn Rate</div>
-  <div class="kpi-val " id="sc_kv_3" data-orig="14.9%">14.9%</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_3"></canvas></div>
-  <div class="kpi-d" id="sc_md_3" data-orig="▼ 2.2% MoM" data-oc="#F87171" style="color:#F87171">▼ 2.2% MoM</div>
-  <div class="kpi-d" id="sc_yd_3" data-orig="▼ 0.2% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.2% YoY</div>
-  
-</div></div>
-  
-<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #1F2937;padding-top:14px">
-  <div style="flex:1;padding-right:14px;border-right:1px solid #1F2937">
-    <div class="sec">Operational Status</div>
-    <div class="ed-stat-row"><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Revenue: ▼ 4.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.3%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Profit: ▼ 3.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.2%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Margin %: ▼ 0.1% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.0%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Churn Rate: ▼ 2.2% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.2%</span></div>
-    <div class="narr">Revenue closed at $201,232,243 (▲ +10.3% YoY, ▼ -4.0% MoM). Content_Type → Original Series accelerated Revenue by $18,075,718 (+60.4% vs prior). Margin at 35.63 — below threshold, worth a capital-allocation call this week.</div>
+
+  <!-- ── TOP: headline + secondary KPIs (left) | primary KPI tall box (right) ── -->
+  <div style="display:flex;gap:0;align-items:flex-start;margin-bottom:10px;padding-bottom:10px;
+              border-bottom:1px solid #D0C8BC">
+    <!-- Left: icon + headline + subtitle + secondary KPIs -->
+    <div style="flex:1;padding-right:20px">
+      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+        <div style="width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 36L18 24l8 6 14-16" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="12" r="4" fill="#10B981" opacity="0.3" stroke="#10B981" stroke-width="1.5"/></svg></div>
+        <div style="flex:1">
+          <div class="ed-headline">Gross Profit YoY gap at +4.5% — margin 30.0%, board alert</div>
+          <div class="ed-sub">Gross Profit closed at $46,082,042 (▲ +4.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;padding-left:4px"><div style="border-left:3px solid #10B981;padding-left:8px;"><div style="font-size:7px;color:#8B7D70;letter-spacing:1px;text-transform:uppercase">Revenue</div><div style="font-size:12px;font-weight:700;color:#1A1410;font-family:Georgia,serif">$153,649,235</div><div style="font-size:8px;font-weight:600;color:#34D399">▲ 4.4% MoM</div></div><div style="border-left:3px solid #10B981;padding-left:8px;"><div style="font-size:7px;color:#8B7D70;letter-spacing:1px;text-transform:uppercase">Gross Margin %</div><div style="font-size:12px;font-weight:700;color:#1A1410;font-family:Georgia,serif">2999.2%</div><div style="font-size:8px;font-weight:600;color:#F87171">▼ 0.1% MoM</div></div><div style="border-left:3px solid #10B981;padding-left:8px;"><div style="font-size:7px;color:#8B7D70;letter-spacing:1px;text-transform:uppercase">Waste</div><div style="font-size:12px;font-weight:700;color:#1A1410;font-family:Georgia,serif">$6,018,456</div><div style="font-size:8px;font-weight:600;color:#34D399">▲ 4.4% MoM</div></div></div>
+    </div>
+    <!-- Right: primary KPI tall box -->
+    <div style="flex:0 0 175px;padding-left:16px;border-left:1px solid #D0C8BC">
+      <div style="font-size:9px;font-weight:700;color:#8B7D70;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Gross Profit</div><div style="font-size:32px;font-weight:800;color:#1A1410;font-family:Georgia,serif;line-height:1.0;margin-bottom:10px">$46,082,042</div><div style="display:flex;gap:6px;flex-wrap:wrap"><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#8B7D70;text-transform:uppercase">MoM</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 4.4%</div></div><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#8B7D70;text-transform:uppercase">YoY</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 4.5%</div></div></div>
+    </div>
   </div>
-  <div style="flex:1;padding:0 14px;border-right:1px solid #1F2937">
-    <div class="sec">What Moved the Number</div>
-    <div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#10B981;margin-right:4px">▶</span>Content_Type → Original Series accelerated Revenue by $18,075,718 (+60.4% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#10B981;margin-right:4px">▶</span>Content_Type → Documentaries accelerated Revenue by $15,746,983 (+45.3% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#10B981;margin-right:4px">▶</span>Genre → Reality accelerated Revenue by $12,111,957 (+78.4% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#10B981;margin-right:4px">▶</span>Content_Type → Licensed Content compressed Revenue by $10,554,566 (-28.7% vs prior).</div>
+
+  <!-- ── BOTTOM: strategic overview (left) | signals+bar top, exec dir bottom (right) ── -->
+  <div style="display:flex;gap:0;align-items:flex-start">
+    <!-- Left col: Strategic Overview -->
+    <div style="flex:0 0 28%;padding-right:14px">
+      <div class="sec">Operational Status</div><div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 4.4% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 4.6%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 4.4% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 4.5%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Gross Margin %: ▼ 0.1% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.1%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Waste: ▲ 4.4% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 4.6%</span></div><div class="narr">Gross Profit closed at $46,082,042 (▲ +4.5% YoY, ▲ +4.4% MoM). Province → Ontario accelerated Gross Profit by $611,656 (+4.5% vs prior). Margin at 30.0% — below threshold, worth a capital-allocation call this week.</div>
+    </div>
+    <!-- Vertical separator (always full height of whichever col is taller) -->
+    <div style="width:1px;background:#D0C8BC;flex-shrink:0;align-self:stretch"></div>
+    <!-- Middle-right: column flex — signals+bar on top, exec directive below -->
+    <div style="flex:1;padding-left:14px;display:flex;flex-direction:column">
+      <!-- Top row: Boardroom Signals | BAR Chart -->
+      <div style="display:flex;gap:0;padding-bottom:10px;border-bottom:1px solid #D0C8BC">
+        <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
+          <div class="sec">What Moved the Number</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#10B981;margin-right:4px">▶</span>Province → Ontario accelerated Gross Profit by $611,656 (+4.5% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#10B981;margin-right:4px">▶</span>Province → Quebec accelerated Gross Profit by $405,284 (+4.4% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#10B981;margin-right:4px">▶</span>Province → Alberta accelerated Gross Profit by $368,168 (+4.9% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#10B981;margin-right:4px">▶</span>Province → British Columbia accelerated Gross Profit by $363,155 (+4.4% vs prior).</div>
+        </div>
+        <div style="flex:0 0 200px;padding-left:14px">
+          <div style="margin-bottom:4px"><span id="ed-dim-title" class="sec" style="display:block;margin-bottom:5px">Province Breakdown</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px"><button class="ed-dim-pill ed-dim-pill-active" data-dim="Province" onclick="ariaEdDim(this)" style="--ed-accent:#10B981">Province</button> <button class="ed-dim-pill " data-dim="Category" onclick="ariaEdDim(this)" style="--ed-accent:#10B981">Category</button> </div></div><div class="chart-box" style="height:176px"><canvas id="ed_bar"></canvas></div>
+        </div>
+      </div>
+      <!-- Bottom band: Executive Directive spanning full middle+right width -->
+      <div style="padding-top:8px">
+        <div class="sec">Team Action</div><div style="display:flex;flex-wrap:wrap"><div style="display:inline-block;margin-right:18px;margin-bottom:4px;font-size:10px;color:#4A3F35;"><span style="color:#10B981;font-weight:700;margin-right:5px">▶</span>Protect Province → Ontario momentum with committed budget. Owner: C-Suite + Finance. Deadline: Before the next board review. Success metric: sustain $611,656 lift into next month.</div></div>
+      </div>
+    </div>
   </div>
-  <div style="flex:1;padding-left:14px">
-    <div class="sec">Team Action</div>
-    <div style="margin-bottom:6px;font-size:10px;color:#CBD5E1;"><span style="color:#10B981;font-weight:700;margin-right:5px">▶</span>Align on Content_Type → Licensed Content recovery strategy. Owner: C-Suite + Finance. Deadline: Before the next board review. Success metric: recover ~$5,277,283 in Revenue within 30 days.</div>
-  </div>
-</div>
+
   
 <div class="footer">
   <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
-  <div class="footer-text">They will ask whether this growth is margin-accretive — answer: margin sits at 35.63, below threshold — have the capital-allocation slide ready. Strategic bright spot: Content_Type → Original Series added $18,075,718 — name it before they ask.</div>
+  <div class="footer-text">They will ask whether this growth is margin-accretive — answer: margin sits at 30.0%, below threshold — have the capital-allocation slide ready. Strategic bright spot: Province → Ontario added $611,656 — name it before they ask.</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -234,200 +226,55 @@ if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
 /* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
 var ARIA_CHARTS = {};
 
-var ARIA_KPI_ORDER        = ["Revenue", "Profit", "Margin %", "Churn Rate"];
-var ARIA_DIM_MEMBER_KPIS  = {"Region": {"Asia Pacific": {"Revenue": {"value": 30794242.71, "value_fmt": "$30.8M", "mom_pct": -3.87, "yoy_pct": 9.93}, "Profit": {"value": 10898395.22, "value_fmt": "$10.9M", "mom_pct": -5.31, "yoy_pct": 8.01}, "Active Subscribers": {"value": 100803213.0, "value_fmt": "100,803,213", "mom_pct": -3.98, "yoy_pct": 9.75}, "New Subscriptions": {"value": 249155.0, "value_fmt": "249,155", "mom_pct": -4.37, "yoy_pct": 9.62}, "Cancellations": {"value": 143726.0, "value_fmt": "143,726", "mom_pct": -7.55, "yoy_pct": 9.05}, "Margin %": {"value": 35.4258, "value_fmt": "35.43", "mom_pct": -1.62, "yoy_pct": -1.31}, "Avg Watch Hours": {"value": 2.4436, "value_fmt": "2.44", "mom_pct": -5.94, "yoy_pct": 2.96}, "Churn Rate": {"value": 0.1426, "value_fmt": "14.3%", "mom_pct": -3.72, "yoy_pct": -0.63}}, "Europe": {"Revenue": {"value": 54766117.29, "value_fmt": "$54.8M", "mom_pct": -4.08, "yoy_pct": 10.53}, "Profit": {"value": 19276452.83, "value_fmt": "$19.3M", "mom_pct": -6.47, "yoy_pct": 9.15}, "Active Subscribers": {"value": 125064407.0, "value_fmt": "125,064,407", "mom_pct": -4.05, "yoy_pct": 10.38}, "New Subscriptions": {"value": 312366.0, "value_fmt": "312,366", "mom_pct": 1.15, "yoy_pct": 8.89}, "Cancellations": {"value": 180617.0, "value_fmt": "180,617", "mom_pct": -6.69, "yoy_pct": 0.86}, "Margin %": {"value": 34.982, "value_fmt": "34.98", "mom_pct": -3.04, "yoy_pct": -1.86}, "Avg Watch Hours": {"value": 2.332, "value_fmt": "2.33", "mom_pct": -8.64, "yoy_pct": 1.54}, "Churn Rate": {"value": 0.1444, "value_fmt": "14.4%", "mom_pct": -2.75, "yoy_pct": -8.62}}, "Latin America": {"Revenue": {"value": 19063742.84, "value_fmt": "$19.1M", "mom_pct": -4.51, "yoy_pct": 10.51}, "Profit": {"value": 6842119.81, "value_fmt": "$6.8M", "mom_pct": -3.63, "yoy_pct": 12.78}, "Active Subscribers": {"value": 75306630.0, "value_fmt": "75,306,630", "mom_pct": -4.46, "yoy_pct": 10.78}, "New Subscriptions": {"value": 178633.0, "value_fmt": "178,633", "mom_pct": -8.9, "yoy_pct": 3.82}, "Cancellations": {"value": 114678.0, "value_fmt": "114,678", "mom_pct": -6.86, "yoy_pct": 15.54}, "Margin %": {"value": 35.8762, "value_fmt": "35.88", "mom_pct": 0.68, "yoy_pct": 1.62}, "Avg Watch Hours": {"value": 2.3298, "value_fmt": "2.33", "mom_pct": -12.66, "yoy_pct": -4.63}, "Churn Rate": {"value": 0.1523, "value_fmt": "15.2%", "mom_pct": -2.51, "yoy_pct": 4.3}}, "Middle East & Africa": {"Revenue": {"value": 8319057.65, "value_fmt": "$8.3M", "mom_pct": -4.22, "yoy_pct": 9.65}, "Profit": {"value": 3023174.81, "value_fmt": "$3.0M", "mom_pct": -2.28, "yoy_pct": 11.15}, "Active Subscribers": {"value": 38596448.0, "value_fmt": "38,596,448", "mom_pct": -4.18, "yoy_pct": 10.07}, "New Subscriptions": {"value": 94110.0, "value_fmt": "94,110", "mom_pct": -7.63, "yoy_pct": 8.24}, "Cancellations": {"value": 59464.0, "value_fmt": "59,464", "mom_pct": -6.39, "yoy_pct": 20.91}, "Margin %": {"value": 36.2524, "value_fmt": "36.25", "mom_pct": 2.0, "yoy_pct": 0.58}, "Avg Watch Hours": {"value": 2.1651, "value_fmt": "2.17", "mom_pct": -12.2, "yoy_pct": -11.05}, "Churn Rate": {"value": 0.1541, "value_fmt": "15.4%", "mom_pct": -2.31, "yoy_pct": 9.85}}, "North America": {"Revenue": {"value": 88289082.42, "value_fmt": "$88.3M", "mom_pct": -3.88, "yoy_pct": 10.38}, "Profit": {"value": 31606567.69, "value_fmt": "$31.6M", "mom_pct": -1.74, "yoy_pct": 10.92}, "Active Subscribers": {"value": 168817062.0, "value_fmt": "168,817,062", "mom_pct": -4.44, "yoy_pct": 9.72}, "New Subscriptions": {"value": 419575.0, "value_fmt": "419,575", "mom_pct": -6.5, "yoy_pct": 11.32}, "Cancellations": {"value": 258290.0, "value_fmt": "258,290", "mom_pct": -5.09, "yoy_pct": 12.57}, "Margin %": {"value": 35.6256, "value_fmt": "35.63", "mom_pct": 1.71, "yoy_pct": 0.8}, "Avg Watch Hours": {"value": 2.4813, "value_fmt": "2.48", "mom_pct": -2.85, "yoy_pct": 10.5}, "Churn Rate": {"value": 0.153, "value_fmt": "15.3%", "mom_pct": -0.68, "yoy_pct": 2.6}}}, "Plan_Type": {"Basic (Ads)": {"Revenue": {"value": 32287032.31, "value_fmt": "$32.3M", "mom_pct": -4.13, "yoy_pct": 10.5}, "Profit": {"value": 11295430.91, "value_fmt": "$11.3M", "mom_pct": -5.79, "yoy_pct": 10.06}, "Active Subscribers": {"value": 152222542.0, "value_fmt": "152,222,542", "mom_pct": -4.69, "yoy_pct": 10.09}, "New Subscriptions": {"value": 378587.0, "value_fmt": "378,587", "mom_pct": -3.89, "yoy_pct": 7.75}, "Cancellations": {"value": 223609.0, "value_fmt": "223,609", "mom_pct": -7.73, "yoy_pct": 8.71}, "Margin %": {"value": 35.304, "value_fmt": "35.30", "mom_pct": -1.09, "yoy_pct": -0.93}, "Avg Watch Hours": {"value": 2.4064, "value_fmt": "2.41", "mom_pct": -3.23, "yoy_pct": 5.41}, "Churn Rate": {"value": 0.1469, "value_fmt": "14.7%", "mom_pct": -3.19, "yoy_pct": -1.25}}, "Premium": {"Revenue": {"value": 80671591.55, "value_fmt": "$80.7M", "mom_pct": -4.21, "yoy_pct": 10.6}, "Profit": {"value": 28604202.27, "value_fmt": "$28.6M", "mom_pct": -4.42, "yoy_pct": 10.71}, "Active Subscribers": {"value": 127293402.0, "value_fmt": "127,293,402", "mom_pct": -4.1, "yoy_pct": 10.32}, "New Subscriptions": {"value": 314012.0, "value_fmt": "314,012", "mom_pct": -3.51, "yoy_pct": 7.7}, "Cancellations": {"value": 191276.0, "value_fmt": "191,276", "mom_pct": -2.74, "yoy_pct": 8.73}, "Margin %": {"value": 35.7099, "value_fmt": "35.71", "mom_pct": 0.07, "yoy_pct": 1.07}, "Avg Watch Hours": {"value": 2.3525, "value_fmt": "2.35", "mom_pct": -10.33, "yoy_pct": -2.1}, "Churn Rate": {"value": 0.1503, "value_fmt": "15.0%", "mom_pct": 1.42, "yoy_pct": -1.44}}, "Standard": {"Revenue": {"value": 88273619.05, "value_fmt": "$88.3M", "mom_pct": -3.77, "yoy_pct": 10.03}, "Profit": {"value": 31747077.18, "value_fmt": "$31.7M", "mom_pct": -2.51, "yoy_pct": 9.72}, "Active Subscribers": {"value": 229071816.0, "value_fmt": "229,071,816", "mom_pct": -4.0, "yoy_pct": 9.91}, "New Subscriptions": {"value": 561240.0, "value_fmt": "561,240", "mom_pct": -5.95, "yoy_pct": 10.68}, "Cancellations": {"value": 341890.0, "value_fmt": "341,890", "mom_pct": -7.3, "yoy_pct": 11.32}, "Margin %": {"value": 35.8833, "value_fmt": "35.88", "mom_pct": 0.81, "yoy_pct": -0.25}, "Avg Watch Hours": {"value": 2.2921, "value_fmt": "2.29", "mom_pct": -11.58, "yoy_pct": -4.08}, "Churn Rate": {"value": 0.1493, "value_fmt": "14.9%", "mom_pct": -3.43, "yoy_pct": 1.28}}}, "Content_Type": {"Documentaries": {"Revenue": {"value": 50494541.09, "value_fmt": "$50.5M", "mom_pct": 1.34, "yoy_pct": 45.32}, "Profit": {"value": 17813684.53, "value_fmt": "$17.8M", "mom_pct": -0.13, "yoy_pct": 44.5}, "Active Subscribers": {"value": 112615684.0, "value_fmt": "112,615,684", "mom_pct": -6.15, "yoy_pct": 22.0}, "New Subscriptions": {"value": 259852.0, "value_fmt": "259,852", "mom_pct": -12.34, "yoy_pct": 7.62}, "Cancellations": {"value": 162589.0, "value_fmt": "162,589", "mom_pct": -7.94, "yoy_pct": 11.46}, "Margin %": {"value": 35.4882, "value_fmt": "35.49", "mom_pct": -0.98, "yoy_pct": 0.25}, "Avg Watch Hours": {"value": 2.2494, "value_fmt": "2.25", "mom_pct": -19.09, "yoy_pct": -6.45}, "Churn Rate": {"value": 0.1444, "value_fmt": "14.4%", "mom_pct": -1.9, "yoy_pct": -8.64}}, "Kids & Family": {"Revenue": {"value": 32996948.32, "value_fmt": "$33.0M", "mom_pct": -40.35, "yoy_pct": -6.28}, "Profit": {"value": 11749578.92, "value_fmt": "$11.7M", "mom_pct": -39.53, "yoy_pct": -6.7}, "Active Subscribers": {"value": 80784004.0, "value_fmt": "80,784,004", "mom_pct": -40.76, "yoy_pct": -11.19}, "New Subscriptions": {"value": 210166.0, "value_fmt": "210,166", "mom_pct": -38.06, "yoy_pct": -4.49}, "Cancellations": {"value": 124798.0, "value_fmt": "124,798", "mom_pct": -42.27, "yoy_pct": -7.72}, "Margin %": {"value": 35.6369, "value_fmt": "35.64", "mom_pct": 0.46, "yoy_pct": -1.16}, "Avg Watch Hours": {"value": 2.3205, "value_fmt": "2.32", "mom_pct": -10.23, "yoy_pct": 2.11}, "Churn Rate": {"value": 0.1545, "value_fmt": "15.4%", "mom_pct": -2.56, "yoy_pct": 3.9}}, "Licensed Content": {"Revenue": {"value": 26169386.41, "value_fmt": "$26.2M", "mom_pct": -19.45, "yoy_pct": -28.74}, "Profit": {"value": 9179101.25, "value_fmt": "$9.2M", "mom_pct": -20.7, "yoy_pct": -30.32}, "Active Subscribers": {"value": 85302968.0, "value_fmt": "85,302,968", "mom_pct": -4.15, "yoy_pct": 0.33}, "New Subscriptions": {"value": 215217.0, "value_fmt": "215,217", "mom_pct": 1.62, "yoy_pct": 6.06}, "Cancellations": {"value": 124935.0, "value_fmt": "124,935", "mom_pct": -9.48, "yoy_pct": -0.55}, "Margin %": {"value": 35.6155, "value_fmt": "35.62", "mom_pct": 0.73, "yoy_pct": -0.87}, "Avg Watch Hours": {"value": 2.2917, "value_fmt": "2.29", "mom_pct": -7.86, "yoy_pct": -0.7}, "Churn Rate": {"value": 0.1465, "value_fmt": "14.6%", "mom_pct": -5.56, "yoy_pct": -0.89}}, "Movies": {"Revenue": {"value": 43571626.69, "value_fmt": "$43.6M", "mom_pct": 18.45, "yoy_pct": -4.83}, "Profit": {"value": 15654554.99, "value_fmt": "$15.7M", "mom_pct": 18.98, "yoy_pct": -3.38}, "Active Subscribers": {"value": 116511933.0, "value_fmt": "116,511,933", "mom_pct": 17.91, "yoy_pct": 7.22}, "New Subscriptions": {"value": 295022.0, "value_fmt": "295,022", "mom_pct": 19.18, "yoy_pct": 8.85}, "Cancellations": {"value": 178443.0, "value_fmt": "178,443", "mom_pct": 21.42, "yoy_pct": 15.85}, "Margin %": {"value": 35.5446, "value_fmt": "35.54", "mom_pct": -0.49, "yoy_pct": 0.65}, "Avg Watch Hours": {"value": 2.5029, "value_fmt": "2.50", "mom_pct": -0.52, "yoy_pct": -0.57}, "Churn Rate": {"value": 0.1532, "value_fmt": "15.3%", "mom_pct": 2.98, "yoy_pct": 8.05}}, "Original Series": {"Revenue": {"value": 47999740.4, "value_fmt": "$48.0M", "mom_pct": 36.29, "yoy_pct": 60.41}, "Profit": {"value": 17249790.67, "value_fmt": "$17.2M", "mom_pct": 38.2, "yoy_pct": 60.66}, "Active Subscribers": {"value": 113373171.0, "value_fmt": "113,373,171", "mom_pct": 30.44, "yoy_pct": 33.2}, "New Subscriptions": {"value": 273582.0, "value_fmt": "273,582", "mom_pct": 23.78, "yoy_pct": 27.5}, "Cancellations": {"value": 166010.0, "value_fmt": "166,010", "mom_pct": 27.66, "yoy_pct": 29.72}, "Margin %": {"value": 35.8891, "value_fmt": "35.89", "mom_pct": -0.13, "yoy_pct": 0.64}, "Avg Watch Hours": {"value": 2.3787, "value_fmt": "2.38", "mom_pct": -1.52, "yoy_pct": 6.16}, "Churn Rate": {"value": 0.1464, "value_fmt": "14.6%", "mom_pct": -2.13, "yoy_pct": -2.61}}}, "Genre": {"Action": {"Revenue": {"value": 24342012.41, "value_fmt": "$24.3M", "mom_pct": -19.67, "yoy_pct": -4.57}, "Profit": {"value": 8746033.36, "value_fmt": "$8.7M", "mom_pct": -19.49, "yoy_pct": -1.44}, "Active Subscribers": {"value": 65216655.0, "value_fmt": "65,216,655", "mom_pct": -6.38, "yoy_pct": 4.33}, "New Subscriptions": {"value": 171997.0, "value_fmt": "171,997", "mom_pct": -3.63, "yoy_pct": 12.0}, "Cancellations": {"value": 94638.0, "value_fmt": "94,638", "mom_pct": -14.12, "yoy_pct": 1.48}, "Margin %": {"value": 35.0259, "value_fmt": "35.03", "mom_pct": -1.71, "yoy_pct": -1.63}, "Avg Watch Hours": {"value": 2.443, "value_fmt": "2.44", "mom_pct": 5.34, "yoy_pct": 3.25}, "Churn Rate": {"value": 0.1451, "value_fmt": "14.5%", "mom_pct": -8.27, "yoy_pct": -2.73}}, "Animation": {"Revenue": {"value": 13688370.63, "value_fmt": "$13.7M", "mom_pct": 0.61, "yoy_pct": 34.37}, "Profit": {"value": 4772888.76, "value_fmt": "$4.8M", "mom_pct": -3.54, "yoy_pct": 33.32}, "Active Subscribers": {"value": 31140930.0, "value_fmt": "31,140,930", "mom_pct": -19.89, "yoy_pct": 5.49}, "New Subscriptions": {"value": 70579.0, "value_fmt": "70,579", "mom_pct": -32.06, "yoy_pct": -7.51}, "Cancellations": {"value": 47574.0, "value_fmt": "47,574", "mom_pct": -12.04, "yoy_pct": 10.13}, "Margin %": {"value": 35.2358, "value_fmt": "35.24", "mom_pct": -4.29, "yoy_pct": -1.3}, "Avg Watch Hours": {"value": 2.2067, "value_fmt": "2.21", "mom_pct": -10.3, "yoy_pct": -20.86}, "Churn Rate": {"value": 0.1528, "value_fmt": "15.3%", "mom_pct": 9.8, "yoy_pct": 4.39}}, "Comedy": {"Revenue": {"value": 15162898.21, "value_fmt": "$15.2M", "mom_pct": 6.83, "yoy_pct": 13.16}, "Profit": {"value": 5437838.12, "value_fmt": "$5.4M", "mom_pct": 5.96, "yoy_pct": 17.81}, "Active Subscribers": {"value": 38718752.0, "value_fmt": "38,718,752", "mom_pct": -8.66, "yoy_pct": 0.61}, "New Subscriptions": {"value": 96382.0, "value_fmt": "96,382", "mom_pct": -2.89, "yoy_pct": -0.72}, "Cancellations": {"value": 54569.0, "value_fmt": "54,569", "mom_pct": -12.94, "yoy_pct": -1.8}, "Margin %": {"value": 35.5433, "value_fmt": "35.54", "mom_pct": -1.9, "yoy_pct": 1.18}, "Avg Watch Hours": {"value": 2.3367, "value_fmt": "2.34", "mom_pct": -2.57, "yoy_pct": -7.16}, "Churn Rate": {"value": 0.1409, "value_fmt": "14.1%", "mom_pct": -4.69, "yoy_pct": -2.39}}, "Documentary": {"Revenue": {"value": 26046323.94, "value_fmt": "$26.0M", "mom_pct": -9.36, "yoy_pct": 8.68}, "Profit": {"value": 9420363.15, "value_fmt": "$9.4M", "mom_pct": -7.98, "yoy_pct": 6.84}, "Active Subscribers": {"value": 61448155.0, "value_fmt": "61,448,155", "mom_pct": -6.69, "yoy_pct": 4.37}, "New Subscriptions": {"value": 150180.0, "value_fmt": "150,180", "mom_pct": -13.1, "yoy_pct": -1.53}, "Cancellations": {"value": 92423.0, "value_fmt": "92,423", "mom_pct": -3.77, "yoy_pct": 6.7}, "Margin %": {"value": 36.1982, "value_fmt": "36.20", "mom_pct": 1.22, "yoy_pct": -0.66}, "Avg Watch Hours": {"value": 2.2964, "value_fmt": "2.30", "mom_pct": -18.05, "yoy_pct": -5.72}, "Churn Rate": {"value": 0.1504, "value_fmt": "15.0%", "mom_pct": 3.13, "yoy_pct": 2.23}}, "Drama": {"Revenue": {"value": 29446357.95, "value_fmt": "$29.4M", "mom_pct": 21.31, "yoy_pct": 43.34}, "Profit": {"value": 10446075.81, "value_fmt": "$10.4M", "mom_pct": 23.43, "yoy_pct": 41.43}, "Active Subscribers": {"value": 63518588.0, "value_fmt": "63,518,588", "mom_pct": -7.08, "yoy_pct": 21.57}, "New Subscriptions": {"value": 155606.0, "value_fmt": "155,606", "mom_pct": -8.35, "yoy_pct": 21.12}, "Cancellations": {"value": 97486.0, "value_fmt": "97,486", "mom_pct": -3.61, "yoy_pct": 23.28}, "Margin %": {"value": 35.899, "value_fmt": "35.90", "mom_pct": 1.77, "yoy_pct": 1.46}, "Avg Watch Hours": {"value": 2.3862, "value_fmt": "2.39", "mom_pct": -13.75, "yoy_pct": -1.57}, "Churn Rate": {"value": 0.1535, "value_fmt": "15.3%", "mom_pct": 3.73, "yoy_pct": 1.4}}, "Horror": {"Revenue": {"value": 17023432.21, "value_fmt": "$17.0M", "mom_pct": -8.17, "yoy_pct": -2.41}, "Profit": {"value": 6067512.99, "value_fmt": "$6.1M", "mom_pct": -8.34, "yoy_pct": -4.28}, "Active Subscribers": {"value": 37255442.0, "value_fmt": "37,255,442", "mom_pct": -20.71, "yoy_pct": -12.7}, "New Subscriptions": {"value": 84650.0, "value_fmt": "84,650", "mom_pct": -23.93, "yoy_pct": -18.02}, "Cancellations": {"value": 57043.0, "value_fmt": "57,043", "mom_pct": -24.69, "yoy_pct": -4.17}, "Margin %": {"value": 36.5033, "value_fmt": "36.50", "mom_pct": 1.33, "yoy_pct": 2.91}, "Avg Watch Hours": {"value": 2.2617, "value_fmt": "2.26", "mom_pct": -13.27, "yoy_pct": -7.31}, "Churn Rate": {"value": 0.1531, "value_fmt": "15.3%", "mom_pct": -5.03, "yoy_pct": 9.77}}, "Reality": {"Revenue": {"value": 27560104.01, "value_fmt": "$27.6M", "mom_pct": 18.27, "yoy_pct": 78.4}, "Profit": {"value": 9609526.12, "value_fmt": "$9.6M", "mom_pct": 16.88, "yoy_pct": 79.55}, "Active Subscribers": {"value": 71170925.0, "value_fmt": "71,170,925", "mom_pct": 23.26, "yoy_pct": 98.7}, "New Subscriptions": {"value": 173153.0, "value_fmt": "173,153", "mom_pct": 24.74, "yoy_pct": 86.34}, "Cancellations": {"value": 107000.0, "value_fmt": "107,000", "mom_pct": 28.16, "yoy_pct": 96.65}, "Margin %": {"value": 35.405, "value_fmt": "35.41", "mom_pct": 1.43, "yoy_pct": 1.61}, "Avg Watch Hours": {"value": 2.48, "value_fmt": "2.48", "mom_pct": 2.9, "yoy_pct": 9.7}, "Churn Rate": {"value": 0.1503, "value_fmt": "15.0%", "mom_pct": 3.98, "yoy_pct": -1.03}}, "Romance": {"Revenue": {"value": 13839718.27, "value_fmt": "$13.8M", "mom_pct": -18.28, "yoy_pct": -34.67}, "Profit": {"value": 4806460.0, "value_fmt": "$4.8M", "mom_pct": -21.55, "yoy_pct": -36.52}, "Active Subscribers": {"value": 40268185.0, "value_fmt": "40,268,185", "mom_pct": 0.2, "yoy_pct": -14.81}, "New Subscriptions": {"value": 99016.0, "value_fmt": "99,016", "mom_pct": -5.83, "yoy_pct": -16.21}, "Cancellations": {"value": 55805.0, "value_fmt": "55,805", "mom_pct": -10.05, "yoy_pct": -20.32}, "Margin %": {"value": 34.915, "value_fmt": "34.91", "mom_pct": -1.42, "yoy_pct": -3.39}, "Avg Watch Hours": {"value": 2.1728, "value_fmt": "2.17", "mom_pct": -19.73, "yoy_pct": -1.11}, "Churn Rate": {"value": 0.1386, "value_fmt": "13.9%", "mom_pct": -10.23, "yoy_pct": -6.47}}, "Sci-Fi": {"Revenue": {"value": 16212324.77, "value_fmt": "$16.2M", "mom_pct": -20.48, "yoy_pct": -33.41}, "Profit": {"value": 5791280.23, "value_fmt": "$5.8M", "mom_pct": -20.45, "yoy_pct": -33.89}, "Active Subscribers": {"value": 48655923.0, "value_fmt": "48,655,923", "mom_pct": -3.22, "yoy_pct": -28.79}, "New Subscriptions": {"value": 122116.0, "value_fmt": "122,116", "mom_pct": 4.2, "yoy_pct": -25.8}, "Cancellations": {"value": 75509.0, "value_fmt": "75,509", "mom_pct": -9.63, "yoy_pct": -29.21}, "Margin %": {"value": 35.2875, "value_fmt": "35.29", "mom_pct": -2.88, "yoy_pct": -0.74}, "Avg Watch Hours": {"value": 2.3575, "value_fmt": "2.36", "mom_pct": -6.11, "yoy_pct": 11.17}, "Churn Rate": {"value": 0.1552, "value_fmt": "15.5%", "mom_pct": -6.62, "yoy_pct": -0.58}}, "Thriller": {"Revenue": {"value": 17910700.51, "value_fmt": "$17.9M", "mom_pct": -7.49, "yoy_pct": 72.87}, "Profit": {"value": 6548731.82, "value_fmt": "$6.5M", "mom_pct": -0.56, "yoy_pct": 75.22}, "Active Subscribers": {"value": 51194205.0, "value_fmt": "51,194,205", "mom_pct": 0.85, "yoy_pct": 94.34}, "New Subscriptions": {"value": 130160.0, "value_fmt": "130,160", "mom_pct": 8.99, "yoy_pct": 106.04}, "Cancellations": {"value": 74728.0, "value_fmt": "74,728", "mom_pct": -5.21, "yoy_pct": 85.03}, "Margin %": {"value": 36.1126, "value_fmt": "36.11", "mom_pct": 4.17, "yoy_pct": 0.34}, "Avg Watch Hours": {"value": 2.3909, "value_fmt": "2.39", "mom_pct": -9.96, "yoy_pct": 9.21}, "Churn Rate": {"value": 0.146, "value_fmt": "14.6%", "mom_pct": -6.01, "yoy_pct": -4.79}}}};
-var ARIA_SC_MEMBER_SERIES = {"Region": {"Asia Pacific": {"Revenue": [2019659.29, 2022353.69, 2051340.99, 2019737.49, 2036896.28, 2064207.48, 2042754.72, 2082801.55, 2025662.83, 2066033.14, 2103620.27, 2032693.53, 2091874.23, 2023581.16, 2111026.06], "Profit": [746663.14, 722913.26, 776775.68, 701406.62, 751170.7, 715085.14, 712743.04, 756352.04, 691365.04, 749046.62, 690393.62, 692285.64, 682866.76, 736123.33, 773204.59], "Active Subscribers": [6602676.0, 6697617.0, 6731678.0, 6605781.0, 6697584.0, 6795855.0, 6625434.0, 6722670.0, 6664600.0, 6853383.0, 6872922.0, 6646768.0, 6767002.0, 6634885.0, 6884358.0], "New Subscriptions": [14704.0, 13549.0, 16332.0, 16383.0, 16560.0, 21146.0, 18492.0, 15254.0, 14754.0, 15894.0, 17459.0, 13877.0, 19961.0, 17756.0, 17034.0], "Cancellations": [8248.0, 10446.0, 9763.0, 8594.0, 9602.0, 10458.0, 10844.0, 9047.0, 9380.0, 8105.0, 8500.0, 10418.0, 11182.0, 10539.0, 8600.0], "Margin %": [36.2067, 36.1267, 36.8867, 35.3833, 36.87, 34.41, 36.0733, 36.9733, 34.5867, 35.5067, 33.5667, 34.8833, 32.6767, 35.3767, 35.86], "Avg Watch Hours": [3.11, 1.9033, 2.7067, 2.5967, 1.89, 2.8433, 1.9533, 2.0833, 2.1833, 2.1533, 2.42, 3.2, 2.74, 2.58, 2.29], "Churn Rate": [0.1249, 0.156, 0.145, 0.1301, 0.1434, 0.1539, 0.1637, 0.1346, 0.1407, 0.1183, 0.1237, 0.1567, 0.1652, 0.1588, 0.1249]}, "Europe": {"Revenue": [3686063.28, 3611740.68, 3639822.0, 3717699.86, 3676439.12, 3657518.43, 3659877.2, 3667393.85, 3650355.02, 3602380.77, 3672482.5, 3626613.93, 3621145.31, 3604308.98, 3672276.36], "Profit": [1244047.15, 1208381.69, 1273778.55, 1300350.04, 1322566.08, 1402198.25, 1394190.5, 1256771.87, 1178860.87, 1275052.22, 1290045.62, 1229703.08, 1357290.51, 1244548.73, 1298667.67], "Active Subscribers": [8406393.0, 8209261.0, 8386510.0, 8520995.0, 8306051.0, 8351357.0, 8456500.0, 8284368.0, 8203781.0, 8231410.0, 8339802.0, 8368429.0, 8344786.0, 8259581.0, 8395183.0], "New Subscriptions": [20490.0, 18886.0, 21074.0, 19269.0, 19990.0, 26396.0, 25293.0, 16614.0, 15782.0, 20021.0, 19142.0, 19116.0, 22752.0, 26476.0, 21065.0], "Cancellations": [12353.0, 9260.0, 12978.0, 12860.0, 10660.0, 10644.0, 13361.0, 14088.0, 13106.0, 14514.0, 11260.0, 9769.0, 13121.0, 10098.0, 12545.0], "Margin %": [33.26, 33.8033, 35.34, 34.49, 35.1133, 37.0167, 38.1733, 34.54, 33.7567, 34.49, 35.7267, 33.7167, 36.97, 33.8533, 34.48], "Avg Watch Hours": [2.1067, 2.98, 2.4233, 1.9533, 2.49, 2.62, 2.4067, 2.0467, 3.1067, 2.1833, 1.89, 2.56, 2.5833, 1.7467, 1.8833], "Churn Rate": [0.1469, 0.1128, 0.1547, 0.1509, 0.1283, 0.1275, 0.158, 0.1701, 0.1598, 0.1763, 0.135, 0.1167, 0.1572, 0.1223, 0.1494]}, "Latin America": {"Revenue": [1254153.76, 1305871.85, 1229228.34, 1289925.23, 1269939.17, 1247297.8, 1284311.97, 1272309.18, 1298316.45, 1277819.26, 1236257.8, 1265452.1, 1273562.14, 1285142.98, 1274154.81], "Profit": [453464.29, 483457.0, 413637.58, 451614.84, 431301.97, 449658.59, 449139.37, 496832.99, 476648.57, 492275.87, 438481.29, 428790.78, 478127.42, 471902.41, 426786.84], "Active Subscribers": [5014413.0, 5112580.0, 4904461.0, 5033333.0, 5029279.0, 4935585.0, 5054473.0, 4986684.0, 5108274.0, 5079786.0, 4954722.0, 4971418.0, 5017254.0, 5069269.0, 5035099.0], "New Subscriptions": [12892.0, 10827.0, 10598.0, 11927.0, 11873.0, 11659.0, 13459.0, 12885.0, 11997.0, 10143.0, 10651.0, 10819.0, 13595.0, 14568.0, 10740.0], "Cancellations": [8567.0, 8486.0, 7895.0, 7023.0, 7848.0, 8033.0, 6624.0, 8315.0, 8240.0, 7934.0, 7878.0, 6559.0, 6329.0, 7645.0, 7302.0], "Margin %": [36.3667, 36.88, 34.0, 34.1333, 33.6533, 35.9, 35.3233, 39.12, 36.92, 38.75, 35.1633, 34.0033, 37.42, 36.9167, 33.5933], "Avg Watch Hours": [2.1133, 2.7967, 3.0767, 2.38, 1.88, 2.32, 2.33, 1.9333, 2.2233, 2.2833, 2.14, 2.43, 2.4167, 2.19, 2.4333], "Churn Rate": [0.1708, 0.166, 0.161, 0.1395, 0.156, 0.1628, 0.1311, 0.1667, 0.1613, 0.1562, 0.159, 0.1319, 0.1261, 0.1508, 0.145]}, "Middle East & Africa": {"Revenue": [551837.38, 558747.86, 545194.99, 553659.58, 551633.7, 553197.44, 549336.99, 543046.53, 554789.57, 561506.0, 556986.81, 555115.42, 553862.1, 568372.69, 561770.59], "Profit": [200874.47, 195759.01, 190487.76, 194746.32, 200113.07, 187971.57, 194832.45, 197676.1, 206599.6, 208999.99, 208445.93, 196073.12, 209567.6, 211965.38, 219062.44], "Active Subscribers": [2523751.0, 2598095.0, 2514376.0, 2584054.0, 2586950.0, 2594072.0, 2550086.0, 2522886.0, 2567090.0, 2600754.0, 2572850.0, 2584178.0, 2568046.0, 2610983.0, 2618277.0], "New Subscriptions": [5330.0, 5884.0, 6074.0, 5941.0, 5998.0, 6754.0, 7434.0, 5458.0, 6056.0, 5545.0, 5990.0, 5717.0, 8461.0, 7543.0, 5925.0], "Cancellations": [4036.0, 4269.0, 4304.0, 4136.0, 4532.0, 3990.0, 4030.0, 3673.0, 3551.0, 4159.0, 4040.0, 3719.0, 3468.0, 3512.0, 4045.0], "Margin %": [35.8367, 35.5667, 34.35, 34.9533, 36.4267, 34.4133, 36.15, 36.43, 36.6733, 37.5033, 37.75, 34.9933, 37.46, 37.2567, 38.0233], "Avg Watch Hours": [2.52, 2.0567, 1.3433, 2.11, 1.9067, 2.5767, 2.1767, 2.01, 2.0167, 2.6067, 2.4133, 2.1533, 2.37, 2.4433, 1.7733], "Churn Rate": [0.1599, 0.1643, 0.1712, 0.1601, 0.1752, 0.1538, 0.158, 0.1456, 0.1383, 0.1599, 0.157, 0.1439, 0.135, 0.1345, 0.1545]}, "North America": {"Revenue": [5785087.75, 5730887.89, 5966695.8, 5954126.68, 5823132.29, 5863681.91, 5996710.08, 5957043.58, 5896944.58, 5974763.98, 5923781.9, 5896985.96, 5815826.36, 5863600.04, 5839813.62], "Profit": [1946827.37, 1910657.54, 2125688.0, 2069120.07, 1982719.41, 2121661.12, 2149085.52, 2252416.48, 2194953.75, 2093496.8, 2051597.33, 2175574.45, 2139553.26, 2195135.77, 2198080.82], "Active Subscribers": [11141030.0, 11011362.0, 11479484.0, 11296402.0, 11194613.0, 11220224.0, 11450898.0, 11275782.0, 11267409.0, 11338122.0, 11247696.0, 11285370.0, 11166684.0, 11229460.0, 11212526.0], "New Subscriptions": [24205.0, 25682.0, 26944.0, 21206.0, 28028.0, 33553.0, 31125.0, 25093.0, 27183.0, 26421.0, 25951.0, 27985.0, 31917.0, 35143.0, 29139.0], "Cancellations": [15685.0, 14011.0, 21583.0, 17597.0, 18373.0, 18441.0, 16242.0, 13844.0, 19429.0, 16633.0, 13474.0, 15950.0, 19690.0, 17369.0, 19969.0], "Margin %": [33.4067, 33.1767, 34.9567, 34.9867, 33.3433, 36.3267, 35.6333, 38.0833, 36.8867, 35.6267, 35.1433, 36.6533, 35.9, 37.6433, 36.6167], "Avg Watch Hours": [3.2233, 2.8467, 2.3533, 2.1133, 2.4433, 2.09, 2.6267, 2.96, 2.8267, 1.4533, 2.57, 1.7233, 2.9633, 2.2767, 2.75], "Churn Rate": [0.1408, 0.1272, 0.188, 0.1558, 0.1641, 0.1644, 0.1418, 0.1228, 0.1724, 0.1467, 0.1198, 0.1413, 0.1763, 0.1547, 0.1781]}}, "Plan_Type": {"Basic (Ads)": {"Revenue": [2114385.86, 2152608.89, 2190446.64, 2125106.9, 2172900.24, 2200778.5, 2160055.73, 2153750.21, 2113952.85, 2167251.12, 2136791.71, 2142202.97, 2148775.85, 2154675.8, 2153349.04], "Profit": [695948.36, 744198.7, 745162.68, 736630.66, 705147.77, 760796.29, 796127.08, 821083.79, 786621.5, 768898.02, 791469.54, 753672.55, 728204.7, 763728.07, 697741.2], "Active Subscribers": [9957919.0, 10100160.0, 10290914.0, 10106905.0, 10224285.0, 10294260.0, 10186306.0, 10063809.0, 9985036.0, 10207232.0, 10077892.0, 10183290.0, 10094727.0, 10218425.0, 10231382.0], "New Subscriptions": [22348.0, 21412.0, 26543.0, 22488.0, 26231.0, 30657.0, 30607.0, 21440.0, 21192.0, 24499.0, 24553.0, 24747.0, 25564.0, 32039.0, 24267.0], "Cancellations": [13105.0, 14035.0, 17253.0, 15995.0, 15403.0, 13994.0, 15004.0, 16208.0, 17322.0, 12663.0, 14569.0, 12753.0, 16852.0, 12912.0, 15541.0], "Margin %": [33.618, 35.812, 33.876, 34.2, 33.74, 34.564, 37.726, 38.008, 36.934, 36.078, 36.988, 34.976, 34.63, 35.434, 32.976], "Avg Watch Hours": [2.388, 2.71, 2.276, 2.262, 2.72, 2.208, 1.898, 2.64, 2.39, 1.774, 3.13, 2.686, 2.976, 2.212, 1.826], "Churn Rate": [0.1316, 0.139, 0.1677, 0.1583, 0.1507, 0.1359, 0.1473, 0.1611, 0.1735, 0.1241, 0.1446, 0.1252, 0.1669, 0.1264, 0.1519]}, "Premium": {"Revenue": [5359327.14, 5304021.72, 5404432.18, 5432089.2, 5361262.46, 5324199.29, 5458677.96, 5557317.67, 5381116.42, 5389129.74, 5384367.54, 5366449.39, 5255938.31, 5384221.04, 5309041.49], "Profit": [1804226.68, 1843547.95, 1872899.84, 1925738.53, 1860114.8, 2043948.48, 2023264.34, 2050179.26, 1785260.92, 1883519.55, 1847823.83, 1844716.18, 1918766.73, 1900872.78, 1999322.4], "Active Subscribers": [8495800.0, 8404799.0, 8502983.0, 8539790.0, 8409076.0, 8458841.0, 8603033.0, 8650795.0, 8478954.0, 8498038.0, 8464176.0, 8489630.0, 8389287.0, 8476478.0, 8431722.0], "New Subscriptions": [20286.0, 20426.0, 20576.0, 19411.0, 18722.0, 23468.0, 23425.0, 20195.0, 19028.0, 18066.0, 20113.0, 18022.0, 25713.0, 25434.0, 21127.0], "Cancellations": [13903.0, 10316.0, 15232.0, 10636.0, 13140.0, 12872.0, 12924.0, 12106.0, 11485.0, 14518.0, 11413.0, 11145.0, 13581.0, 13524.0, 14481.0], "Margin %": [35.3, 35.054, 35.692, 35.976, 35.772, 37.352, 36.366, 36.69, 33.888, 35.44, 34.574, 34.448, 37.026, 34.97, 37.1], "Avg Watch Hours": [2.83, 2.296, 2.776, 2.36, 2.016, 2.372, 2.584, 1.66, 2.434, 2.166, 2.194, 2.448, 2.586, 2.088, 2.478], "Churn Rate": [0.1636, 0.1227, 0.1791, 0.1245, 0.1563, 0.1522, 0.1502, 0.1399, 0.1355, 0.1708, 0.1348, 0.1313, 0.1619, 0.1595, 0.1717]}, "Standard": {"Revenue": [5823088.46, 5772971.36, 5837403.3, 5977952.74, 5823877.86, 5860925.27, 5914257.27, 5811526.81, 5930999.18, 5926122.29, 5971970.03, 5868208.58, 5951555.98, 5806109.01, 5996650.91], "Profit": [2091701.38, 1933421.85, 2162305.05, 2054868.7, 2122608.66, 2071829.9, 2080599.46, 2088786.43, 2176545.41, 2166453.93, 2039670.42, 2124038.34, 2220434.12, 2195074.77, 2218738.76], "Active Subscribers": [15234544.0, 15123956.0, 15222612.0, 15393870.0, 15181116.0, 15143992.0, 15348052.0, 15077786.0, 15347164.0, 15398185.0, 15445924.0, 15183243.0, 15379758.0, 15109275.0, 15482339.0], "New Subscriptions": [34987.0, 32990.0, 33903.0, 32827.0, 37496.0, 45383.0, 41771.0, 33669.0, 35552.0, 35459.0, 34527.0, 34745.0, 45409.0, 44013.0, 38509.0], "Cancellations": [21881.0, 22121.0, 24038.0, 23579.0, 22472.0, 24700.0, 23173.0, 20653.0, 24899.0, 24164.0, 19170.0, 22517.0, 23357.0, 22727.0, 22439.0], "Margin %": [36.128, 34.466, 35.752, 34.192, 35.732, 34.924, 34.72, 36.39, 36.472, 37.608, 34.848, 35.126, 36.6, 38.224, 37.068], "Avg Watch Hours": [2.626, 2.544, 2.09, 2.07, 1.63, 2.89, 2.414, 2.32, 2.59, 2.468, 1.536, 2.106, 2.282, 2.442, 2.374], "Churn Rate": [0.1436, 0.1463, 0.1579, 0.1532, 0.148, 0.1631, 0.151, 0.137, 0.1622, 0.1569, 0.1241, 0.1483, 0.1519, 0.1504, 0.1449]}}, "Content_Type": {"Documentaries": {"Revenue": [723783.57, 4381805.09, 2194980.84, 5815589.18, 805012.18, 4220208.41, 733547.36, 8609900.15, 4343288.89, 4236474.2, 5439615.51, 3355715.88, 221816.54, 2004948.29, 3407855.0], "Profit": [272230.54, 1533765.47, 727637.28, 2010567.61, 301798.18, 1529107.11, 263410.13, 3131681.21, 1481448.18, 1487515.37, 1920544.39, 1160887.04, 87149.18, 686965.71, 1218977.13], "Active Subscribers": [1882660.0, 8602670.0, 5770360.0, 10428215.0, 1637499.0, 8559831.0, 1913132.0, 14969789.0, 9090584.0, 13086790.0, 12633795.0, 7349249.0, 638952.0, 8114278.0, 7937880.0], "New Subscriptions": [4627.0, 20246.0, 13530.0, 21153.0, 3145.0, 25740.0, 5314.0, 32425.0, 20497.0, 29609.0, 24798.0, 14811.0, 1920.0, 22224.0, 19813.0], "Cancellations": [2997.0, 12552.0, 9955.0, 14657.0, 2233.0, 13698.0, 2882.0, 21081.0, 13966.0, 17506.0, 16503.0, 11090.0, 644.0, 11543.0, 11282.0], "Margin %": [37.29, 35.808, 33.37, 34.1975, 37.49, 36.3733, 35.65, 36.416, 35.4325, 34.526, 36.926, 35.0875, 39.29, 34.0875, 34.8033], "Avg Watch Hours": [2.17, 2.54, 3.0067, 2.31, 1.53, 2.0233, 2.645, 2.128, 2.3725, 1.636, 2.052, 2.8675, 2.28, 2.06, 1.99], "Churn Rate": [0.1592, 0.1459, 0.1725, 0.1406, 0.1364, 0.16, 0.1506, 0.1408, 0.1536, 0.1338, 0.1306, 0.1509, 0.1008, 0.1423, 0.1421]}, "Kids & Family": {"Revenue": [3999566.93, 92320.36, 2732676.56, 1708855.32, 1276268.42, 2622328.58, 2164141.51, 1277819.26, 3435124.44, 2466277.59, 3628041.02, 6843009.42, 750518.91], "Profit": [1421735.89, 34353.79, 911137.85, 584109.12, 409501.38, 931625.12, 806610.25, 492275.87, 1165889.33, 850112.38, 1291380.82, 2585882.43, 264964.69], "Active Subscribers": [11731715.0, 789479.0, 4941159.0, 4621525.0, 5307251.0, 8345674.0, 5427871.0, 5079786.0, 5624531.0, 3614246.0, 7909576.0, 14967398.0, 2423793.0], "New Subscriptions": [28699.0, 1641.0, 11313.0, 9489.0, 13233.0, 24601.0, 16318.0, 10143.0, 14579.0, 6929.0, 21955.0, 44808.0, 6458.0], "Cancellations": [15259.0, 1260.0, 9016.0, 9096.0, 9725.0, 11488.0, 8666.0, 7934.0, 7745.0, 4696.0, 12485.0, 24283.0, 3145.0], "Margin %": [35.088, 37.21, 33.155, 33.985, 34.16, 34.57, 38.01, 38.75, 33.78, 33.98, 34.6275, 38.118, 36.735], "Avg Watch Hours": [2.358, 2.04, 2.62, 2.3, 2.4767, 2.365, 2.2233, 2.2833, 2.2567, 1.75, 2.8225, 2.172, 2.0], "Churn Rate": [0.1301, 0.1596, 0.1825, 0.1968, 0.1832, 0.1377, 0.1597, 0.1562, 0.1377, 0.1299, 0.1578, 0.1622, 0.1298]}, "Licensed Content": {"Revenue": [237864.22, 1808402.72, 2785808.79, 894598.76, 2292235.57, 3248936.27, 2619682.49, 2136999.33, 2731658.75, 1270037.3, 440456.61, 652173.91, 3209762.55, 1840769.14], "Profit": [88833.93, 653819.16, 968435.62, 316277.87, 790462.6, 1172062.43, 942838.68, 686361.6, 962792.52, 468551.41, 149612.62, 228504.78, 1133607.84, 616940.19], "Active Subscribers": [1126132.0, 7499657.0, 7839457.0, 4364196.0, 8474453.0, 10531593.0, 9404774.0, 5497727.0, 5910539.0, 5359423.0, 2615986.0, 3046304.0, 7204309.0, 6428418.0], "New Subscriptions": [2303.0, 14649.0, 19255.0, 10545.0, 22271.0, 30323.0, 21670.0, 11691.0, 14311.0, 14426.0, 5626.0, 8807.0, 23843.0, 15497.0], "Cancellations": [1685.0, 11004.0, 12109.0, 8208.0, 14298.0, 16066.0, 14687.0, 7349.0, 7648.0, 6294.0, 3782.0, 3606.0, 8985.0, 9214.0], "Margin %": [37.35, 36.3667, 35.14, 35.62, 35.226, 35.265, 36.586, 34.9525, 37.14, 36.77, 34.025, 35.365, 35.99, 33.505], "Avg Watch Hours": [3.2, 2.3933, 1.5267, 2.28, 2.682, 2.27, 2.612, 2.0975, 1.795, 3.035, 2.485, 1.85, 2.0033, 1.935], "Churn Rate": [0.1496, 0.1467, 0.1545, 0.1881, 0.1687, 0.1526, 0.1562, 0.1337, 0.1294, 0.1174, 0.1446, 0.1184, 0.1247, 0.1433]}, "Movies": {"Revenue": [4534495.62, 2930968.02, 2009146.98, 2390128.36, 3454328.09, 331470.74, 319905.58, 1089535.41, 3997521.13, 1032402.17, 288155.17, 7114410.86, 8340282.31, 5738876.25], "Profit": [1585932.9, 930761.5, 748253.36, 842810.49, 1142096.97, 109664.72, 129008.46, 420777.81, 1487732.13, 379328.29, 103543.19, 2561815.03, 3050685.57, 2162144.57], "Active Subscribers": [9357761.0, 9659735.0, 6212579.0, 10085058.0, 6422305.0, 2024625.0, 1966322.0, 4856335.0, 8165253.0, 2333408.0, 2250752.0, 20276682.0, 20999760.0, 11901358.0], "New Subscriptions": [20259.0, 23730.0, 15666.0, 22265.0, 15805.0, 7045.0, 5530.0, 11171.0, 21253.0, 5973.0, 5253.0, 50148.0, 60208.0, 30716.0], "Cancellations": [14785.0, 13170.0, 10309.0, 14509.0, 9129.0, 3248.0, 2387.0, 7641.0, 14156.0, 3566.0, 4227.0, 26847.0, 34863.0, 19606.0], "Margin %": [34.5433, 33.1, 35.805, 35.5275, 35.1767, 33.08, 40.33, 38.2467, 35.07, 35.565, 36.745, 35.1986, 35.9929, 35.7325], "Avg Watch Hours": [2.8267, 2.8525, 2.54, 1.995, 1.8067, 3.21, 1.45, 1.46, 3.09, 3.185, 3.375, 2.3229, 2.6886, 2.545], "Churn Rate": [0.158, 0.1363, 0.1659, 0.1439, 0.1421, 0.1604, 0.1214, 0.1573, 0.1734, 0.1528, 0.1878, 0.1324, 0.166, 0.1647]}, "Original Series": {"Revenue": [3801091.12, 4016105.78, 3709668.95, 3620575.98, 6927833.11, 3919659.76, 7066460.24, 1203476.64, 2948259.1, 4204148.77, 3060196.86, 513956.36, 1287285.59, 1721022.14], "Profit": [1223143.16, 1368468.58, 1424903.46, 1279750.67, 2518196.83, 1515715.12, 2528899.61, 464751.78, 1092885.92, 1496959.45, 1020435.47, 209685.2, 453219.64, 652775.78], "Active Subscribers": [9589995.0, 7077374.0, 9252954.0, 8905767.0, 16083226.0, 6492510.0, 14298473.0, 4561492.0, 11057590.0, 7692932.0, 8119491.0, 1269180.0, 3518193.0, 5453994.0], "New Subscriptions": [21733.0, 14562.0, 21258.0, 21819.0, 39721.0, 19851.0, 38318.0, 10038.0, 22331.0, 17988.0, 20137.0, 3796.0, 10611.0, 11419.0], "Cancellations": [14163.0, 8486.0, 15134.0, 11948.0, 21720.0, 8834.0, 21100.0, 5558.0, 18235.0, 14691.0, 10383.0, 2192.0, 4352.0, 9214.0], "Margin %": [33.5575, 34.455, 37.18, 34.994, 34.9133, 38.795, 35.468, 37.845, 37.43, 37.1133, 33.0167, 40.8, 36.0767, 36.975], "Avg Watch Hours": [2.8525, 2.21, 2.2367, 2.328, 2.1483, 2.6, 2.398, 2.51, 2.48, 2.35, 1.4833, 3.13, 2.8667, 2.3425], "Churn Rate": [0.1477, 0.1199, 0.1636, 0.1342, 0.135, 0.1361, 0.1476, 0.1218, 0.1649, 0.191, 0.1279, 0.1727, 0.1237, 0.1689]}}, "Genre": {"Action": {"Revenue": [237864.22, 1630471.39, 732019.0, 799756.23, 2366515.75, 2568137.64, 1402372.28, 2458418.37, 520325.97, 832598.62, 3814337.38, 1024077.66, 2722128.13, 3232989.77], "Profit": [88833.93, 503573.36, 237729.48, 262109.68, 827797.51, 985567.06, 472128.91, 946720.09, 176055.87, 262087.81, 1439188.1, 344125.94, 1030157.67, 1169957.95], "Active Subscribers": [1126132.0, 4446015.0, 3683214.0, 1652751.0, 7517077.0, 7158742.0, 4230867.0, 2889846.0, 1285908.0, 1715775.0, 11516767.0, 3886676.0, 6458508.0, 7648377.0], "New Subscriptions": [2303.0, 10852.0, 7768.0, 4330.0, 17038.0, 22286.0, 11465.0, 7201.0, 2675.0, 4764.0, 28985.0, 11867.0, 19801.0, 20662.0], "Cancellations": [1685.0, 5398.0, 6161.0, 2609.0, 10539.0, 7957.0, 6879.0, 3590.0, 1629.0, 2547.0, 16588.0, 7084.0, 9362.0, 12610.0], "Margin %": [37.35, 33.86, 33.31, 32.77, 34.1467, 38.025, 34.23, 38.51, 33.84, 31.48, 35.388, 34.605, 37.81, 34.345], "Avg Watch Hours": [3.2, 2.775, 2.82, 2.02, 1.66, 2.98, 2.52, 2.42, 3.08, 2.33, 2.276, 2.59, 2.09, 2.5], "Churn Rate": [0.1496, 0.1214, 0.1673, 0.1579, 0.1402, 0.1112, 0.1626, 0.1242, 0.1267, 0.1484, 0.144, 0.1823, 0.145, 0.1649]}, "Animation": {"Revenue": [240939.1, 2674760.16, 5996710.08, 1421317.24, 1488781.45, 250472.71, 1069879.93, 545509.96], "Profit": [82518.24, 913850.58, 2149085.52, 504729.84, 445985.64, 99849.55, 378214.07, 198655.32], "Active Subscribers": [1133414.0, 5199836.0, 11450898.0, 4148207.0, 2086567.0, 1192186.0, 3688717.0, 2241105.0], "New Subscriptions": [2838.0, 9550.0, 31125.0, 8575.0, 4097.0, 2184.0, 7459.0, 4751.0], "Cancellations": [2220.0, 8251.0, 16242.0, 7342.0, 2571.0, 2144.0, 5754.0, 3050.0], "Margin %": [34.25, 34.17, 35.6333, 35.515, 29.96, 39.86, 35.12, 36.42], "Avg Watch Hours": [1.24, 1.29, 2.6267, 2.065, 2.66, 2.93, 2.33, 1.69], "Churn Rate": [0.1959, 0.1587, 0.1418, 0.177, 0.1232, 0.1798, 0.156, 0.1361]}, "Comedy": {"Revenue": [2539460.01, 1398930.32, 89933.16, 224853.14, 216654.98, 3441323.46, 2658079.92, 1656532.24, 939405.9, 420595.64, 1577129.44], "Profit": [860936.37, 463873.41, 30372.78, 85006.57, 69241.64, 1254441.38, 1050927.36, 583687.61, 307188.86, 159803.29, 572358.85], "Active Subscribers": [5778707.0, 5107710.0, 782720.0, 660594.0, 637271.0, 7993989.0, 5204403.0, 3635855.0, 3112599.0, 2119807.0, 3685097.0], "New Subscriptions": [13181.0, 12943.0, 1797.0, 1786.0, 1590.0, 18125.0, 14387.0, 6861.0, 7406.0, 5588.0, 12718.0], "Cancellations": [8722.0, 7970.0, 1438.0, 776.0, 1037.0, 9361.0, 9573.0, 5805.0, 3575.0, 2444.0, 3868.0], "Margin %": [34.36, 33.9767, 33.77, 37.81, 31.96, 36.29, 39.54, 37.14, 32.7, 37.92, 36.29], "Avg Watch Hours": [2.36, 2.3533, 2.25, 1.54, 3.22, 3.12, 3.36, 1.425, 1.38, 2.6, 1.88], "Churn Rate": [0.1509, 0.156, 0.1837, 0.1175, 0.1627, 0.1171, 0.1839, 0.1597, 0.1149, 0.1153, 0.105]}, "Documentary": {"Revenue": [1145427.22, 1821272.8, 3750276.18, 3299984.6, 1384735.03, 1454946.57, 1822173.84, 232645.81, 1156566.75, 3953676.06, 1865765.85, 519954.04, 2270118.12, 1118351.52, 250429.55], "Profit": [412690.35, 660292.54, 1306980.77, 1190905.98, 509761.39, 579766.92, 704414.08, 85106.53, 452470.56, 1397109.9, 637518.07, 160792.58, 847269.22, 372544.64, 102739.62], "Active Subscribers": [3648949.0, 4142398.0, 7026936.0, 8398304.0, 4874498.0, 2087738.0, 4931523.0, 1126159.0, 4763739.0, 6500746.0, 4915978.0, 1264109.0, 2769310.0, 3818017.0, 1179751.0], "New Subscriptions": [9198.0, 8906.0, 15822.0, 19188.0, 10906.0, 6315.0, 14163.0, 2552.0, 9971.0, 15804.0, 13025.0, 3174.0, 7517.0, 10619.0, 3020.0], "Cancellations": [4688.0, 5600.0, 10474.0, 11582.0, 8287.0, 2692.0, 7447.0, 1522.0, 8172.0, 12547.0, 6427.0, 1650.0, 5318.0, 4519.0, 1498.0], "Margin %": [35.21, 36.86, 35.7733, 35.9233, 36.2867, 39.85, 36.975, 36.58, 39.125, 35.74, 34.6, 30.92, 37.32, 33.44, 41.03], "Avg Watch Hours": [3.055, 2.225, 3.1867, 2.4667, 1.85, 2.6, 2.055, 1.69, 2.955, 2.06, 1.355, 2.69, 2.83, 1.395, 1.78], "Churn Rate": [0.1285, 0.1352, 0.1491, 0.1379, 0.17, 0.1289, 0.151, 0.1351, 0.1715, 0.193, 0.1307, 0.1305, 0.192, 0.1184, 0.127]}, "Drama": {"Revenue": [2595685.38, 3636212.9, 1056746.14, 2929374.14, 2535619.78, 2898877.03, 3934088.12, 1812538.2, 1555259.22, 199988.1, 2584877.3, 3207002.28, 500089.36], "Profit": [934679.87, 1272696.41, 409552.26, 1029615.22, 955518.32, 989768.7, 1371479.55, 593880.94, 551655.78, 69342.88, 920451.01, 1185209.8, 162225.07], "Active Subscribers": [5748262.0, 6687929.0, 2333717.0, 5052544.0, 5036234.0, 7017093.0, 8526067.0, 4337237.0, 2866419.0, 1466204.0, 6865412.0, 6337428.0, 1244042.0], "New Subscriptions": [12262.0, 15981.0, 5841.0, 10255.0, 13122.0, 22827.0, 17724.0, 8412.0, 5527.0, 2894.0, 19093.0, 18230.0, 3438.0], "Cancellations": [8023.0, 9705.0, 4190.0, 6013.0, 7674.0, 12570.0, 13424.0, 7166.0, 3648.0, 1859.0, 10479.0, 11088.0, 1647.0], "Margin %": [34.905, 36.0133, 38.095, 35.355, 37.68, 33.68, 35.93, 35.345, 37.095, 34.67, 35.4033, 37.81, 32.44], "Avg Watch Hours": [2.795, 2.8233, 2.03, 2.2, 1.79, 2.61, 1.886, 2.23, 2.565, 2.91, 2.2933, 2.88, 2.22], "Churn Rate": [0.1396, 0.1451, 0.1795, 0.119, 0.1524, 0.1791, 0.1574, 0.1652, 0.1273, 0.1268, 0.1526, 0.175, 0.1324]}, "Horror": {"Revenue": [1114316.39, 87491.51, 918938.75, 197393.98, 3238864.66, 3143823.41, 3486289.15, 4836314.36], "Profit": [386471.94, 32231.62, 331054.1, 77750.84, 1144026.39, 1122125.24, 1202623.48, 1771229.38], "Active Subscribers": [3733054.0, 765215.0, 2443689.0, 1463325.0, 6063006.0, 5704404.0, 6425469.0, 10657280.0], "New Subscriptions": [7528.0, 1732.0, 7125.0, 3934.0, 12796.0, 12860.0, 12318.0, 26357.0], "Cancellations": [4916.0, 1448.0, 4258.0, 2918.0, 9856.0, 8533.0, 9816.0, 15298.0], "Margin %": [34.67, 36.84, 37.25, 39.39, 35.56, 37.4733, 35.4, 36.8125], "Avg Watch Hours": [2.75, 2.71, 1.415, 2.7, 2.56, 2.1933, 2.25, 2.13], "Churn Rate": [0.1317, 0.1892, 0.1742, 0.1994, 0.1626, 0.1496, 0.1528, 0.1435]}, "Reality": {"Revenue": [3276963.41, 2737638.66, 3186351.14, 225782.15, 4380779.75, 3652597.74, 319905.58, 1257241.77, 2044945.0, 938421.55, 2449145.06, 925502.39, 2164829.81], "Profit": [1041677.35, 910892.54, 1223515.19, 88941.89, 1385013.98, 1394939.92, 129008.46, 424424.57, 728182.89, 347434.46, 807243.59, 301376.66, 826874.62], "Active Subscribers": [6142077.0, 6498317.0, 7705659.0, 659607.0, 9866511.0, 5733832.0, 1966322.0, 4320578.0, 7809438.0, 3314875.0, 5490662.0, 3289028.0, 8374019.0], "New Subscriptions": [13751.0, 12218.0, 18386.0, 1276.0, 25156.0, 15563.0, 5530.0, 11181.0, 17033.0, 9137.0, 12109.0, 7968.0, 23845.0], "Cancellations": [9072.0, 7919.0, 14299.0, 1042.0, 14981.0, 9143.0, 2387.0, 7265.0, 11428.0, 3916.0, 6910.0, 5701.0, 12937.0], "Margin %": [32.065, 34.805, 37.78, 39.39, 31.995, 38.3167, 40.33, 35.5533, 35.51, 37.02, 32.99, 32.56, 36.88], "Avg Watch Hours": [3.21, 2.61, 2.485, 1.79, 2.725, 2.0133, 1.45, 2.2933, 2.4833, 2.52, 2.875, 2.93, 2.3733], "Churn Rate": [0.1477, 0.1219, 0.1856, 0.158, 0.1518, 0.1595, 0.1214, 0.1681, 0.1463, 0.1181, 0.1259, 0.1733, 0.1545]}, "Romance": {"Revenue": [2518206.79, 890759.51, 237944.27, 1743600.16, 200036.14, 418083.08, 1290019.28, 2619090.11, 1417087.82, 1071382.93, 1433508.18], "Profit": [906803.42, 323368.3, 75431.65, 579613.7, 72760.93, 151086.49, 470857.37, 883471.94, 504083.08, 352946.96, 486036.16], "Active Subscribers": [6815763.0, 3013492.0, 1141727.0, 7544890.0, 1495453.0, 2749247.0, 5448981.0, 5154151.0, 2047710.0, 2830103.0, 2026668.0], "New Subscriptions": [16223.0, 6400.0, 2868.0, 19833.0, 4678.0, 6109.0, 13408.0, 9878.0, 4207.0, 9395.0, 6017.0], "Cancellations": [9247.0, 4964.0, 1656.0, 11923.0, 2694.0, 3857.0, 6594.0, 5685.0, 2306.0, 3630.0, 3249.0], "Margin %": [36.52, 36.3, 31.7, 34.365, 36.37, 35.525, 35.19, 33.73, 35.57, 34.48, 33.91], "Avg Watch Hours": [2.39, 1.5, 2.29, 2.51, 2.14, 2.21, 1.385, 2.22, 2.5, 2.29, 1.87], "Churn Rate": [0.1357, 0.1647, 0.145, 0.158, 0.1801, 0.1403, 0.121, 0.1103, 0.1126, 0.1283, 0.1603]}, "Sci-Fi": {"Revenue": [558893.11, 4465950.56, 3277614.13, 606810.97, 1385272.37, 543557.66, 1420124.36, 513956.36, 226684.51, 3213460.74], "Profit": [190914.01, 1520071.63, 1126010.11, 192568.81, 496251.76, 212700.05, 536151.0, 209685.2, 79006.06, 1227921.6], "Active Subscribers": [2293696.0, 12133569.0, 11153076.0, 2551871.0, 5485327.0, 2236278.0, 3716726.0, 1269180.0, 655247.0, 7160953.0], "New Subscriptions": [6007.0, 30367.0, 25462.0, 7898.0, 14831.0, 5938.0, 9094.0, 3796.0, 2178.0, 16545.0], "Cancellations": [4336.0, 19179.0, 17619.0, 4116.0, 7852.0, 3508.0, 4828.0, 2192.0, 1260.0, 10619.0], "Margin %": [34.16, 33.332, 34.312, 31.73, 35.63, 39.13, 38.1633, 40.8, 34.85, 35.5433], "Avg Watch Hours": [1.9, 2.048, 2.404, 1.81, 2.79, 1.63, 2.3467, 3.13, 1.74, 2.9], "Churn Rate": [0.189, 0.1581, 0.158, 0.1613, 0.1431, 0.1569, 0.1299, 0.1727, 0.1923, 0.1483]}, "Thriller": {"Revenue": [424301.32, 2378045.6, 244277.97, 1487581.92, 1293850.05, 875586.65, 2866733.5, 528884.69, 944549.43, 4545759.74, 895371.98, 1425757.66], "Profit": [155341.12, 892541.84, 85107.92, 545287.12, 507121.2, 309570.01, 1003033.18, 189267.56, 340498.04, 1731747.27, 307487.82, 481728.74], "Active Subscribers": [2134677.0, 5094348.0, 1165656.0, 2133312.0, 5408519.0, 3000469.0, 5799523.0, 3515074.0, 3404137.0, 10834256.0, 2449194.0, 6255040.0], "New Subscriptions": [4696.0, 12709.0, 3196.0, 6886.0, 11255.0, 6144.0, 13640.0, 9137.0, 9076.0, 31462.0, 8078.0, 13881.0], "Cancellations": [3116.0, 7310.0, 2128.0, 3342.0, 7302.0, 3617.0, 7999.0, 5067.0, 4236.0, 16942.0, 2880.0, 10789.0], "Margin %": [36.62, 37.305, 34.84, 36.66, 39.285, 35.36, 34.305, 35.535, 36.05, 36.7933, 35.76, 34.92], "Avg Watch Hours": [2.07, 2.18, 2.46, 2.66, 2.43, 1.18, 2.44, 3.385, 2.53, 2.83, 2.745, 1.7925], "Churn Rate": [0.146, 0.1435, 0.1826, 0.1567, 0.135, 0.1205, 0.1379, 0.1442, 0.1244, 0.1564, 0.1176, 0.1725]}}};
-var ARIA_SC_ORIG_SERIES   = {"Revenue": [13296801.46, 13229601.97, 13432282.12, 13535148.84, 13358040.56, 13385903.06, 13532990.96, 13522594.69, 13426068.45, 13482503.15, 13493129.28, 13376860.94, 13356270.14, 13345005.85, 13459041.44], "Profit": [4591876.42, 4521168.5, 4780367.57, 4717237.89, 4687871.23, 4876574.67, 4899990.88, 4960049.48, 4748427.83, 4818871.5, 4678963.79, 4722427.07, 4867405.55, 4859675.62, 4915802.36], "Margin %": [35.0153, 35.1107, 35.1067, 34.7893, 35.0813, 35.6133, 36.2707, 37.0293, 35.7647, 36.3753, 35.47, 34.85, 36.0853, 36.2093, 35.7147], "Churn Rate": [0.1451, 0.1382, 0.1662, 0.1475, 0.1509, 0.1521, 0.1497, 0.1449, 0.1588, 0.1506, 0.1328, 0.1371, 0.1588, 0.1454, 0.1536]};
-var ARIA_SC_ORIG_LABELS   = {"Revenue": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "Profit": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "Margin %": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "Churn Rate": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"]};
-
-/* format a raw pct number → {text, color} */
-function _ariaPct(p) {
-    if (p === null || p === undefined) return {text:'—', color:'#888'};
-    var s = p >= 0 ? '▲' : '▼';
-    var c = p >= 0 ? '#34D399' : '#F87171';
-    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
-}
-
-function ariaFilter(sel) {
-    var dim = sel.getAttribute('data-dim');
-    var val = sel.value;
-    var mData = (val === 'All') ? null :
-                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
-    var mSeries = (val === 'All') ? null :
-                  ((ARIA_SC_MEMBER_SERIES[dim] || {})[val] || null);
-
-    ARIA_KPI_ORDER.forEach(function(kn, i) {
-        var kd = mData ? (mData[kn] || null) : null;
-
-        /* ── main value ── */
-        var ve = document.getElementById('sc_kv_' + i);
-        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
-                                    : ve.getAttribute('data-orig');
-
-        /* ── MoM ── */
-        var me = document.getElementById('sc_md_' + i);
-        if (me) {
-            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
-                var rm = _ariaPct(kd.mom_pct);
-                me.textContent = rm.text + ' MoM';
-                me.style.color = rm.color;
-            } else {
-                me.textContent = me.getAttribute('data-orig') || '— MoM';
-                me.style.color = me.getAttribute('data-oc') || '#888';
-            }
-        }
-
-        /* ── YoY ── */
-        var ye = document.getElementById('sc_yd_' + i);
-        if (ye) {
-            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
-                var ry = _ariaPct(kd.yoy_pct);
-                ye.textContent = ry.text + ' YoY';
-                ye.style.color = ry.color;
-            } else {
-                ye.textContent = ye.getAttribute('data-orig') || '— YoY';
-                ye.style.color = ye.getAttribute('data-oc') || '#888';
-            }
-        }
-
-        /* ── sparkline ── */
-        var chart = ARIA_CHARTS['sc_spark_' + i];
-        if (chart) {
-            var usingMember = (mSeries && mSeries[kn] && mSeries[kn].length > 1);
-            var newSeries = usingMember ? mSeries[kn] : (ARIA_SC_ORIG_SERIES[kn] || null);
-            if (newSeries && newSeries.length > 1) {
-                chart.data.datasets[0].data = newSeries;
-                /* Restore original date labels on "All"; use indices for member series */
-                var origLbls = ARIA_SC_ORIG_LABELS[kn];
-                chart.data.labels = (!usingMember && origLbls && origLbls.length > 0)
-                    ? origLbls
-                    : newSeries.map(function(_, j) { return j; });
-                chart.update('none');
-            }
-        }
+var ARIA_DIM_DATA = {"Province": {"labels": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], "values": [14064779.14, 9536537.86, 8610631.74, 7966121.12, 3034977.96, 2868994.57]}, "Category": {"labels": ["Meat & Seafood", "Grocery & Pantry", "Bakery & Deli", "Dairy & Eggs", "Snacks & Confectionery", "Household & Cleaning"], "values": [7861044.66, 5528861.85, 5260743.96, 3375716.87, 3221316.04, 3049539.5]}};
+function ariaEdDim(pill) {
+    var dim = pill.getAttribute('data-dim');
+    var d   = ARIA_DIM_DATA[dim];
+    if (!d) return;
+    var chart = ARIA_CHARTS['ed_bar'];
+    if (!chart) return;
+    chart.data.labels           = d.labels;
+    chart.data.datasets[0].data = d.values;
+    chart.update('none');
+    var t = document.getElementById('ed-dim-title');
+    if (t) t.textContent = dim + ' Breakdown';
+    document.querySelectorAll('.ed-dim-pill').forEach(function(p) {
+        p.classList.toggle('ed-dim-pill-active', p.getAttribute('data-dim') === dim);
     });
 }
-
 </script>
 <script>
 /* ── Chart init — runs after DOM is ready so canvas elements exist ── */
 document.addEventListener('DOMContentLoaded', function() {
     
-    ARIA_CHARTS['sc_spark_0'] = new Chart(document.getElementById('sc_spark_0'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[13296801.46, 13229601.97, 13432282.12, 13535148.84, 13358040.56, 13385903.06, 13532990.96, 13522594.69, 13426068.45, 13482503.15, 13493129.28, 13376860.94, 13356270.14, 13345005.85, 13459041.44],
-            borderColor:'#10B981', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#10B98118', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
+    ARIA_CHARTS['ed_bar'] = new Chart(document.getElementById('ed_bar'), {
+        type:'bar',
+        data:{ labels:["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], datasets:[{ data:[14064779.14, 9536537.86, 8610631.74, 7966121.12, 3034977.96, 2868994.57],
+            backgroundColor:["#34D399", "#34D399", "#34D399", "#34D399", "#34D399", "#34D399"], borderRadius:3, borderWidth:0 }] },
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+            layout:{padding:{right:42}},
             plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
+                datalabels:{
+                    anchor:'end', align:'right',
+                    formatter:function(v){
+                        return Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                               Math.abs(v)>=1e3?(v/1e3).toFixed(1)+'K':
+                               v.toFixed(0);
+                    },
+                    color:'#8B7D70', font:{size:8,weight:'600'}
+                },
+                tooltip:{ callbacks:{ label: ctx =>
+                    (Math.abs(ctx.raw)>=1e6
+                     ? (ctx.raw>=0?'+':'')+( ctx.raw/1e6).toFixed(1)+'M'
+                     : Math.abs(ctx.raw)>=1e3
+                     ? (ctx.raw>=0?'+':'')+(ctx.raw/1e3).toFixed(1)+'K'
+                     : ctx.raw.toFixed(0)) } } },
+            scales:{
+                x:{ display:false, grid:{display:false} },
+                y:{ ticks:{ color:'#8B7D70', font:{size:9} },
+                     grid:{display:false}, border:{display:false} }
             },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_1'] = new Chart(document.getElementById('sc_spark_1'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[4591876.42, 4521168.5, 4780367.57, 4717237.89, 4687871.23, 4876574.67, 4899990.88, 4960049.48, 4748427.83, 4818871.5, 4678963.79, 4722427.07, 4867405.55, 4859675.62, 4915802.36],
-            borderColor:'#10B981', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#10B98118', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_2'] = new Chart(document.getElementById('sc_spark_2'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[35.02, 35.11, 35.11, 34.79, 35.08, 35.61, 36.27, 37.03, 35.76, 36.38, 35.47, 34.85, 36.09, 36.21, 35.71],
-            borderColor:'#10B981', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#10B98118', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_3'] = new Chart(document.getElementById('sc_spark_3'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[0.15, 0.14, 0.17, 0.15, 0.15, 0.15, 0.15, 0.14, 0.16, 0.15, 0.13, 0.14, 0.16, 0.15, 0.15],
-            borderColor:'#10B981', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#10B98118', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
+            animation:{duration:0} }
     });
 });
 </script>
