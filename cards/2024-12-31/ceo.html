@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=29 dim_gs_keys=['Store Type', 'Channel', 'Province', 'Category'] first_dim=Category tmpl=dossier | yoy_keys=['Revenue', 'Profit', 'Units Sold', 'Discounts', 'Cost', 'Avg Service Time', 'Drive-Thru Speed', 'Profit Margin %', 'Discount Rate %', 'Cost-to-Revenue %'] yoy_lens=[29, 29, 29, 29, 29, 29, 29, 29, 29, 29] | dod_keys=['Revenue', 'Profit', 'Units Sold', 'Discounts', 'Cost', 'Avg Service Time', 'Drive-Thru Speed', 'Profit Margin %', 'Discount Rate %', 'Cost-to-Revenue %'] dod_lens=[29, 29, 29, 29, 29, 29, 29, 29, 29, 29] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Store Type', 'Channel', 'Province', 'Category'] | df_shape=[204680, 24] | kpi_map=[('Revenue', 'Gross Sales', 'sum', ''), ('Profit', 'Profit', 'sum', ''), ('Units Sold', 'Quantity', 'sum', ''), ('Discounts', 'Discount', 'sum', ''), ('Cost', 'COGS', 'sum', ''), ('Avg Service Time', 'Avg Service Time (sec)', 'mean', ''), ('Drive-Thru Speed', 'Drive Thru Flag', 'mean', ''), ('Profit Margin %', 'DERIVED', 'ratio', 'Profit'), ('Discount Rate %', 'DERIVED', 'ratio', 'Discount'), ('Cost-to-Revenue %', 'DERIVED', 'ratio', 'COGS')] | yoy_summary={'Revenue': 29, 'Profit': 29, 'Units Sold': 29, 'Discounts': 29, 'Cost': 29, 'Avg Service Time': 29, 'Drive-Thru Speed': 29, 'Profit Margin %': 29, 'Discount Rate %': 29, 'Cost-to-Revenue %': 29} | yoy_diag.effective_dims=['Store Type', 'Channel', 'Province', 'Category', 'Store ID', 'Store Name'] | yoy_diag.kpis=['Revenue', 'Profit', 'Units Sold', 'Discounts', 'Cost', 'Avg Service Time', 'Drive-Thru Speed', 'Profit Margin %', 'Discount Rate %', 'Cost-to-Revenue %'] | yoy_diag.curr_start=2024-12-01 yoy_diag.prior_start=2023-12-01 yoy_diag.prior_end=2023-12-31 | yoy_diag.curr_df_len=8680 yoy_diag.prior_df_len=8680 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Store Type yoy_diag.spot_cfg={'column': 'Gross Sales', 'agg': 'sum'} yoy_diag.spot_agg_len=2 yoy_diag.spot_agg_sample=[('Suburban', 436221.54), ('Urban', 378465.14)] | df_cat_cols={'Year': 'int64/2', 'Month': 'int64/12', 'Month Name': 'str/12', 'Quarter': 'str/4', 'Day of Week': 'str/7', 'Is Weekend': 'int64/2', 'Store ID': 'str/10', 'Store Name': 'str/10', 'Province': 'str/5', 'Store Type': 'str/2', 'Channel': 'str/4', 'Category': 'str/7'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#F5F0E8; }
+body {
+    background:#F5F0E8; color:#1A1410;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#F5F0E8;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #D0C8BC; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#8B7D70; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#F59E0B; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#8B7D70; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#8B7D70; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#F59E0B; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#FFFFFF; border:1px solid #D0C8BC;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#4A3F35; line-height:1.6; }
+.narr strong { color:#1A1410; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#8B7D70; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#FFFFFF; color:#1A1410;
+    border:1px solid #D0C8BC; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#F59E0B22; border:1px solid #F59E0B55;
+    color:#F59E0B; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#F59E0B15; border:1px solid #F59E0B40;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#F59E0B; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#1A1410;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#8B7D70; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#EDE8DF; margin:14px -28px 0;
+                padding:10px 28px; border-top:1px solid #D0C8BC; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#F59E0B; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#4A3F35; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #D0C8BC;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#1A1410;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#8B7D70; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#4A3F35; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #D0C8BC; color:#8B7D70;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#F59E0B20; border-color:#F59E0B80; color:#F59E0B;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span><img src="https://logo.clearbit.com/qsr.com" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=qsr.com&sz=64';" style="height:26px;width:auto;object-fit:contain;vertical-align:middle;border-radius:3px;margin-left:8px;opacity:0.9;" alt="QSR" title="QSR">
+  </div>
+  <div class="mast-mid">CEO  ·  EXECUTIVE BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">TUE DEC 31 2024</div>
+      <span class="date-range"> &nbsp;Dec 01 → Dec 31 </span>
+    </div>
+  </div>
+</div>
+  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Category" onchange="ariaFilter(this)"><option value="All">Category: All</option><option value="Combo Meals">Combo Meals</option><option value="Burgers">Burgers</option><option value="Chicken">Chicken</option><option value="Sides">Sides</option><option value="Beverages">Beverages</option><option value="Desserts">Desserts</option></select> <select class="filter-sel" data-dim="Province" onchange="ariaFilter(this)"><option value="All">Province: All</option><option value="Ontario">Ontario</option><option value="BC">BC</option><option value="Quebec">Quebec</option><option value="Alberta">Alberta</option><option value="Nova Scotia">Nova Scotia</option></select> <select class="filter-sel" data-dim="Channel" onchange="ariaFilter(this)"><option value="All">Channel: All</option><option value="Drive-Thru">Drive-Thru</option><option value="Dine-In">Dine-In</option><option value="Mobile/App">Mobile/App</option><option value="Delivery">Delivery</option></select> <select class="filter-sel" data-dim="Store Type" onchange="ariaFilter(this)"><option value="All">Store Type: All</option><option value="Suburban">Suburban</option><option value="Urban">Urban</option></select> </div>
+  <div class="sec">Analytics Dossier</div>
+  <div class="mkpi-row">
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Profit Margin %</div>
+  <div class="mkpi-val" id="ds_kv_0" data-orig="67.9%">67.9%</div>
+  <div class="mkpi-d" id="ds_md_0" data-orig="▼ 0.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.1% MoM</div>
+  <div class="mkpi-d" id="ds_yd_0" data-orig="▼ 0.2% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.2% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Revenue</div>
+  <div class="mkpi-val" id="ds_kv_1" data-orig="$814,687">$814,687</div>
+  <div class="mkpi-d" id="ds_md_1" data-orig="▲ 0.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.4% MoM</div>
+  <div class="mkpi-d" id="ds_yd_1" data-orig="▼ 0.7% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.7% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Profit</div>
+  <div class="mkpi-val" id="ds_kv_2" data-orig="$553,405">$553,405</div>
+  <div class="mkpi-d" id="ds_md_2" data-orig="▲ 0.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.4% MoM</div>
+  <div class="mkpi-d" id="ds_yd_2" data-orig="▼ 0.9% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.9% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Cost-to-Revenue %</div>
+  <div class="mkpi-val" id="ds_kv_3" data-orig="30.4%">30.4%</div>
+  <div class="mkpi-d" id="ds_md_3" data-orig="▲ 0.2% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.2% MoM</div>
+  <div class="mkpi-d" id="ds_yd_3" data-orig="▲ 0.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 0.4% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Units Sold</div>
+  <div class="mkpi-val" id="ds_kv_4" data-orig="119,704">119,704</div>
+  <div class="mkpi-d" id="ds_md_4" data-orig="▲ 0.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.4% MoM</div>
+  <div class="mkpi-d" id="ds_yd_4" data-orig="▼ 0.4% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.4% YoY</div>
+</div></div>
+  
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <div style="background:#FFFFFF;border:1px solid #D0C8BC;border-radius:8px;padding:12px">
+    <div id="ds-trend-title" class="sec">Revenue — Monthly (12M)</div>
+    
+<div class="chart-box" style="height:160px">
+  <canvas id="ds_trend"></canvas>
+</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #D0C8BC;border-radius:8px;padding:12px">
+    <div id="ds-dim-title" class="sec">Category Breakdown</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_dimbar"></canvas></div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #D0C8BC;border-radius:8px;padding:12px">
+    <div id="ds-donut-title" class="sec">Contribution Mix</div>
+    
+<div style="display:flex;gap:8px;align-items:flex-start">
+  <div class="chart-box" style="height:160px;flex:0 0 160px">
+    <canvas id="ds_donut"></canvas>
+  </div>
+  <div id="ds-donut-legend" style="flex:1;overflow:hidden;padding-top:8px"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Combo Meals</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#34D399;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Burgers</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#60A5FA;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Chicken</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F87171;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Sides</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#A78BFA;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Beverages</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#FBBF24;flex-shrink:0"></div><div style="font-size:8px;color:#4A3F35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Desserts</div></div></div>
+</div>
+  </div>
+  <div style="background:#FFFFFF;border:1px solid #D0C8BC;border-radius:8px;padding:12px">
+    <div id="ds-wfall-title" class="sec">Period-over-Period Waterfall</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_wfall"></canvas></div>
+  </div>
+</div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #D0C8BC;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
+    <div class="sec">Strategic Overview</div>
+    <div class="ed-stat-row"><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Profit Margin %: ▼ 0.1% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.2%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 0.4% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.7%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Profit: ▲ 0.4% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 0.9%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Cost-to-Revenue %: ▲ 0.2% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 0.4%</span></div>
+    <div class="narr">Revenue reached $814,687 this month, showing plateauing growth MoM. This flat top-line, combined with a 0.6% MoM increase in Cost, resulted in a slight 0.06% erosion of Profit Margin %. We need to urgently assess cost efficiencies, particularly within the Drive-Thru channel, to p</div>
+  </div>
+  <div style="flex:1;padding:0 14px;border-right:1px solid #D0C8BC">
+    <div class="sec">Boardroom Signals</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Channel → Drive-Thru decreased Profit Margin % by $3,345 (1.31% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Category → Combo Meals decreased Profit Margin % by $2,610 (1.08% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Store Type → Urban decreased Profit Margin % by $2,571 (0.99% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Compound Signal: top-line growing, bottom-line eroding — cost pressure.</div>
+  </div>
+  <div style="flex:1;padding-left:14px">
+    <div class="sec">Executive Directive</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;font-weight:700;margin-right:5px">▶</span>Investigate cost drivers in Drive-Thru and Urban stores. Owner: Head of Operations. Deadline: Next 7 days. Success metric: Cost-to-Revenue % stabilizes or declines by 0.1%.</div>
+  </div>
+</div>
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">The CEO will ask: &quot;Is growth coming at the cost of margin?&quot; Answer: &quot;Yes, our top-line is flat, but rising costs are subtly eroding our profit margin.&quot; The positive momentum in Delivery channel revenue and profit is a bright spot, indicating potential for targeted investment.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_DS_KPIS           = ["Profit Margin %", "Revenue", "Profit", "Cost-to-Revenue %", "Units Sold"];
+var ARIA_DIM_MEMBER_KPIS   = {"Store Type": {"Suburban": {"Revenue": {"value": 436221.54, "value_fmt": "$436K", "mom_pct": 0.32, "yoy_pct": -0.09}, "Profit": {"value": 296456.5, "value_fmt": "$296K", "mom_pct": 0.35, "yoy_pct": -0.17}, "Units Sold": {"value": 63722.0, "value_fmt": "63,722", "mom_pct": 0.34, "yoy_pct": 0.25}, "Discounts": {"value": 7438.41, "value_fmt": "$7K", "mom_pct": 0.11, "yoy_pct": -2.26}, "Cost": {"value": 132326.63, "value_fmt": "$132K", "mom_pct": 0.26, "yoy_pct": 0.22}, "Avg Service Time": {"value": 214.4078, "value_fmt": "214.41", "mom_pct": -0.37, "yoy_pct": -0.12}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6796, "value_fmt": "68.0%", "mom_pct": 0.03, "yoy_pct": -0.08}, "Discount Rate %": {"value": 0.0171, "value_fmt": "1.7%", "mom_pct": -0.21, "yoy_pct": -2.17}, "Cost-to-Revenue %": {"value": 0.3033, "value_fmt": "30.3%", "mom_pct": -0.06, "yoy_pct": 0.31}}, "Urban": {"Revenue": {"value": 378465.14, "value_fmt": "$378K", "mom_pct": 0.57, "yoy_pct": -0.07}, "Profit": {"value": 256948.45, "value_fmt": "$257K", "mom_pct": 0.39, "yoy_pct": -0.42}, "Units Sold": {"value": 55982.0, "value_fmt": "55,982", "mom_pct": 0.47, "yoy_pct": 0.14}, "Discounts": {"value": 6328.78, "value_fmt": "$6K", "mom_pct": 0.13, "yoy_pct": 4.87}, "Cost": {"value": 115187.91, "value_fmt": "$115K", "mom_pct": 1.01, "yoy_pct": 0.43}, "Avg Service Time": {"value": 216.1521, "value_fmt": "216.15", "mom_pct": 0.22, "yoy_pct": -0.11}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6789, "value_fmt": "67.9%", "mom_pct": -0.18, "yoy_pct": -0.34}, "Discount Rate %": {"value": 0.0167, "value_fmt": "1.7%", "mom_pct": -0.44, "yoy_pct": 4.95}, "Cost-to-Revenue %": {"value": 0.3044, "value_fmt": "30.4%", "mom_pct": 0.43, "yoy_pct": 0.51}}}, "Channel": {"Delivery": {"Revenue": {"value": 94266.03, "value_fmt": "$94K", "mom_pct": 0.95, "yoy_pct": 0.35}, "Profit": {"value": 64152.17, "value_fmt": "$64K", "mom_pct": 1.18, "yoy_pct": 0.53}, "Units Sold": {"value": 13165.0, "value_fmt": "13,165", "mom_pct": 1.44, "yoy_pct": 0.69}, "Discounts": {"value": 1481.2, "value_fmt": "$1K", "mom_pct": -10.44, "yoy_pct": -5.03}, "Cost": {"value": 28632.66, "value_fmt": "$29K", "mom_pct": 1.09, "yoy_pct": 0.25}, "Avg Service Time": {"value": NaN, "value_fmt": "nan", "mom_pct": NaN, "yoy_pct": NaN}, "Drive-Thru Speed": {"value": 0.0, "value_fmt": "0.00", "mom_pct": null, "yoy_pct": null}, "Profit Margin %": {"value": 0.6805, "value_fmt": "68.1%", "mom_pct": 0.23, "yoy_pct": 0.18}, "Discount Rate %": {"value": 0.0157, "value_fmt": "1.6%", "mom_pct": -11.28, "yoy_pct": -5.36}, "Cost-to-Revenue %": {"value": 0.3037, "value_fmt": "30.4%", "mom_pct": 0.14, "yoy_pct": -0.11}}, "Dine-In": {"Revenue": {"value": 203529.96, "value_fmt": "$204K", "mom_pct": 0.64, "yoy_pct": -0.35}, "Profit": {"value": 138692.47, "value_fmt": "$139K", "mom_pct": 1.19, "yoy_pct": -0.19}, "Units Sold": {"value": 29933.0, "value_fmt": "29,933", "mom_pct": 0.97, "yoy_pct": 0.17}, "Discounts": {"value": 3070.37, "value_fmt": "$3K", "mom_pct": -19.55, "yoy_pct": -9.58}, "Cost": {"value": 61767.12, "value_fmt": "$62K", "mom_pct": 0.67, "yoy_pct": -0.19}, "Avg Service Time": {"value": NaN, "value_fmt": "nan", "mom_pct": NaN, "yoy_pct": NaN}, "Drive-Thru Speed": {"value": 0.0, "value_fmt": "0.00", "mom_pct": null, "yoy_pct": null}, "Profit Margin %": {"value": 0.6814, "value_fmt": "68.1%", "mom_pct": 0.54, "yoy_pct": 0.16}, "Discount Rate %": {"value": 0.0151, "value_fmt": "1.5%", "mom_pct": -20.06, "yoy_pct": -9.27}, "Cost-to-Revenue %": {"value": 0.3035, "value_fmt": "30.3%", "mom_pct": 0.03, "yoy_pct": 0.16}}, "Drive-Thru": {"Revenue": {"value": 372822.42, "value_fmt": "$373K", "mom_pct": 0.4, "yoy_pct": -0.12}, "Profit": {"value": 252375.51, "value_fmt": "$252K", "mom_pct": -0.23, "yoy_pct": -0.72}, "Units Sold": {"value": 55863.0, "value_fmt": "55,863", "mom_pct": -0.03, "yoy_pct": 0.23}, "Discounts": {"value": 7107.78, "value_fmt": "$7K", "mom_pct": 21.52, "yoy_pct": 11.54}, "Cost": {"value": 113339.13, "value_fmt": "$113K", "mom_pct": 0.72, "yoy_pct": 0.55}, "Avg Service Time": {"value": 215.1055, "value_fmt": "215.11", "mom_pct": -0.14, "yoy_pct": -0.12}, "Drive-Thru Speed": {"value": 1.0, "value_fmt": "1.00", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6769, "value_fmt": "67.7%", "mom_pct": -0.63, "yoy_pct": -0.59}, "Discount Rate %": {"value": 0.0191, "value_fmt": "1.9%", "mom_pct": 21.03, "yoy_pct": 11.68}, "Cost-to-Revenue %": {"value": 0.304, "value_fmt": "30.4%", "mom_pct": 0.32, "yoy_pct": 0.68}}, "Mobile/App": {"Revenue": {"value": 144068.27, "value_fmt": "$144K", "mom_pct": -0.08, "yoy_pct": 0.12}, "Profit": {"value": 98184.8, "value_fmt": "$98K", "mom_pct": 0.26, "yoy_pct": 0.18}, "Units Sold": {"value": 20743.0, "value_fmt": "20,743", "mom_pct": 0.09, "yoy_pct": -0.15}, "Discounts": {"value": 2107.84, "value_fmt": "$2K", "mom_pct": -13.31, "yoy_pct": -9.03}, "Cost": {"value": 43775.63, "value_fmt": "$44K", "mom_pct": -0.1, "yoy_pct": 0.47}, "Avg Service Time": {"value": NaN, "value_fmt": "nan", "mom_pct": NaN, "yoy_pct": NaN}, "Drive-Thru Speed": {"value": 0.0, "value_fmt": "0.00", "mom_pct": null, "yoy_pct": null}, "Profit Margin %": {"value": 0.6815, "value_fmt": "68.2%", "mom_pct": 0.34, "yoy_pct": 0.06}, "Discount Rate %": {"value": 0.0146, "value_fmt": "1.5%", "mom_pct": -13.24, "yoy_pct": -9.14}, "Cost-to-Revenue %": {"value": 0.3039, "value_fmt": "30.4%", "mom_pct": -0.02, "yoy_pct": 0.35}}}, "Province": {"Alberta": {"Revenue": {"value": 146224.67, "value_fmt": "$146K", "mom_pct": 0.73, "yoy_pct": 0.13}, "Profit": {"value": 99528.01, "value_fmt": "$100K", "mom_pct": 1.06, "yoy_pct": 0.24}, "Units Sold": {"value": 21268.0, "value_fmt": "21,268", "mom_pct": 0.7, "yoy_pct": 0.04}, "Discounts": {"value": 2467.45, "value_fmt": "$2K", "mom_pct": -1.69, "yoy_pct": -5.05}, "Cost": {"value": 44229.21, "value_fmt": "$44K", "mom_pct": 0.12, "yoy_pct": 0.19}, "Avg Service Time": {"value": 215.7419, "value_fmt": "215.74", "mom_pct": 1.41, "yoy_pct": -0.22}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6807, "value_fmt": "68.1%", "mom_pct": 0.33, "yoy_pct": 0.11}, "Discount Rate %": {"value": 0.0169, "value_fmt": "1.7%", "mom_pct": -2.4, "yoy_pct": -5.17}, "Cost-to-Revenue %": {"value": 0.3025, "value_fmt": "30.2%", "mom_pct": -0.6, "yoy_pct": 0.06}}, "BC": {"Revenue": {"value": 166827.05, "value_fmt": "$167K", "mom_pct": 0.6, "yoy_pct": -0.65}, "Profit": {"value": 113528.13, "value_fmt": "$114K", "mom_pct": 0.76, "yoy_pct": -0.68}, "Units Sold": {"value": 24617.0, "value_fmt": "24,617", "mom_pct": 0.38, "yoy_pct": -0.11}, "Discounts": {"value": 2606.02, "value_fmt": "$3K", "mom_pct": -8.39, "yoy_pct": -10.33}, "Cost": {"value": 50692.9, "value_fmt": "$51K", "mom_pct": 0.75, "yoy_pct": -0.02}, "Avg Service Time": {"value": 218.5138, "value_fmt": "218.51", "mom_pct": 0.75, "yoy_pct": 2.62}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6805, "value_fmt": "68.1%", "mom_pct": 0.16, "yoy_pct": -0.03}, "Discount Rate %": {"value": 0.0156, "value_fmt": "1.6%", "mom_pct": -8.93, "yoy_pct": -9.74}, "Cost-to-Revenue %": {"value": 0.3039, "value_fmt": "30.4%", "mom_pct": 0.15, "yoy_pct": 0.63}}, "Nova Scotia": {"Revenue": {"value": 94846.8, "value_fmt": "$95K", "mom_pct": 0.46, "yoy_pct": -0.11}, "Profit": {"value": 64532.6, "value_fmt": "$65K", "mom_pct": 0.21, "yoy_pct": -0.53}, "Units Sold": {"value": 13942.0, "value_fmt": "13,942", "mom_pct": 0.52, "yoy_pct": -0.88}, "Discounts": {"value": 1464.16, "value_fmt": "$1K", "mom_pct": 9.87, "yoy_pct": 9.66}, "Cost": {"value": 28850.04, "value_fmt": "$29K", "mom_pct": 0.58, "yoy_pct": 0.4}, "Avg Service Time": {"value": 214.6959, "value_fmt": "214.70", "mom_pct": -0.05, "yoy_pct": -0.46}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6804, "value_fmt": "68.0%", "mom_pct": -0.25, "yoy_pct": -0.43}, "Discount Rate %": {"value": 0.0154, "value_fmt": "1.5%", "mom_pct": 9.37, "yoy_pct": 9.78}, "Cost-to-Revenue %": {"value": 0.3042, "value_fmt": "30.4%", "mom_pct": 0.12, "yoy_pct": 0.51}}, "Ontario": {"Revenue": {"value": 239565.35, "value_fmt": "$240K", "mom_pct": 0.13, "yoy_pct": 0.05}, "Profit": {"value": 162290.31, "value_fmt": "$162K", "mom_pct": -0.13, "yoy_pct": -0.4}, "Units Sold": {"value": 35296.0, "value_fmt": "35,296", "mom_pct": 0.36, "yoy_pct": 0.6}, "Discounts": {"value": 4335.35, "value_fmt": "$4K", "mom_pct": -0.06, "yoy_pct": 7.81}, "Cost": {"value": 72939.69, "value_fmt": "$73K", "mom_pct": 0.72, "yoy_pct": 0.63}, "Avg Service Time": {"value": 214.4731, "value_fmt": "214.47", "mom_pct": -0.49, "yoy_pct": -0.34}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6774, "value_fmt": "67.7%", "mom_pct": -0.26, "yoy_pct": -0.45}, "Discount Rate %": {"value": 0.0181, "value_fmt": "1.8%", "mom_pct": -0.19, "yoy_pct": 7.76}, "Cost-to-Revenue %": {"value": 0.3045, "value_fmt": "30.4%", "mom_pct": 0.59, "yoy_pct": 0.58}}, "Quebec": {"Revenue": {"value": 167222.81, "value_fmt": "$167K", "mom_pct": 0.47, "yoy_pct": 0.12}, "Profit": {"value": 113525.9, "value_fmt": "$114K", "mom_pct": 0.21, "yoy_pct": -0.03}, "Units Sold": {"value": 24581.0, "value_fmt": "24,581", "mom_pct": 0.15, "yoy_pct": 0.69}, "Discounts": {"value": 2894.21, "value_fmt": "$3K", "mom_pct": 6.19, "yoy_pct": 3.97}, "Cost": {"value": 50802.7, "value_fmt": "$51K", "mom_pct": 0.74, "yoy_pct": 0.27}, "Avg Service Time": {"value": 212.2143, "value_fmt": "212.21", "mom_pct": -2.05, "yoy_pct": -2.2}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6789, "value_fmt": "67.9%", "mom_pct": -0.26, "yoy_pct": -0.16}, "Discount Rate %": {"value": 0.0173, "value_fmt": "1.7%", "mom_pct": 5.7, "yoy_pct": 3.84}, "Cost-to-Revenue %": {"value": 0.3038, "value_fmt": "30.4%", "mom_pct": 0.27, "yoy_pct": 0.14}}}, "Category": {"Beverages": {"Revenue": {"value": 30634.85, "value_fmt": "$31K", "mom_pct": 0.62, "yoy_pct": 0.71}, "Profit": {"value": 24087.82, "value_fmt": "$24K", "mom_pct": 0.51, "yoy_pct": 0.89}, "Units Sold": {"value": 14206.0, "value_fmt": "14,206", "mom_pct": 0.23, "yoy_pct": 0.85}, "Discounts": {"value": 541.82, "value_fmt": "$542", "mom_pct": 8.31, "yoy_pct": -3.18}, "Cost": {"value": 6005.21, "value_fmt": "$6K", "mom_pct": 0.4, "yoy_pct": 0.34}, "Avg Service Time": {"value": 212.2742, "value_fmt": "212.27", "mom_pct": -2.01, "yoy_pct": -1.49}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.7863, "value_fmt": "78.6%", "mom_pct": -0.1, "yoy_pct": 0.18}, "Discount Rate %": {"value": 0.0177, "value_fmt": "1.8%", "mom_pct": 7.64, "yoy_pct": -3.86}, "Cost-to-Revenue %": {"value": 0.196, "value_fmt": "19.6%", "mom_pct": -0.22, "yoy_pct": -0.36}}, "Breakfast": {"Revenue": {"value": 52121.27, "value_fmt": "$52K", "mom_pct": 0.17, "yoy_pct": 0.39}, "Profit": {"value": 35825.4, "value_fmt": "$36K", "mom_pct": 0.6, "yoy_pct": 0.05}, "Units Sold": {"value": 8849.0, "value_fmt": "8,849", "mom_pct": -0.11, "yoy_pct": -0.42}, "Discounts": {"value": 800.6, "value_fmt": "$801", "mom_pct": -11.93, "yoy_pct": 12.27}, "Cost": {"value": 15495.27, "value_fmt": "$15K", "mom_pct": -0.1, "yoy_pct": 0.64}, "Avg Service Time": {"value": 212.4548, "value_fmt": "212.45", "mom_pct": -0.02, "yoy_pct": -0.55}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6873, "value_fmt": "68.7%", "mom_pct": 0.43, "yoy_pct": -0.34}, "Discount Rate %": {"value": 0.0154, "value_fmt": "1.5%", "mom_pct": -12.08, "yoy_pct": 11.83}, "Cost-to-Revenue %": {"value": 0.2973, "value_fmt": "29.7%", "mom_pct": -0.27, "yoy_pct": 0.25}}, "Burgers": {"Revenue": {"value": 171116.03, "value_fmt": "$171K", "mom_pct": 0.02, "yoy_pct": -0.27}, "Profit": {"value": 114134.73, "value_fmt": "$114K", "mom_pct": -0.1, "yoy_pct": -0.75}, "Units Sold": {"value": 24480.0, "value_fmt": "24,480", "mom_pct": 0.26, "yoy_pct": -0.12}, "Discounts": {"value": 2813.5, "value_fmt": "$3K", "mom_pct": -4.86, "yoy_pct": 4.37}, "Cost": {"value": 54167.8, "value_fmt": "$54K", "mom_pct": 0.52, "yoy_pct": 0.52}, "Avg Service Time": {"value": 216.7613, "value_fmt": "216.76", "mom_pct": 0.86, "yoy_pct": 1.5}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.667, "value_fmt": "66.7%", "mom_pct": -0.11, "yoy_pct": -0.48}, "Discount Rate %": {"value": 0.0164, "value_fmt": "1.6%", "mom_pct": -4.88, "yoy_pct": 4.66}, "Cost-to-Revenue %": {"value": 0.3166, "value_fmt": "31.7%", "mom_pct": 0.51, "yoy_pct": 0.79}}, "Chicken": {"Revenue": {"value": 163472.09, "value_fmt": "$163K", "mom_pct": 0.36, "yoy_pct": 0.28}, "Profit": {"value": 108788.67, "value_fmt": "$109K", "mom_pct": 0.18, "yoy_pct": 0.12}, "Units Sold": {"value": 21828.0, "value_fmt": "21,828", "mom_pct": 0.0, "yoy_pct": 0.24}, "Discounts": {"value": 2843.73, "value_fmt": "$3K", "mom_pct": 2.21, "yoy_pct": -3.51}, "Cost": {"value": 51839.69, "value_fmt": "$52K", "mom_pct": 0.65, "yoy_pct": 0.83}, "Avg Service Time": {"value": 216.1548, "value_fmt": "216.15", "mom_pct": -1.11, "yoy_pct": -0.44}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6655, "value_fmt": "66.5%", "mom_pct": -0.18, "yoy_pct": -0.16}, "Discount Rate %": {"value": 0.0174, "value_fmt": "1.7%", "mom_pct": 1.85, "yoy_pct": -3.78}, "Cost-to-Revenue %": {"value": 0.3171, "value_fmt": "31.7%", "mom_pct": 0.29, "yoy_pct": 0.55}}, "Combo Meals": {"Revenue": {"value": 354954.23, "value_fmt": "$355K", "mom_pct": 0.74, "yoy_pct": -0.31}, "Profit": {"value": 238362.62, "value_fmt": "$238K", "mom_pct": 0.68, "yoy_pct": -0.49}, "Units Sold": {"value": 34952.0, "value_fmt": "34,952", "mom_pct": 0.68, "yoy_pct": -0.08}, "Discounts": {"value": 6034.27, "value_fmt": "$6K", "mom_pct": 2.8, "yoy_pct": 1.56}, "Cost": {"value": 110557.34, "value_fmt": "$111K", "mom_pct": 0.77, "yoy_pct": -0.02}, "Avg Service Time": {"value": 215.6548, "value_fmt": "215.65", "mom_pct": 0.17, "yoy_pct": 0.74}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.6715, "value_fmt": "67.2%", "mom_pct": -0.06, "yoy_pct": -0.18}, "Discount Rate %": {"value": 0.017, "value_fmt": "1.7%", "mom_pct": 2.04, "yoy_pct": 1.88}, "Cost-to-Revenue %": {"value": 0.3115, "value_fmt": "31.1%", "mom_pct": 0.03, "yoy_pct": 0.29}}, "Desserts": {"Revenue": {"value": 9957.56, "value_fmt": "$10K", "mom_pct": -0.11, "yoy_pct": -0.43}, "Profit": {"value": 7527.54, "value_fmt": "$8K", "mom_pct": -0.27, "yoy_pct": -0.56}, "Units Sold": {"value": 3753.0, "value_fmt": "3,753", "mom_pct": -0.71, "yoy_pct": -1.11}, "Discounts": {"value": 180.3, "value_fmt": "$180", "mom_pct": 4.06, "yoy_pct": 6.31}, "Cost": {"value": 2249.72, "value_fmt": "$2K", "mom_pct": 0.09, "yoy_pct": -0.47}, "Avg Service Time": {"value": 215.0968, "value_fmt": "215.10", "mom_pct": -0.47, "yoy_pct": 0.76}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.756, "value_fmt": "75.6%", "mom_pct": -0.16, "yoy_pct": -0.14}, "Discount Rate %": {"value": 0.0181, "value_fmt": "1.8%", "mom_pct": 4.17, "yoy_pct": 6.76}, "Cost-to-Revenue %": {"value": 0.2259, "value_fmt": "22.6%", "mom_pct": 0.2, "yoy_pct": -0.04}}, "Sides": {"Revenue": {"value": 32430.65, "value_fmt": "$32K", "mom_pct": 0.17, "yoy_pct": 0.25}, "Profit": {"value": 24678.17, "value_fmt": "$25K", "mom_pct": 0.17, "yoy_pct": 0.63}, "Units Sold": {"value": 11636.0, "value_fmt": "11,636", "mom_pct": 1.57, "yoy_pct": 1.75}, "Discounts": {"value": 552.97, "value_fmt": "$553", "mom_pct": -1.0, "yoy_pct": -10.54}, "Cost": {"value": 7199.51, "value_fmt": "$7K", "mom_pct": 0.27, "yoy_pct": -0.11}, "Avg Service Time": {"value": 217.3419, "value_fmt": "217.34", "mom_pct": 1.68, "yoy_pct": -1.28}, "Drive-Thru Speed": {"value": 0.25, "value_fmt": "0.25", "mom_pct": 0.0, "yoy_pct": 0.0}, "Profit Margin %": {"value": 0.761, "value_fmt": "76.1%", "mom_pct": -0.0, "yoy_pct": 0.38}, "Discount Rate %": {"value": 0.0171, "value_fmt": "1.7%", "mom_pct": -1.18, "yoy_pct": -10.77}, "Cost-to-Revenue %": {"value": 0.222, "value_fmt": "22.2%", "mom_pct": 0.1, "yoy_pct": -0.36}}}};
+var ARIA_DIM_MONTHLY       = {"Store Type": {"Suburban": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [344120.3, 323114.9, 396140.05, 381689.71, 393922.6, 446196.61, 455053.32, 455891.32, 383109.14, 393843.16, 422757.85, 436221.54]}, "Urban": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [297962.47, 279712.49, 345175.34, 332182.21, 340228.51, 386164.77, 393660.42, 396679.16, 331926.23, 341818.81, 365963.71, 378465.14]}}, "Channel": {"Delivery": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [73490.99, 68641.15, 85659.04, 81963.93, 84162.37, 95748.51, 97652.46, 98560.69, 82187.05, 84540.75, 90791.35, 94266.03]}, "Dine-In": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [160544.07, 150886.57, 184339.58, 178207.35, 183527.47, 207980.78, 212593.62, 213014.46, 178612.28, 183309.07, 196596.18, 203529.96]}, "Drive-Thru": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [294639.45, 276862.17, 340085.01, 327639.59, 336237.22, 380794.06, 387521.68, 389365.3, 327189.17, 338394.75, 361078.3, 372822.42]}, "Mobile/App": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [113408.26, 106437.5, 131231.76, 126061.05, 130224.05, 147838.03, 150945.98, 151630.03, 127046.87, 129417.4, 140255.73, 144068.27]}}, "Province": {"Alberta": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [114345.36, 108298.57, 131967.57, 127534.47, 131422.57, 148806.16, 151999.29, 152621.4, 127430.48, 131781.6, 141051.77, 146224.67]}, "BC": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [132150.51, 123010.64, 152193.47, 146547.9, 151323.71, 170439.64, 174111.55, 175510.73, 147040.03, 150986.6, 161339.11, 166827.05]}, "Nova Scotia": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [75014.15, 70119.43, 86639.64, 83253.34, 85079.18, 97016.93, 98803.97, 99129.91, 82572.79, 85670.12, 91797.52, 94846.8]}, "Ontario": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [189130.0, 177269.85, 217791.49, 210281.33, 215884.98, 245372.37, 249642.14, 250602.27, 211503.9, 216153.47, 232707.39, 239565.35]}, "Quebec": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [131442.75, 124128.9, 152723.22, 146254.88, 150440.67, 170726.28, 174156.79, 174706.17, 146488.17, 151070.18, 161825.77, 167222.81]}}, "Category": {"Beverages": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [24021.09, 22415.12, 27797.22, 26612.18, 27456.91, 31144.06, 31976.52, 31979.44, 26638.41, 27424.79, 29593.64, 30634.85]}, "Breakfast": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [40860.0, 38271.71, 47683.79, 45581.75, 47004.06, 53420.23, 54745.84, 54882.28, 45981.21, 47202.9, 50557.44, 52121.27]}, "Burgers": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [135994.49, 126975.19, 155754.98, 150070.88, 154660.93, 175846.16, 178210.43, 179637.54, 150922.68, 153985.62, 166317.62, 171116.03]}, "Chicken": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [128604.32, 120819.58, 148879.29, 143751.19, 147558.3, 166302.78, 170541.73, 170771.89, 142842.92, 148123.87, 158480.25, 163472.09]}, "Combo Meals": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [279673.39, 263274.01, 322779.84, 310827.35, 319635.37, 362230.27, 368884.23, 370773.3, 311258.19, 321019.86, 342589.87, 354954.23]}, "Desserts": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [7779.76, 7326.19, 9158.47, 8749.31, 8944.43, 10293.92, 10418.79, 10514.71, 8850.42, 9034.43, 9692.16, 9957.56]}, "Sides": {"labels": ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], "values": [25149.72, 23745.59, 29261.8, 28279.26, 28891.11, 33123.96, 33936.2, 34011.32, 28541.54, 28870.5, 31490.58, 32430.65]}}};
+var ARIA_ACCENT            = '#F59E0B';
+var ARIA_PALETTE           = ["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24", "#F97316", "#14B8A6"];
+var ARIA_DIM_DATA        = {"Store Type": {"labels": ["Suburban", "Urban"], "values": [296456.5, 256948.45]}, "Channel": {"labels": ["Drive-Thru", "Dine-In", "Mobile/App", "Delivery"], "values": [252375.51, 138692.47, 98184.8, 64152.17]}, "Province": {"labels": ["Ontario", "BC", "Quebec", "Alberta", "Nova Scotia"], "values": [162290.31, 113528.13, 113525.9, 99528.01, 64532.6]}, "Category": {"labels": ["Combo Meals", "Burgers", "Chicken", "Sides", "Beverages", "Desserts"], "values": [238362.62, 114134.73, 108788.67, 24678.17, 24087.82, 7527.54]}};
+var ARIA_DIM_DRIVERS     = {"Store Type": [{"member": "Suburban", "delta": -2337.97, "value": 296456.5}, {"member": "Urban", "delta": -2571.15, "value": 256948.45}], "Channel": [{"member": "Delivery", "delta": -102.65, "value": 64152.17}, {"member": "Mobile/App", "delta": -377.32, "value": 98184.8}, {"member": "Dine-In", "delta": -1083.76, "value": 138692.47}, {"member": "Drive-Thru", "delta": -3345.39, "value": 252375.51}], "Province": [{"member": "Alberta", "delta": -452.9, "value": 99528.01}, {"member": "Quebec", "delta": -716.45, "value": 113525.9}, {"member": "Nova Scotia", "delta": -788.33, "value": 64532.6}, {"member": "BC", "delta": -1506.39, "value": 113528.13}, {"member": "Ontario", "delta": -1445.05, "value": 162290.31}], "Category": [{"member": "Beverages", "delta": 24.22, "value": 24087.82}, {"member": "Sides", "delta": -24.73, "value": 24678.17}, {"member": "Desserts", "delta": -83.55, "value": 7527.54}, {"member": "Combo Meals", "delta": -2610.1, "value": 238362.62}, {"member": "Burgers", "delta": -1459.2, "value": 114134.73}, {"member": "Chicken", "delta": -580.05, "value": 108788.67}], "Store ID": [{"member": "ST009", "delta": 41.14, "value": 50201.8}, {"member": "ST007", "delta": -193.59, "value": 49470.89}, {"member": "ST002", "delta": -363.66, "value": 49502.64}, {"member": "ST005", "delta": -801.96, "value": 49064.21}, {"member": "ST010", "delta": -788.33, "value": 64532.6}, {"member": "ST004", "delta": -704.43, "value": 64463.92}], "Store Name": [{"member": "Edmonton South", "delta": 41.14, "value": 50201.8}, {"member": "Laval", "delta": -193.59, "value": 49470.89}, {"member": "Scarborough", "delta": -363.66, "value": 49502.64}, {"member": "Surrey", "delta": -801.96, "value": 49064.21}, {"member": "Halifax", "delta": -788.33, "value": 64532.6}, {"member": "Downtown Vancouver", "delta": -704.43, "value": 64463.92}]};
+var _ARIA_MONTHLY_LABELS = ["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"];
+var _ARIA_MONTHLY_VALUES = [642082.77, 602827.39, 741315.39, 713871.92, 734151.11, 832361.38, 848713.74, 852570.48, 715035.37, 735661.97, 788721.56, 814686.68];
+var _ARIA_PRIOR_VAL      = 0.68;
+var _ARIA_CURR_VAL       = 0.68;
+var _ARIA_TC             = '#8B7D70';
+var _ARIA_SUB            = '#4A3F35';
+
+function _ariaPct(p) {
+    if (p === null || p === undefined) return {text:'—', color:'#888'};
+    var s = p >= 0 ? '▲' : '▼';
+    var c = p >= 0 ? '#34D399' : '#F87171';
+    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
+}
+function _fmtVal(v) {
+    return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+(v/1e3).toFixed(1)+'K':v.toFixed(2);
+}
+
+function ariaFilter(sel) {
+    var dim = sel.getAttribute('data-dim');
+    var val = sel.value;
+
+    /* ── 1. KPI mini tiles ── */
+    var mData = (val === 'All') ? null :
+                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
+    ARIA_DS_KPIS.forEach(function(kn, i) {
+        var kd = mData ? (mData[kn] || null) : null;
+        var ve = document.getElementById('ds_kv_' + i);
+        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
+                                    : ve.getAttribute('data-orig');
+        var me = document.getElementById('ds_md_' + i);
+        if (me) {
+            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
+                var rm = _ariaPct(kd.mom_pct); me.textContent = rm.text+' MoM'; me.style.color = rm.color;
+            } else { me.textContent = me.getAttribute('data-orig')||'— MoM'; me.style.color = me.getAttribute('data-oc')||'#888'; }
+        }
+        var ye = document.getElementById('ds_yd_' + i);
+        if (ye) {
+            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
+                var ry = _ariaPct(kd.yoy_pct); ye.textContent = ry.text+' YoY'; ye.style.color = ry.color;
+            } else { ye.textContent = ye.getAttribute('data-orig')||'— YoY'; ye.style.color = ye.getAttribute('data-oc')||'#888'; }
+        }
+    });
+
+    /* ── 2. Bar chart — switch dim, highlight member ── */
+    var d = ARIA_DIM_DATA[dim];
+    if (d) {
+        var barChart = ARIA_CHARTS['ds_dimbar'];
+        if (barChart) {
+            barChart.data.labels = d.labels;
+            barChart.data.datasets[0].data = d.values;
+            barChart.data.datasets[0].backgroundColor = (val === 'All')
+                ? d.labels.map(function(l, idx) { return ARIA_PALETTE[idx % ARIA_PALETTE.length]; })
+                : d.labels.map(function(l) { return l === val ? ARIA_ACCENT : ARIA_ACCENT+'28'; });
+            barChart.update('none');
+            var bt = document.getElementById('ds-dim-title');
+            if (bt) bt.textContent = dim+' Breakdown'+(val!=='All'?' • '+val:'');
+        }
+    }
+
+    /* ── 3. Donut — switch to selected dim's contribution mix ── */
+    if (d) {
+        var donutChart = ARIA_CHARTS['ds_donut'];
+        if (donutChart) {
+            var dColors = d.labels.map(function(l, idx) {
+                var base = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                return (val !== 'All' && l !== val) ? base+'55' : base;
+            });
+            donutChart.data.labels = d.labels;
+            donutChart.data.datasets[0].data = d.values;
+            donutChart.data.datasets[0].backgroundColor = dColors;
+            donutChart.update('none');
+            var dt = document.getElementById('ds-donut-title');
+            if (dt) dt.textContent = dim+' Mix'+(val!=='All'?' • '+val:'');
+            var dl = document.getElementById('ds-donut-legend');
+            if (dl) {
+                dl.innerHTML = d.labels.map(function(l, idx) {
+                    var c = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                    return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">'
+                         + '<div style="width:7px;height:7px;border-radius:50%;background:'+c+';flex-shrink:0"></div>'
+                         + '<div style="font-size:8px;color:'+_ARIA_SUB+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'
+                         + l.substring(0,18)+'</div></div>';
+                }).join('');
+            }
+        }
+    }
+
+    /* ── 4. Waterfall — rebuild using ALL dim members from ARIA_DIM_DATA ── */
+    /* ARIA_DIM_DRIVERS only holds top-N drivers and may omit members with small deltas.
+       Instead, start from ARIA_DIM_DATA (complete member list + current values) and
+       merge deltas from ARIA_DIM_DRIVERS; missing members get delta = 0. */
+    var d4    = ARIA_DIM_DATA[dim];
+    var drvList4 = ARIA_DIM_DRIVERS[dim] || [];
+    var drvMap4  = {};
+    drvList4.forEach(function(s) { drvMap4[s.member] = s; });
+    var wfLabels, wfData, wfColors;
+    if (d4 && d4.labels && d4.labels.length > 0) {
+        var allSteps4 = d4.labels.map(function(m, idx) {
+            var drv = drvMap4[m];
+            return { member: m,
+                      value:  drv ? drv.value : (d4.values[idx] || 0),
+                      delta:  drv ? drv.delta : 0 };
+        });
+        var curr4  = allSteps4.reduce(function(a,s){ return a+(s.value||0);  }, 0);
+        var prior4 = allSteps4.reduce(function(a,s){ return a+((s.value||0)-(s.delta||0)); }, 0);
+        var lifts4 = allSteps4.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags4 = allSteps4.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps4 = lifts4.concat(drags4);
+        /* Always include selected member even if its delta is 0 */
+        if (val!=='All' && !steps4.some(function(s){return s.member===val;})) {
+            var sel4 = allSteps4.find(function(s){return s.member===val;});
+            if (sel4) steps4.push(sel4);
+        }
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior4*100)/100]]; wfColors=['#60A5FA'];
+        var cum4=prior4;
+        steps4.forEach(function(s) {
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum4*100)/100, Math.round((cum4+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0 ? (hi?'#10B981':'#34D399') : (hi?'#EF4444':'#F87171'));
+            cum4+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr4*100)/100]); wfColors.push('#60A5FA');
+    } else {
+        /* Fallback to driver list if ARIA_DIM_DATA unavailable for this dim */
+        var drvs=drvList4, curr_total=0, prior_total=0;
+        drvs.forEach(function(s){curr_total+=(s.value||0);prior_total+=((s.value||0)-(s.delta||0));});
+        var lifts=drvs.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags=drvs.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps=lifts.concat(drags);
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior_total*100)/100]]; wfColors=['#60A5FA'];
+        var cum=prior_total;
+        steps.forEach(function(s){
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum*100)/100,Math.round((cum+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0?(hi?'#10B981':'#34D399'):(hi?'#EF4444':'#F87171'));
+            cum+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr_total*100)/100]); wfColors.push('#60A5FA');
+    }
+    var wfChart = ARIA_CHARTS['ds_wfall'];
+    if (wfChart) {
+        wfChart.data.labels = wfLabels;
+        wfChart.data.datasets[0].data = wfData;
+        wfChart.data.datasets[0].backgroundColor = wfColors;
+        wfChart.update('none');
+        var wt = document.getElementById('ds-wfall-title');
+        if (wt) wt.textContent = dim+' Waterfall'+(val!=='All'?' • '+val:'');
+    }
+
+    /* ── 5. Line trend — switch to member's monthly series, restore on All ── */
+    var trendChart = ARIA_CHARTS['ds_trend'];
+    if (trendChart) {
+        var mMonthly = (val === 'All') ? null :
+                       ((ARIA_DIM_MONTHLY[dim] || {})[val] || null);
+        if (mMonthly && mMonthly.values && mMonthly.values.length >= 2) {
+            trendChart.data.labels   = mMonthly.labels;
+            trendChart.data.datasets[0].data = mMonthly.values;
+        } else {
+            trendChart.data.labels   = _ARIA_MONTHLY_LABELS;
+            trendChart.data.datasets[0].data = _ARIA_MONTHLY_VALUES;
+        }
+        trendChart.update('none');
+        var tt = document.getElementById('ds-trend-title');
+        if (tt) tt.textContent = (val === 'All')
+            ? (_ARIA_MONTHLY_LABELS.length ? 'Revenue — Monthly (12M)' : 'Trend')
+            : dim + ' → ' + val + ' Monthly Trend';
+    }
+}
+
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    (function(){
+        var ctx = document.getElementById('ds_trend');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_trend'] = new Chart(ctx, {
+            type:'line',
+            data:{ labels:["2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12"], datasets:[{
+                data:[642082.77, 602827.39, 741315.39, 713871.92, 734151.11, 832361.38, 848713.74, 852570.48, 715035.37, 735661.97, 788721.56, 814686.68], borderColor:'#F59E0B', borderWidth:2,
+                pointRadius:0, fill:true,
+                backgroundColor:'#F59E0B22', tension:0.35
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{display:false},
+                    datalabels:{display:false},
+                    tooltip:{ mode:'index', intersect:false,
+                        callbacks:{ label: function(ctx) {
+                            var v = ctx.raw;
+                            return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(2);
+                        } } } },
+                scales:{
+                    x:{ ticks:{ color:'#8B7D70', font:{size:8}, maxTicksLimit:6 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ ticks:{ color:'#8B7D70', font:{size:8} },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+    (function(){
+        var ctx = document.getElementById('ds_dimbar');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_dimbar'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Combo Meals", "Burgers", "Chicken", "Sides", "Beverages", "Desserts"], datasets:[{ data:[238362.62, 114134.73, 108788.67, 24678.17, 24087.82, 7527.54],
+                backgroundColor:["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24"], borderRadius:4, borderWidth:0 }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(0);
+                        },
+                        color:'#8B7D70', font:{size:8,weight:'600'}
+                    },
+                    tooltip:{ callbacks:{ label: ctx =>
+                        (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                         ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                         ctx.raw.toFixed(1)) } } },
+                scales:{
+                    x:{ ticks:{ color:'#8B7D70', font:{size:9}, maxRotation:30 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ display:false, grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:300} }
+        });
+    })();
+    ARIA_CHARTS['ds_donut'] = new Chart(document.getElementById('ds_donut'), {
+        type:'doughnut',
+        data:{ labels:["Combo Meals", "Burgers", "Chicken", "Sides", "Beverages", "Desserts"], datasets:[{ data:[238362.62, 114134.73, 108788.67, 24678.17, 24087.82, 7527.54],
+            backgroundColor:["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24"], borderWidth:2, borderColor:'transparent',
+            hoverOffset:4 }] },
+        options:{ cutout:'62%', responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{
+                    display:true,
+                    formatter:function(v, ctx){
+                        var total = ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+                        return total>0 ? (v/total*100).toFixed(1)+'%' : '';
+                    },
+                    color:'#fff',
+                    font:{size:8, weight:'700'},
+                    textStrokeColor:'rgba(0,0,0,0.35)',
+                    textStrokeWidth:2,
+                },
+                tooltip:{ callbacks:{ label: ctx => ' '+ctx.label+': '+
+                    (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                     ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                     ctx.raw.toFixed(0)) } } },
+            animation:{duration:0} }
+    });
+    (function(){
+        var ctx = document.getElementById('ds_wfall');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_wfall'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Prior", "Beverages", "Combo Meals", "Burgers", "Current"], datasets:[{
+                data:[[0, 522312.96], [522312.96, 522337.18], [522337.18, 519727.08], [519727.08, 518267.88], [0, 517579.55]],
+                backgroundColor:["#60A5FA", "#34D399", "#F87171", "#F87171", "#60A5FA"],
+                borderRadius:3, borderWidth:0
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        display:true,
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            if(!Array.isArray(v)) return '';
+                            var diff = v[1] - v[0];
+                            /* Prior/Current anchors: show absolute value */
+                            if(v[0]===0) {
+                                return Math.abs(v[1])>=1e6?'$'+(v[1]/1e6).toFixed(1)+'M':
+                                       Math.abs(v[1])>=1e3?'$'+(v[1]/1e3).toFixed(1)+'K':
+                                       '$'+v[1].toFixed(0);
+                            }
+                            /* Delta bars: show signed change */
+                            var s = diff>=0?'+':'-';
+                            var a = Math.abs(diff);
+                            return s+(a>=1e6?(a/1e6).toFixed(1)+'M':
+                                      a>=1e3?(a/1e3).toFixed(1)+'K':
+                                      a.toFixed(0));
+                        },
+                        color:'#8B7D70', font:{size:8, weight:'600'},
+                    },
+                    tooltip:{ callbacks:{
+                        label: ctx => {
+                            var a=ctx.raw, v=Array.isArray(a)?a[1]-a[0]:a;
+                            return (v>=0?'+':'')+
+                                (Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                                 Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'K':
+                                 v.toFixed(0));
+                        }
+                    } } },
+                scales:{
+                    x:{ ticks:{ color:'#8B7D70', font:{size:9} },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ min:0,
+                         ticks:{ color:'#8B7D70', font:{size:8},
+                             callback: v => v>=1e6?'$'+(v/1e6).toFixed(0)+'M':
+                                          v>=1e3?'$'+(v/1e3).toFixed(0)+'K':v },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+});
+</script>
+</body>
+</html>
