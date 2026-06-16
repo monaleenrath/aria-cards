@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=19 dim_gs_keys=['Plan_Type', 'Region', 'Content_Type', 'Genre'] first_dim=Genre tmpl=dossier | yoy_keys=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] yoy_lens=[19, 19, 19, 19, 19, 19, 19, 19, 19] | dod_keys=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] dod_lens=[19, 19, 19, 19, 19, 19, 19, 19, 19] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Plan_Type', 'Region', 'Content_Type'] | df_shape=[16440, 16] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('Active Subscribers', 'Active_Subscribers', 'sum', ''), ('New Subscriptions', 'New_Subscriptions', 'sum', ''), ('Cancellations', 'Cancellations', 'sum', ''), ('Avg Watch Hours', 'Avg_Watch_Hours_Per_User', 'mean', ''), ('Content Cost', 'Content_Cost_USD', 'sum', ''), ('Ops Cost', 'Ops_Cost_USD', 'sum', ''), ('Titles Available', 'Titles_Available', 'mean', ''), ('Churn Rate %', 'DERIVED', 'ratio', 'Cancellations')] | yoy_summary={'Revenue': 19, 'Active Subscribers': 19, 'New Subscriptions': 19, 'Cancellations': 19, 'Avg Watch Hours': 19, 'Content Cost': 19, 'Ops Cost': 19, 'Titles Available': 19, 'Churn Rate %': 19} | yoy_diag.effective_dims=['Plan_Type', 'Region', 'Content_Type', 'Genre'] | yoy_diag.kpis=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-16 | yoy_diag.curr_df_len=240 yoy_diag.prior_df_len=240 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Plan_Type yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=3 yoy_diag.spot_agg_sample=[('Basic (Ads)', 34449509.55), ('Premium', 85987121.19), ('Standard', 94208482.43)] | df_cat_cols={'Region': 'str/5', 'Plan_Type': 'str/3', 'Content_Type': 'str/5', 'Genre': 'str/10'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#0B1220; }
+body {
+    background:#0B1220; color:#F8FAFC;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#0B1220;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #1F2937; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#64748B; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#2DD4BF; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#64748B; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#64748B; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#2DD4BF; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#111827; border:1px solid #1F2937;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#111827; border:1px solid #1F2937;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#111827; border:1px solid #1F2937;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#CBD5E1; line-height:1.6; }
+.narr strong { color:#F8FAFC; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#64748B; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#1F2937; color:#F8FAFC;
+    border:1px solid #1F2937; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#2DD4BF22; border:1px solid #2DD4BF55;
+    color:#2DD4BF; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#2DD4BF15; border:1px solid #2DD4BF40;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#2DD4BF; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#F8FAFC;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#64748B; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#111827; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #1F2937; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#2DD4BF; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#CBD5E1; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85;
+                line-height:1.6; overflow:visible; white-space:normal; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #1F2937;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#F8FAFC;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#64748B; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#CBD5E1; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #1F2937; color:#64748B;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#2DD4BF20; border-color:#2DD4BF80; color:#2DD4BF;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span><img src="https://logo.clearbit.com/netflix.com" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=netflix.com&sz=64';" style="height:26px;width:auto;object-fit:contain;vertical-align:middle;border-radius:3px;margin-left:8px;opacity:0.9;" alt="Netflix" title="Netflix">
+  </div>
+  <div class="mast-mid">OPS  ·  OPERATIONS BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">TUE JUN 16 2026</div>
+      <span class="date-range"> &nbsp;Jun 01 → Jun 16 </span>
+    </div>
+  </div>
+</div>
+  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Region" onchange="ariaFilter(this)"><option value="All">Region: All</option><option value="North America">North America</option><option value="Europe">Europe</option><option value="Asia Pacific">Asia Pacific</option><option value="Latin America">Latin America</option><option value="Middle East &amp; Africa">Middle East &amp; Africa</option></select> <select class="filter-sel" data-dim="Content_Type" onchange="ariaFilter(this)"><option value="All">Content_Type: All</option><option value="Documentaries">Documentaries</option><option value="Original Series">Original Series</option><option value="Movies">Movies</option><option value="Licensed Content">Licensed Content</option><option value="Kids &amp; Family">Kids &amp; Family</option></select> <select class="filter-sel" data-dim="Plan_Type" onchange="ariaFilter(this)"><option value="All">Plan_Type: All</option><option value="Standard">Standard</option><option value="Premium">Premium</option><option value="Basic (Ads)">Basic (Ads)</option></select> </div>
+  <div class="sec">Analytics Dossier</div>
+  <div class="mkpi-row">
+<div class="mkpi" style="border-top:2px solid #34D399">
+  <div class="mkpi-name">Revenue</div>
+  <div class="mkpi-val" id="ds_kv_0" data-orig="$214,645,113">$214,645,113</div>
+  <div class="mkpi-d" id="ds_md_0" data-orig="▼ 4.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 4.1% MoM</div>
+  <div class="mkpi-d" id="ds_yd_0" data-orig="▲ 10.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.3% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #34D399">
+  <div class="mkpi-name">Active Subscribers</div>
+  <div class="mkpi-val" id="ds_kv_1" data-orig="542,544,476">542,544,476</div>
+  <div class="mkpi-d" id="ds_md_1" data-orig="▼ 4.3% MoM" data-oc="#F87171" style="color:#F87171">▼ 4.3% MoM</div>
+  <div class="mkpi-d" id="ds_yd_1" data-orig="▲ 10.1% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.1% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #34D399">
+  <div class="mkpi-name">New Subscriptions</div>
+  <div class="mkpi-val" id="ds_kv_2" data-orig="1,330,670">1,330,670</div>
+  <div class="mkpi-d" id="ds_md_2" data-orig="▼ 6.3% MoM" data-oc="#F87171" style="color:#F87171">▼ 6.3% MoM</div>
+  <div class="mkpi-d" id="ds_yd_2" data-orig="▲ 9.0% YoY" data-oc="#34D399" style="color:#34D399">▲ 9.0% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #34D399">
+  <div class="mkpi-name">Cancellations</div>
+  <div class="mkpi-val" id="ds_kv_3" data-orig="808,339">808,339</div>
+  <div class="mkpi-d" id="ds_md_3" data-orig="▼ 6.2% MoM" data-oc="#F87171" style="color:#F87171">▼ 6.2% MoM</div>
+  <div class="mkpi-d" id="ds_yd_3" data-orig="▲ 9.5% YoY" data-oc="#34D399" style="color:#34D399">▲ 9.5% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Avg Watch Hours</div>
+  <div class="mkpi-val" id="ds_kv_4" data-orig="2.37">2.37</div>
+  <div class="mkpi-d" id="ds_md_4" data-orig="▼ 8.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 8.1% MoM</div>
+  <div class="mkpi-d" id="ds_yd_4" data-orig="▲ 1.5% YoY" data-oc="#34D399" style="color:#34D399">▲ 1.5% YoY</div>
+</div></div>
+  
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-trend-title" class="sec">Revenue — Monthly (12M)</div>
+    
+<div class="chart-box" style="height:160px">
+  <canvas id="ds_trend"></canvas>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-dim-title" class="sec">Genre Breakdown</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_dimbar"></canvas></div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-donut-title" class="sec">Contribution Mix</div>
+    
+<div style="display:flex;gap:8px;align-items:flex-start">
+  <div class="chart-box" style="height:160px;flex:0 0 160px">
+    <canvas id="ds_donut"></canvas>
+  </div>
+  <div id="ds-donut-legend" style="flex:1;overflow:hidden;padding-top:8px"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#2DD4BF;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Drama</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Reality</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#34D399;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Action</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#60A5FA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Thriller</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F87171;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Sci-Fi</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#A78BFA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Romance</div></div></div>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-wfall-title" class="sec">Period-over-Period Waterfall</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_wfall"></canvas></div>
+  </div>
+</div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #1F2937;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #1F2937">
+    <div class="sec">Performance Review</div>
+    <div class="ed-stat-row"><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Revenue: ▼ 4.1% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.3%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Active Subscribers: ▼ 4.3% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.1%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">New Subscriptions: ▼ 6.3% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 9.0%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Cancellations: ▼ 6.2% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 9.5%</span></div>
+    <div class="narr">Active Subscribers decreased to 542,544,476 this month, a 4.3% MoM deceleration. The primary cause is a significant -42.7% MoM decline in Active Subscribers tied to Kids &amp; Family content. Operations must support Content teams in a rapid review of Kids &amp; Family content strategy to</div>
+  </div>
+  <div style="flex:1;padding:0 14px;border-right:1px solid #1F2937">
+    <div class="sec">Root-Cause Drivers</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Content_Type → Kids &amp; Family reduced Active Subscribers by 62,046,224 (-42.68% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Plan_Type → Standard reduced Active Subscribers by 10,167,804 (-3.99% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Region → North America reduced Active Subscribers by 8,287,657 (-4.4% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Content_Type → Original Series grew Active Subscribers by 25,724,830 (+28.86% vs prior).</div>
+  </div>
+  <div style="flex:1;padding-left:14px">
+    <div class="sec">Leadership Priority</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#CBD5E1;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Review and update Kids &amp; Family content strategy. Owner: Head of Content. Deadline: Next 30 days. Success metric: Increase Kids &amp; Family new subscriptions by 5%.</div>
+  </div>
+</div>
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">The first question Operations Head will ask is about the nature of the decline. This decline is a content appeal issue, not a capacity or process failure. Churn Rate % is down 2.1% MoM, indicating improved retention among our existing subscriber base.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_DS_KPIS              = ["Revenue", "Active Subscribers", "New Subscriptions", "Cancellations", "Avg Watch Hours"];
+var ARIA_DIM_MEMBER_KPIS      = {"Plan_Type": {"Basic (Ads)": {"Revenue": {"value": 34449509.55, "value_fmt": "$34.4M", "mom_pct": -4.19, "yoy_pct": 10.5}, "Active Subscribers": {"value": 162448521.0, "value_fmt": "162,448,521", "mom_pct": -4.73, "yoy_pct": 10.11}, "New Subscriptions": {"value": 402228.0, "value_fmt": "402,228", "mom_pct": -5.15, "yoy_pct": 8.05}, "Cancellations": {"value": 238407.0, "value_fmt": "238,407", "mom_pct": -8.49, "yoy_pct": 8.78}, "Avg Watch Hours": {"value": 2.4374, "value_fmt": "2.44", "mom_pct": -2.5, "yoy_pct": 8.12}, "Content Cost": {"value": 16682389.37, "value_fmt": "$16.7M", "mom_pct": -3.6, "yoy_pct": 11.47}, "Ops Cost": {"value": 2628488.59, "value_fmt": "$2.6M", "mom_pct": -4.18, "yoy_pct": 9.65}, "Titles Available": {"value": 17896.7125, "value_fmt": "17,896", "mom_pct": -0.07, "yoy_pct": 3.4}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.1%", "mom_pct": -3.94, "yoy_pct": -1.21}}, "Premium": {"Revenue": {"value": 85987121.19, "value_fmt": "$86.0M", "mom_pct": -4.34, "yoy_pct": 10.59}, "Active Subscribers": {"value": 135604860.0, "value_fmt": "135,604,860", "mom_pct": -4.21, "yoy_pct": 10.27}, "New Subscriptions": {"value": 333490.0, "value_fmt": "333,490", "mom_pct": -5.24, "yoy_pct": 7.87}, "Cancellations": {"value": 204943.0, "value_fmt": "204,943", "mom_pct": -2.8, "yoy_pct": 9.7}, "Avg Watch Hours": {"value": 2.3552, "value_fmt": "2.36", "mom_pct": -10.13, "yoy_pct": -1.12}, "Content Cost": {"value": 41220607.23, "value_fmt": "$41.2M", "mom_pct": -4.68, "yoy_pct": 10.07}, "Ops Cost": {"value": 6435872.3, "value_fmt": "$6.4M", "mom_pct": -3.71, "yoy_pct": 10.97}, "Titles Available": {"value": 17786.525, "value_fmt": "17,786", "mom_pct": -0.73, "yoy_pct": 3.63}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": 1.47, "yoy_pct": -0.52}}, "Standard": {"Revenue": {"value": 94208482.43, "value_fmt": "$94.2M", "mom_pct": -3.74, "yoy_pct": 10.07}, "Active Subscribers": {"value": 244491095.0, "value_fmt": "244,491,095", "mom_pct": -3.99, "yoy_pct": 9.91}, "New Subscriptions": {"value": 594952.0, "value_fmt": "594,952", "mom_pct": -7.6, "yoy_pct": 10.34}, "Cancellations": {"value": 364989.0, "value_fmt": "364,989", "mom_pct": -6.58, "yoy_pct": 9.94}, "Avg Watch Hours": {"value": 2.3086, "value_fmt": "2.31", "mom_pct": -11.45, "yoy_pct": -2.14}, "Content Cost": {"value": 44952166.73, "value_fmt": "$45.0M", "mom_pct": -4.31, "yoy_pct": 10.76}, "Ops Cost": {"value": 7061482.6, "value_fmt": "$7.1M", "mom_pct": -3.4, "yoy_pct": 9.72}, "Titles Available": {"value": 17767.7375, "value_fmt": "17,767", "mom_pct": 0.12, "yoy_pct": 2.85}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.1%", "mom_pct": -2.7, "yoy_pct": 0.03}}}, "Region": {"Asia Pacific": {"Revenue": {"value": 32862004.47, "value_fmt": "$32.9M", "mom_pct": -3.83, "yoy_pct": 9.9}, "Active Subscribers": {"value": 107497292.0, "value_fmt": "107,497,292", "mom_pct": -4.04, "yoy_pct": 9.65}, "New Subscriptions": {"value": 264726.0, "value_fmt": "264,726", "mom_pct": -5.62, "yoy_pct": 9.89}, "Cancellations": {"value": 154453.0, "value_fmt": "154,453", "mom_pct": -5.79, "yoy_pct": 8.3}, "Avg Watch Hours": {"value": 2.4429, "value_fmt": "2.44", "mom_pct": -6.2, "yoy_pct": 4.29}, "Content Cost": {"value": 15836948.99, "value_fmt": "$15.8M", "mom_pct": -3.01, "yoy_pct": 11.97}, "Ops Cost": {"value": 2479297.86, "value_fmt": "$2.5M", "mom_pct": -2.65, "yoy_pct": 7.95}, "Titles Available": {"value": 17763.0417, "value_fmt": "17,763", "mom_pct": -0.51, "yoy_pct": 2.1}, "Churn Rate %": {"value": 0.0014, "value_fmt": "0.1%", "mom_pct": -1.82, "yoy_pct": -1.23}}, "Europe": {"Revenue": {"value": 58454551.39, "value_fmt": "$58.5M", "mom_pct": -4.16, "yoy_pct": 10.56}, "Active Subscribers": {"value": 133412371.0, "value_fmt": "133,412,371", "mom_pct": -4.14, "yoy_pct": 10.35}, "New Subscriptions": {"value": 329382.0, "value_fmt": "329,382", "mom_pct": -0.91, "yoy_pct": 8.19}, "Cancellations": {"value": 193733.0, "value_fmt": "193,733", "mom_pct": -7.85, "yoy_pct": 0.85}, "Avg Watch Hours": {"value": 2.3804, "value_fmt": "2.38", "mom_pct": -5.42, "yoy_pct": 5.79}, "Content Cost": {"value": 28100917.9, "value_fmt": "$28.1M", "mom_pct": -3.64, "yoy_pct": 10.67}, "Ops Cost": {"value": 4482199.03, "value_fmt": "$4.5M", "mom_pct": 0.42, "yoy_pct": 13.71}, "Titles Available": {"value": 17934.9583, "value_fmt": "17,934", "mom_pct": 1.55, "yoy_pct": 4.67}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.1%", "mom_pct": -3.88, "yoy_pct": -8.61}}, "Latin America": {"Revenue": {"value": 20332923.89, "value_fmt": "$20.3M", "mom_pct": -4.48, "yoy_pct": 10.51}, "Active Subscribers": {"value": 80311240.0, "value_fmt": "80,311,240", "mom_pct": -4.47, "yoy_pct": 10.7}, "New Subscriptions": {"value": 190196.0, "value_fmt": "190,196", "mom_pct": -10.71, "yoy_pct": 4.84}, "Cancellations": {"value": 123275.0, "value_fmt": "123,275", "mom_pct": -6.0, "yoy_pct": 16.64}, "Avg Watch Hours": {"value": 2.3219, "value_fmt": "2.32", "mom_pct": -14.25, "yoy_pct": -3.6}, "Content Cost": {"value": 9683280.23, "value_fmt": "$9.7M", "mom_pct": -5.74, "yoy_pct": 8.67}, "Ops Cost": {"value": 1507894.95, "value_fmt": "$1.5M", "mom_pct": -3.25, "yoy_pct": 12.59}, "Titles Available": {"value": 17883.0208, "value_fmt": "17,883", "mom_pct": -0.41, "yoy_pct": 3.27}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": -1.6, "yoy_pct": 5.37}}, "Middle East & Africa": {"Revenue": {"value": 8872452.0, "value_fmt": "$8.9M", "mom_pct": -4.32, "yoy_pct": 9.61}, "Active Subscribers": {"value": 41138512.0, "value_fmt": "41,138,512", "mom_pct": -4.32, "yoy_pct": 9.92}, "New Subscriptions": {"value": 100587.0, "value_fmt": "100,587", "mom_pct": -8.38, "yoy_pct": 9.43}, "Cancellations": {"value": 63427.0, "value_fmt": "63,427", "mom_pct": -6.41, "yoy_pct": 20.91}, "Avg Watch Hours": {"value": 2.1819, "value_fmt": "2.18", "mom_pct": -11.98, "yoy_pct": -9.07}, "Content Cost": {"value": 4194639.06, "value_fmt": "$4.2M", "mom_pct": -6.4, "yoy_pct": 8.24}, "Ops Cost": {"value": 659766.75, "value_fmt": "$660K", "mom_pct": -2.4, "yoy_pct": 9.39}, "Titles Available": {"value": 17680.5, "value_fmt": "17,680", "mom_pct": -1.76, "yoy_pct": 3.25}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": -2.18, "yoy_pct": 10.0}}, "North America": {"Revenue": {"value": 94123181.42, "value_fmt": "$94.1M", "mom_pct": -3.94, "yoy_pct": 10.41}, "Active Subscribers": {"value": 180185061.0, "value_fmt": "180,185,061", "mom_pct": -4.4, "yoy_pct": 9.84}, "New Subscriptions": {"value": 445779.0, "value_fmt": "445,779", "mom_pct": -7.93, "yoy_pct": 10.91}, "Cancellations": {"value": 273451.0, "value_fmt": "273,451", "mom_pct": -5.37, "yoy_pct": 11.56}, "Avg Watch Hours": {"value": 2.5083, "value_fmt": "2.51", "mom_pct": -2.45, "yoy_pct": 11.1}, "Content Cost": {"value": 45039377.15, "value_fmt": "$45.0M", "mom_pct": -4.74, "yoy_pct": 10.72}, "Ops Cost": {"value": 6996684.9, "value_fmt": "$7.0M", "mom_pct": -6.62, "yoy_pct": 8.45}, "Titles Available": {"value": 17823.4375, "value_fmt": "17,823", "mom_pct": 0.01, "yoy_pct": 3.18}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": -1.01, "yoy_pct": 1.56}}}, "Content_Type": {"Documentaries": {"Revenue": {"value": 52632117.55, "value_fmt": "$52.6M", "mom_pct": -0.8, "yoy_pct": 26.99}, "Active Subscribers": {"value": 120328699.0, "value_fmt": "120,328,699", "mom_pct": -5.74, "yoy_pct": 13.78}, "New Subscriptions": {"value": 278594.0, "value_fmt": "278,594", "mom_pct": -13.37, "yoy_pct": 2.38}, "Cancellations": {"value": 171969.0, "value_fmt": "171,969", "mom_pct": -7.15, "yoy_pct": 2.95}, "Avg Watch Hours": {"value": 2.2711, "value_fmt": "2.27", "mom_pct": -19.17, "yoy_pct": -3.52}, "Content Cost": {"value": 25404810.28, "value_fmt": "$25.4M", "mom_pct": 0.16, "yoy_pct": 27.97}, "Ops Cost": {"value": 3914832.19, "value_fmt": "$3.9M", "mom_pct": -0.79, "yoy_pct": 23.96}, "Titles Available": {"value": 17826.4074, "value_fmt": "17,826", "mom_pct": -0.6, "yoy_pct": 3.77}, "Churn Rate %": {"value": 0.0014, "value_fmt": "0.1%", "mom_pct": -1.49, "yoy_pct": -9.52}}, "Kids & Family": {"Revenue": {"value": 33586611.58, "value_fmt": "$33.6M", "mom_pct": -42.05, "yoy_pct": -6.83}, "Active Subscribers": {"value": 83334923.0, "value_fmt": "83,334,923", "mom_pct": -42.68, "yoy_pct": -11.32}, "New Subscriptions": {"value": 215644.0, "value_fmt": "215,644", "mom_pct": -40.64, "yoy_pct": -4.69}, "Cancellations": {"value": 128572.0, "value_fmt": "128,572", "mom_pct": -44.83, "yoy_pct": -7.39}, "Avg Watch Hours": {"value": 2.3495, "value_fmt": "2.35", "mom_pct": -9.01, "yoy_pct": 3.91}, "Content Cost": {"value": 16112701.78, "value_fmt": "$16.1M", "mom_pct": -42.62, "yoy_pct": -6.65}, "Ops Cost": {"value": 2504927.19, "value_fmt": "$2.5M", "mom_pct": -41.28, "yoy_pct": -5.35}, "Titles Available": {"value": 17756.525, "value_fmt": "17,756", "mom_pct": -0.46, "yoy_pct": 2.82}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": -3.76, "yoy_pct": 4.42}}, "Licensed Content": {"Revenue": {"value": 35853091.22, "value_fmt": "$35.9M", "mom_pct": 6.51, "yoy_pct": -3.65}, "Active Subscribers": {"value": 104909530.0, "value_fmt": "104,909,530", "mom_pct": 12.98, "yoy_pct": 18.86}, "New Subscriptions": {"value": 258376.0, "value_fmt": "258,376", "mom_pct": 15.78, "yoy_pct": 22.96}, "Cancellations": {"value": 156666.0, "value_fmt": "156,666", "mom_pct": 10.03, "yoy_pct": 20.33}, "Avg Watch Hours": {"value": 2.3428, "value_fmt": "2.34", "mom_pct": -5.99, "yoy_pct": 2.91}, "Content Cost": {"value": 17212773.21, "value_fmt": "$17.2M", "mom_pct": 6.71, "yoy_pct": -3.71}, "Ops Cost": {"value": 2794034.77, "value_fmt": "$2.8M", "mom_pct": 11.97, "yoy_pct": 1.39}, "Titles Available": {"value": 17880.766, "value_fmt": "17,880", "mom_pct": 0.88, "yoy_pct": 3.5}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.1%", "mom_pct": -2.6, "yoy_pct": 1.24}}, "Movies": {"Revenue": {"value": 44373533.28, "value_fmt": "$44.4M", "mom_pct": 5.03, "yoy_pct": -9.72}, "Active Subscribers": {"value": 119120477.0, "value_fmt": "119,120,477", "mom_pct": 6.64, "yoy_pct": 2.05}, "New Subscriptions": {"value": 301398.0, "value_fmt": "301,398", "mom_pct": 6.17, "yoy_pct": 3.4}, "Cancellations": {"value": 182444.0, "value_fmt": "182,444", "mom_pct": 9.09, "yoy_pct": 7.91}, "Avg Watch Hours": {"value": 2.4931, "value_fmt": "2.49", "mom_pct": -2.2, "yoy_pct": -0.18}, "Content Cost": {"value": 21100994.43, "value_fmt": "$21.1M", "mom_pct": 3.72, "yoy_pct": -9.9}, "Ops Cost": {"value": 3266333.97, "value_fmt": "$3.3M", "mom_pct": 2.25, "yoy_pct": -12.83}, "Titles Available": {"value": 17850.1373, "value_fmt": "17,850", "mom_pct": -0.08, "yoy_pct": 3.32}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.2%", "mom_pct": 2.3, "yoy_pct": 5.74}}, "Original Series": {"Revenue": {"value": 48199759.54, "value_fmt": "$48.2M", "mom_pct": 31.04, "yoy_pct": 57.23}, "Active Subscribers": {"value": 114850847.0, "value_fmt": "114,850,847", "mom_pct": 28.86, "yoy_pct": 30.16}, "New Subscriptions": {"value": 276658.0, "value_fmt": "276,658", "mom_pct": 21.36, "yoy_pct": 25.4}, "Cancellations": {"value": 168688.0, "value_fmt": "168,688", "mom_pct": 25.74, "yoy_pct": 27.0}, "Avg Watch Hours": {"value": 2.3796, "value_fmt": "2.38", "mom_pct": -0.33, "yoy_pct": 7.45}, "Content Cost": {"value": 23023883.63, "value_fmt": "$23.0M", "mom_pct": 30.77, "yoy_pct": 57.77}, "Ops Cost": {"value": 3645715.37, "value_fmt": "$3.6M", "mom_pct": 28.59, "yoy_pct": 56.8}, "Titles Available": {"value": 17759.125, "value_fmt": "17,759", "mom_pct": -0.93, "yoy_pct": 2.9}, "Churn Rate %": {"value": 0.0015, "value_fmt": "0.1%", "mom_pct": -2.43, "yoy_pct": -2.43}}}};
+var ARIA_DIM_MONTHLY          = {"Plan_Type": {"Basic (Ads)": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [71493344.49, 65082051.81, 68778210.65, 67002991.94, 69505501.86, 64576903.43, 67086289.12, 71256177.06, 69536853.51, 72502960.15, 77700041.13, 81028118.05]}, "Premium": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [179603255.81, 162678952.17, 171651511.64, 167568469.51, 174528200.3, 161044454.45, 169177645.82, 177810658.57, 174156694.98, 180981594.67, 194933933.59, 202919466.62]}, "Standard": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [194827812.47, 178335217.71, 187243608.59, 183175669.03, 189400309.14, 175930670.18, 183560593.05, 194213995.36, 189587500.1, 197852320.31, 211810310.8, 220721833.2]}}, "Region": {"Asia Pacific": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [68291271.9, 62533005.79, 65458082.46, 64199786.05, 66362030.9, 61457577.57, 64090013.28, 67829119.68, 66378397.94, 69041093.29, 74249202.39, 77247366.83]}, "Europe": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [121457177.54, 110650975.24, 116285711.79, 113915565.11, 118290057.26, 109690311.09, 114633341.15, 120897863.58, 118168821.21, 123560030.11, 132017414.04, 137186124.68]}, "Latin America": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [42279234.55, 38576476.88, 40719552.56, 39522923.21, 41193516.87, 38132281.37, 39804256.89, 42279156.18, 41106267.97, 42787699.86, 45873749.29, 47821936.66]}, "Middle East & Africa": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [18420423.25, 16740175.87, 17728293.96, 17267174.33, 17922122.68, 16603560.27, 17302083.19, 18367224.37, 17951356.37, 18669086.58, 20030070.92, 20822115.71]}, "North America": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [195476305.53, 177595587.91, 187481690.11, 182841681.78, 189666283.59, 175668297.76, 183994833.48, 193907467.18, 189676205.1, 197278965.29, 212273848.88, 221591873.99]}}, "Content_Type": {"Documentaries": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [85187666.89, 71550819.93, 82461010.11, 82885203.83, 101939559.69, 88172461.55, 88006671.95, 87712542.34, 92902875.04, 87564219.66, 105233427.32, 107682125.72]}, "Kids & Family": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [85039013.33, 90263863.77, 83043097.74, 68963632.7, 99450463.8, 76673160.56, 84970865.84, 77893907.62, 74848707.24, 101511666.23, 111745313.16, 112074853.87]}, "Licensed Content": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [87547018.62, 73477821.09, 67452743.51, 84901046.77, 73151961.98, 76740270.9, 75378031.24, 79057701.75, 84662615.81, 89728780.96, 104479746.32, 109300456.95]}, "Movies": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [87873203.03, 70078418.62, 96575230.93, 87749486.69, 87200316.88, 79934088.32, 84401907.72, 99440593.65, 79497448.62, 92564094.1, 81708198.47, 95633105.9]}, "Original Series": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [100277510.9, 100725298.28, 98141248.59, 93247760.49, 71691708.95, 80032046.73, 87067051.24, 99176085.63, 101369401.88, 79968114.18, 81277600.25, 79978875.43]}}};
+var ARIA_ACCENT               = '#2DD4BF';
+var ARIA_PALETTE              = ["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24", "#F97316", "#14B8A6"];
+var ARIA_DIM_DATA             = {"Plan_Type": {"labels": ["Standard", "Premium", "Basic (Ads)"], "values": [94208482.43, 85987121.19, 34449509.55]}, "Region": {"labels": ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East & Africa"], "values": [94123181.42, 58454551.39, 32862004.47, 20332923.89, 8872452.0]}, "Content_Type": {"labels": ["Documentaries", "Original Series", "Movies", "Licensed Content", "Kids & Family"], "values": [52632117.55, 48199759.54, 44373533.28, 35853091.22, 33586611.58]}, "Genre": {"labels": ["Drama", "Reality", "Action", "Thriller", "Sci-Fi", "Romance"], "values": [31306768.97, 30121546.06, 28276118.28, 17910700.51, 16545358.26, 13839718.27]}};
+var ARIA_DIM_DRIVERS          = {"Plan_Type": [{"member": "Standard", "delta": 8622183.09, "value": 94208482.43}, {"member": "Premium", "delta": 8234397.44, "value": 85987121.19}, {"member": "Basic (Ads)", "delta": 3273328.24, "value": 34449509.55}], "Region": [{"member": "North America", "delta": 8873454.29, "value": 94123181.42}, {"member": "Europe", "delta": 5582735.87, "value": 58454551.39}, {"member": "Asia Pacific", "delta": 2961219.07, "value": 32862004.47}, {"member": "Middle East & Africa", "delta": 777927.64, "value": 8872452.0}, {"member": "Latin America", "delta": 1934571.9, "value": 20332923.89}], "Content_Type": [{"member": "Original Series", "delta": 17543698.39, "value": 48199759.54}, {"member": "Documentaries", "delta": 11185145.74, "value": 52632117.55}, {"member": "Licensed Content", "delta": -1356753.07, "value": 35853091.22}, {"member": "Movies", "delta": -4778867.1, "value": 44373533.28}, {"member": "Kids & Family", "delta": -2463315.19, "value": 33586611.58}], "Genre": [{"member": "Reality", "delta": 12123941.87, "value": 30121546.06}, {"member": "Drama", "delta": 9442606.5, "value": 31306768.97}, {"member": "Thriller", "delta": 4475506.83, "value": 17910700.51}, {"member": "Romance", "delta": -8412688.49, "value": 13839718.27}, {"member": "Sci-Fi", "delta": -8344767.86, "value": 16545358.26}, {"member": "Action", "delta": 1010602.93, "value": 28276118.28}]};
+var _ARIA_MONTHLY_LABELS      = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"];
+var _ARIA_MONTHLY_VALUES      = [445924412.77, 406096221.69, 427673330.88, 417747130.48, 433434011.3, 401552028.06, 419824527.99, 443280830.99, 433281048.59, 451336875.13, 484444285.52, 504669417.87];
+var _ARIA_PRIOR_VAL           = 223707779.12;
+var _ARIA_CURR_VAL            = 214645113.17;
+var _ARIA_TC                  = '#64748B';
+var _ARIA_SUB                 = '#CBD5E1';
+
+function _ariaPct(p) {
+    if (p === null || p === undefined) return {text:'—', color:'#888'};
+    var s = p >= 0 ? '▲' : '▼';
+    var c = p >= 0 ? '#34D399' : '#F87171';
+    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
+}
+function _fmtVal(v) {
+    return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+(v/1e3).toFixed(1)+'K':v.toFixed(2);
+}
+
+function ariaFilter(sel) {
+    var dim = sel.getAttribute('data-dim');
+    var val = sel.value;
+
+    /* ── 1. KPI mini tiles ── */
+    var mData = (val === 'All') ? null :
+                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
+    ARIA_DS_KPIS.forEach(function(kn, i) {
+        var kd = mData ? (mData[kn] || null) : null;
+        var ve = document.getElementById('ds_kv_' + i);
+        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
+                                    : ve.getAttribute('data-orig');
+        var me = document.getElementById('ds_md_' + i);
+        if (me) {
+            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
+                var rm = _ariaPct(kd.mom_pct); me.textContent = rm.text+' MoM'; me.style.color = rm.color;
+            } else { me.textContent = me.getAttribute('data-orig')||'— MoM'; me.style.color = me.getAttribute('data-oc')||'#888'; }
+        }
+        var ye = document.getElementById('ds_yd_' + i);
+        if (ye) {
+            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
+                var ry = _ariaPct(kd.yoy_pct); ye.textContent = ry.text+' YoY'; ye.style.color = ry.color;
+            } else { ye.textContent = ye.getAttribute('data-orig')||'— YoY'; ye.style.color = ye.getAttribute('data-oc')||'#888'; }
+        }
+    });
+
+    /* ── 2. Bar chart — switch dim, highlight member, update target markers ── */
+    var d = ARIA_DIM_DATA[dim];
+    if (d) {
+        var barChart = ARIA_CHARTS['ds_dimbar'];
+        if (barChart) {
+            barChart.data.labels = d.labels;
+            barChart.data.datasets[0].data = d.values;
+            barChart.data.datasets[0].backgroundColor = (val === 'All')
+                ? d.labels.map(function(l, idx) { return ARIA_PALETTE[idx % ARIA_PALETTE.length]; })
+                : d.labels.map(function(l) { return l === val ? ARIA_ACCENT : ARIA_ACCENT+'28'; });
+            barChart.update('none');
+            var bt = document.getElementById('ds-dim-title');
+            if (bt) bt.textContent = dim+' Breakdown'+(val!=='All'?' • '+val:'');
+        }
+    }
+
+    /* ── 3. Donut — switch to selected dim's contribution mix ── */
+    if (d) {
+        var donutChart = ARIA_CHARTS['ds_donut'];
+        if (donutChart) {
+            var dColors = d.labels.map(function(l, idx) {
+                var base = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                return (val !== 'All' && l !== val) ? base+'55' : base;
+            });
+            donutChart.data.labels = d.labels;
+            donutChart.data.datasets[0].data = d.values;
+            donutChart.data.datasets[0].backgroundColor = dColors;
+            donutChart.update('none');
+            var dt = document.getElementById('ds-donut-title');
+            if (dt) dt.textContent = dim+' Mix'+(val!=='All'?' • '+val:'');
+            var dl = document.getElementById('ds-donut-legend');
+            if (dl) {
+                dl.innerHTML = d.labels.map(function(l, idx) {
+                    var c = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                    return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">'
+                         + '<div style="width:7px;height:7px;border-radius:50%;background:'+c+';flex-shrink:0"></div>'
+                         + '<div style="font-size:8px;color:'+_ARIA_SUB+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'
+                         + l.substring(0,18)+'</div></div>';
+                }).join('');
+            }
+        }
+    }
+
+    /* ── 4. Waterfall — rebuild using ALL dim members from ARIA_DIM_DATA ── */
+    /* ARIA_DIM_DRIVERS only holds top-N drivers and may omit members with small deltas.
+       Instead, start from ARIA_DIM_DATA (complete member list + current values) and
+       merge deltas from ARIA_DIM_DRIVERS; missing members get delta = 0. */
+    var d4    = ARIA_DIM_DATA[dim];
+    var drvList4 = ARIA_DIM_DRIVERS[dim] || [];
+    var drvMap4  = {};
+    drvList4.forEach(function(s) { drvMap4[s.member] = s; });
+    var wfLabels, wfData, wfColors;
+    if (d4 && d4.labels && d4.labels.length > 0) {
+        var allSteps4 = d4.labels.map(function(m, idx) {
+            var drv = drvMap4[m];
+            return { member: m,
+                      value:  drv ? drv.value : (d4.values[idx] || 0),
+                      delta:  drv ? drv.delta : 0 };
+        });
+        var curr4  = allSteps4.reduce(function(a,s){ return a+(s.value||0);  }, 0);
+        var prior4 = allSteps4.reduce(function(a,s){ return a+((s.value||0)-(s.delta||0)); }, 0);
+        var lifts4 = allSteps4.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags4 = allSteps4.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps4 = lifts4.concat(drags4);
+        /* Always include selected member even if its delta is 0 */
+        if (val!=='All' && !steps4.some(function(s){return s.member===val;})) {
+            var sel4 = allSteps4.find(function(s){return s.member===val;});
+            if (sel4) steps4.push(sel4);
+        }
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior4*100)/100]]; wfColors=['#60A5FA'];
+        var cum4=prior4;
+        steps4.forEach(function(s) {
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum4*100)/100, Math.round((cum4+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0 ? (hi?'#10B981':'#34D399') : (hi?'#EF4444':'#F87171'));
+            cum4+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr4*100)/100]); wfColors.push('#60A5FA');
+    } else {
+        /* Fallback to driver list if ARIA_DIM_DATA unavailable for this dim */
+        var drvs=drvList4, curr_total=0, prior_total=0;
+        drvs.forEach(function(s){curr_total+=(s.value||0);prior_total+=((s.value||0)-(s.delta||0));});
+        var lifts=drvs.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags=drvs.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps=lifts.concat(drags);
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior_total*100)/100]]; wfColors=['#60A5FA'];
+        var cum=prior_total;
+        steps.forEach(function(s){
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum*100)/100,Math.round((cum+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0?(hi?'#10B981':'#34D399'):(hi?'#EF4444':'#F87171'));
+            cum+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr_total*100)/100]); wfColors.push('#60A5FA');
+    }
+    var wfChart = ARIA_CHARTS['ds_wfall'];
+    if (wfChart) {
+        wfChart.data.labels = wfLabels;
+        wfChart.data.datasets[0].data = wfData;
+        wfChart.data.datasets[0].backgroundColor = wfColors;
+        wfChart.update('none');
+        var wt = document.getElementById('ds-wfall-title');
+        if (wt) wt.textContent = dim+' Waterfall'+(val!=='All'?' • '+val:'');
+    }
+
+    /* ── 5. Line trend — switch to member's monthly series, restore on All ── */
+    var trendChart = ARIA_CHARTS['ds_trend'];
+    if (trendChart) {
+        var mMonthly = (val === 'All') ? null :
+                       ((ARIA_DIM_MONTHLY[dim] || {})[val] || null);
+        if (mMonthly && mMonthly.values && mMonthly.values.length >= 2) {
+            trendChart.data.labels   = mMonthly.labels;
+            trendChart.data.datasets[0].data = mMonthly.values;
+        } else {
+            trendChart.data.labels   = _ARIA_MONTHLY_LABELS;
+            trendChart.data.datasets[0].data = _ARIA_MONTHLY_VALUES;
+        }
+        trendChart.update('none');
+        var tt = document.getElementById('ds-trend-title');
+        if (tt) tt.textContent = (val === 'All')
+            ? (_ARIA_MONTHLY_LABELS.length ? 'Revenue — Monthly (12M)' : 'Trend')
+            : dim + ' → ' + val + ' Monthly Trend';
+    }
+}
+
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    (function(){
+        var ctx = document.getElementById('ds_trend');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_trend'] = new Chart(ctx, {
+            type:'line',
+            data:{ labels:["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], datasets:[{
+                data:[445924412.77, 406096221.69, 427673330.88, 417747130.48, 433434011.3, 401552028.06, 419824527.99, 443280830.99, 433281048.59, 451336875.13, 484444285.52, 504669417.87], borderColor:'#2DD4BF', borderWidth:2,
+                pointRadius:0, fill:true,
+                backgroundColor:'#2DD4BF22', tension:0.35
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{display:false},
+                    datalabels:{display:false},
+                    tooltip:{ mode:'index', intersect:false,
+                        callbacks:{ label: function(ctx) {
+                            var v = ctx.raw;
+                            return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(2);
+                        } } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:8}, maxTicksLimit:6 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ ticks:{ color:'#64748B', font:{size:8} },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+    (function(){
+        var ctx = document.getElementById('ds_dimbar');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_dimbar'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Drama", "Reality", "Action", "Thriller", "Sci-Fi", "Romance"], datasets:[{ data:[31306768.97, 30121546.06, 28276118.28, 17910700.51, 16545358.26, 13839718.27],
+                backgroundColor:["#2DD4BF", "#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA"], borderRadius:4, borderWidth:0 }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(0);
+                        },
+                        color:'#64748B', font:{size:8,weight:'600'}
+                    },
+                    tooltip:{ callbacks:{ label: ctx =>
+                        (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                         ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                         ctx.raw.toFixed(1)) } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9}, maxRotation:30 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ display:false, grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:300} }
+        });
+    })();
+    ARIA_CHARTS['ds_donut'] = new Chart(document.getElementById('ds_donut'), {
+        type:'doughnut',
+        data:{ labels:["Drama", "Reality", "Action", "Thriller", "Sci-Fi", "Romance"], datasets:[{ data:[31306768.97, 30121546.06, 28276118.28, 17910700.51, 16545358.26, 13839718.27],
+            backgroundColor:["#2DD4BF", "#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA"], borderWidth:2, borderColor:'transparent',
+            hoverOffset:4 }] },
+        options:{ cutout:'62%', responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{
+                    display:true,
+                    formatter:function(v, ctx){
+                        var total = ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+                        return total>0 ? (v/total*100).toFixed(1)+'%' : '';
+                    },
+                    color:'#fff',
+                    font:{size:8, weight:'700'},
+                    textStrokeColor:'rgba(0,0,0,0.35)',
+                    textStrokeWidth:2,
+                },
+                tooltip:{ callbacks:{ label: ctx => ' '+ctx.label+': '+
+                    (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                     ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                     ctx.raw.toFixed(0)) } } },
+            animation:{duration:0} }
+    });
+    (function(){
+        var ctx = document.getElementById('ds_wfall');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_wfall'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Prior", "Reality", "Drama", "Thriller", "Romance", "Sci-Fi", "Current"], datasets:[{
+                data:[[0, 127705008.57], [127705008.57, 139828950.44], [139828950.44, 149271556.94], [149271556.94, 153747063.77], [153747063.77, 145334375.28], [145334375.28, 136989607.42], [0, 138000210.35]],
+                backgroundColor:["#60A5FA", "#34D399", "#34D399", "#34D399", "#F87171", "#F87171", "#60A5FA"],
+                borderRadius:3, borderWidth:0
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        display:true,
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            if(!Array.isArray(v)) return '';
+                            var diff = v[1] - v[0];
+                            /* Prior/Current anchors: show absolute value */
+                            if(v[0]===0) {
+                                return Math.abs(v[1])>=1e6?'$'+(v[1]/1e6).toFixed(1)+'M':
+                                       Math.abs(v[1])>=1e3?'$'+(v[1]/1e3).toFixed(1)+'K':
+                                       '$'+v[1].toFixed(0);
+                            }
+                            /* Delta bars: show signed change */
+                            var s = diff>=0?'+':'-';
+                            var a = Math.abs(diff);
+                            return s+(a>=1e6?(a/1e6).toFixed(1)+'M':
+                                      a>=1e3?(a/1e3).toFixed(1)+'K':
+                                      a.toFixed(0));
+                        },
+                        color:'#64748B', font:{size:8, weight:'600'},
+                    },
+                    tooltip:{ callbacks:{
+                        label: ctx => {
+                            var a=ctx.raw, v=Array.isArray(a)?a[1]-a[0]:a;
+                            return (v>=0?'+':'')+
+                                (Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                                 Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'K':
+                                 v.toFixed(0));
+                        }
+                    } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9} },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ min:0,
+                         ticks:{ color:'#64748B', font:{size:8},
+                             callback: v => v>=1e6?'$'+(v/1e6).toFixed(0)+'M':
+                                          v>=1e3?'$'+(v/1e3).toFixed(0)+'K':v },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+});
+</script>
+</body>
+</html>
