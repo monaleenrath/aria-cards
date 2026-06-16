@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=15 dim_gs_keys=['State', 'Plan_Type', 'Age_Group'] first_dim=State tmpl=scorecard | yoy_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] yoy_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | dod_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] dod_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['State', 'Plan_Type', 'Age_Group'] | df_shape=[131520, 20] | kpi_map=[('Premiums', 'Premiums_USD', 'sum', ''), ('Claims Paid', 'Claims_Paid_USD', 'sum', ''), ('Claims Count', 'Claims_Count', 'sum', ''), ('Active Members', 'Active_Members', 'sum', ''), ('New Enrollments', 'New_Enrollments', 'sum', ''), ('Lapses', 'Lapses', 'sum', ''), ('Medical Loss Ratio %', 'Medical_Loss_Ratio_Pct', 'mean', ''), ('Admin Expense', 'Admin_Expense_USD', 'sum', ''), ('Net Income', 'Net_Income_USD', 'sum', ''), ('Avg Claim', 'Avg_Claim_USD', 'mean', ''), ('Prior Auth Requests', 'Prior_Auth_Requests', 'sum', ''), ('Prior Auth Approved', 'Prior_Auth_Approved', 'sum', ''), ('Readmissions', 'Readmissions', 'sum', ''), ('Preventive Visits', 'Preventive_Visits', 'sum', ''), ('Member Satisfaction', 'Member_Satisfaction_Score', 'mean', ''), ('Prior Auth Approval %', '?', 'ratio', 'Prior_Auth_Approved')] | yoy_summary={'Premiums': 15, 'Claims Paid': 15, 'Claims Count': 15, 'Active Members': 15, 'New Enrollments': 15, 'Lapses': 15, 'Medical Loss Ratio %': 15, 'Admin Expense': 15, 'Net Income': 15, 'Avg Claim': 15, 'Prior Auth Requests': 15, 'Prior Auth Approved': 15, 'Readmissions': 15, 'Preventive Visits': 15, 'Member Satisfaction': 15, 'Prior Auth Approval %': 15} | yoy_diag.effective_dims=['State', 'Plan_Type', 'Age_Group'] | yoy_diag.kpis=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] | yoy_diag.curr_start=2026-06-15 yoy_diag.prior_start=2025-06-15 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=120 yoy_diag.prior_df_len=120 | yoy_diag.spot_kpi=Premiums yoy_diag.spot_dim=State yoy_diag.spot_cfg={'column': 'Premiums_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('California', 86832.61), ('Florida', 71929.25), ('Illinois', 60347.68)] | df_cat_cols={'State': 'str/6', 'Plan_Type': 'str/5', 'Age_Group': 'str/4'} -->
+<!-- ARIA_DEPLOY_VERSION=2026-06-16-v34 | all_drivers=15 dim_gs_keys=['State', 'Plan_Type', 'Age_Group'] first_dim=State tmpl=scorecard | yoy_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] yoy_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | dod_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] dod_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['State', 'Plan_Type', 'Age_Group'] | df_shape=[131520, 20] | kpi_map=[('Premiums', 'Premiums_USD', 'sum', ''), ('Claims Paid', 'Claims_Paid_USD', 'sum', ''), ('Claims Count', 'Claims_Count', 'sum', ''), ('Active Members', 'Active_Members', 'sum', ''), ('New Enrollments', 'New_Enrollments', 'sum', ''), ('Lapses', 'Lapses', 'sum', ''), ('Medical Loss Ratio %', 'Medical_Loss_Ratio_Pct', 'mean', ''), ('Admin Expense', 'Admin_Expense_USD', 'sum', ''), ('Net Income', 'Net_Income_USD', 'sum', ''), ('Avg Claim', 'Avg_Claim_USD', 'mean', ''), ('Prior Auth Requests', 'Prior_Auth_Requests', 'sum', ''), ('Prior Auth Approved', 'Prior_Auth_Approved', 'sum', ''), ('Readmissions', 'Readmissions', 'sum', ''), ('Preventive Visits', 'Preventive_Visits', 'sum', ''), ('Member Satisfaction', 'Member_Satisfaction_Score', 'mean', ''), ('Prior Auth Approval %', '?', 'ratio', 'Prior_Auth_Approved')] | yoy_summary={'Premiums': 15, 'Claims Paid': 15, 'Claims Count': 15, 'Active Members': 15, 'New Enrollments': 15, 'Lapses': 15, 'Medical Loss Ratio %': 15, 'Admin Expense': 15, 'Net Income': 15, 'Avg Claim': 15, 'Prior Auth Requests': 15, 'Prior Auth Approved': 15, 'Readmissions': 15, 'Preventive Visits': 15, 'Member Satisfaction': 15, 'Prior Auth Approval %': 15} | yoy_diag.effective_dims=['State', 'Plan_Type', 'Age_Group'] | yoy_diag.kpis=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] | yoy_diag.curr_start=2026-06-15 yoy_diag.prior_start=2025-06-15 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=120 yoy_diag.prior_df_len=120 | yoy_diag.spot_kpi=Premiums yoy_diag.spot_dim=State yoy_diag.spot_cfg={'column': 'Premiums_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('California', 86832.61), ('Florida', 71929.25), ('Illinois', 60347.68)] | df_cat_cols={'State': 'str/6', 'Plan_Type': 'str/5', 'Age_Group': 'str/4'} -->
 <html>
 <head>
 <meta charset="utf-8">
@@ -173,9 +173,9 @@ canvas     { display:block; }
   <div class="kpi-name">Claims Count</div>
   <div class="kpi-val " id="sc_kv_0" data-orig="338">338</div>
   <div style="height:8px"></div>
+  
   <div class="kpi-d" id="sc_md_0" data-orig="▲ 2.1% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.1% MoM</div>
   <div class="kpi-d" id="sc_yd_0" data-orig="▲ 8.7% YoY" data-oc="#34D399" style="color:#34D399">▲ 8.7% YoY</div>
-  
   
 </div>
 <div class="kpi-tile-v2">
@@ -183,19 +183,19 @@ canvas     { display:block; }
   <div class="kpi-name">Avg Claim</div>
   <div class="kpi-val " id="sc_kv_1" data-orig="$1,241">$1,241</div>
   <div style="height:8px"></div>
+  
   <div class="kpi-d" id="sc_md_1" data-orig="▼ 2.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 2.0% MoM</div>
   <div class="kpi-d" id="sc_yd_1" data-orig="▼ 2.3% YoY" data-oc="#F87171" style="color:#F87171">▼ 2.3% YoY</div>
   
-  <div style="font-size:8px;font-weight:700;color:#22c55e;margin-top:2px">107% of target</div>
 </div>
 <div class="kpi-tile-v2">
   <div class="kpi-rag" style="background:#94A3B8"></div>
   <div class="kpi-name">Prior Auth Requests</div>
   <div class="kpi-val " id="sc_kv_2" data-orig="65">65</div>
   <div style="height:8px"></div>
+  
   <div class="kpi-d" id="sc_md_2" data-orig="— MoM" data-oc="#94A3B8" style="color:#94A3B8">— MoM</div>
   <div class="kpi-d" id="sc_yd_2" data-orig="— YoY" data-oc="#94A3B8" style="color:#94A3B8">— YoY</div>
-  
   
 </div>
 <div class="kpi-tile-v2">
@@ -203,9 +203,9 @@ canvas     { display:block; }
   <div class="kpi-name">Prior Auth Approval %</div>
   <div class="kpi-val " id="sc_kv_3" data-orig="307.7%">307.7%</div>
   <div style="height:8px"></div>
+  
   <div class="kpi-d" id="sc_md_3" data-orig="— MoM" data-oc="#94A3B8" style="color:#94A3B8">— MoM</div>
   <div class="kpi-d" id="sc_yd_3" data-orig="— YoY" data-oc="#94A3B8" style="color:#94A3B8">— YoY</div>
-  
   
 </div></div>
   
@@ -213,21 +213,21 @@ canvas     { display:block; }
   <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
     <div class="sec">Operational Status</div>
     <div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Claims Count: ▲ 2.1% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 8.7%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Avg Claim: ▼ 2.0% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 2.3%</span></div>
-    <div class="narr">Prior Auth Approval % remains flat at 3.08%, indicating a critical bottleneck in our claims process. This low approval rate stems from only 2 approvals out of 65 requests, with California and the 65+ age group showing the only activity. Operations must immediately review the prio</div>
+    <div class="narr">Claims Count closed at 338 (▲ +8.7% YoY, ▲ +2.1% MoM). Age_Group → 35-54 processed Claims Count by $15 (+21.1% vs prior). — orders processed — throughput stable, no SLA escalation required today.</div>
   </div>
   <div style="flex:1;padding:0 14px;border-right:1px solid #D0C8BC">
     <div class="sec">What Moved the Number</div>
-    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>State → California accounted for 2 approved Prior Auth requests (100% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Age_Group → 65+ accounted for 2 approved Prior Auth requests (100% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Plan_Type → HMO contributed 1 approved Prior Auth request (50% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Compound Signal: Claims Count increased by 2.1% DoD while Avg Claim decreased by 2.0% DoD, indicating transaction count growing but basket shrinking.</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Age_Group → 35-54 processed Claims Count by $15 (+21.1% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>State → California processed Claims Count by $11 (+18.0% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Plan_Type → PPO processed Claims Count by $9 (+14.5% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Plan_Type → HMO processed Claims Count by $7 (+11.5% vs prior).</div>
   </div>
   <div style="flex:1;padding-left:14px">
     <div class="sec">Team Action</div>
-    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Review Prior Authorization workflow. Owner: Claims Processing Lead. Deadline: 48 hours. Success metric: Workflow analysis complete, and initial corrective actions identified for non-California states.</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Audit Ship Mode split and flag any nodes below SLA. Owner: Operations + Logistics. Deadline: By next fulfilment cycle. Success metric: fulfilment rate holds above prior 7-day baseline.</div>
   </div>
 </div>
   
 <div class="footer">
   <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
-  <div class="footer-text">The primary bottleneck is our Prior Authorization approval process, which is effectively stalled at 3.08% approval, severely impacting member care and throughput. On a positive note, Active Members are up 1.17% DoD, showing continued growth in our member base.</div>
+  <div class="footer-text">They will ask about SLA impact — have the Ship Mode split and on-time rate ready before the question lands; lead with data, not with &#x27;we&#x27;re looking into it&#x27;. Throughput bright spot: Age_Group → 35-54 added $15 — name it before they ask. If pressed on root cause, lead with the data-quality check result before citing demand shift.</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -243,6 +243,9 @@ var ARIA_DIM_MEMBER_KPIS  = {"State": {"California": {"Premiums": {"value": 8683
 var ARIA_SC_MEMBER_SERIES = {"State": {"California": {"Premiums": [86832.61], "Claims Paid": [81105.39], "Claims Count": [72.0], "Active Members": [6255.0], "New Enrollments": [83.0], "Lapses": [42.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [7924.53], "Net Income": [-2197.35], "Avg Claim": [1213.3475], "Prior Auth Requests": [16.0], "Prior Auth Approved": [2.0], "Readmissions": [0.0], "Preventive Visits": [68.0], "Member Satisfaction": [3.9435], "Prior Auth Approval %": [12.5]}, "Florida": {"Premiums": [71929.25], "Claims Paid": [66431.95], "Claims Count": [54.0], "Active Members": [5247.0], "New Enrollments": [65.0], "Lapses": [26.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [6566.57], "Net Income": [-1069.26], "Avg Claim": [1288.7955], "Prior Auth Requests": [10.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [54.0], "Member Satisfaction": [3.893], "Prior Auth Approval %": [0.0]}, "Illinois": {"Premiums": [60347.68], "Claims Paid": [56815.15], "Claims Count": [50.0], "Active Members": [4395.0], "New Enrollments": [49.0], "Lapses": [28.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [5462.5], "Net Income": [-1929.99], "Avg Claim": [1165.6685], "Prior Auth Requests": [7.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [40.0], "Member Satisfaction": [3.935], "Prior Auth Approval %": [0.0]}, "New York": {"Premiums": [77881.5], "Claims Paid": [71568.61], "Claims Count": [61.0], "Active Members": [5700.0], "New Enrollments": [65.0], "Lapses": [44.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [7050.09], "Net Income": [-737.22], "Avg Claim": [1281.1495], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [62.0], "Member Satisfaction": [4.1085], "Prior Auth Approval %": [0.0]}, "Ohio": {"Premiums": [53452.39], "Claims Paid": [50032.09], "Claims Count": [40.0], "Active Members": [3870.0], "New Enrollments": [46.0], "Lapses": [25.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [4882.66], "Net Income": [-1462.36], "Avg Claim": [1262.186], "Prior Auth Requests": [5.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [37.0], "Member Satisfaction": [4.092], "Prior Auth Approval %": [0.0]}, "Texas": {"Premiums": [76135.75], "Claims Paid": [71071.38], "Claims Count": [61.0], "Active Members": [5503.0], "New Enrollments": [77.0], "Lapses": [31.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [6866.59], "Net Income": [-1802.19], "Avg Claim": [1236.9525], "Prior Auth Requests": [14.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [59.0], "Member Satisfaction": [3.998], "Prior Auth Approval %": [0.0]}}, "Plan_Type": {"HDHP": {"Premiums": [66493.11], "Claims Paid": [60684.42], "Claims Count": [65.0], "Active Members": [6275.0], "New Enrollments": [74.0], "Lapses": [38.0], "Medical Loss Ratio %": [88.4575], "Admin Expense": [7485.44], "Net Income": [-1676.78], "Avg Claim": [995.6954], "Prior Auth Requests": [14.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [65.0], "Member Satisfaction": [4.0083], "Prior Auth Approval %": [0.0]}, "HMO": {"Premiums": [89211.14], "Claims Paid": [82707.15], "Claims Count": [68.0], "Active Members": [6159.0], "New Enrollments": [76.0], "Lapses": [39.0], "Medical Loss Ratio %": [90.07], "Admin Expense": [8861.35], "Net Income": [-2357.35], "Avg Claim": [1311.5646], "Prior Auth Requests": [11.0], "Prior Auth Approved": [1.0], "Readmissions": [0.0], "Preventive Visits": [64.0], "Member Satisfaction": [4.05], "Prior Auth Approval %": [9.0909]}, "Medicaid": {"Premiums": [38068.53], "Claims Paid": [35833.45], "Claims Count": [65.0], "Active Members": [6152.0], "New Enrollments": [78.0], "Lapses": [43.0], "Medical Loss Ratio %": [92.3275], "Admin Expense": [2706.21], "Net Income": [-471.12], "Avg Claim": [585.4617], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [65.0], "Member Satisfaction": [4.0329], "Prior Auth Approval %": [0.0]}, "Medicare Advantage": {"Premiums": [110458.7], "Claims Paid": [103620.22], "Claims Count": [69.0], "Active Members": [6214.0], "New Enrollments": [74.0], "Lapses": [34.0], "Medical Loss Ratio %": [91.415], "Admin Expense": [8843.58], "Net Income": [-2005.07], "Avg Claim": [1625.6679], "Prior Auth Requests": [14.0], "Prior Auth Approved": [1.0], "Readmissions": [0.0], "Preventive Visits": [63.0], "Member Satisfaction": [3.8854], "Prior Auth Approval %": [7.1429]}, "PPO": {"Premiums": [122347.7], "Claims Paid": [114179.33], "Claims Count": [71.0], "Active Members": [6170.0], "New Enrollments": [83.0], "Lapses": [42.0], "Medical Loss Ratio %": [90.8775], "Admin Expense": [10856.36], "Net Income": [-2688.05], "Avg Claim": [1688.36], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [63.0], "Member Satisfaction": [3.9983], "Prior Auth Approval %": [0.0]}}, "Age_Group": {"18-34": {"Premiums": [77485.33], "Claims Paid": [46528.97], "Claims Count": [32.0], "Active Members": [10630.0], "New Enrollments": [130.0], "Lapses": [76.0], "Medical Loss Ratio %": [60.086], "Admin Expense": [7076.46], "Net Income": [23879.9], "Avg Claim": [1461.7473], "Prior Auth Requests": [0.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [115.0], "Member Satisfaction": [4.0203], "Prior Auth Approval %": [0.0]}, "35-54": {"Premiums": [112209.83], "Claims Paid": [103006.34], "Claims Count": [86.0], "Active Members": [9411.0], "New Enrollments": [129.0], "Lapses": [65.0], "Medical Loss Ratio %": [92.432], "Admin Expense": [10230.04], "Net Income": [-1026.54], "Avg Claim": [1209.6257], "Prior Auth Requests": [15.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [103.0], "Member Satisfaction": [4.061], "Prior Auth Approval %": [0.0]}, "55-64": {"Premiums": [120935.93], "Claims Paid": [126030.84], "Claims Count": [113.0], "Active Members": [6298.0], "New Enrollments": [75.0], "Lapses": [35.0], "Medical Loss Ratio %": [105.0], "Admin Expense": [10893.52], "Net Income": [-15988.47], "Avg Claim": [1135.7493], "Prior Auth Requests": [25.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [59.0], "Member Satisfaction": [3.922], "Prior Auth Approval %": [0.0]}, "65+": {"Premiums": [115948.09], "Claims Paid": [121458.42], "Claims Count": [107.0], "Active Members": [4631.0], "New Enrollments": [51.0], "Lapses": [20.0], "Medical Loss Ratio %": [105.0], "Admin Expense": [10552.92], "Net Income": [-16063.26], "Avg Claim": [1158.2773], "Prior Auth Requests": [25.0], "Prior Auth Approved": [2.0], "Readmissions": [0.0], "Preventive Visits": [43.0], "Member Satisfaction": [3.9767], "Prior Auth Approval %": [8.0]}}};
 var ARIA_SC_ORIG_SERIES   = {"Claims Count": [338.0], "Avg Claim": [1241.3499], "Prior Auth Requests": [65.0], "Prior Auth Approval %": [3.0769]};
 var ARIA_SC_ORIG_LABELS   = {"Claims Count": ["2026-06-15"], "Avg Claim": ["2026-06-15"], "Prior Auth Requests": ["2026-06-15"], "Prior Auth Approval %": ["2026-06-15"]};
+var ARIA_SC_ORIG_TGT      = {"Claims Count": [], "Avg Claim": [], "Prior Auth Requests": [], "Prior Auth Approval %": []};
+var ARIA_SC_ORIG_TGT_LBL  = {"Claims Count": [], "Avg Claim": [], "Prior Auth Requests": [], "Prior Auth Approval %": []};
+var ARIA_SC_MEM_TGT       = {};
 
 /* format a raw pct number → {text, color} */
 function _ariaPct(p) {
@@ -306,6 +309,20 @@ function ariaFilter(sel) {
                 chart.data.labels = (!usingMember && origLbls && origLbls.length > 0)
                     ? origLbls
                     : newSeries.map(function(_, j) { return j; });
+                /* ── target line (dataset[1]) — also filter-aware ── */
+                if (chart.data.datasets.length > 1) {
+                    var memTgt = (val !== 'All' && ARIA_SC_MEM_TGT[dim] &&
+                                  ARIA_SC_MEM_TGT[dim][val] &&
+                                  ARIA_SC_MEM_TGT[dim][val][kn])
+                                 ? ARIA_SC_MEM_TGT[dim][val][kn] : null;
+                    var tgtVals = memTgt ? (memTgt.values || []) :
+                                  (ARIA_SC_ORIG_TGT[kn] || []);
+                    var tgtLbls = memTgt ? (memTgt.labels || []) :
+                                  (ARIA_SC_ORIG_TGT_LBL[kn] || []);
+                    chart.data.datasets[1].data   = tgtVals;
+                    chart.data.datasets[1].labels = tgtLbls.length ? tgtLbls :
+                        tgtVals.map(function(_, j) { return j; });
+                }
                 chart.update('none');
             }
         }
