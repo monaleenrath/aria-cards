@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Province', 'Category'] first_dim=Province tmpl=dossier | yoy_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Province'] | df_shape=[65760, 16] | kpi_map=[('Revenue', 'Revenue_CAD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('Cost', 'COGS_CAD', 'sum', ''), ('Transactions', 'Transactions', 'sum', ''), ('Avg Basket', 'Avg_Basket_CAD', 'mean', ''), ('Loyalty Redemptions', 'Loyalty_Redemptions', 'sum', ''), ('Loyalty Members', 'Loyalty_Members', 'mean', ''), ('New Loyalty Members', 'New_Loyalty_Members', 'sum', ''), ('Waste %', 'Waste_Pct', 'mean', ''), ('Promo Revenue', 'Promo_Revenue_CAD', 'sum', ''), ('Gross Profit', 'Gross_Profit_CAD', 'sum', ''), ('Cost-to-Revenue %', 'DERIVED', 'ratio', 'COGS_CAD'), ('Gross Margin %', 'DERIVED', 'ratio', 'Gross_Profit_CAD'), ('Promo Mix %', 'DERIVED', 'ratio', 'Promo_Revenue_CAD')] | yoy_summary={'Revenue': 12, 'Units Sold': 12, 'Cost': 12, 'Transactions': 12, 'Avg Basket': 12, 'Loyalty Redemptions': 12, 'Loyalty Members': 12, 'New Loyalty Members': 12, 'Waste %': 12, 'Promo Revenue': 12, 'Gross Profit': 12, 'Cost-to-Revenue %': 12, 'Gross Margin %': 12, 'Promo Mix %': 12} | yoy_diag.effective_dims=['Province', 'Category'] | yoy_diag.kpis=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-16 | yoy_diag.curr_df_len=960 yoy_diag.prior_df_len=960 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Province yoy_diag.spot_cfg={'column': 'Revenue_CAD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('Alberta', 5769536.58), ('British Columbia', 6270247.48), ('Manitoba', 2205478.46)] | df_cat_cols={'Province': 'str/6', 'Category': 'str/10'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#0B1220; }
+body {
+    background:#0B1220; color:#F8FAFC;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#0B1220;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #1F2937; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#64748B; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#A78BFA; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#64748B; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#64748B; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#A78BFA; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#111827; border:1px solid #1F2937;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#111827; border:1px solid #1F2937;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#111827; border:1px solid #1F2937;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#CBD5E1; line-height:1.6; }
+.narr strong { color:#F8FAFC; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#64748B; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#1F2937; color:#F8FAFC;
+    border:1px solid #1F2937; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#A78BFA22; border:1px solid #A78BFA55;
+    color:#A78BFA; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#A78BFA15; border:1px solid #A78BFA40;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#A78BFA; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#F8FAFC;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#64748B; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#111827; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #1F2937; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#A78BFA; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#CBD5E1; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85;
+                line-height:1.6; overflow:visible; white-space:normal; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #1F2937;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#F8FAFC;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#64748B; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#CBD5E1; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #1F2937; color:#64748B;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#A78BFA20; border-color:#A78BFA80; color:#A78BFA;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span><img src="https://logo.clearbit.com/sobeys.com" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sobeys.com&sz=64';" style="height:26px;width:auto;object-fit:contain;vertical-align:middle;border-radius:3px;margin-left:8px;opacity:0.9;" alt="Sobeys" title="Sobeys">
+  </div>
+  <div class="mast-mid">VP  ·  LEADERSHIP BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">TUE JUN 16 2026</div>
+      <span class="date-range"> &nbsp;Jun 01 → Jun 16 </span>
+    </div>
+  </div>
+</div>
+  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Province" onchange="ariaFilter(this)"><option value="All">Province: All</option><option value="Ontario">Ontario</option><option value="Quebec">Quebec</option><option value="British Columbia">British Columbia</option><option value="Alberta">Alberta</option><option value="Manitoba">Manitoba</option><option value="Nova Scotia">Nova Scotia</option></select> </div>
+  <div class="sec">Analytics Dossier</div>
+  <div class="mkpi-row">
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Revenue</div>
+  <div class="mkpi-val" id="ds_kv_0" data-orig="$33,482,686">$33,482,686</div>
+  <div class="mkpi-d" id="ds_md_0" data-orig="▲ 2.9% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.9% MoM</div>
+  <div class="mkpi-d" id="ds_yd_0" data-orig="▲ 3.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.4% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Promo Revenue</div>
+  <div class="mkpi-val" id="ds_kv_1" data-orig="$3,343,846">$3,343,846</div>
+  <div class="mkpi-d" id="ds_md_1" data-orig="▲ 127.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 127.4% MoM</div>
+  <div class="mkpi-d" id="ds_yd_1" data-orig="▲ 3.7% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.7% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Gross Profit</div>
+  <div class="mkpi-val" id="ds_kv_2" data-orig="$10,047,036">$10,047,036</div>
+  <div class="mkpi-d" id="ds_md_2" data-orig="▲ 3.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 3.0% MoM</div>
+  <div class="mkpi-d" id="ds_yd_2" data-orig="▲ 3.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.3% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Cost-to-Revenue %</div>
+  <div class="mkpi-val" id="ds_kv_3" data-orig="70.0%">70.0%</div>
+  <div class="mkpi-d" id="ds_md_3" data-orig="▼ 0.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.0% MoM</div>
+  <div class="mkpi-d" id="ds_yd_3" data-orig="▲ 0.0% YoY" data-oc="#34D399" style="color:#34D399">▲ 0.0% YoY</div>
+</div>
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Gross Margin %</div>
+  <div class="mkpi-val" id="ds_kv_4" data-orig="30.0%">30.0%</div>
+  <div class="mkpi-d" id="ds_md_4" data-orig="▲ 0.1% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.1% MoM</div>
+  <div class="mkpi-d" id="ds_yd_4" data-orig="▼ 0.1% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.1% YoY</div>
+</div></div>
+  
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-trend-title" class="sec">Revenue — Monthly (12M)</div>
+    
+<div class="chart-box" style="height:160px">
+  <canvas id="ds_trend"></canvas>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-dim-title" class="sec">Province Breakdown</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_dimbar"></canvas></div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-donut-title" class="sec">Contribution Mix</div>
+    
+<div style="display:flex;gap:8px;align-items:flex-start">
+  <div class="chart-box" style="height:160px;flex:0 0 160px">
+    <canvas id="ds_donut"></canvas>
+  </div>
+  <div id="ds-donut-legend" style="flex:1;overflow:hidden;padding-top:8px"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#A78BFA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Ontario</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Quebec</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#34D399;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">British Columbia</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#60A5FA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Alberta</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F87171;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Manitoba</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#FBBF24;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Nova Scotia</div></div></div>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-wfall-title" class="sec">Period-over-Period Waterfall</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_wfall"></canvas></div>
+  </div>
+</div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #1F2937;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #1F2937">
+    <div class="sec">Performance Review</div>
+    <div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 2.9% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.4%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Promo Revenue: ▲ 127.4% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.7%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 3.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.3%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Cost-to-Revenue %: ▼ 0.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 0.0%</span></div>
+    <div class="narr">Revenue reached $33.48M, growing 2.87% MoM, supported by a 4.42% MoM increase in transactions. However, Avg Basket declined by $0.62 (-1.09%) MoM, driven by broad reductions across provinces and categories, coinciding with a 127.4% MoM surge in Promo Revenue. This signals discoun</div>
+  </div>
+  <div style="flex:1;padding:0 14px;border-right:1px solid #1F2937">
+    <div class="sec">Root-Cause Drivers</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#A78BFA;margin-right:4px">▶</span>Province → Ontario increased Revenue by $271,767 (2.73% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#A78BFA;margin-right:4px">▶</span>Province → Quebec increased Revenue by $202,465 (3.01% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#A78BFA;margin-right:4px">▶</span>Category → Meat &amp; Seafood increased Revenue by $174,408 (3.36% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#A78BFA;margin-right:4px">▶</span>Category → Fresh Produce decreased Avg Basket by $1.80 (-3.17% vs prior).</div>
+  </div>
+  <div style="flex:1;padding-left:14px">
+    <div class="sec">Leadership Priority</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#CBD5E1;"><span style="color:#A78BFA;font-weight:700;margin-right:5px">▶</span>Re-evaluate promotional calendar for Q3. Owner: Marketing &amp; Sales. Deadline: End of next week. Success metric: Avg Basket growth of 1.5% and Promo Mix % reduction to 8% by month-end.</div>
+  </div>
+</div>
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">Marketing and Sales own this, and it requires immediate cross-functional alignment, not new resources, but a strategic shift. The bright spot is that overall revenue and gross profit continue to grow, indicating strong underlying demand.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_DS_KPIS              = ["Revenue", "Promo Revenue", "Gross Profit", "Cost-to-Revenue %", "Gross Margin %"];
+var ARIA_DIM_MEMBER_KPIS      = {"Province": {"Alberta": {"Revenue": {"value": 5769536.58, "value_fmt": "$5.8M", "mom_pct": 2.63, "yoy_pct": 3.16}, "Units Sold": {"value": 1372093.0, "value_fmt": "1,372,093", "mom_pct": 2.83, "yoy_pct": 2.69}, "Cost": {"value": 4035027.91, "value_fmt": "$4.0M", "mom_pct": 2.62, "yoy_pct": 2.99}, "Transactions": {"value": 106197.0, "value_fmt": "106,197", "mom_pct": 2.99, "yoy_pct": 3.34}, "Avg Basket": {"value": 56.0986, "value_fmt": "$56", "mom_pct": -0.08, "yoy_pct": 0.23}, "Loyalty Redemptions": {"value": 37306.0, "value_fmt": "37,306", "mom_pct": 4.65, "yoy_pct": 4.87}, "Loyalty Members": {"value": 22828.2375, "value_fmt": "22,828", "mom_pct": 1.07, "yoy_pct": 5.39}, "New Loyalty Members": {"value": 36220.0, "value_fmt": "36,220", "mom_pct": 0.23, "yoy_pct": 4.45}, "Waste %": {"value": 3.4326, "value_fmt": "343.3%", "mom_pct": -0.38, "yoy_pct": 0.87}, "Promo Revenue": {"value": 575455.53, "value_fmt": "$575K", "mom_pct": 122.73, "yoy_pct": 4.5}, "Gross Profit": {"value": 1734508.67, "value_fmt": "$1.7M", "mom_pct": 2.65, "yoy_pct": 3.56}, "Cost-to-Revenue %": {"value": 0.6994, "value_fmt": "69.9%", "mom_pct": -0.01, "yoy_pct": -0.16}, "Gross Margin %": {"value": 0.3006, "value_fmt": "30.1%", "mom_pct": 0.02, "yoy_pct": 0.39}, "Promo Mix %": {"value": 0.0997, "value_fmt": "10.0%", "mom_pct": 117.03, "yoy_pct": 1.3}}, "British Columbia": {"Revenue": {"value": 6270247.48, "value_fmt": "$6.3M", "mom_pct": 3.07, "yoy_pct": 3.51}, "Units Sold": {"value": 1510065.0, "value_fmt": "1,510,065", "mom_pct": 4.32, "yoy_pct": 5.33}, "Cost": {"value": 4391525.65, "value_fmt": "$4.4M", "mom_pct": 3.0, "yoy_pct": 3.55}, "Transactions": {"value": 116921.0, "value_fmt": "116,921", "mom_pct": 5.36, "yoy_pct": 4.26}, "Avg Basket": {"value": 55.5413, "value_fmt": "$56", "mom_pct": -1.9, "yoy_pct": -0.14}, "Loyalty Redemptions": {"value": 40500.0, "value_fmt": "40,500", "mom_pct": 4.16, "yoy_pct": 3.65}, "Loyalty Members": {"value": 23058.8063, "value_fmt": "23,058", "mom_pct": -0.38, "yoy_pct": 5.14}, "New Loyalty Members": {"value": 35257.0, "value_fmt": "35,257", "mom_pct": -4.7, "yoy_pct": 3.76}, "Waste %": {"value": 3.3666, "value_fmt": "336.7%", "mom_pct": 0.62, "yoy_pct": -1.13}, "Promo Revenue": {"value": 617261.7, "value_fmt": "$617K", "mom_pct": 127.81, "yoy_pct": 2.36}, "Gross Profit": {"value": 1878721.83, "value_fmt": "$1.9M", "mom_pct": 3.22, "yoy_pct": 3.42}, "Cost-to-Revenue %": {"value": 0.7004, "value_fmt": "70.0%", "mom_pct": -0.06, "yoy_pct": 0.04}, "Gross Margin %": {"value": 0.2996, "value_fmt": "30.0%", "mom_pct": 0.15, "yoy_pct": -0.09}, "Promo Mix %": {"value": 0.0984, "value_fmt": "9.8%", "mom_pct": 121.03, "yoy_pct": -1.12}}, "Manitoba": {"Revenue": {"value": 2205478.46, "value_fmt": "$2.2M", "mom_pct": 3.07, "yoy_pct": 3.45}, "Units Sold": {"value": 519506.0, "value_fmt": "519,506", "mom_pct": 0.46, "yoy_pct": 3.1}, "Cost": {"value": 1546372.33, "value_fmt": "$1.5M", "mom_pct": 3.1, "yoy_pct": 3.62}, "Transactions": {"value": 40532.0, "value_fmt": "40,532", "mom_pct": 3.59, "yoy_pct": 3.4}, "Avg Basket": {"value": 56.2718, "value_fmt": "$56", "mom_pct": 0.62, "yoy_pct": 1.02}, "Loyalty Redemptions": {"value": 14085.0, "value_fmt": "14,085", "mom_pct": 3.07, "yoy_pct": 3.88}, "Loyalty Members": {"value": 23374.0625, "value_fmt": "23,374", "mom_pct": 2.84, "yoy_pct": 9.52}, "New Loyalty Members": {"value": 17778.0, "value_fmt": "17,778", "mom_pct": 2.51, "yoy_pct": 4.72}, "Waste %": {"value": 3.3518, "value_fmt": "335.2%", "mom_pct": -1.51, "yoy_pct": -1.9}, "Promo Revenue": {"value": 216354.67, "value_fmt": "$216K", "mom_pct": 121.36, "yoy_pct": -0.71}, "Gross Profit": {"value": 659106.13, "value_fmt": "$659K", "mom_pct": 2.99, "yoy_pct": 3.06}, "Cost-to-Revenue %": {"value": 0.7012, "value_fmt": "70.1%", "mom_pct": 0.03, "yoy_pct": 0.16}, "Gross Margin %": {"value": 0.2988, "value_fmt": "29.9%", "mom_pct": -0.07, "yoy_pct": -0.38}, "Promo Mix %": {"value": 0.0981, "value_fmt": "9.8%", "mom_pct": 114.76, "yoy_pct": -4.02}}, "Nova Scotia": {"Revenue": {"value": 2091103.94, "value_fmt": "$2.1M", "mom_pct": 2.96, "yoy_pct": 3.5}, "Units Sold": {"value": 497561.0, "value_fmt": "497,561", "mom_pct": 5.15, "yoy_pct": -0.08}, "Cost": {"value": 1462915.32, "value_fmt": "$1.5M", "mom_pct": 2.63, "yoy_pct": 3.74}, "Transactions": {"value": 38475.0, "value_fmt": "38,475", "mom_pct": 6.53, "yoy_pct": 2.41}, "Avg Basket": {"value": 56.177, "value_fmt": "$56", "mom_pct": -3.11, "yoy_pct": 1.11}, "Loyalty Redemptions": {"value": 13198.0, "value_fmt": "13,198", "mom_pct": 5.74, "yoy_pct": 0.69}, "Loyalty Members": {"value": 23053.775, "value_fmt": "23,053", "mom_pct": 1.2, "yoy_pct": 6.35}, "New Loyalty Members": {"value": 18079.0, "value_fmt": "18,079", "mom_pct": -5.31, "yoy_pct": 3.16}, "Waste %": {"value": 3.394, "value_fmt": "339.4%", "mom_pct": 0.34, "yoy_pct": -0.03}, "Promo Revenue": {"value": 211359.89, "value_fmt": "$211K", "mom_pct": 137.35, "yoy_pct": 3.61}, "Gross Profit": {"value": 628188.62, "value_fmt": "$628K", "mom_pct": 3.76, "yoy_pct": 2.95}, "Cost-to-Revenue %": {"value": 0.6996, "value_fmt": "70.0%", "mom_pct": -0.33, "yoy_pct": 0.23}, "Gross Margin %": {"value": 0.3004, "value_fmt": "30.0%", "mom_pct": 0.77, "yoy_pct": -0.53}, "Promo Mix %": {"value": 0.1011, "value_fmt": "10.1%", "mom_pct": 130.52, "yoy_pct": 0.1}}, "Ontario": {"Revenue": {"value": 10218664.35, "value_fmt": "$10.2M", "mom_pct": 2.73, "yoy_pct": 3.37}, "Units Sold": {"value": 2498206.0, "value_fmt": "2,498,206", "mom_pct": 4.76, "yoy_pct": 5.88}, "Cost": {"value": 7145495.21, "value_fmt": "$7.1M", "mom_pct": 2.51, "yoy_pct": 3.29}, "Transactions": {"value": 190472.0, "value_fmt": "190,472", "mom_pct": 4.79, "yoy_pct": 5.29}, "Avg Basket": {"value": 55.4668, "value_fmt": "$55", "mom_pct": -1.6, "yoy_pct": -1.37}, "Loyalty Redemptions": {"value": 65610.0, "value_fmt": "65,610", "mom_pct": 3.27, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22964.725, "value_fmt": "22,964", "mom_pct": 0.88, "yoy_pct": 6.1}, "New Loyalty Members": {"value": 55008.0, "value_fmt": "55,008", "mom_pct": 1.78, "yoy_pct": 7.5}, "Waste %": {"value": 3.4209, "value_fmt": "342.1%", "mom_pct": 0.18, "yoy_pct": 0.94}, "Promo Revenue": {"value": 1024294.87, "value_fmt": "$1.0M", "mom_pct": 126.92, "yoy_pct": 4.34}, "Gross Profit": {"value": 3073169.14, "value_fmt": "$3.1M", "mom_pct": 3.26, "yoy_pct": 3.57}, "Cost-to-Revenue %": {"value": 0.6993, "value_fmt": "69.9%", "mom_pct": -0.22, "yoy_pct": -0.08}, "Gross Margin %": {"value": 0.3007, "value_fmt": "30.1%", "mom_pct": 0.51, "yoy_pct": 0.19}, "Promo Mix %": {"value": 0.1002, "value_fmt": "10.0%", "mom_pct": 120.89, "yoy_pct": 0.93}}, "Quebec": {"Revenue": {"value": 6927655.63, "value_fmt": "$6.9M", "mom_pct": 3.01, "yoy_pct": 3.26}, "Units Sold": {"value": 1666293.0, "value_fmt": "1,666,293", "mom_pct": 4.42, "yoy_pct": 3.92}, "Cost": {"value": 4854314.15, "value_fmt": "$4.9M", "mom_pct": 3.28, "yoy_pct": 3.48}, "Transactions": {"value": 127751.0, "value_fmt": "127,751", "mom_pct": 3.89, "yoy_pct": 4.06}, "Avg Basket": {"value": 56.0207, "value_fmt": "$56", "mom_pct": -0.41, "yoy_pct": -0.22}, "Loyalty Redemptions": {"value": 43956.0, "value_fmt": "43,956", "mom_pct": 3.84, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22728.2938, "value_fmt": "22,728", "mom_pct": -0.39, "yoy_pct": 5.32}, "New Loyalty Members": {"value": 45402.0, "value_fmt": "45,402", "mom_pct": 2.65, "yoy_pct": 6.36}, "Waste %": {"value": 3.4159, "value_fmt": "341.6%", "mom_pct": 0.83, "yoy_pct": 1.22}, "Promo Revenue": {"value": 699119.48, "value_fmt": "$699K", "mom_pct": 130.75, "yoy_pct": 4.92}, "Gross Profit": {"value": 2073341.48, "value_fmt": "$2.1M", "mom_pct": 2.39, "yoy_pct": 2.76}, "Cost-to-Revenue %": {"value": 0.7007, "value_fmt": "70.1%", "mom_pct": 0.26, "yoy_pct": 0.21}, "Gross Margin %": {"value": 0.2993, "value_fmt": "29.9%", "mom_pct": -0.61, "yoy_pct": -0.49}, "Promo Mix %": {"value": 0.1009, "value_fmt": "10.1%", "mom_pct": 124.0, "yoy_pct": 1.6}}}};
+var ARIA_DIM_MONTHLY          = {"Province": {"Alberta": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [10161211.37, 9174617.07, 10638128.08, 10258117.18, 10815272.03, 10863765.8, 11282443.54, 11450587.52, 10452697.65, 10914335.89, 12535827.09, 12882758.81]}, "British Columbia": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [10988314.7, 9966267.41, 11496023.31, 11144115.33, 11694564.08, 11798758.56, 12213788.75, 12412936.12, 11348507.55, 11877895.26, 13555505.77, 13982735.32]}, "Manitoba": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [3876317.78, 3502329.36, 4046411.09, 3913207.61, 4127905.04, 4148076.68, 4313071.73, 4380109.34, 3995587.5, 4180061.54, 4800117.57, 4923515.77]}, "Nova Scotia": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [3659902.0, 3321506.62, 3846596.01, 3712143.67, 3902658.36, 3930806.62, 4069748.68, 4128257.36, 3780817.07, 3949975.01, 4518803.08, 4649701.16]}, "Ontario": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [17949976.24, 16272371.55, 18837696.54, 18190519.64, 19126939.94, 19261278.16, 19991677.31, 20291961.67, 18523086.69, 19362969.12, 22210564.54, 22791131.42]}, "Quebec": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [12180291.26, 10984931.27, 12721796.9, 12312974.16, 12922917.87, 13024580.8, 13504586.91, 13687354.44, 12556810.26, 13096194.56, 14996776.68, 15424654.53]}}};
+var ARIA_ACCENT               = '#A78BFA';
+var ARIA_PALETTE              = ["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24", "#F97316", "#14B8A6"];
+var ARIA_DIM_DATA             = {"Province": {"labels": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], "values": [10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94]}, "Category": {"labels": ["Meat & Seafood", "Grocery & Pantry", "Fresh Produce", "Health & Beauty", "Household & Cleaning", "Snacks & Confectionery"], "values": [5357466.31, 5011431.58, 4676748.36, 2347544.18, 2021726.04, 2011520.0]}};
+var ARIA_DIM_DRIVERS          = {"Province": [{"member": "Ontario", "delta": 333194.86, "value": 10218664.35}, {"member": "Quebec", "delta": 219003.75, "value": 6927655.63}, {"member": "British Columbia", "delta": 212744.68, "value": 6270247.48}, {"member": "Nova Scotia", "delta": 70758.02, "value": 2091103.94}, {"member": "Manitoba", "delta": 73599.05, "value": 2205478.46}, {"member": "Alberta", "delta": 176890.29, "value": 5769536.58}], "Category": [{"member": "Meat & Seafood", "delta": 170740.37, "value": 5357466.31}, {"member": "Grocery & Pantry", "delta": 157134.49, "value": 5011431.58}, {"member": "Fresh Produce", "delta": 138227.76, "value": 4676748.36}, {"member": "Snacks & Confectionery", "delta": 70211.64, "value": 2011520.0}, {"member": "Health & Beauty", "delta": 78484.69, "value": 2347544.18}, {"member": "Household & Cleaning", "delta": 78962.5, "value": 2021726.04}]};
+var _ARIA_MONTHLY_LABELS      = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"];
+var _ARIA_MONTHLY_VALUES      = [58816013.35, 53222023.28, 61586651.93, 59531077.59, 62590257.32, 63027266.62, 65375316.92, 66351206.45, 60657506.72, 63381431.38, 72617594.73, 74654497.01];
+var _ARIA_PRIOR_VAL           = 32548302.97;
+var _ARIA_CURR_VAL            = 33482686.44;
+var _ARIA_TC                  = '#64748B';
+var _ARIA_SUB                 = '#CBD5E1';
+
+function _ariaPct(p) {
+    if (p === null || p === undefined) return {text:'—', color:'#888'};
+    var s = p >= 0 ? '▲' : '▼';
+    var c = p >= 0 ? '#34D399' : '#F87171';
+    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
+}
+function _fmtVal(v) {
+    return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+(v/1e3).toFixed(1)+'K':v.toFixed(2);
+}
+
+function ariaFilter(sel) {
+    var dim = sel.getAttribute('data-dim');
+    var val = sel.value;
+
+    /* ── 1. KPI mini tiles ── */
+    var mData = (val === 'All') ? null :
+                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
+    ARIA_DS_KPIS.forEach(function(kn, i) {
+        var kd = mData ? (mData[kn] || null) : null;
+        var ve = document.getElementById('ds_kv_' + i);
+        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
+                                    : ve.getAttribute('data-orig');
+        var me = document.getElementById('ds_md_' + i);
+        if (me) {
+            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
+                var rm = _ariaPct(kd.mom_pct); me.textContent = rm.text+' MoM'; me.style.color = rm.color;
+            } else { me.textContent = me.getAttribute('data-orig')||'— MoM'; me.style.color = me.getAttribute('data-oc')||'#888'; }
+        }
+        var ye = document.getElementById('ds_yd_' + i);
+        if (ye) {
+            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
+                var ry = _ariaPct(kd.yoy_pct); ye.textContent = ry.text+' YoY'; ye.style.color = ry.color;
+            } else { ye.textContent = ye.getAttribute('data-orig')||'— YoY'; ye.style.color = ye.getAttribute('data-oc')||'#888'; }
+        }
+    });
+
+    /* ── 2. Bar chart — switch dim, highlight member, update target markers ── */
+    var d = ARIA_DIM_DATA[dim];
+    if (d) {
+        var barChart = ARIA_CHARTS['ds_dimbar'];
+        if (barChart) {
+            barChart.data.labels = d.labels;
+            barChart.data.datasets[0].data = d.values;
+            barChart.data.datasets[0].backgroundColor = (val === 'All')
+                ? d.labels.map(function(l, idx) { return ARIA_PALETTE[idx % ARIA_PALETTE.length]; })
+                : d.labels.map(function(l) { return l === val ? ARIA_ACCENT : ARIA_ACCENT+'28'; });
+            barChart.update('none');
+            var bt = document.getElementById('ds-dim-title');
+            if (bt) bt.textContent = dim+' Breakdown'+(val!=='All'?' • '+val:'');
+        }
+    }
+
+    /* ── 3. Donut — switch to selected dim's contribution mix ── */
+    if (d) {
+        var donutChart = ARIA_CHARTS['ds_donut'];
+        if (donutChart) {
+            var dColors = d.labels.map(function(l, idx) {
+                var base = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                return (val !== 'All' && l !== val) ? base+'55' : base;
+            });
+            donutChart.data.labels = d.labels;
+            donutChart.data.datasets[0].data = d.values;
+            donutChart.data.datasets[0].backgroundColor = dColors;
+            donutChart.update('none');
+            var dt = document.getElementById('ds-donut-title');
+            if (dt) dt.textContent = dim+' Mix'+(val!=='All'?' • '+val:'');
+            var dl = document.getElementById('ds-donut-legend');
+            if (dl) {
+                dl.innerHTML = d.labels.map(function(l, idx) {
+                    var c = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                    return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">'
+                         + '<div style="width:7px;height:7px;border-radius:50%;background:'+c+';flex-shrink:0"></div>'
+                         + '<div style="font-size:8px;color:'+_ARIA_SUB+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'
+                         + l.substring(0,18)+'</div></div>';
+                }).join('');
+            }
+        }
+    }
+
+    /* ── 4. Waterfall — rebuild using ALL dim members from ARIA_DIM_DATA ── */
+    /* ARIA_DIM_DRIVERS only holds top-N drivers and may omit members with small deltas.
+       Instead, start from ARIA_DIM_DATA (complete member list + current values) and
+       merge deltas from ARIA_DIM_DRIVERS; missing members get delta = 0. */
+    var d4    = ARIA_DIM_DATA[dim];
+    var drvList4 = ARIA_DIM_DRIVERS[dim] || [];
+    var drvMap4  = {};
+    drvList4.forEach(function(s) { drvMap4[s.member] = s; });
+    var wfLabels, wfData, wfColors;
+    if (d4 && d4.labels && d4.labels.length > 0) {
+        var allSteps4 = d4.labels.map(function(m, idx) {
+            var drv = drvMap4[m];
+            return { member: m,
+                      value:  drv ? drv.value : (d4.values[idx] || 0),
+                      delta:  drv ? drv.delta : 0 };
+        });
+        var curr4  = allSteps4.reduce(function(a,s){ return a+(s.value||0);  }, 0);
+        var prior4 = allSteps4.reduce(function(a,s){ return a+((s.value||0)-(s.delta||0)); }, 0);
+        var lifts4 = allSteps4.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags4 = allSteps4.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps4 = lifts4.concat(drags4);
+        /* Always include selected member even if its delta is 0 */
+        if (val!=='All' && !steps4.some(function(s){return s.member===val;})) {
+            var sel4 = allSteps4.find(function(s){return s.member===val;});
+            if (sel4) steps4.push(sel4);
+        }
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior4*100)/100]]; wfColors=['#60A5FA'];
+        var cum4=prior4;
+        steps4.forEach(function(s) {
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum4*100)/100, Math.round((cum4+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0 ? (hi?'#10B981':'#34D399') : (hi?'#EF4444':'#F87171'));
+            cum4+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr4*100)/100]); wfColors.push('#60A5FA');
+    } else {
+        /* Fallback to driver list if ARIA_DIM_DATA unavailable for this dim */
+        var drvs=drvList4, curr_total=0, prior_total=0;
+        drvs.forEach(function(s){curr_total+=(s.value||0);prior_total+=((s.value||0)-(s.delta||0));});
+        var lifts=drvs.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags=drvs.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps=lifts.concat(drags);
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior_total*100)/100]]; wfColors=['#60A5FA'];
+        var cum=prior_total;
+        steps.forEach(function(s){
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum*100)/100,Math.round((cum+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0?(hi?'#10B981':'#34D399'):(hi?'#EF4444':'#F87171'));
+            cum+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr_total*100)/100]); wfColors.push('#60A5FA');
+    }
+    var wfChart = ARIA_CHARTS['ds_wfall'];
+    if (wfChart) {
+        wfChart.data.labels = wfLabels;
+        wfChart.data.datasets[0].data = wfData;
+        wfChart.data.datasets[0].backgroundColor = wfColors;
+        wfChart.update('none');
+        var wt = document.getElementById('ds-wfall-title');
+        if (wt) wt.textContent = dim+' Waterfall'+(val!=='All'?' • '+val:'');
+    }
+
+    /* ── 5. Line trend — switch to member's monthly series, restore on All ── */
+    var trendChart = ARIA_CHARTS['ds_trend'];
+    if (trendChart) {
+        var mMonthly = (val === 'All') ? null :
+                       ((ARIA_DIM_MONTHLY[dim] || {})[val] || null);
+        if (mMonthly && mMonthly.values && mMonthly.values.length >= 2) {
+            trendChart.data.labels   = mMonthly.labels;
+            trendChart.data.datasets[0].data = mMonthly.values;
+        } else {
+            trendChart.data.labels   = _ARIA_MONTHLY_LABELS;
+            trendChart.data.datasets[0].data = _ARIA_MONTHLY_VALUES;
+        }
+        trendChart.update('none');
+        var tt = document.getElementById('ds-trend-title');
+        if (tt) tt.textContent = (val === 'All')
+            ? (_ARIA_MONTHLY_LABELS.length ? 'Revenue — Monthly (12M)' : 'Trend')
+            : dim + ' → ' + val + ' Monthly Trend';
+    }
+}
+
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    (function(){
+        var ctx = document.getElementById('ds_trend');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_trend'] = new Chart(ctx, {
+            type:'line',
+            data:{ labels:["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], datasets:[{
+                data:[58816013.35, 53222023.28, 61586651.93, 59531077.59, 62590257.32, 63027266.62, 65375316.92, 66351206.45, 60657506.72, 63381431.38, 72617594.73, 74654497.01], borderColor:'#A78BFA', borderWidth:2,
+                pointRadius:0, fill:true,
+                backgroundColor:'#A78BFA22', tension:0.35
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{display:false},
+                    datalabels:{display:false},
+                    tooltip:{ mode:'index', intersect:false,
+                        callbacks:{ label: function(ctx) {
+                            var v = ctx.raw;
+                            return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(2);
+                        } } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:8}, maxTicksLimit:6 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ ticks:{ color:'#64748B', font:{size:8} },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+    (function(){
+        var ctx = document.getElementById('ds_dimbar');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_dimbar'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], datasets:[{ data:[10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94],
+                backgroundColor:["#A78BFA", "#F59E0B", "#34D399", "#60A5FA", "#F87171", "#FBBF24"], borderRadius:4, borderWidth:0 }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(0);
+                        },
+                        color:'#64748B', font:{size:8,weight:'600'}
+                    },
+                    tooltip:{ callbacks:{ label: ctx =>
+                        (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                         ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                         ctx.raw.toFixed(1)) } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9}, maxRotation:30 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ display:false, grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:300} }
+        });
+    })();
+    ARIA_CHARTS['ds_donut'] = new Chart(document.getElementById('ds_donut'), {
+        type:'doughnut',
+        data:{ labels:["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], datasets:[{ data:[10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94],
+            backgroundColor:["#A78BFA", "#F59E0B", "#34D399", "#60A5FA", "#F87171", "#FBBF24"], borderWidth:2, borderColor:'transparent',
+            hoverOffset:4 }] },
+        options:{ cutout:'62%', responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{
+                    display:true,
+                    formatter:function(v, ctx){
+                        var total = ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+                        return total>0 ? (v/total*100).toFixed(1)+'%' : '';
+                    },
+                    color:'#fff',
+                    font:{size:8, weight:'700'},
+                    textStrokeColor:'rgba(0,0,0,0.35)',
+                    textStrokeWidth:2,
+                },
+                tooltip:{ callbacks:{ label: ctx => ' '+ctx.label+': '+
+                    (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                     ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                     ctx.raw.toFixed(0)) } } },
+            animation:{duration:0} }
+    });
+    (function(){
+        var ctx = document.getElementById('ds_wfall');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_wfall'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Prior", "Ontario", "Quebec", "British Colu", "Current"], datasets:[{
+                data:[[0, 32396495.79], [32396495.79, 32729690.65], [32729690.65, 32948694.4], [32948694.4, 33161439.08], [0, 33482686.44]],
+                backgroundColor:["#60A5FA", "#34D399", "#34D399", "#34D399", "#60A5FA"],
+                borderRadius:3, borderWidth:0
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        display:true,
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            if(!Array.isArray(v)) return '';
+                            var diff = v[1] - v[0];
+                            /* Prior/Current anchors: show absolute value */
+                            if(v[0]===0) {
+                                return Math.abs(v[1])>=1e6?'$'+(v[1]/1e6).toFixed(1)+'M':
+                                       Math.abs(v[1])>=1e3?'$'+(v[1]/1e3).toFixed(1)+'K':
+                                       '$'+v[1].toFixed(0);
+                            }
+                            /* Delta bars: show signed change */
+                            var s = diff>=0?'+':'-';
+                            var a = Math.abs(diff);
+                            return s+(a>=1e6?(a/1e6).toFixed(1)+'M':
+                                      a>=1e3?(a/1e3).toFixed(1)+'K':
+                                      a.toFixed(0));
+                        },
+                        color:'#64748B', font:{size:8, weight:'600'},
+                    },
+                    tooltip:{ callbacks:{
+                        label: ctx => {
+                            var a=ctx.raw, v=Array.isArray(a)?a[1]-a[0]:a;
+                            return (v>=0?'+':'')+
+                                (Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                                 Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'K':
+                                 v.toFixed(0));
+                        }
+                    } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9} },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ min:0,
+                         ticks:{ color:'#64748B', font:{size:8},
+                             callback: v => v>=1e6?'$'+(v/1e6).toFixed(0)+'M':
+                                          v>=1e3?'$'+(v/1e3).toFixed(0)+'K':v },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+});
+</script>
+</body>
+</html>
