@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=15 dim_gs_keys=['State', 'Plan_Type', 'Age_Group'] first_dim=State tmpl=scorecard | yoy_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] yoy_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | dod_keys=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] dod_lens=[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['State', 'Plan_Type', 'Age_Group'] | df_shape=[131520, 20] | kpi_map=[('Premiums', 'Premiums_USD', 'sum', ''), ('Claims Paid', 'Claims_Paid_USD', 'sum', ''), ('Claims Count', 'Claims_Count', 'sum', ''), ('Active Members', 'Active_Members', 'sum', ''), ('New Enrollments', 'New_Enrollments', 'sum', ''), ('Lapses', 'Lapses', 'sum', ''), ('Medical Loss Ratio %', 'Medical_Loss_Ratio_Pct', 'mean', ''), ('Admin Expense', 'Admin_Expense_USD', 'sum', ''), ('Net Income', 'Net_Income_USD', 'sum', ''), ('Avg Claim', 'Avg_Claim_USD', 'mean', ''), ('Prior Auth Requests', 'Prior_Auth_Requests', 'sum', ''), ('Prior Auth Approved', 'Prior_Auth_Approved', 'sum', ''), ('Readmissions', 'Readmissions', 'sum', ''), ('Preventive Visits', 'Preventive_Visits', 'sum', ''), ('Member Satisfaction', 'Member_Satisfaction_Score', 'mean', ''), ('Prior Auth Approval %', '?', 'ratio', 'Prior_Auth_Approved')] | yoy_summary={'Premiums': 15, 'Claims Paid': 15, 'Claims Count': 15, 'Active Members': 15, 'New Enrollments': 15, 'Lapses': 15, 'Medical Loss Ratio %': 15, 'Admin Expense': 15, 'Net Income': 15, 'Avg Claim': 15, 'Prior Auth Requests': 15, 'Prior Auth Approved': 15, 'Readmissions': 15, 'Preventive Visits': 15, 'Member Satisfaction': 15, 'Prior Auth Approval %': 15} | yoy_diag.effective_dims=['State', 'Plan_Type', 'Age_Group'] | yoy_diag.kpis=['Premiums', 'Claims Paid', 'Claims Count', 'Active Members', 'New Enrollments', 'Lapses', 'Medical Loss Ratio %', 'Admin Expense', 'Net Income', 'Avg Claim', 'Prior Auth Requests', 'Prior Auth Approved', 'Readmissions', 'Preventive Visits', 'Member Satisfaction', 'Prior Auth Approval %'] | yoy_diag.curr_start=2026-06-15 yoy_diag.prior_start=2025-06-15 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=120 yoy_diag.prior_df_len=120 | yoy_diag.spot_kpi=Premiums yoy_diag.spot_dim=State yoy_diag.spot_cfg={'column': 'Premiums_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('California', 86832.61), ('Florida', 71929.25), ('Illinois', 60347.68)] | df_cat_cols={'State': 'str/6', 'Plan_Type': 'str/5', 'Age_Group': 'str/4'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#F5F0E8; }
+body {
+    background:#F5F0E8; color:#1A1410;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#F5F0E8;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #D0C8BC; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#8B7D70; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#2DD4BF; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#8B7D70; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#8B7D70; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#2DD4BF; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#FFFFFF; border:1px solid #D0C8BC;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#4A3F35; line-height:1.6; }
+.narr strong { color:#1A1410; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#8B7D70; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#FFFFFF; color:#1A1410;
+    border:1px solid #D0C8BC; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#2DD4BF22; border:1px solid #2DD4BF55;
+    color:#2DD4BF; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#2DD4BF15; border:1px solid #2DD4BF40;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#2DD4BF; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#1A1410;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#8B7D70; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#EDE8DF; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #D0C8BC; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#2DD4BF; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#4A3F35; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85;
+                line-height:1.6; overflow:visible; white-space:normal; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #D0C8BC;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#1A1410;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#8B7D70; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#4A3F35; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #D0C8BC; color:#8B7D70;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#2DD4BF20; border-color:#2DD4BF80; color:#2DD4BF;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span>
+  </div>
+  <div class="mast-mid">OPS HEAD  ·  OPERATIONS BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">MON JUN 15 2026</div>
+      
+    </div>
+  </div>
+</div>
+  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="State" onchange="ariaFilter(this)"><option value="All">State: All</option><option value="California">California</option><option value="New York">New York</option><option value="Texas">Texas</option><option value="Florida">Florida</option><option value="Illinois">Illinois</option><option value="Ohio">Ohio</option></select> <select class="filter-sel" data-dim="Plan_Type" onchange="ariaFilter(this)"><option value="All">Plan_Type: All</option><option value="PPO">PPO</option><option value="Medicare Advantage">Medicare Advantage</option><option value="HMO">HMO</option><option value="Medicaid">Medicaid</option><option value="HDHP">HDHP</option></select> <select class="filter-sel" data-dim="Age_Group" onchange="ariaFilter(this)"><option value="All">Age_Group: All</option><option value="55-64">55-64</option><option value="65+">65+</option><option value="35-54">35-54</option><option value="18-34">18-34</option></select> </div>
+  <div class="sec">Performance Scorecard</div>
+  <div class="kpi-grid-v2">
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#34D399"></div>
+  <div class="kpi-name">Claims Count</div>
+  <div class="kpi-val " id="sc_kv_0" data-orig="338">338</div>
+  <div style="height:8px"></div>
+  <div class="kpi-d" id="sc_md_0" data-orig="▲ 2.1% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.1% MoM</div>
+  <div class="kpi-d" id="sc_yd_0" data-orig="▲ 8.7% YoY" data-oc="#34D399" style="color:#34D399">▲ 8.7% YoY</div>
+  
+  
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#F87171"></div>
+  <div class="kpi-name">Avg Claim</div>
+  <div class="kpi-val " id="sc_kv_1" data-orig="$1,241">$1,241</div>
+  <div style="height:8px"></div>
+  <div class="kpi-d" id="sc_md_1" data-orig="▼ 2.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 2.0% MoM</div>
+  <div class="kpi-d" id="sc_yd_1" data-orig="▼ 2.3% YoY" data-oc="#F87171" style="color:#F87171">▼ 2.3% YoY</div>
+  
+  <div style="font-size:8px;font-weight:700;color:#22c55e;margin-top:2px">107% of target</div>
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#94A3B8"></div>
+  <div class="kpi-name">Prior Auth Requests</div>
+  <div class="kpi-val " id="sc_kv_2" data-orig="65">65</div>
+  <div style="height:8px"></div>
+  <div class="kpi-d" id="sc_md_2" data-orig="— MoM" data-oc="#94A3B8" style="color:#94A3B8">— MoM</div>
+  <div class="kpi-d" id="sc_yd_2" data-orig="— YoY" data-oc="#94A3B8" style="color:#94A3B8">— YoY</div>
+  
+  
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#94A3B8"></div>
+  <div class="kpi-name">Prior Auth Approval %</div>
+  <div class="kpi-val " id="sc_kv_3" data-orig="307.7%">307.7%</div>
+  <div style="height:8px"></div>
+  <div class="kpi-d" id="sc_md_3" data-orig="— MoM" data-oc="#94A3B8" style="color:#94A3B8">— MoM</div>
+  <div class="kpi-d" id="sc_yd_3" data-orig="— YoY" data-oc="#94A3B8" style="color:#94A3B8">— YoY</div>
+  
+  
+</div></div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #D0C8BC;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
+    <div class="sec">Operational Status</div>
+    <div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Claims Count: ▲ 2.1% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 8.7%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Avg Claim: ▼ 2.0% MoM</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">YoY ▼ 2.3%</span></div>
+    <div class="narr">Prior Auth Approval % remains flat at 3.08%, indicating a critical bottleneck in our claims process. This low approval rate stems from only 2 approvals out of 65 requests, with California and the 65+ age group showing the only activity. Operations must immediately review the prio</div>
+  </div>
+  <div style="flex:1;padding:0 14px;border-right:1px solid #D0C8BC">
+    <div class="sec">What Moved the Number</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>State → California accounted for 2 approved Prior Auth requests (100% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Age_Group → 65+ accounted for 2 approved Prior Auth requests (100% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Plan_Type → HMO contributed 1 approved Prior Auth request (50% of total approvals).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;margin-right:4px">▶</span>Compound Signal: Claims Count increased by 2.1% DoD while Avg Claim decreased by 2.0% DoD, indicating transaction count growing but basket shrinking.</div>
+  </div>
+  <div style="flex:1;padding-left:14px">
+    <div class="sec">Team Action</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#2DD4BF;font-weight:700;margin-right:5px">▶</span>Review Prior Authorization workflow. Owner: Claims Processing Lead. Deadline: 48 hours. Success metric: Workflow analysis complete, and initial corrective actions identified for non-California states.</div>
+  </div>
+</div>
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">The primary bottleneck is our Prior Authorization approval process, which is effectively stalled at 3.08% approval, severely impacting member care and throughput. On a positive note, Active Members are up 1.17% DoD, showing continued growth in our member base.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_KPI_ORDER        = ["Claims Count", "Avg Claim", "Prior Auth Requests", "Prior Auth Approval %"];
+var ARIA_DIM_MEMBER_KPIS  = {"State": {"California": {"Premiums": {"value": 86832.61, "value_fmt": "$87K", "mom_pct": 2.26, "yoy_pct": 7.29}, "Claims Paid": {"value": 81105.39, "value_fmt": "$81K", "mom_pct": 1.65, "yoy_pct": 9.58}, "Claims Count": {"value": 72.0, "value_fmt": "72", "mom_pct": 5.88, "yoy_pct": 18.03}, "Active Members": {"value": 6255.0, "value_fmt": "6,255", "mom_pct": 0.53, "yoy_pct": 6.34}, "New Enrollments": {"value": 83.0, "value_fmt": "83", "mom_pct": 2.47, "yoy_pct": 9.21}, "Lapses": {"value": 42.0, "value_fmt": "42", "mom_pct": 2.44, "yoy_pct": 10.53}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 7924.53, "value_fmt": "$8K", "mom_pct": 0.39, "yoy_pct": 6.61}, "Net Income": {"value": -2197.35, "value_fmt": "$-2K", "mom_pct": -20.51, "yoy_pct": 325.99}, "Avg Claim": {"value": 1213.3475, "value_fmt": "$1K", "mom_pct": -7.22, "yoy_pct": -10.26}, "Prior Auth Requests": {"value": 16.0, "value_fmt": "16", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 2.0, "value_fmt": "2", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 68.0, "value_fmt": "68", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.9435, "value_fmt": "3.94", "mom_pct": -4.35, "yoy_pct": 1.97}, "Prior Auth Approval %": {"value": 12.5, "value_fmt": "1250.0%", "mom_pct": null, "yoy_pct": null}}, "Florida": {"Premiums": {"value": 71929.25, "value_fmt": "$72K", "mom_pct": 2.08, "yoy_pct": 4.52}, "Claims Paid": {"value": 66431.95, "value_fmt": "$66K", "mom_pct": 1.68, "yoy_pct": 4.54}, "Claims Count": {"value": 54.0, "value_fmt": "54", "mom_pct": -3.57, "yoy_pct": 8.0}, "Active Members": {"value": 5247.0, "value_fmt": "5,247", "mom_pct": 2.28, "yoy_pct": 6.32}, "New Enrollments": {"value": 65.0, "value_fmt": "65", "mom_pct": 4.84, "yoy_pct": 20.37}, "Lapses": {"value": 26.0, "value_fmt": "26", "mom_pct": -21.21, "yoy_pct": -21.21}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 6566.57, "value_fmt": "$7K", "mom_pct": 4.99, "yoy_pct": 6.38}, "Net Income": {"value": -1069.26, "value_fmt": "$-1K", "mom_pct": -5.01, "yoy_pct": 18.67}, "Avg Claim": {"value": 1288.7955, "value_fmt": "$1K", "mom_pct": 4.4, "yoy_pct": -4.13}, "Prior Auth Requests": {"value": 10.0, "value_fmt": "10", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 54.0, "value_fmt": "54", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.893, "value_fmt": "3.89", "mom_pct": -5.58, "yoy_pct": 0.74}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "Illinois": {"Premiums": {"value": 60347.68, "value_fmt": "$60K", "mom_pct": -0.1, "yoy_pct": 4.3}, "Claims Paid": {"value": 56815.15, "value_fmt": "$57K", "mom_pct": 0.71, "yoy_pct": 7.25}, "Claims Count": {"value": 50.0, "value_fmt": "50", "mom_pct": 16.28, "yoy_pct": 13.64}, "Active Members": {"value": 4395.0, "value_fmt": "4,395", "mom_pct": 1.01, "yoy_pct": 3.53}, "New Enrollments": {"value": 49.0, "value_fmt": "49", "mom_pct": -2.0, "yoy_pct": -9.26}, "Lapses": {"value": 28.0, "value_fmt": "28", "mom_pct": -3.45, "yoy_pct": 27.27}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 5462.5, "value_fmt": "$5K", "mom_pct": -2.58, "yoy_pct": 4.52}, "Net Income": {"value": -1929.99, "value_fmt": "$-2K", "mom_pct": 19.54, "yoy_pct": 466.68}, "Avg Claim": {"value": 1165.6685, "value_fmt": "$1K", "mom_pct": -11.29, "yoy_pct": -6.62}, "Prior Auth Requests": {"value": 7.0, "value_fmt": "7", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 40.0, "value_fmt": "40", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.935, "value_fmt": "3.93", "mom_pct": -3.99, "yoy_pct": 2.5}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "New York": {"Premiums": {"value": 77881.5, "value_fmt": "$78K", "mom_pct": -1.46, "yoy_pct": 3.97}, "Claims Paid": {"value": 71568.61, "value_fmt": "$72K", "mom_pct": -4.14, "yoy_pct": 3.86}, "Claims Count": {"value": 61.0, "value_fmt": "61", "mom_pct": -3.17, "yoy_pct": 1.67}, "Active Members": {"value": 5700.0, "value_fmt": "5,700", "mom_pct": 0.85, "yoy_pct": 4.15}, "New Enrollments": {"value": 65.0, "value_fmt": "65", "mom_pct": -9.72, "yoy_pct": 4.84}, "Lapses": {"value": 44.0, "value_fmt": "44", "mom_pct": 22.22, "yoy_pct": 46.67}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 7050.09, "value_fmt": "$7K", "mom_pct": -2.05, "yoy_pct": 6.07}, "Net Income": {"value": -737.22, "value_fmt": "$-737", "mom_pct": -73.91, "yoy_pct": 14.48}, "Avg Claim": {"value": 1281.1495, "value_fmt": "$1K", "mom_pct": -0.92, "yoy_pct": 3.07}, "Prior Auth Requests": {"value": 13.0, "value_fmt": "13", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 62.0, "value_fmt": "62", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.1085, "value_fmt": "4.11", "mom_pct": 5.37, "yoy_pct": 0.29}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "Ohio": {"Premiums": {"value": 53452.39, "value_fmt": "$53K", "mom_pct": 0.81, "yoy_pct": 3.57}, "Claims Paid": {"value": 50032.09, "value_fmt": "$50K", "mom_pct": 0.61, "yoy_pct": 7.53}, "Claims Count": {"value": 40.0, "value_fmt": "40", "mom_pct": -6.98, "yoy_pct": 2.56}, "Active Members": {"value": 3870.0, "value_fmt": "3,870", "mom_pct": 0.21, "yoy_pct": 2.79}, "New Enrollments": {"value": 46.0, "value_fmt": "46", "mom_pct": -4.17, "yoy_pct": 15.0}, "Lapses": {"value": 25.0, "value_fmt": "25", "mom_pct": 25.0, "yoy_pct": 4.17}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 4882.66, "value_fmt": "$5K", "mom_pct": 2.65, "yoy_pct": 3.7}, "Net Income": {"value": -1462.36, "value_fmt": "$-1K", "mom_pct": -0.02, "yoy_pct": -491.19}, "Avg Claim": {"value": 1262.186, "value_fmt": "$1K", "mom_pct": 8.63, "yoy_pct": 3.61}, "Prior Auth Requests": {"value": 5.0, "value_fmt": "5", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 37.0, "value_fmt": "37", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.092, "value_fmt": "4.09", "mom_pct": 0.38, "yoy_pct": 1.19}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "Texas": {"Premiums": {"value": 76135.75, "value_fmt": "$76K", "mom_pct": 2.94, "yoy_pct": 8.94}, "Claims Paid": {"value": 71071.38, "value_fmt": "$71K", "mom_pct": 3.05, "yoy_pct": 10.56}, "Claims Count": {"value": 61.0, "value_fmt": "61", "mom_pct": 5.17, "yoy_pct": 7.02}, "Active Members": {"value": 5503.0, "value_fmt": "5,503", "mom_pct": 2.02, "yoy_pct": 7.92}, "New Enrollments": {"value": 77.0, "value_fmt": "77", "mom_pct": 18.46, "yoy_pct": 45.28}, "Lapses": {"value": 31.0, "value_fmt": "31", "mom_pct": -6.06, "yoy_pct": 40.91}, "Medical Loss Ratio %": {"value": 90.6295, "value_fmt": "90.63", "mom_pct": 0.0, "yoy_pct": 2.01}, "Admin Expense": {"value": 6866.59, "value_fmt": "$7K", "mom_pct": 5.08, "yoy_pct": 10.2}, "Net Income": {"value": -1802.19, "value_fmt": "$-2K", "mom_pct": 16.9, "yoy_pct": 186.21}, "Avg Claim": {"value": 1236.9525, "value_fmt": "$1K", "mom_pct": -4.0, "yoy_pct": 1.84}, "Prior Auth Requests": {"value": 14.0, "value_fmt": "14", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 59.0, "value_fmt": "59", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.998, "value_fmt": "4.00", "mom_pct": 1.02, "yoy_pct": -7.53}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}}, "Plan_Type": {"HDHP": {"Premiums": {"value": 66493.11, "value_fmt": "$66K", "mom_pct": 1.15, "yoy_pct": 5.81}, "Claims Paid": {"value": 60684.42, "value_fmt": "$61K", "mom_pct": 1.09, "yoy_pct": 7.26}, "Claims Count": {"value": 65.0, "value_fmt": "65", "mom_pct": -4.41, "yoy_pct": 8.33}, "Active Members": {"value": 6275.0, "value_fmt": "6,275", "mom_pct": 1.05, "yoy_pct": 7.32}, "New Enrollments": {"value": 74.0, "value_fmt": "74", "mom_pct": -6.33, "yoy_pct": 7.25}, "Lapses": {"value": 38.0, "value_fmt": "38", "mom_pct": -11.63, "yoy_pct": 8.57}, "Medical Loss Ratio %": {"value": 88.4575, "value_fmt": "88.46", "mom_pct": 0.0, "yoy_pct": 1.84}, "Admin Expense": {"value": 7485.44, "value_fmt": "$7K", "mom_pct": 2.56, "yoy_pct": 8.01}, "Net Income": {"value": -1676.78, "value_fmt": "$-2K", "mom_pct": 5.4, "yoy_pct": 151.95}, "Avg Claim": {"value": 995.6954, "value_fmt": "$996", "mom_pct": 6.95, "yoy_pct": -1.25}, "Prior Auth Requests": {"value": 14.0, "value_fmt": "14", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 65.0, "value_fmt": "65", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.0083, "value_fmt": "4.01", "mom_pct": -0.48, "yoy_pct": -1.82}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "HMO": {"Premiums": {"value": 89211.14, "value_fmt": "$89K", "mom_pct": 0.14, "yoy_pct": 5.6}, "Claims Paid": {"value": 82707.15, "value_fmt": "$83K", "mom_pct": 0.07, "yoy_pct": 7.22}, "Claims Count": {"value": 68.0, "value_fmt": "68", "mom_pct": 3.03, "yoy_pct": 11.48}, "Active Members": {"value": 6159.0, "value_fmt": "6,159", "mom_pct": -0.79, "yoy_pct": 5.39}, "New Enrollments": {"value": 76.0, "value_fmt": "76", "mom_pct": 1.33, "yoy_pct": 18.75}, "Lapses": {"value": 39.0, "value_fmt": "39", "mom_pct": -2.5, "yoy_pct": 18.18}, "Medical Loss Ratio %": {"value": 90.07, "value_fmt": "90.07", "mom_pct": 0.0, "yoy_pct": 1.95}, "Admin Expense": {"value": 8861.35, "value_fmt": "$9K", "mom_pct": -0.37, "yoy_pct": 4.4}, "Net Income": {"value": -2357.35, "value_fmt": "$-2K", "mom_pct": -3.95, "yoy_pct": 105.73}, "Avg Claim": {"value": 1311.5646, "value_fmt": "$1K", "mom_pct": -1.32, "yoy_pct": -1.93}, "Prior Auth Requests": {"value": 11.0, "value_fmt": "11", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 1.0, "value_fmt": "1", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 64.0, "value_fmt": "64", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.05, "value_fmt": "4.05", "mom_pct": -2.69, "yoy_pct": 3.29}, "Prior Auth Approval %": {"value": 9.0909, "value_fmt": "909.1%", "mom_pct": null, "yoy_pct": null}}, "Medicaid": {"Premiums": {"value": 38068.53, "value_fmt": "$38K", "mom_pct": 0.66, "yoy_pct": 5.07}, "Claims Paid": {"value": 35833.45, "value_fmt": "$36K", "mom_pct": -1.5, "yoy_pct": 6.39}, "Claims Count": {"value": 65.0, "value_fmt": "65", "mom_pct": -1.52, "yoy_pct": 0.0}, "Active Members": {"value": 6152.0, "value_fmt": "6,152", "mom_pct": 0.67, "yoy_pct": 4.32}, "New Enrollments": {"value": 78.0, "value_fmt": "78", "mom_pct": -3.7, "yoy_pct": 2.63}, "Lapses": {"value": 43.0, "value_fmt": "43", "mom_pct": 22.86, "yoy_pct": 30.3}, "Medical Loss Ratio %": {"value": 92.3275, "value_fmt": "92.33", "mom_pct": 0.0, "yoy_pct": 2.21}, "Admin Expense": {"value": 2706.21, "value_fmt": "$3K", "mom_pct": 6.31, "yoy_pct": 6.12}, "Net Income": {"value": -471.12, "value_fmt": "$-471", "mom_pct": -57.4, "yoy_pct": 214045.45}, "Avg Claim": {"value": 585.4617, "value_fmt": "$585", "mom_pct": -1.06, "yoy_pct": 7.76}, "Prior Auth Requests": {"value": 13.0, "value_fmt": "13", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 65.0, "value_fmt": "65", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.0329, "value_fmt": "4.03", "mom_pct": 1.73, "yoy_pct": 1.3}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "Medicare Advantage": {"Premiums": {"value": 110458.7, "value_fmt": "$110K", "mom_pct": 1.94, "yoy_pct": 4.27}, "Claims Paid": {"value": 103620.22, "value_fmt": "$104K", "mom_pct": 1.37, "yoy_pct": 5.68}, "Claims Count": {"value": 69.0, "value_fmt": "69", "mom_pct": 7.81, "yoy_pct": 9.52}, "Active Members": {"value": 6214.0, "value_fmt": "6,214", "mom_pct": 2.3, "yoy_pct": 3.48}, "New Enrollments": {"value": 74.0, "value_fmt": "74", "mom_pct": 10.45, "yoy_pct": 13.85}, "Lapses": {"value": 34.0, "value_fmt": "34", "mom_pct": 3.03, "yoy_pct": -5.56}, "Medical Loss Ratio %": {"value": 91.415, "value_fmt": "91.42", "mom_pct": 0.0, "yoy_pct": 2.04}, "Admin Expense": {"value": 8843.58, "value_fmt": "$9K", "mom_pct": 1.12, "yoy_pct": 6.15}, "Net Income": {"value": -2005.07, "value_fmt": "$-2K", "mom_pct": -23.09, "yoy_pct": 353.81}, "Avg Claim": {"value": 1625.6679, "value_fmt": "$2K", "mom_pct": -2.56, "yoy_pct": -2.5}, "Prior Auth Requests": {"value": 14.0, "value_fmt": "14", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 1.0, "value_fmt": "1", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 63.0, "value_fmt": "63", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.8854, "value_fmt": "3.89", "mom_pct": -3.86, "yoy_pct": -2.25}, "Prior Auth Approval %": {"value": 7.1429, "value_fmt": "714.3%", "mom_pct": null, "yoy_pct": null}}, "PPO": {"Premiums": {"value": 122347.7, "value_fmt": "$122K", "mom_pct": 1.27, "yoy_pct": 6.83}, "Claims Paid": {"value": 114179.33, "value_fmt": "$114K", "mom_pct": 0.49, "yoy_pct": 8.93}, "Claims Count": {"value": 71.0, "value_fmt": "71", "mom_pct": 5.97, "yoy_pct": 14.52}, "Active Members": {"value": 6170.0, "value_fmt": "6,170", "mom_pct": 2.7, "yoy_pct": 6.27}, "New Enrollments": {"value": 83.0, "value_fmt": "83", "mom_pct": 9.21, "yoy_pct": 27.69}, "Lapses": {"value": 42.0, "value_fmt": "42", "mom_pct": 2.44, "yoy_pct": 31.25}, "Medical Loss Ratio %": {"value": 90.8775, "value_fmt": "90.88", "mom_pct": 0.0, "yoy_pct": 2.0}, "Admin Expense": {"value": 10856.36, "value_fmt": "$11K", "mom_pct": 0.9, "yoy_pct": 7.29}, "Net Income": {"value": -2688.05, "value_fmt": "$-3K", "mom_pct": -24.84, "yoy_pct": 565.54}, "Avg Claim": {"value": 1688.36, "value_fmt": "$2K", "mom_pct": -6.87, "yoy_pct": -5.9}, "Prior Auth Requests": {"value": 13.0, "value_fmt": "13", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 63.0, "value_fmt": "63", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.9983, "value_fmt": "4.00", "mom_pct": -0.94, "yoy_pct": -1.75}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}}, "Age_Group": {"18-34": {"Premiums": {"value": 77485.33, "value_fmt": "$77K", "mom_pct": 3.29, "yoy_pct": 5.05}, "Claims Paid": {"value": 46528.97, "value_fmt": "$47K", "mom_pct": 2.28, "yoy_pct": 4.15}, "Claims Count": {"value": 32.0, "value_fmt": "32", "mom_pct": 3.23, "yoy_pct": 3.23}, "Active Members": {"value": 10630.0, "value_fmt": "10,630", "mom_pct": 2.51, "yoy_pct": 4.99}, "New Enrollments": {"value": 130.0, "value_fmt": "130", "mom_pct": -0.76, "yoy_pct": 12.07}, "Lapses": {"value": 76.0, "value_fmt": "76", "mom_pct": 18.75, "yoy_pct": 22.58}, "Medical Loss Ratio %": {"value": 60.086, "value_fmt": "60.09", "mom_pct": 0.0, "yoy_pct": 0.14}, "Admin Expense": {"value": 7076.46, "value_fmt": "$7K", "mom_pct": 3.58, "yoy_pct": 5.26}, "Net Income": {"value": 23879.9, "value_fmt": "$24K", "mom_pct": 5.23, "yoy_pct": 6.77}, "Avg Claim": {"value": 1461.7473, "value_fmt": "$1K", "mom_pct": -1.94, "yoy_pct": 0.33}, "Prior Auth Requests": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 115.0, "value_fmt": "115", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.0203, "value_fmt": "4.02", "mom_pct": 0.74, "yoy_pct": 0.37}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "35-54": {"Premiums": {"value": 112209.83, "value_fmt": "$112K", "mom_pct": 2.21, "yoy_pct": 6.0}, "Claims Paid": {"value": 103006.34, "value_fmt": "$103K", "mom_pct": 0.98, "yoy_pct": 13.9}, "Claims Count": {"value": 86.0, "value_fmt": "86", "mom_pct": 2.38, "yoy_pct": 21.13}, "Active Members": {"value": 9411.0, "value_fmt": "9,411", "mom_pct": 1.43, "yoy_pct": 5.58}, "New Enrollments": {"value": 129.0, "value_fmt": "129", "mom_pct": 12.17, "yoy_pct": 20.56}, "Lapses": {"value": 65.0, "value_fmt": "65", "mom_pct": 3.17, "yoy_pct": 27.45}, "Medical Loss Ratio %": {"value": 92.432, "value_fmt": "92.43", "mom_pct": -0.0, "yoy_pct": 8.25}, "Admin Expense": {"value": 10230.04, "value_fmt": "$10K", "mom_pct": 2.4, "yoy_pct": 8.05}, "Net Income": {"value": -1026.54, "value_fmt": "$-1K", "mom_pct": -53.52, "yoy_pct": -117.23}, "Avg Claim": {"value": 1209.6257, "value_fmt": "$1K", "mom_pct": -3.68, "yoy_pct": -7.0}, "Prior Auth Requests": {"value": 15.0, "value_fmt": "15", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 103.0, "value_fmt": "103", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 4.061, "value_fmt": "4.06", "mom_pct": -0.28, "yoy_pct": 2.12}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "55-64": {"Premiums": {"value": 120935.93, "value_fmt": "$121K", "mom_pct": -0.19, "yoy_pct": 6.81}, "Claims Paid": {"value": 126030.84, "value_fmt": "$126K", "mom_pct": 0.35, "yoy_pct": 6.38}, "Claims Count": {"value": 113.0, "value_fmt": "113", "mom_pct": 4.63, "yoy_pct": 6.6}, "Active Members": {"value": 6298.0, "value_fmt": "6,298", "mom_pct": -0.63, "yoy_pct": 6.24}, "New Enrollments": {"value": 75.0, "value_fmt": "75", "mom_pct": -6.25, "yoy_pct": 2.74}, "Lapses": {"value": 35.0, "value_fmt": "35", "mom_pct": -12.5, "yoy_pct": 0.0}, "Medical Loss Ratio %": {"value": 105.0, "value_fmt": "105.00", "mom_pct": 0.0, "yoy_pct": 0.0}, "Admin Expense": {"value": 10893.52, "value_fmt": "$11K", "mom_pct": 0.38, "yoy_pct": 6.51}, "Net Income": {"value": -15988.47, "value_fmt": "$-16K", "mom_pct": 4.67, "yoy_pct": 3.35}, "Avg Claim": {"value": 1135.7493, "value_fmt": "$1K", "mom_pct": -2.52, "yoy_pct": -2.01}, "Prior Auth Requests": {"value": 25.0, "value_fmt": "25", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 59.0, "value_fmt": "59", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.922, "value_fmt": "3.92", "mom_pct": -1.87, "yoy_pct": -1.02}, "Prior Auth Approval %": {"value": 0.0, "value_fmt": "0.0%", "mom_pct": null, "yoy_pct": null}}, "65+": {"Premiums": {"value": 115948.09, "value_fmt": "$116K", "mom_pct": 0.1, "yoy_pct": 4.3}, "Claims Paid": {"value": 121458.42, "value_fmt": "$121K", "mom_pct": -0.29, "yoy_pct": 4.1}, "Claims Count": {"value": 107.0, "value_fmt": "107", "mom_pct": -0.93, "yoy_pct": 3.88}, "Active Members": {"value": 4631.0, "value_fmt": "4,631", "mom_pct": 0.13, "yoy_pct": 4.49}, "New Enrollments": {"value": 51.0, "value_fmt": "51", "mom_pct": -1.92, "yoy_pct": 18.6}, "Lapses": {"value": 20.0, "value_fmt": "20", "mom_pct": -20.0, "yoy_pct": -4.76}, "Medical Loss Ratio %": {"value": 105.0, "value_fmt": "105.00", "mom_pct": 0.0, "yoy_pct": 0.0}, "Admin Expense": {"value": 10552.92, "value_fmt": "$11K", "mom_pct": -0.16, "yoy_pct": 5.53}, "Net Income": {"value": -16063.26, "value_fmt": "$-16K", "mom_pct": -2.9, "yoy_pct": 3.57}, "Avg Claim": {"value": 1158.2773, "value_fmt": "$1K", "mom_pct": 0.32, "yoy_pct": -0.47}, "Prior Auth Requests": {"value": 25.0, "value_fmt": "25", "mom_pct": null, "yoy_pct": null}, "Prior Auth Approved": {"value": 2.0, "value_fmt": "2", "mom_pct": null, "yoy_pct": null}, "Readmissions": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Preventive Visits": {"value": 43.0, "value_fmt": "43", "mom_pct": null, "yoy_pct": null}, "Member Satisfaction": {"value": 3.9767, "value_fmt": "3.98", "mom_pct": -3.6, "yoy_pct": -2.51}, "Prior Auth Approval %": {"value": 8.0, "value_fmt": "800.0%", "mom_pct": null, "yoy_pct": null}}}};
+var ARIA_SC_MEMBER_SERIES = {"State": {"California": {"Premiums": [86832.61], "Claims Paid": [81105.39], "Claims Count": [72.0], "Active Members": [6255.0], "New Enrollments": [83.0], "Lapses": [42.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [7924.53], "Net Income": [-2197.35], "Avg Claim": [1213.3475], "Prior Auth Requests": [16.0], "Prior Auth Approved": [2.0], "Readmissions": [0.0], "Preventive Visits": [68.0], "Member Satisfaction": [3.9435], "Prior Auth Approval %": [12.5]}, "Florida": {"Premiums": [71929.25], "Claims Paid": [66431.95], "Claims Count": [54.0], "Active Members": [5247.0], "New Enrollments": [65.0], "Lapses": [26.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [6566.57], "Net Income": [-1069.26], "Avg Claim": [1288.7955], "Prior Auth Requests": [10.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [54.0], "Member Satisfaction": [3.893], "Prior Auth Approval %": [0.0]}, "Illinois": {"Premiums": [60347.68], "Claims Paid": [56815.15], "Claims Count": [50.0], "Active Members": [4395.0], "New Enrollments": [49.0], "Lapses": [28.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [5462.5], "Net Income": [-1929.99], "Avg Claim": [1165.6685], "Prior Auth Requests": [7.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [40.0], "Member Satisfaction": [3.935], "Prior Auth Approval %": [0.0]}, "New York": {"Premiums": [77881.5], "Claims Paid": [71568.61], "Claims Count": [61.0], "Active Members": [5700.0], "New Enrollments": [65.0], "Lapses": [44.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [7050.09], "Net Income": [-737.22], "Avg Claim": [1281.1495], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [62.0], "Member Satisfaction": [4.1085], "Prior Auth Approval %": [0.0]}, "Ohio": {"Premiums": [53452.39], "Claims Paid": [50032.09], "Claims Count": [40.0], "Active Members": [3870.0], "New Enrollments": [46.0], "Lapses": [25.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [4882.66], "Net Income": [-1462.36], "Avg Claim": [1262.186], "Prior Auth Requests": [5.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [37.0], "Member Satisfaction": [4.092], "Prior Auth Approval %": [0.0]}, "Texas": {"Premiums": [76135.75], "Claims Paid": [71071.38], "Claims Count": [61.0], "Active Members": [5503.0], "New Enrollments": [77.0], "Lapses": [31.0], "Medical Loss Ratio %": [90.6295], "Admin Expense": [6866.59], "Net Income": [-1802.19], "Avg Claim": [1236.9525], "Prior Auth Requests": [14.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [59.0], "Member Satisfaction": [3.998], "Prior Auth Approval %": [0.0]}}, "Plan_Type": {"HDHP": {"Premiums": [66493.11], "Claims Paid": [60684.42], "Claims Count": [65.0], "Active Members": [6275.0], "New Enrollments": [74.0], "Lapses": [38.0], "Medical Loss Ratio %": [88.4575], "Admin Expense": [7485.44], "Net Income": [-1676.78], "Avg Claim": [995.6954], "Prior Auth Requests": [14.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [65.0], "Member Satisfaction": [4.0083], "Prior Auth Approval %": [0.0]}, "HMO": {"Premiums": [89211.14], "Claims Paid": [82707.15], "Claims Count": [68.0], "Active Members": [6159.0], "New Enrollments": [76.0], "Lapses": [39.0], "Medical Loss Ratio %": [90.07], "Admin Expense": [8861.35], "Net Income": [-2357.35], "Avg Claim": [1311.5646], "Prior Auth Requests": [11.0], "Prior Auth Approved": [1.0], "Readmissions": [0.0], "Preventive Visits": [64.0], "Member Satisfaction": [4.05], "Prior Auth Approval %": [9.0909]}, "Medicaid": {"Premiums": [38068.53], "Claims Paid": [35833.45], "Claims Count": [65.0], "Active Members": [6152.0], "New Enrollments": [78.0], "Lapses": [43.0], "Medical Loss Ratio %": [92.3275], "Admin Expense": [2706.21], "Net Income": [-471.12], "Avg Claim": [585.4617], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [65.0], "Member Satisfaction": [4.0329], "Prior Auth Approval %": [0.0]}, "Medicare Advantage": {"Premiums": [110458.7], "Claims Paid": [103620.22], "Claims Count": [69.0], "Active Members": [6214.0], "New Enrollments": [74.0], "Lapses": [34.0], "Medical Loss Ratio %": [91.415], "Admin Expense": [8843.58], "Net Income": [-2005.07], "Avg Claim": [1625.6679], "Prior Auth Requests": [14.0], "Prior Auth Approved": [1.0], "Readmissions": [0.0], "Preventive Visits": [63.0], "Member Satisfaction": [3.8854], "Prior Auth Approval %": [7.1429]}, "PPO": {"Premiums": [122347.7], "Claims Paid": [114179.33], "Claims Count": [71.0], "Active Members": [6170.0], "New Enrollments": [83.0], "Lapses": [42.0], "Medical Loss Ratio %": [90.8775], "Admin Expense": [10856.36], "Net Income": [-2688.05], "Avg Claim": [1688.36], "Prior Auth Requests": [13.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [63.0], "Member Satisfaction": [3.9983], "Prior Auth Approval %": [0.0]}}, "Age_Group": {"18-34": {"Premiums": [77485.33], "Claims Paid": [46528.97], "Claims Count": [32.0], "Active Members": [10630.0], "New Enrollments": [130.0], "Lapses": [76.0], "Medical Loss Ratio %": [60.086], "Admin Expense": [7076.46], "Net Income": [23879.9], "Avg Claim": [1461.7473], "Prior Auth Requests": [0.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [115.0], "Member Satisfaction": [4.0203], "Prior Auth Approval %": [0.0]}, "35-54": {"Premiums": [112209.83], "Claims Paid": [103006.34], "Claims Count": [86.0], "Active Members": [9411.0], "New Enrollments": [129.0], "Lapses": [65.0], "Medical Loss Ratio %": [92.432], "Admin Expense": [10230.04], "Net Income": [-1026.54], "Avg Claim": [1209.6257], "Prior Auth Requests": [15.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [103.0], "Member Satisfaction": [4.061], "Prior Auth Approval %": [0.0]}, "55-64": {"Premiums": [120935.93], "Claims Paid": [126030.84], "Claims Count": [113.0], "Active Members": [6298.0], "New Enrollments": [75.0], "Lapses": [35.0], "Medical Loss Ratio %": [105.0], "Admin Expense": [10893.52], "Net Income": [-15988.47], "Avg Claim": [1135.7493], "Prior Auth Requests": [25.0], "Prior Auth Approved": [0.0], "Readmissions": [0.0], "Preventive Visits": [59.0], "Member Satisfaction": [3.922], "Prior Auth Approval %": [0.0]}, "65+": {"Premiums": [115948.09], "Claims Paid": [121458.42], "Claims Count": [107.0], "Active Members": [4631.0], "New Enrollments": [51.0], "Lapses": [20.0], "Medical Loss Ratio %": [105.0], "Admin Expense": [10552.92], "Net Income": [-16063.26], "Avg Claim": [1158.2773], "Prior Auth Requests": [25.0], "Prior Auth Approved": [2.0], "Readmissions": [0.0], "Preventive Visits": [43.0], "Member Satisfaction": [3.9767], "Prior Auth Approval %": [8.0]}}};
+var ARIA_SC_ORIG_SERIES   = {"Claims Count": [338.0], "Avg Claim": [1241.3499], "Prior Auth Requests": [65.0], "Prior Auth Approval %": [3.0769]};
+var ARIA_SC_ORIG_LABELS   = {"Claims Count": ["2026-06-15"], "Avg Claim": ["2026-06-15"], "Prior Auth Requests": ["2026-06-15"], "Prior Auth Approval %": ["2026-06-15"]};
+
+/* format a raw pct number → {text, color} */
+function _ariaPct(p) {
+    if (p === null || p === undefined) return {text:'—', color:'#888'};
+    var s = p >= 0 ? '▲' : '▼';
+    var c = p >= 0 ? '#34D399' : '#F87171';
+    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
+}
+
+function ariaFilter(sel) {
+    var dim = sel.getAttribute('data-dim');
+    var val = sel.value;
+    var mData = (val === 'All') ? null :
+                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
+    var mSeries = (val === 'All') ? null :
+                  ((ARIA_SC_MEMBER_SERIES[dim] || {})[val] || null);
+
+    ARIA_KPI_ORDER.forEach(function(kn, i) {
+        var kd = mData ? (mData[kn] || null) : null;
+
+        /* ── main value ── */
+        var ve = document.getElementById('sc_kv_' + i);
+        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
+                                    : ve.getAttribute('data-orig');
+
+        /* ── MoM ── */
+        var me = document.getElementById('sc_md_' + i);
+        if (me) {
+            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
+                var rm = _ariaPct(kd.mom_pct);
+                me.textContent = rm.text + ' MoM';
+                me.style.color = rm.color;
+            } else {
+                me.textContent = me.getAttribute('data-orig') || '— MoM';
+                me.style.color = me.getAttribute('data-oc') || '#888';
+            }
+        }
+
+        /* ── YoY ── */
+        var ye = document.getElementById('sc_yd_' + i);
+        if (ye) {
+            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
+                var ry = _ariaPct(kd.yoy_pct);
+                ye.textContent = ry.text + ' YoY';
+                ye.style.color = ry.color;
+            } else {
+                ye.textContent = ye.getAttribute('data-orig') || '— YoY';
+                ye.style.color = ye.getAttribute('data-oc') || '#888';
+            }
+        }
+
+        /* ── sparkline ── */
+        var chart = ARIA_CHARTS['sc_spark_' + i];
+        if (chart) {
+            var usingMember = (mSeries && mSeries[kn] && mSeries[kn].length > 1);
+            var newSeries = usingMember ? mSeries[kn] : (ARIA_SC_ORIG_SERIES[kn] || null);
+            if (newSeries && newSeries.length > 1) {
+                chart.data.datasets[0].data = newSeries;
+                /* Restore original date labels on "All"; use indices for member series */
+                var origLbls = ARIA_SC_ORIG_LABELS[kn];
+                chart.data.labels = (!usingMember && origLbls && origLbls.length > 0)
+                    ? origLbls
+                    : newSeries.map(function(_, j) { return j; });
+                chart.update('none');
+            }
+        }
+    });
+}
+
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+});
+</script>
+</body>
+</html>
