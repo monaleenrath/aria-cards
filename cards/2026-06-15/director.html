@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Region', 'Therapeutic_Area', 'Drug_Category'] first_dim=Therapeutic_Area tmpl=scorecard | yoy_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | df_shape=[65760, 19] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('COGS', 'COGS_USD', 'sum', ''), ('Gross Profit', 'Gross_Profit_USD', 'sum', ''), ('Margin %', 'Margin_Pct', 'mean', ''), ('R&D Spend', 'R&D_Spend_USD', 'sum', ''), ('Marketing Spend', 'Marketing_Spend_USD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('New Prescriptions', 'New_Prescriptions', 'sum', ''), ('Repeat Prescriptions', 'Repeat_Prescriptions', 'sum', ''), ('Avg Selling Price', 'Avg_Selling_Price_USD', 'mean', ''), ('Market Share %', 'Market_Share_Pct', 'mean', ''), ('Patient Adherence %', 'Patient_Adherence_Pct', 'mean', ''), ('Returns', 'Returns_USD', 'sum', ''), ('Samples Distributed', 'Samples_Distributed', 'sum', ''), ('Adverse Events', 'Adverse_Events_Count', 'sum', ''), ('Gross Margin %', '?', 'ratio', 'Gross_Profit_USD')] | yoy_summary={'Revenue': 12, 'COGS': 12, 'Gross Profit': 12, 'Margin %': 12, 'R&D Spend': 12, 'Marketing Spend': 12, 'Units Sold': 12, 'New Prescriptions': 12, 'Repeat Prescriptions': 12, 'Avg Selling Price': 12, 'Market Share %': 12, 'Patient Adherence %': 12, 'Returns': 12, 'Samples Distributed': 12, 'Adverse Events': 12, 'Gross Margin %': 12} | yoy_diag.effective_dims=['Region', 'Therapeutic_Area', 'Drug_Category'] | yoy_diag.kpis=['Revenue', 'COGS', 'Gross Profit', 'Margin %', 'R&D Spend', 'Marketing Spend', 'Units Sold', 'New Prescriptions', 'Repeat Prescriptions', 'Avg Selling Price', 'Market Share %', 'Patient Adherence %', 'Returns', 'Samples Distributed', 'Adverse Events', 'Gross Margin %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-15 | yoy_diag.curr_df_len=900 yoy_diag.prior_df_len=900 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Region yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=4 yoy_diag.spot_agg_sample=[('Asia Pacific', 42490424.4), ('Europe', 58511714.19), ('Latin America', 23468184.61)] | df_cat_cols={'Region': 'str/4', 'Therapeutic_Area': 'str/5', 'Drug_Category': 'str/3'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#F5F0E8; }
+body {
+    background:#F5F0E8; color:#1A1410;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#F5F0E8;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #D0C8BC; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#8B7D70; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#8B5CF6; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#8B7D70; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#8B7D70; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#8B5CF6; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#FFFFFF; border:1px solid #D0C8BC;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#FFFFFF; border:1px solid #D0C8BC;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#8B7D70; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#1A1410;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#4A3F35; line-height:1.6; }
+.narr strong { color:#1A1410; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#8B7D70; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#FFFFFF; color:#1A1410;
+    border:1px solid #D0C8BC; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#8B5CF622; border:1px solid #8B5CF655;
+    color:#8B5CF6; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#8B5CF615; border:1px solid #8B5CF640;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#8B5CF6; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#1A1410;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#8B7D70; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#EDE8DF; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #D0C8BC; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#8B5CF6; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#4A3F35; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85;
+                line-height:1.6; overflow:visible; white-space:normal; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #D0C8BC;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#1A1410;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#8B7D70; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#4A3F35; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #D0C8BC; color:#8B7D70;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#8B5CF620; border-color:#8B5CF680; color:#8B5CF6;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span>
+  </div>
+  <div class="mast-mid">DIRECTOR  ·  LEADERSHIP BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">MON JUN 15 2026</div>
+      <span class="date-range"> &nbsp;Jun 01 → Jun 15 </span>
+    </div>
+  </div>
+</div>
+  <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Therapeutic_Area" onchange="ariaFilter(this)"><option value="All">Therapeutic_Area: All</option><option value="Oncology">Oncology</option><option value="Cardiology">Cardiology</option><option value="Immunology">Immunology</option><option value="Neurology">Neurology</option><option value="Respiratory">Respiratory</option></select> <select class="filter-sel" data-dim="Region" onchange="ariaFilter(this)"><option value="All">Region: All</option><option value="North America">North America</option><option value="Europe">Europe</option><option value="Asia Pacific">Asia Pacific</option><option value="Latin America">Latin America</option></select> <select class="filter-sel" data-dim="Drug_Category" onchange="ariaFilter(this)"><option value="All">Drug_Category: All</option><option value="Branded">Branded</option><option value="Biosimilar">Biosimilar</option><option value="Generic">Generic</option></select> </div>
+  <div class="sec">Performance Scorecard</div>
+  <div class="kpi-grid-v2">
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#34D399"></div>
+  <div class="kpi-name">Revenue</div>
+  <div class="kpi-val sm" id="sc_kv_0" data-orig="$202,155,429">$202,155,429</div>
+  <div class="kpi-spark-v2"><canvas id="sc_spark_0"></canvas></div>
+  <div class="kpi-d" id="sc_md_0" data-orig="▲ 4.8% MoM" data-oc="#34D399" style="color:#34D399">▲ 4.8% MoM</div>
+  <div class="kpi-d" id="sc_yd_0" data-orig="▲ 10.5% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.5% YoY</div>
+  
+  <div style="font-size:8px;font-weight:700;color:#ef4444;margin-top:2px">62% of target</div>
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#34D399"></div>
+  <div class="kpi-name">Gross Profit</div>
+  <div class="kpi-val sm" id="sc_kv_1" data-orig="$118,439,731">$118,439,731</div>
+  <div class="kpi-spark-v2"><canvas id="sc_spark_1"></canvas></div>
+  <div class="kpi-d" id="sc_md_1" data-orig="▲ 5.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 5.0% MoM</div>
+  <div class="kpi-d" id="sc_yd_1" data-orig="▲ 10.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 10.4% YoY</div>
+  
+  <div style="font-size:8px;font-weight:700;color:#ef4444;margin-top:2px">62% of target</div>
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#FBBF24"></div>
+  <div class="kpi-name">Market Share %</div>
+  <div class="kpi-val " id="sc_kv_2" data-orig="20.06">20.06</div>
+  <div class="kpi-spark-v2"><canvas id="sc_spark_2"></canvas></div>
+  <div class="kpi-d" id="sc_md_2" data-orig="▼ 0.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.1% MoM</div>
+  <div class="kpi-d" id="sc_yd_2" data-orig="▲ 1.8% YoY" data-oc="#34D399" style="color:#34D399">▲ 1.8% YoY</div>
+  
+  <div style="font-size:8px;font-weight:700;color:#f59e0b;margin-top:2px">89% of target</div>
+</div>
+<div class="kpi-tile-v2">
+  <div class="kpi-rag" style="background:#34D399"></div>
+  <div class="kpi-name">New Prescriptions</div>
+  <div class="kpi-val " id="sc_kv_3" data-orig="457,014">457,014</div>
+  <div class="kpi-spark-v2"><canvas id="sc_spark_3"></canvas></div>
+  <div class="kpi-d" id="sc_md_3" data-orig="▲ 5.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 5.0% MoM</div>
+  <div class="kpi-d" id="sc_yd_3" data-orig="▲ 11.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 11.4% YoY</div>
+  
+  <div style="font-size:8px;font-weight:700;color:#ef4444;margin-top:2px">56% of target</div>
+</div></div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #D0C8BC;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
+    <div class="sec">Operational Status</div>
+    <div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.5%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 5.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.4%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Market Share %: ▼ 0.1% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 1.8%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">New Prescriptions: ▲ 5.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 11.4%</span></div>
+    <div class="narr">Revenue reached $202,155,429 MTD, up 4.8% MoM, achieving 62.2% of target. North America Region boosted Revenue by $3,940,061 (5.3% MoM). Director should assess if the slight decline in average selling price is a strategic trade-off for volume or a market pressure requiring pricin</div>
+  </div>
+  <div style="flex:1;padding:0 14px;border-right:1px solid #D0C8BC">
+    <div class="sec">What Moved the Number</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#8B5CF6;margin-right:4px">▶</span>Region → North America boosted Revenue by $3.9M (5.3% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#8B5CF6;margin-right:4px">▶</span>Therapeutic_Area → Oncology lifted Revenue by $2.4M (4.9% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#8B5CF6;margin-right:4px">▶</span>Drug_Category → Branded elevated Revenue by $5.5M (5.4% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#8B5CF6;margin-right:4px">▶</span>Units Sold ▲ + Avg Selling Price ▼ indicates transaction count growing but basket shrinking.</div>
+  </div>
+  <div style="flex:1;padding-left:14px">
+    <div class="sec">Team Action</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#8B5CF6;font-weight:700;margin-right:5px">▶</span>Review pricing strategy and regional sales incentives. Owner: Commercial and Finance. Deadline: End of next week. Success metric: Stabilize Avg Selling Price MoM and improve Market Share % by 0.5 points.</div>
+  </div>
+</div>
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">Director will ask if the average selling price dip is concerning; it&#x27;s a slight dip, likely a volume-driven trade-off, but warrants monitoring by Commercial. New Prescriptions are up 11.4% YoY, showing strong product demand.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_KPI_ORDER        = ["Revenue", "Gross Profit", "Market Share %", "New Prescriptions"];
+var ARIA_DIM_MEMBER_KPIS  = {"Region": {"Asia Pacific": {"Revenue": {"value": 42490424.4, "value_fmt": "$42.5M", "mom_pct": 4.13, "yoy_pct": 8.71}, "COGS": {"value": 17630942.58, "value_fmt": "$17.6M", "mom_pct": 4.13, "yoy_pct": 9.39}, "Gross Profit": {"value": 24859481.77, "value_fmt": "$24.9M", "mom_pct": 4.12, "yoy_pct": 8.23}, "Margin %": {"value": 53.9603, "value_fmt": "53.96", "mom_pct": -0.02, "yoy_pct": -0.32}, "R&D Spend": {"value": 5625151.71, "value_fmt": "$5.6M", "mom_pct": 5.25, "yoy_pct": 9.61}, "Marketing Spend": {"value": 3636160.88, "value_fmt": "$3.6M", "mom_pct": 4.07, "yoy_pct": 6.93}, "Units Sold": {"value": 384921.0, "value_fmt": "384,921", "mom_pct": 4.33, "yoy_pct": 9.55}, "New Prescriptions": {"value": 95920.0, "value_fmt": "95,920", "mom_pct": 3.14, "yoy_pct": 10.7}, "Repeat Prescriptions": {"value": 288035.0, "value_fmt": "288,035", "mom_pct": 3.87, "yoy_pct": 10.09}, "Avg Selling Price": {"value": 140.3109, "value_fmt": "$140", "mom_pct": -0.11, "yoy_pct": 0.15}, "Market Share %": {"value": 20.1004, "value_fmt": "20.10", "mom_pct": 0.06, "yoy_pct": 2.01}, "Patient Adherence %": {"value": 71.022, "value_fmt": "71.02", "mom_pct": -2.44, "yoy_pct": -1.78}, "Returns": {"value": 654402.18, "value_fmt": "$654K", "mom_pct": 9.53, "yoy_pct": 7.49}, "Samples Distributed": {"value": 4350.0, "value_fmt": "4,350", "mom_pct": 0.3, "yoy_pct": 9.24}, "Adverse Events": {"value": 577.0, "value_fmt": "577", "mom_pct": 10.96, "yoy_pct": 5.1}, "Gross Margin %": {"value": 58.5061, "value_fmt": "5850.6%", "mom_pct": -0.01, "yoy_pct": -0.44}}, "Europe": {"Revenue": {"value": 58511714.19, "value_fmt": "$58.5M", "mom_pct": 4.66, "yoy_pct": 11.71}, "COGS": {"value": 24254999.71, "value_fmt": "$24.3M", "mom_pct": 4.64, "yoy_pct": 11.87}, "Gross Profit": {"value": 34256714.4, "value_fmt": "$34.3M", "mom_pct": 4.68, "yoy_pct": 11.6}, "Margin %": {"value": 53.9853, "value_fmt": "53.99", "mom_pct": 0.09, "yoy_pct": -0.05}, "R&D Spend": {"value": 7715603.56, "value_fmt": "$7.7M", "mom_pct": 5.68, "yoy_pct": 12.47}, "Marketing Spend": {"value": 5015771.36, "value_fmt": "$5.0M", "mom_pct": 3.31, "yoy_pct": 11.77}, "Units Sold": {"value": 527974.0, "value_fmt": "527,974", "mom_pct": 4.85, "yoy_pct": 11.66}, "New Prescriptions": {"value": 131952.0, "value_fmt": "131,952", "mom_pct": 5.15, "yoy_pct": 12.75}, "Repeat Prescriptions": {"value": 393491.0, "value_fmt": "393,491", "mom_pct": 4.96, "yoy_pct": 11.64}, "Avg Selling Price": {"value": 139.6136, "value_fmt": "$140", "mom_pct": -0.61, "yoy_pct": -0.29}, "Market Share %": {"value": 20.062, "value_fmt": "20.06", "mom_pct": 0.11, "yoy_pct": 1.99}, "Patient Adherence %": {"value": 71.8868, "value_fmt": "71.89", "mom_pct": 0.66, "yoy_pct": -0.18}, "Returns": {"value": 875317.91, "value_fmt": "$875K", "mom_pct": 6.23, "yoy_pct": 8.09}, "Samples Distributed": {"value": 6040.0, "value_fmt": "6,040", "mom_pct": 5.3, "yoy_pct": 11.58}, "Adverse Events": {"value": 836.0, "value_fmt": "836", "mom_pct": 13.43, "yoy_pct": 20.29}, "Gross Margin %": {"value": 58.5468, "value_fmt": "5854.7%", "mom_pct": 0.01, "yoy_pct": -0.1}}, "Latin America": {"Revenue": {"value": 23468184.61, "value_fmt": "$23.5M", "mom_pct": 4.85, "yoy_pct": 10.83}, "COGS": {"value": 9713269.52, "value_fmt": "$9.7M", "mom_pct": 4.79, "yoy_pct": 10.61}, "Gross Profit": {"value": 13754915.11, "value_fmt": "$13.8M", "mom_pct": 4.9, "yoy_pct": 10.99}, "Margin %": {"value": 54.0136, "value_fmt": "54.01", "mom_pct": -0.08, "yoy_pct": -0.04}, "R&D Spend": {"value": 3067648.71, "value_fmt": "$3.1M", "mom_pct": 4.74, "yoy_pct": 8.89}, "Marketing Spend": {"value": 2028642.86, "value_fmt": "$2.0M", "mom_pct": 5.22, "yoy_pct": 12.38}, "Units Sold": {"value": 212441.0, "value_fmt": "212,441", "mom_pct": 4.99, "yoy_pct": 9.61}, "New Prescriptions": {"value": 52663.0, "value_fmt": "52,663", "mom_pct": 2.83, "yoy_pct": 9.05}, "Repeat Prescriptions": {"value": 160682.0, "value_fmt": "160,682", "mom_pct": 6.8, "yoy_pct": 10.94}, "Avg Selling Price": {"value": 140.2242, "value_fmt": "$140", "mom_pct": -0.7, "yoy_pct": 0.75}, "Market Share %": {"value": 20.0203, "value_fmt": "20.02", "mom_pct": -0.33, "yoy_pct": 1.55}, "Patient Adherence %": {"value": 71.9505, "value_fmt": "71.95", "mom_pct": 0.24, "yoy_pct": -0.17}, "Returns": {"value": 374634.16, "value_fmt": "$375K", "mom_pct": 9.26, "yoy_pct": 18.44}, "Samples Distributed": {"value": 2334.0, "value_fmt": "2,334", "mom_pct": 4.29, "yoy_pct": 13.52}, "Adverse Events": {"value": 244.0, "value_fmt": "244", "mom_pct": 2.95, "yoy_pct": 8.93}, "Gross Margin %": {"value": 58.6109, "value_fmt": "5861.1%", "mom_pct": 0.04, "yoy_pct": 0.14}}, "North America": {"Revenue": {"value": 77685105.89, "value_fmt": "$77.7M", "mom_pct": 5.34, "yoy_pct": 10.37}, "COGS": {"value": 32116485.95, "value_fmt": "$32.1M", "mom_pct": 4.78, "yoy_pct": 10.16}, "Gross Profit": {"value": 45568619.85, "value_fmt": "$45.6M", "mom_pct": 5.75, "yoy_pct": 10.53}, "Margin %": {"value": 54.0084, "value_fmt": "54.01", "mom_pct": 0.28, "yoy_pct": 0.07}, "R&D Spend": {"value": 10212956.17, "value_fmt": "$10.2M", "mom_pct": 6.09, "yoy_pct": 11.09}, "Marketing Spend": {"value": 6800228.7, "value_fmt": "$6.8M", "mom_pct": 6.41, "yoy_pct": 13.9}, "Units Sold": {"value": 700246.0, "value_fmt": "700,246", "mom_pct": 5.08, "yoy_pct": 10.29}, "New Prescriptions": {"value": 176479.0, "value_fmt": "176,479", "mom_pct": 6.58, "yoy_pct": 11.61}, "Repeat Prescriptions": {"value": 526570.0, "value_fmt": "526,570", "mom_pct": 4.84, "yoy_pct": 10.42}, "Avg Selling Price": {"value": 140.2759, "value_fmt": "$140", "mom_pct": -0.48, "yoy_pct": 0.44}, "Market Share %": {"value": 20.0454, "value_fmt": "20.05", "mom_pct": -0.38, "yoy_pct": 1.83}, "Patient Adherence %": {"value": 71.3786, "value_fmt": "71.38", "mom_pct": -1.54, "yoy_pct": -2.1}, "Returns": {"value": 1161354.05, "value_fmt": "$1.2M", "mom_pct": 4.72, "yoy_pct": 16.98}, "Samples Distributed": {"value": 8367.0, "value_fmt": "8,367", "mom_pct": 10.92, "yoy_pct": 17.07}, "Adverse Events": {"value": 1122.0, "value_fmt": "1,122", "mom_pct": 14.61, "yoy_pct": 15.31}, "Gross Margin %": {"value": 58.6581, "value_fmt": "5865.8%", "mom_pct": 0.38, "yoy_pct": 0.14}}}, "Therapeutic_Area": {"Cardiology": {"Revenue": {"value": 42975955.72, "value_fmt": "$43.0M", "mom_pct": 5.03, "yoy_pct": 10.27}, "COGS": {"value": 17856453.63, "value_fmt": "$17.9M", "mom_pct": 4.95, "yoy_pct": 11.27}, "Gross Profit": {"value": 25119502.06, "value_fmt": "$25.1M", "mom_pct": 5.09, "yoy_pct": 9.56}, "Margin %": {"value": 53.9057, "value_fmt": "53.91", "mom_pct": 0.09, "yoy_pct": -0.56}, "R&D Spend": {"value": 5649820.74, "value_fmt": "$5.6M", "mom_pct": 5.73, "yoy_pct": 10.99}, "Marketing Spend": {"value": 3685491.25, "value_fmt": "$3.7M", "mom_pct": 3.73, "yoy_pct": 10.92}, "Units Sold": {"value": 386035.0, "value_fmt": "386,035", "mom_pct": 4.2, "yoy_pct": 9.44}, "New Prescriptions": {"value": 97388.0, "value_fmt": "97,388", "mom_pct": 6.01, "yoy_pct": 11.54}, "Repeat Prescriptions": {"value": 287374.0, "value_fmt": "287,374", "mom_pct": 4.17, "yoy_pct": 8.99}, "Avg Selling Price": {"value": 140.5289, "value_fmt": "$141", "mom_pct": 0.13, "yoy_pct": 1.16}, "Market Share %": {"value": 20.0624, "value_fmt": "20.06", "mom_pct": -0.02, "yoy_pct": 1.94}, "Patient Adherence %": {"value": 71.7377, "value_fmt": "71.74", "mom_pct": 0.01, "yoy_pct": 0.23}, "Returns": {"value": 683066.48, "value_fmt": "$683K", "mom_pct": 13.01, "yoy_pct": 20.69}, "Samples Distributed": {"value": 4283.0, "value_fmt": "4,283", "mom_pct": 1.32, "yoy_pct": 4.36}, "Adverse Events": {"value": 590.0, "value_fmt": "590", "mom_pct": 11.32, "yoy_pct": 18.95}, "Gross Margin %": {"value": 58.4501, "value_fmt": "5845.0%", "mom_pct": 0.06, "yoy_pct": -0.64}}, "Immunology": {"Revenue": {"value": 41043515.31, "value_fmt": "$41.0M", "mom_pct": 5.51, "yoy_pct": 10.51}, "COGS": {"value": 17019376.74, "value_fmt": "$17.0M", "mom_pct": 5.31, "yoy_pct": 10.8}, "Gross Profit": {"value": 24024138.45, "value_fmt": "$24.0M", "mom_pct": 5.65, "yoy_pct": 10.3}, "Margin %": {"value": 53.9271, "value_fmt": "53.93", "mom_pct": -0.09, "yoy_pct": -0.28}, "R&D Spend": {"value": 5360963.97, "value_fmt": "$5.4M", "mom_pct": 5.53, "yoy_pct": 9.89}, "Marketing Spend": {"value": 3515590.76, "value_fmt": "$3.5M", "mom_pct": 6.21, "yoy_pct": 11.0}, "Units Sold": {"value": 372171.0, "value_fmt": "372,171", "mom_pct": 6.14, "yoy_pct": 10.59}, "New Prescriptions": {"value": 91290.0, "value_fmt": "91,290", "mom_pct": 3.03, "yoy_pct": 10.31}, "Repeat Prescriptions": {"value": 277845.0, "value_fmt": "277,845", "mom_pct": 6.33, "yoy_pct": 10.09}, "Avg Selling Price": {"value": 139.9421, "value_fmt": "$140", "mom_pct": -1.07, "yoy_pct": 0.81}, "Market Share %": {"value": 20.0447, "value_fmt": "20.04", "mom_pct": -0.16, "yoy_pct": 1.88}, "Patient Adherence %": {"value": 71.6119, "value_fmt": "71.61", "mom_pct": -0.75, "yoy_pct": -2.24}, "Returns": {"value": 609585.76, "value_fmt": "$610K", "mom_pct": 4.85, "yoy_pct": 1.47}, "Samples Distributed": {"value": 4108.0, "value_fmt": "4,108", "mom_pct": 2.55, "yoy_pct": 13.67}, "Adverse Events": {"value": 540.0, "value_fmt": "540", "mom_pct": 3.45, "yoy_pct": 3.25}, "Gross Margin %": {"value": 58.5333, "value_fmt": "5853.3%", "mom_pct": 0.13, "yoy_pct": -0.19}}, "Neurology": {"Revenue": {"value": 36618146.62, "value_fmt": "$36.6M", "mom_pct": 4.68, "yoy_pct": 10.14}, "COGS": {"value": 15164179.44, "value_fmt": "$15.2M", "mom_pct": 4.46, "yoy_pct": 10.01}, "Gross Profit": {"value": 21453967.13, "value_fmt": "$21.5M", "mom_pct": 4.84, "yoy_pct": 10.24}, "Margin %": {"value": 54.0301, "value_fmt": "54.03", "mom_pct": 0.36, "yoy_pct": 0.18}, "R&D Spend": {"value": 4826819.48, "value_fmt": "$4.8M", "mom_pct": 6.48, "yoy_pct": 11.46}, "Marketing Spend": {"value": 3190419.0, "value_fmt": "$3.2M", "mom_pct": 4.64, "yoy_pct": 11.95}, "Units Sold": {"value": 328606.0, "value_fmt": "328,606", "mom_pct": 4.48, "yoy_pct": 10.49}, "New Prescriptions": {"value": 82198.0, "value_fmt": "82,198", "mom_pct": 5.25, "yoy_pct": 10.93}, "Repeat Prescriptions": {"value": 247304.0, "value_fmt": "247,304", "mom_pct": 3.8, "yoy_pct": 11.92}, "Avg Selling Price": {"value": 140.0759, "value_fmt": "$140", "mom_pct": -0.32, "yoy_pct": -0.33}, "Market Share %": {"value": 20.0416, "value_fmt": "20.04", "mom_pct": -0.31, "yoy_pct": 1.81}, "Patient Adherence %": {"value": 70.6451, "value_fmt": "70.65", "mom_pct": -2.56, "yoy_pct": -2.44}, "Returns": {"value": 566364.27, "value_fmt": "$566K", "mom_pct": 8.46, "yoy_pct": 18.27}, "Samples Distributed": {"value": 3921.0, "value_fmt": "3,921", "mom_pct": 9.07, "yoy_pct": 18.21}, "Adverse Events": {"value": 510.0, "value_fmt": "510", "mom_pct": 14.09, "yoy_pct": 11.35}, "Gross Margin %": {"value": 58.5883, "value_fmt": "5858.8%", "mom_pct": 0.15, "yoy_pct": 0.09}}, "Oncology": {"Revenue": {"value": 51774967.9, "value_fmt": "$51.8M", "mom_pct": 4.87, "yoy_pct": 10.73}, "COGS": {"value": 21403519.99, "value_fmt": "$21.4M", "mom_pct": 4.81, "yoy_pct": 10.36}, "Gross Profit": {"value": 30371447.97, "value_fmt": "$30.4M", "mom_pct": 4.91, "yoy_pct": 11.0}, "Margin %": {"value": 53.9956, "value_fmt": "54.00", "mom_pct": -0.12, "yoy_pct": 0.04}, "R&D Spend": {"value": 6849539.45, "value_fmt": "$6.8M", "mom_pct": 5.67, "yoy_pct": 11.14}, "Marketing Spend": {"value": 4496134.92, "value_fmt": "$4.5M", "mom_pct": 5.18, "yoy_pct": 11.4}, "Units Sold": {"value": 470830.0, "value_fmt": "470,830", "mom_pct": 5.72, "yoy_pct": 11.04}, "New Prescriptions": {"value": 118842.0, "value_fmt": "118,842", "mom_pct": 6.84, "yoy_pct": 12.49}, "Repeat Prescriptions": {"value": 352159.0, "value_fmt": "352,159", "mom_pct": 5.82, "yoy_pct": 10.13}, "Avg Selling Price": {"value": 139.5205, "value_fmt": "$140", "mom_pct": -1.16, "yoy_pct": -0.27}, "Market Share %": {"value": 20.0514, "value_fmt": "20.05", "mom_pct": -0.15, "yoy_pct": 1.65}, "Patient Adherence %": {"value": 71.4664, "value_fmt": "71.47", "mom_pct": -0.87, "yoy_pct": -1.17}, "Returns": {"value": 763364.03, "value_fmt": "$763K", "mom_pct": 3.35, "yoy_pct": 13.03}, "Samples Distributed": {"value": 5565.0, "value_fmt": "5,565", "mom_pct": 9.27, "yoy_pct": 13.06}, "Adverse Events": {"value": 779.0, "value_fmt": "779", "mom_pct": 23.26, "yoy_pct": 22.87}, "Gross Margin %": {"value": 58.6605, "value_fmt": "5866.0%", "mom_pct": 0.04, "yoy_pct": 0.24}}, "Respiratory": {"Revenue": {"value": 29742843.54, "value_fmt": "$29.7M", "mom_pct": 3.74, "yoy_pct": 10.57}, "COGS": {"value": 12272167.96, "value_fmt": "$12.3M", "mom_pct": 2.96, "yoy_pct": 10.1}, "Gross Profit": {"value": 17470675.52, "value_fmt": "$17.5M", "mom_pct": 4.29, "yoy_pct": 10.9}, "Margin %": {"value": 54.1011, "value_fmt": "54.10", "mom_pct": 0.1, "yoy_pct": 0.19}, "R&D Spend": {"value": 3934216.51, "value_fmt": "$3.9M", "mom_pct": 4.59, "yoy_pct": 11.12}, "Marketing Spend": {"value": 2593167.87, "value_fmt": "$2.6M", "mom_pct": 4.51, "yoy_pct": 13.33}, "Units Sold": {"value": 267940.0, "value_fmt": "267,940", "mom_pct": 2.97, "yoy_pct": 10.61}, "New Prescriptions": {"value": 67296.0, "value_fmt": "67,296", "mom_pct": 2.75, "yoy_pct": 11.62}, "Repeat Prescriptions": {"value": 204096.0, "value_fmt": "204,096", "mom_pct": 3.77, "yoy_pct": 13.99}, "Avg Selling Price": {"value": 140.4633, "value_fmt": "$140", "mom_pct": 0.06, "yoy_pct": -0.04}, "Market Share %": {"value": 20.0851, "value_fmt": "20.09", "mom_pct": -0.05, "yoy_pct": 1.94}, "Patient Adherence %": {"value": 72.3363, "value_fmt": "72.34", "mom_pct": 0.29, "yoy_pct": 0.33}, "Returns": {"value": 443327.76, "value_fmt": "$443K", "mom_pct": 3.91, "yoy_pct": 8.98}, "Samples Distributed": {"value": 3214.0, "value_fmt": "3,214", "mom_pct": 9.58, "yoy_pct": 21.7}, "Adverse Events": {"value": 360.0, "value_fmt": "360", "mom_pct": 5.26, "yoy_pct": 9.09}, "Gross Margin %": {"value": 58.7391, "value_fmt": "5873.9%", "mom_pct": 0.53, "yoy_pct": 0.3}}}, "Drug_Category": {"Biosimilar": {"Revenue": {"value": 58260146.01, "value_fmt": "$58.3M", "mom_pct": 4.22, "yoy_pct": 9.7}, "COGS": {"value": 28018220.08, "value_fmt": "$28.0M", "mom_pct": 4.03, "yoy_pct": 9.93}, "Gross Profit": {"value": 30241925.76, "value_fmt": "$30.2M", "mom_pct": 4.4, "yoy_pct": 9.49}, "Margin %": {"value": 51.9379, "value_fmt": "51.94", "mom_pct": 0.14, "yoy_pct": -0.13}, "R&D Spend": {"value": 5828834.84, "value_fmt": "$5.8M", "mom_pct": 3.97, "yoy_pct": 8.84}, "Marketing Spend": {"value": 3482900.12, "value_fmt": "$3.5M", "mom_pct": 4.07, "yoy_pct": 9.14}, "Units Sold": {"value": 614559.0, "value_fmt": "614,559", "mom_pct": 4.75, "yoy_pct": 9.81}, "New Prescriptions": {"value": 152947.0, "value_fmt": "152,947", "mom_pct": 3.98, "yoy_pct": 11.39}, "Repeat Prescriptions": {"value": 461602.0, "value_fmt": "461,602", "mom_pct": 4.84, "yoy_pct": 10.25}, "Avg Selling Price": {"value": 94.9072, "value_fmt": "$95", "mom_pct": -0.64, "yoy_pct": -0.13}, "Market Share %": {"value": 13.6011, "value_fmt": "13.60", "mom_pct": 0.04, "yoy_pct": 6.33}, "Patient Adherence %": {"value": 69.1829, "value_fmt": "69.18", "mom_pct": -1.59, "yoy_pct": -0.84}, "Returns": {"value": 869460.55, "value_fmt": "$869K", "mom_pct": 13.3, "yoy_pct": 8.35}, "Samples Distributed": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Adverse Events": {"value": 930.0, "value_fmt": "930", "mom_pct": 5.08, "yoy_pct": 8.52}, "Gross Margin %": {"value": 51.9084, "value_fmt": "5190.8%", "mom_pct": 0.17, "yoy_pct": -0.19}}, "Branded": {"Revenue": {"value": 106694884.83, "value_fmt": "$106.7M", "mom_pct": 5.39, "yoy_pct": 10.86}, "COGS": {"value": 34162346.15, "value_fmt": "$34.2M", "mom_pct": 5.51, "yoy_pct": 11.16}, "Gross Profit": {"value": 72532538.75, "value_fmt": "$72.5M", "mom_pct": 5.33, "yoy_pct": 10.71}, "Margin %": {"value": 67.9633, "value_fmt": "67.96", "mom_pct": -0.06, "yoy_pct": -0.11}, "R&D Spend": {"value": 19306020.84, "value_fmt": "$19.3M", "mom_pct": 6.28, "yoy_pct": 11.59}, "Marketing Spend": {"value": 12886901.1, "value_fmt": "$12.9M", "mom_pct": 5.23, "yoy_pct": 12.32}, "Units Sold": {"value": 381486.0, "value_fmt": "381,486", "mom_pct": 6.0, "yoy_pct": 10.58}, "New Prescriptions": {"value": 94908.0, "value_fmt": "94,908", "mom_pct": 6.08, "yoy_pct": 9.98}, "Repeat Prescriptions": {"value": 285721.0, "value_fmt": "285,721", "mom_pct": 6.39, "yoy_pct": 10.65}, "Avg Selling Price": {"value": 280.4326, "value_fmt": "$280", "mom_pct": -0.52, "yoy_pct": 0.44}, "Market Share %": {"value": 26.9619, "value_fmt": "26.96", "mom_pct": -0.22, "yoy_pct": -1.98}, "Patient Adherence %": {"value": 75.7633, "value_fmt": "75.76", "mom_pct": -0.46, "yoy_pct": -1.24}, "Returns": {"value": 1635109.97, "value_fmt": "$1.6M", "mom_pct": 3.18, "yoy_pct": 14.86}, "Samples Distributed": {"value": 21091.0, "value_fmt": "21,091", "mom_pct": 6.23, "yoy_pct": 13.4}, "Adverse Events": {"value": 541.0, "value_fmt": "541", "mom_pct": 21.3, "yoy_pct": 22.12}, "Gross Margin %": {"value": 67.9813, "value_fmt": "6798.1%", "mom_pct": -0.05, "yoy_pct": -0.13}}, "Generic": {"Revenue": {"value": 37200398.25, "value_fmt": "$37.2M", "mom_pct": 4.22, "yoy_pct": 10.5}, "COGS": {"value": 21535131.53, "value_fmt": "$21.5M", "mom_pct": 3.94, "yoy_pct": 10.36}, "Gross Profit": {"value": 15665266.62, "value_fmt": "$15.7M", "mom_pct": 4.6, "yoy_pct": 10.71}, "Margin %": {"value": 42.0745, "value_fmt": "42.07", "mom_pct": 0.17, "yoy_pct": 0.01}, "R&D Spend": {"value": 1486504.47, "value_fmt": "$1.5M", "mom_pct": 4.06, "yoy_pct": 10.47}, "Marketing Spend": {"value": 1111002.58, "value_fmt": "$1.1M", "mom_pct": 3.39, "yoy_pct": 11.21}, "Units Sold": {"value": 829537.0, "value_fmt": "829,537", "mom_pct": 4.38, "yoy_pct": 10.86}, "New Prescriptions": {"value": 209159.0, "value_fmt": "209,159", "mom_pct": 5.24, "yoy_pct": 12.15}, "Repeat Prescriptions": {"value": 621455.0, "value_fmt": "621,455", "mom_pct": 4.26, "yoy_pct": 11.19}, "Avg Selling Price": {"value": 44.9787, "value_fmt": "$45", "mom_pct": 0.15, "yoy_pct": 0.0}, "Market Share %": {"value": 19.6081, "value_fmt": "19.61", "mom_pct": -0.13, "yoy_pct": 4.4}, "Patient Adherence %": {"value": 69.7322, "value_fmt": "69.73", "mom_pct": -0.3, "yoy_pct": -1.09}, "Returns": {"value": 561137.78, "value_fmt": "$561K", "mom_pct": 7.69, "yoy_pct": 11.84}, "Samples Distributed": {"value": 0.0, "value_fmt": "0", "mom_pct": null, "yoy_pct": null}, "Adverse Events": {"value": 1308.0, "value_fmt": "1,308", "mom_pct": 14.54, "yoy_pct": 14.64}, "Gross Margin %": {"value": 42.1105, "value_fmt": "4211.0%", "mom_pct": 0.37, "yoy_pct": 0.18}}}};
+var ARIA_SC_MEMBER_SERIES = {"Region": {"Asia Pacific": {"Revenue": [3097138.59, 3161338.5, 3147775.47, 3144072.86, 3212821.96, 2029929.05, 1962287.41, 3027910.62, 3114916.79, 3109590.49, 3142279.74, 3118737.73, 2004537.93, 2051441.83, 3165645.43], "COGS": [1276458.65, 1331464.89, 1302301.07, 1310467.11, 1328618.84, 848705.95, 811484.99, 1272769.58, 1300224.73, 1271920.37, 1290094.82, 1289383.92, 830982.64, 856207.59, 1309857.43], "Gross Profit": [1820679.93, 1829873.59, 1845474.42, 1833605.73, 1884203.11, 1181223.09, 1150802.43, 1755141.04, 1814692.09, 1837670.15, 1852184.92, 1829353.8, 1173555.27, 1195234.24, 1855787.96], "Margin %": [53.904, 53.704, 53.8593, 53.5827, 53.972, 53.6887, 54.05, 53.896, 54.0373, 54.4587, 54.2807, 53.9827, 53.9513, 53.8333, 54.2033], "R&D Spend": [407551.84, 423707.09, 414017.67, 433924.01, 409437.09, 265712.63, 252985.83, 401998.52, 396580.46, 389713.14, 434179.12, 430750.49, 272438.84, 275863.98, 416291.0], "Marketing Spend": [271678.48, 261889.82, 269708.87, 255415.94, 285822.64, 174803.43, 170867.76, 255880.61, 266697.37, 270613.14, 251915.33, 274260.0, 180792.31, 180518.17, 265297.01], "Units Sold": [27664.0, 29720.0, 28597.0, 28514.0, 28224.0, 18504.0, 17582.0, 27987.0, 28814.0, 27805.0, 28511.0, 27660.0, 18291.0, 18146.0, 28902.0], "New Prescriptions": [6832.0, 7419.0, 7015.0, 7133.0, 6954.0, 4711.0, 4234.0, 6854.0, 7106.0, 6969.0, 7588.0, 6830.0, 4672.0, 4558.0, 7045.0], "Repeat Prescriptions": [20489.0, 23791.0, 21353.0, 21854.0, 21743.0, 13152.0, 13395.0, 21076.0, 20332.0, 20502.0, 21050.0, 20117.0, 13815.0, 13610.0, 21756.0], "Avg Selling Price": [141.4453, 140.13, 139.1433, 139.1147, 143.676, 141.0447, 140.4353, 141.3347, 140.0807, 143.2193, 139.0747, 139.8213, 136.8927, 143.24, 136.0113], "Market Share %": [20.2727, 20.0333, 20.1347, 20.0693, 19.974, 19.936, 20.17, 20.306, 20.264, 19.88, 20.1387, 20.026, 20.0107, 20.0353, 20.256], "Patient Adherence %": [70.882, 74.6127, 70.884, 71.4987, 70.0793, 68.646, 72.0087, 67.104, 73.086, 73.822, 67.9187, 74.824, 70.53, 67.5633, 71.8713], "Returns": [45074.33, 51403.58, 48696.17, 58915.36, 46786.16, 26415.68, 22182.1, 51482.49, 52905.51, 44090.05, 46581.36, 40641.71, 34989.48, 29373.01, 54865.19], "Samples Distributed": [300.0, 391.0, 310.0, 388.0, 285.0, 181.0, 194.0, 271.0, 251.0, 329.0, 332.0, 349.0, 228.0, 184.0, 357.0], "Adverse Events": [44.0, 55.0, 46.0, 45.0, 43.0, 24.0, 22.0, 35.0, 43.0, 41.0, 39.0, 44.0, 28.0, 22.0, 46.0], "Gross Margin %": [58.7859, 57.8829, 58.6279, 58.3194, 58.6464, 58.1904, 58.646, 57.9654, 58.2581, 59.0969, 58.944, 58.6569, 58.5449, 58.2631, 58.6227]}, "Europe": {"Revenue": [4309919.96, 4248415.23, 4376475.28, 4279925.17, 4274654.42, 2812989.07, 2870948.63, 4308423.38, 4383024.85, 4250315.59, 4247057.25, 4336703.17, 2796160.89, 2718558.64, 4298142.66], "COGS": [1794573.17, 1764214.3, 1808567.97, 1767138.35, 1774995.22, 1155045.39, 1196487.01, 1788456.51, 1822064.2, 1743417.77, 1773525.35, 1791878.44, 1155895.77, 1132869.54, 1785870.72], "Gross Profit": [2515346.78, 2484200.94, 2567907.31, 2512786.8, 2499659.22, 1657943.68, 1674461.6, 2519966.86, 2560960.65, 2506897.83, 2473531.87, 2544824.72, 1640265.12, 1585689.1, 2512271.92], "Margin %": [53.6847, 54.0847, 54.1907, 53.9447, 54.0167, 53.8913, 53.5813, 53.8067, 54.1833, 54.1493, 53.98, 53.8693, 54.032, 54.2893, 54.076], "R&D Spend": [574132.44, 559290.13, 577570.1, 556151.74, 552325.46, 381133.44, 394974.74, 572797.29, 587339.79, 566979.36, 553093.55, 573957.69, 359749.11, 335204.38, 570904.34], "Marketing Spend": [373611.23, 384244.49, 365458.32, 374873.3, 369071.94, 234569.19, 237970.99, 369436.1, 377288.9, 351130.32, 370721.12, 380643.59, 229525.05, 232339.6, 364887.22], "Units Sold": [38312.0, 39620.0, 39954.0, 39327.0, 38766.0, 25014.0, 25210.0, 38460.0, 39372.0, 37926.0, 39763.0, 37970.0, 24979.0, 24915.0, 38386.0], "New Prescriptions": [9749.0, 9713.0, 9951.0, 9487.0, 9771.0, 6051.0, 6333.0, 10071.0, 10030.0, 9477.0, 10379.0, 9101.0, 6219.0, 5952.0, 9668.0], "Repeat Prescriptions": [29523.0, 29289.0, 29774.0, 28394.0, 29170.0, 18298.0, 18943.0, 28175.0, 29249.0, 28520.0, 29187.0, 28513.0, 18223.0, 18966.0, 29267.0], "Avg Selling Price": [140.0667, 136.322, 139.2627, 139.47, 135.6393, 141.844, 142.3667, 141.456, 142.666, 138.1033, 137.4447, 142.1013, 137.3547, 140.702, 139.404], "Market Share %": [20.1513, 20.0847, 20.144, 20.0387, 20.1627, 20.03, 20.0653, 19.9473, 20.1907, 20.0647, 19.9127, 20.04, 20.0213, 19.9267, 20.15], "Patient Adherence %": [74.25, 72.332, 72.3787, 68.51, 74.852, 73.6387, 71.36, 70.7867, 73.1887, 70.7773, 70.8493, 73.126, 69.762, 69.1627, 73.3273], "Returns": [85085.08, 52149.55, 70117.51, 65532.31, 65882.57, 44433.38, 42689.71, 67760.49, 58285.87, 65077.46, 64419.7, 62452.47, 37714.07, 36289.82, 57427.92], "Samples Distributed": [464.0, 417.0, 434.0, 524.0, 401.0, 284.0, 295.0, 444.0, 509.0, 434.0, 477.0, 468.0, 272.0, 257.0, 360.0], "Adverse Events": [59.0, 71.0, 64.0, 57.0, 68.0, 40.0, 43.0, 76.0, 44.0, 65.0, 52.0, 65.0, 36.0, 39.0, 57.0], "Gross Margin %": [58.3618, 58.4736, 58.6752, 58.711, 58.4763, 58.9389, 58.3243, 58.4893, 58.4291, 58.9815, 58.2411, 58.6811, 58.6613, 58.3283, 58.4502]}, "Latin America": {"Revenue": [1771548.75, 1719833.87, 1704123.68, 1681830.66, 1758031.94, 1137805.73, 1151762.18, 1710528.6, 1761266.9, 1711006.61, 1726080.68, 1693678.03, 1071742.78, 1099937.73, 1769006.47], "COGS": [734758.36, 710553.96, 710001.69, 693987.8, 722557.73, 469345.5, 479130.23, 710849.71, 730398.88, 710296.06, 719841.61, 698069.37, 446611.4, 449469.78, 727397.44], "Gross Profit": [1036790.38, 1009279.9, 994121.99, 987842.89, 1035474.22, 668460.27, 672631.91, 999678.87, 1030868.03, 1000710.58, 1006239.08, 995608.66, 625131.35, 650467.96, 1041609.02], "Margin %": [53.7707, 54.1353, 53.9827, 54.0727, 54.186, 54.122, 53.8327, 54.2527, 54.0527, 53.7747, 53.3593, 54.5087, 53.8033, 54.3447, 54.006], "R&D Spend": [225987.98, 224739.29, 225067.97, 212222.42, 227596.92, 152051.34, 154703.49, 220341.62, 228974.53, 219090.12, 232292.67, 222829.05, 137820.19, 143025.18, 240905.94], "Marketing Spend": [157666.89, 155604.65, 137648.18, 147862.11, 146645.37, 98140.72, 101590.69, 145750.27, 150645.62, 148262.31, 149319.4, 149188.37, 91403.67, 93668.03, 155246.58], "Units Sold": [15865.0, 15488.0, 15708.0, 15013.0, 16188.0, 10212.0, 10224.0, 15789.0, 16029.0, 15769.0, 15415.0, 15363.0, 9776.0, 9843.0, 15759.0], "New Prescriptions": [4023.0, 3800.0, 3894.0, 3869.0, 4003.0, 2443.0, 2582.0, 4000.0, 3848.0, 3947.0, 3906.0, 3803.0, 2316.0, 2389.0, 3840.0], "Repeat Prescriptions": [12353.0, 12053.0, 11733.0, 11432.0, 11960.0, 7877.0, 8017.0, 12034.0, 11740.0, 12028.0, 11278.0, 11284.0, 7459.0, 7364.0, 12070.0], "Avg Selling Price": [139.168, 139.8933, 139.62, 143.0807, 136.1367, 142.05, 140.094, 141.29, 140.178, 139.2767, 141.234, 138.062, 142.556, 140.3407, 140.3833], "Market Share %": [20.0467, 20.0647, 20.1007, 20.0407, 19.9193, 20.1207, 19.866, 19.9773, 19.9593, 19.922, 20.0553, 20.002, 20.0407, 20.1467, 20.0427], "Patient Adherence %": [68.942, 78.1993, 71.4933, 70.0587, 73.524, 72.5427, 68.846, 69.0127, 70.7307, 70.562, 74.2347, 72.276, 74.7973, 72.106, 71.9327], "Returns": [27728.67, 26911.95, 31155.0, 29709.68, 28093.85, 17704.4, 18634.58, 26351.27, 31301.15, 28116.9, 27880.71, 23767.33, 14459.51, 19416.47, 23402.69], "Samples Distributed": [202.0, 144.0, 206.0, 194.0, 154.0, 129.0, 113.0, 185.0, 180.0, 136.0, 177.0, 134.0, 93.0, 111.0, 176.0], "Adverse Events": [20.0, 17.0, 20.0, 18.0, 21.0, 10.0, 7.0, 24.0, 19.0, 12.0, 19.0, 17.0, 11.0, 11.0, 18.0], "Gross Margin %": [58.5245, 58.6847, 58.3363, 58.7362, 58.8996, 58.7499, 58.4002, 58.4427, 58.5299, 58.4867, 58.2962, 58.7838, 58.3285, 59.1368, 58.881]}, "North America": {"Revenue": [5840958.14, 5668389.31, 5489874.73, 5694015.02, 5836248.96, 3753262.47, 3736935.84, 5743157.19, 5638169.73, 5612241.09, 5741829.75, 5652549.02, 3753091.26, 3790091.4, 5734291.98], "COGS": [2403356.4, 2338535.61, 2272786.77, 2350462.14, 2390372.54, 1571617.94, 1567919.06, 2384423.56, 2323006.29, 2307113.8, 2368360.4, 2352116.21, 1546860.41, 1576281.43, 2363273.39], "Gross Profit": [3437601.75, 3329853.69, 3217087.99, 3343552.87, 3445876.42, 2181644.51, 2169016.74, 3358733.62, 3315163.46, 3305127.28, 3373469.33, 3300432.78, 2206230.85, 2213809.97, 3371018.59], "Margin %": [54.202, 53.8633, 54.4913, 54.0773, 53.958, 53.7587, 53.5247, 53.7687, 54.436, 54.2307, 54.1267, 53.9707, 53.8507, 53.748, 54.12], "R&D Spend": [787319.73, 755973.57, 703091.94, 737144.0, 799609.15, 476899.33, 501446.63, 752464.01, 729036.94, 736725.04, 767115.33, 727623.15, 505018.3, 470446.68, 763042.37], "Marketing Spend": [524017.76, 497969.3, 472286.97, 502458.81, 527319.74, 323426.09, 320963.77, 509479.79, 508041.35, 463902.41, 513297.17, 474391.34, 333594.84, 338787.31, 490292.05], "Units Sold": [51376.0, 51680.0, 51065.0, 50740.0, 49727.0, 34652.0, 33885.0, 51855.0, 53044.0, 50915.0, 50002.0, 51518.0, 33589.0, 34057.0, 52141.0], "New Prescriptions": [12511.0, 13011.0, 12535.0, 13076.0, 12758.0, 9131.0, 8626.0, 13089.0, 12944.0, 13585.0, 12212.0, 13557.0, 8370.0, 8188.0, 12886.0], "Repeat Prescriptions": [38140.0, 39564.0, 39763.0, 37838.0, 36328.0, 25375.0, 26749.0, 39498.0, 38465.0, 40302.0, 37900.0, 37145.0, 25090.0, 24650.0, 39763.0], "Avg Selling Price": [142.5587, 138.8567, 139.6853, 142.5167, 141.7433, 140.5953, 137.6807, 138.8273, 136.3373, 139.0567, 141.2213, 141.2193, 140.0007, 142.4113, 141.4273], "Market Share %": [20.0713, 20.1433, 20.0473, 20.0747, 19.9953, 20.0473, 20.152, 20.0107, 20.074, 20.0553, 20.0493, 19.996, 20.04, 19.9333, 19.9907], "Patient Adherence %": [71.71, 73.7113, 73.0653, 72.524, 68.266, 70.2813, 72.58, 69.7647, 72.9887, 67.7173, 70.1113, 71.3053, 73.5647, 69.52, 73.5687], "Returns": [96806.84, 90365.52, 85206.4, 75841.48, 94210.99, 50383.75, 53319.86, 71956.59, 89807.86, 85681.3, 96723.14, 79915.55, 55075.29, 55209.62, 80849.86], "Samples Distributed": [596.0, 688.0, 591.0, 498.0, 642.0, 332.0, 425.0, 520.0, 688.0, 644.0, 578.0, 636.0, 415.0, 449.0, 665.0], "Adverse Events": [86.0, 80.0, 99.0, 90.0, 88.0, 46.0, 52.0, 83.0, 90.0, 75.0, 69.0, 87.0, 56.0, 50.0, 71.0], "Gross Margin %": [58.8534, 58.7443, 58.6004, 58.7205, 59.0427, 58.1266, 58.0427, 58.4824, 58.7986, 58.8914, 58.7525, 58.3884, 58.7844, 58.4105, 58.787]}}, "Therapeutic_Area": {"Cardiology": {"Revenue": [3214040.45, 3162567.72, 3166365.62, 3254209.31, 3152341.25, 2068315.0, 2035453.91, 3055218.39, 3106942.0, 3147755.81, 3242664.78, 3220137.01, 1985657.98, 2042588.92, 3121697.57], "COGS": [1345193.83, 1323511.46, 1323756.01, 1346275.21, 1305004.03, 861448.09, 849012.31, 1258673.4, 1286446.65, 1280053.54, 1345677.12, 1349801.19, 832889.0, 851274.32, 1297437.47], "Gross Profit": [1868846.6, 1839056.28, 1842609.64, 1907934.09, 1847337.24, 1206866.9, 1186441.59, 1796544.97, 1820495.36, 1867702.28, 1896987.66, 1870335.82, 1152768.98, 1191314.58, 1824260.07], "Margin %": [53.8033, 53.375, 53.47, 54.1558, 53.4858, 53.5975, 53.9958, 54.4075, 54.3842, 54.8017, 53.7592, 53.5167, 53.89, 53.7775, 54.1658], "R&D Spend": [419565.52, 426759.5, 431653.13, 420054.26, 413739.36, 271965.65, 261270.39, 393961.04, 406404.79, 412530.44, 436982.83, 432620.19, 254917.86, 263355.06, 404040.72], "Marketing Spend": [272680.06, 283995.08, 269975.23, 284104.84, 269658.01, 176026.14, 178798.29, 256835.09, 278789.34, 253825.28, 265522.69, 273689.53, 166248.25, 174779.42, 280564.0], "Units Sold": [28722.0, 28300.0, 28761.0, 28871.0, 28131.0, 18786.0, 18784.0, 27010.0, 27971.0, 27801.0, 29030.0, 29479.0, 18271.0, 17963.0, 28155.0], "New Prescriptions": [7400.0, 7165.0, 7016.0, 7173.0, 6907.0, 4933.0, 4602.0, 6485.0, 7246.0, 7359.0, 7626.0, 7476.0, 4684.0, 4203.0, 7113.0], "Repeat Prescriptions": [21007.0, 21911.0, 21633.0, 21549.0, 19974.0, 13534.0, 14164.0, 20500.0, 20809.0, 20250.0, 20977.0, 22108.0, 13317.0, 13674.0, 21967.0], "Avg Selling Price": [138.3675, 141.4483, 140.0583, 140.0908, 136.8708, 141.9883, 140.2208, 142.3092, 138.7392, 141.3833, 139.4, 140.8383, 141.7433, 145.4983, 138.9775], "Market Share %": [19.9933, 19.965, 20.2392, 19.9783, 20.1775, 20.0742, 20.0017, 20.0825, 20.0842, 19.9317, 19.8833, 20.2867, 20.12, 20.0267, 20.0925], "Patient Adherence %": [70.1775, 78.2533, 74.07, 69.2717, 69.7742, 72.2383, 72.7283, 68.5892, 72.3275, 69.1217, 70.585, 75.4333, 71.2075, 68.1775, 74.11], "Returns": [52889.18, 50082.67, 52215.68, 51600.71, 55451.08, 30297.65, 29263.0, 45327.29, 53468.76, 56734.84, 47172.71, 50187.97, 28531.42, 30283.02, 49560.5], "Samples Distributed": [335.0, 293.0, 360.0, 343.0, 310.0, 212.0, 164.0, 244.0, 363.0, 313.0, 340.0, 389.0, 180.0, 214.0, 223.0], "Adverse Events": [46.0, 44.0, 49.0, 50.0, 44.0, 22.0, 26.0, 45.0, 34.0, 53.0, 37.0, 46.0, 25.0, 30.0, 39.0], "Gross Margin %": [58.1463, 58.1507, 58.1932, 58.6297, 58.6021, 58.3502, 58.2888, 58.8025, 58.5944, 59.3344, 58.5009, 58.0825, 58.0548, 58.3238, 58.4381]}, "Immunology": {"Revenue": [3001084.44, 3050795.27, 2990763.32, 2909510.78, 3042904.64, 1961181.83, 1952780.47, 3107127.68, 2933338.07, 3042330.8, 3007865.35, 3040814.18, 1995566.67, 1957079.4, 3050372.41], "COGS": [1241073.86, 1259008.53, 1250726.67, 1211454.07, 1246219.73, 819698.58, 812058.25, 1292767.0, 1227682.28, 1250226.28, 1238177.47, 1265750.71, 821054.42, 818895.37, 1264583.52], "Gross Profit": [1760010.58, 1791786.72, 1740036.66, 1698056.7, 1796684.9, 1141483.25, 1140722.2, 1814360.7, 1705655.81, 1792104.51, 1769687.85, 1775063.42, 1174512.25, 1138184.03, 1785788.87], "Margin %": [53.5483, 53.8267, 54.1867, 53.6008, 54.39, 53.71, 53.7658, 54.0842, 54.0142, 53.9675, 54.0208, 54.0225, 53.965, 53.83, 53.9742], "R&D Spend": [397092.51, 400630.68, 385614.25, 388631.71, 394391.5, 259106.7, 254257.98, 413468.27, 374306.77, 404253.16, 388499.19, 393059.63, 266451.48, 243214.08, 397986.06], "Marketing Spend": [280038.73, 277305.02, 247573.96, 241346.47, 266452.38, 168143.9, 161855.43, 265498.56, 251417.18, 242117.59, 272771.25, 250925.48, 172578.88, 170115.47, 247450.46], "Units Sold": [26196.0, 27513.0, 28108.0, 26542.0, 26917.0, 17659.0, 17668.0, 27856.0, 28080.0, 27526.0, 26819.0, 27948.0, 17676.0, 18087.0, 27576.0], "New Prescriptions": [6527.0, 6567.0, 6756.0, 6231.0, 6548.0, 4089.0, 4160.0, 7105.0, 7372.0, 6961.0, 6605.0, 7078.0, 4457.0, 4425.0, 6409.0], "Repeat Prescriptions": [20735.0, 22081.0, 21102.0, 19997.0, 19845.0, 12751.0, 13473.0, 20414.0, 20672.0, 21260.0, 18845.0, 19660.0, 13483.0, 12831.0, 20696.0], "Avg Selling Price": [140.0492, 138.8808, 137.7092, 139.8825, 142.0, 144.1067, 138.5858, 142.7417, 136.9633, 139.9167, 140.525, 138.9108, 142.8075, 137.3108, 138.7417], "Market Share %": [20.185, 20.0925, 20.1342, 19.9333, 19.89, 19.9025, 19.9067, 20.1733, 20.2275, 20.1558, 20.1942, 19.85, 19.8975, 20.0342, 20.0933], "Patient Adherence %": [69.1608, 75.155, 71.6375, 71.6408, 69.3733, 71.4742, 71.7725, 67.0208, 71.3383, 72.0325, 68.3625, 73.4542, 74.4533, 71.8475, 75.4558], "Returns": [46605.13, 41568.3, 55485.56, 39584.11, 43880.02, 27736.15, 24561.63, 43847.65, 45588.98, 36890.81, 55030.65, 45725.31, 33741.87, 30675.21, 38664.38], "Samples Distributed": [292.0, 414.0, 313.0, 326.0, 253.0, 149.0, 200.0, 237.0, 330.0, 324.0, 317.0, 234.0, 163.0, 202.0, 354.0], "Adverse Events": [39.0, 42.0, 49.0, 38.0, 44.0, 23.0, 26.0, 48.0, 29.0, 34.0, 37.0, 39.0, 24.0, 24.0, 44.0], "Gross Margin %": [58.6458, 58.7318, 58.1804, 58.3623, 59.0451, 58.2038, 58.4153, 58.3935, 58.1473, 58.9056, 58.8353, 58.3746, 58.8561, 58.1573, 58.5433]}, "Neurology": {"Revenue": [2627055.81, 2678354.74, 2710545.54, 2749313.92, 2754590.07, 1713961.55, 1813388.77, 2654300.76, 2723379.83, 2653732.8, 2609143.16, 2625320.58, 1762149.63, 1766188.06, 2776721.4], "COGS": [1082676.23, 1121461.58, 1105518.07, 1141591.1, 1147182.21, 722683.69, 757412.94, 1103224.08, 1122470.54, 1102323.98, 1084130.58, 1086473.28, 721148.4, 721448.68, 1144434.08], "Gross Profit": [1544379.59, 1556893.14, 1605027.45, 1607722.81, 1607407.87, 991277.85, 1055975.81, 1551076.68, 1600909.28, 1551408.85, 1525012.57, 1538847.28, 1041001.25, 1044739.39, 1632287.31], "Margin %": [54.2925, 54.4475, 54.5067, 53.7042, 53.9225, 53.6775, 53.515, 53.705, 54.1533, 53.6475, 53.8567, 54.4167, 54.1375, 54.61, 53.8592], "R&D Spend": [353101.26, 343142.3, 346864.62, 357939.36, 366568.17, 215328.2, 247651.08, 354552.33, 351372.28, 353979.13, 354415.98, 340721.59, 240143.43, 218954.0, 382085.75], "Marketing Spend": [240633.2, 228991.26, 232068.94, 243757.2, 233932.91, 148507.32, 153995.91, 227476.75, 246747.03, 226567.17, 225590.36, 228270.26, 153504.47, 160334.64, 240041.58], "Units Sold": [23235.0, 25652.0, 24860.0, 25126.0, 24434.0, 16093.0, 15667.0, 23616.0, 23991.0, 23897.0, 23349.0, 23019.0, 15669.0, 15542.0, 24456.0], "New Prescriptions": [5602.0, 6161.0, 6137.0, 6434.0, 6130.0, 3871.0, 4116.0, 6126.0, 5863.0, 6094.0, 5806.0, 5740.0, 3767.0, 4107.0, 6244.0], "Repeat Prescriptions": [17301.0, 19437.0, 19302.0, 18601.0, 18459.0, 12161.0, 12236.0, 17957.0, 17121.0, 18613.0, 17393.0, 17866.0, 11423.0, 11784.0, 17650.0], "Avg Selling Price": [144.2092, 139.3975, 137.5475, 137.755, 139.5158, 138.0233, 140.7275, 137.6825, 143.5142, 139.4717, 141.6558, 138.7783, 138.7233, 142.6883, 141.4483], "Market Share %": [19.8883, 20.085, 20.0475, 20.1092, 19.9875, 19.9067, 20.2758, 20.0708, 20.2933, 19.8725, 20.1333, 19.825, 19.8808, 20.0858, 20.1625], "Patient Adherence %": [74.3025, 74.4475, 69.7575, 68.99, 71.705, 69.0, 68.5375, 69.7383, 72.2283, 70.9908, 70.4283, 73.0608, 71.6733, 68.4375, 66.3783], "Returns": [49283.73, 40821.62, 40320.71, 44537.71, 45958.67, 22071.8, 27127.75, 42900.39, 43303.69, 47005.25, 31761.49, 33075.07, 29272.0, 23529.43, 45394.96], "Samples Distributed": [252.0, 283.0, 245.0, 362.0, 284.0, 167.0, 173.0, 298.0, 303.0, 278.0, 294.0, 338.0, 169.0, 181.0, 294.0], "Adverse Events": [38.0, 57.0, 41.0, 37.0, 40.0, 22.0, 18.0, 40.0, 37.0, 38.0, 25.0, 31.0, 28.0, 21.0, 37.0], "Gross Margin %": [58.7875, 58.1287, 59.2142, 58.4772, 58.3538, 57.8355, 58.2322, 58.4364, 58.7839, 58.4614, 58.4488, 58.6156, 59.0756, 59.1522, 58.7847]}, "Oncology": {"Revenue": [3902918.61, 3723752.55, 3637697.87, 3736111.68, 3949076.66, 2561852.29, 2488750.69, 3855441.04, 3941189.05, 3687244.41, 3777591.51, 3737090.95, 2467740.95, 2473405.26, 3835104.38], "COGS": [1596863.47, 1550135.45, 1506926.7, 1541498.13, 1620220.81, 1051831.73, 1038818.56, 1612826.47, 1630794.93, 1494225.66, 1580714.68, 1527347.23, 1027707.11, 1042226.28, 1581382.78], "Gross Profit": [2306055.13, 2173617.1, 2130771.19, 2194613.56, 2328855.86, 1510020.58, 1449932.11, 2242614.57, 2310394.15, 2193018.76, 2196876.85, 2209743.73, 1440033.79, 1431178.99, 2253721.6], "Margin %": [54.2075, 53.8375, 54.1908, 54.0425, 54.0083, 54.2417, 53.7925, 53.6275, 54.0192, 54.9775, 53.38, 54.3192, 53.3475, 53.5967, 54.345], "R&D Spend": [524838.76, 497772.49, 468566.73, 483939.13, 520000.21, 344780.91, 344659.16, 503589.26, 517901.46, 478084.34, 514250.28, 499355.48, 323655.16, 316501.29, 511644.79], "Marketing Spend": [340555.55, 314664.92, 306241.99, 320373.44, 370541.65, 217493.41, 212396.93, 343627.37, 337758.58, 324494.37, 337949.62, 330328.27, 217130.7, 209044.22, 313533.9], "Units Sold": [34925.0, 35492.0, 33659.0, 33969.0, 33922.0, 22995.0, 22060.0, 36194.0, 36968.0, 33572.0, 34535.0, 32440.0, 22527.0, 22499.0, 35073.0], "New Prescriptions": [8394.0, 8896.0, 8570.0, 8935.0, 9092.0, 6176.0, 5674.0, 9164.0, 8587.0, 8456.0, 8959.0, 7918.0, 5770.0, 5479.0, 8772.0], "Repeat Prescriptions": [26251.0, 26434.0, 25795.0, 25074.0, 25537.0, 16898.0, 17064.0, 27119.0, 25986.0, 25853.0, 27225.0, 22811.0, 16718.0, 16828.0, 26566.0], "Avg Selling Price": [141.7225, 136.3892, 140.7242, 142.4067, 140.9175, 141.9625, 136.9075, 139.9792, 138.6092, 139.6025, 138.325, 141.3067, 133.6933, 142.2933, 137.9683], "Market Share %": [20.3283, 20.0208, 20.1608, 20.0383, 19.8975, 20.1658, 20.16, 20.0667, 19.8625, 20.1042, 19.9342, 20.0775, 20.0517, 19.8517, 20.0508], "Patient Adherence %": [73.5425, 72.3308, 68.1333, 70.2192, 72.8367, 70.075, 69.8333, 71.6717, 73.2333, 69.97, 71.9525, 72.2775, 72.7717, 70.4492, 72.7], "Returns": [66935.97, 59412.85, 52951.47, 51944.25, 65640.83, 38777.87, 33092.78, 57125.76, 58150.35, 48284.45, 65279.22, 48911.44, 27937.47, 32902.22, 56017.1], "Samples Distributed": [501.0, 365.0, 388.0, 348.0, 374.0, 221.0, 327.0, 394.0, 437.0, 378.0, 397.0, 428.0, 310.0, 268.0, 429.0], "Adverse Events": [60.0, 52.0, 61.0, 61.0, 64.0, 39.0, 36.0, 60.0, 64.0, 44.0, 51.0, 71.0, 37.0, 31.0, 48.0], "Gross Margin %": [59.0854, 58.3717, 58.5747, 58.7406, 58.9722, 58.9425, 58.2594, 58.1675, 58.6218, 59.4758, 58.1555, 59.13, 58.3543, 57.8627, 58.7656]}, "Respiratory": {"Revenue": [2274466.13, 2182506.63, 2212876.81, 2150698.02, 2182844.66, 1428675.65, 1431560.22, 2117931.92, 2192529.32, 2152089.96, 2219982.62, 2178305.23, 1414417.63, 1420767.96, 2183190.78], "COGS": [943339.19, 890651.74, 906730.05, 881236.89, 897917.55, 589052.69, 597719.23, 889008.41, 908299.7, 905918.54, 903122.33, 902075.53, 577551.29, 580983.69, 898561.13], "Gross Profit": [1331126.94, 1291854.88, 1306146.77, 1269461.13, 1284927.1, 839622.97, 833840.97, 1228923.47, 1284229.63, 1246171.44, 1316860.27, 1276229.71, 836866.32, 839784.28, 1284629.64], "Margin %": [53.6, 54.2475, 54.3008, 54.0933, 54.3592, 54.0992, 53.6667, 53.8308, 54.3158, 53.3725, 54.6667, 54.1392, 54.2067, 54.455, 54.1625], "R&D Spend": [300393.94, 295405.11, 287048.95, 288877.71, 294269.38, 184615.28, 196272.08, 282030.54, 291946.42, 263660.59, 292532.39, 289403.49, 189858.51, 182515.79, 295386.33], "Marketing Spend": [193066.82, 194751.98, 189242.22, 191028.21, 188274.74, 120768.66, 124346.65, 187109.0, 187961.11, 186903.77, 183419.1, 195269.76, 125853.57, 131039.36, 194132.92], "Units Sold": [20139.0, 19551.0, 19936.0, 19086.0, 19501.0, 12849.0, 12722.0, 19415.0, 20249.0, 19619.0, 19958.0, 19625.0, 12492.0, 12870.0, 19928.0], "New Prescriptions": [5192.0, 5154.0, 4916.0, 4792.0, 4809.0, 3267.0, 3223.0, 5134.0, 4860.0, 5108.0, 5089.0, 5079.0, 2899.0, 2873.0, 4901.0], "Repeat Prescriptions": [15211.0, 14834.0, 14791.0, 14297.0, 15386.0, 9358.0, 10167.0, 14793.0, 15198.0, 15376.0, 14975.0, 14614.0, 9646.0, 9473.0, 15977.0], "Avg Selling Price": [139.7, 137.8867, 141.1, 145.0925, 137.19, 140.8367, 144.2792, 140.9225, 141.2517, 139.1958, 138.8125, 141.6708, 139.0375, 140.5767, 139.3967], "Market Share %": [20.2825, 20.2442, 19.9517, 20.22, 20.1117, 20.1183, 19.9725, 19.9083, 20.1425, 19.8383, 20.05, 20.0408, 20.1908, 20.0542, 20.15], "Patient Adherence %": [70.0467, 73.3825, 76.1783, 73.1175, 74.7125, 73.5983, 73.1217, 68.815, 73.365, 71.4833, 72.5642, 70.1883, 70.7117, 69.0283, 74.7308], "Returns": [38980.91, 28945.16, 34201.66, 42332.05, 24042.97, 20053.74, 22781.09, 28349.75, 31788.61, 34050.36, 36360.84, 28877.27, 22755.59, 22899.04, 26908.72], "Samples Distributed": [182.0, 285.0, 235.0, 225.0, 261.0, 177.0, 163.0, 247.0, 195.0, 250.0, 216.0, 198.0, 186.0, 136.0, 258.0], "Adverse Events": [26.0, 28.0, 29.0, 24.0, 28.0, 14.0, 18.0, 25.0, 32.0, 24.0, 29.0, 26.0, 17.0, 16.0, 24.0], "Gross Margin %": [58.5248, 59.1913, 59.0248, 59.0255, 58.8648, 58.7693, 58.247, 58.0247, 58.573, 57.9052, 59.3185, 58.5882, 59.1668, 59.1078, 58.8418]}}, "Drug_Category": {"Biosimilar": {"Revenue": [4189503.66, 4362831.15, 4287734.91, 4332857.7, 4243439.65, 2773984.84, 2772369.38, 4295971.56, 4330933.74, 4202942.2, 4328704.48, 4361014.26, 2745350.34, 2752080.71, 4280427.43], "COGS": [2021066.3, 2103443.32, 2059842.49, 2090079.99, 2043603.3, 1348241.44, 1341084.91, 2061863.34, 2080328.06, 1999204.97, 2071247.56, 2095598.75, 1319165.58, 1330058.37, 2053391.7], "Gross Profit": [2168437.36, 2259387.82, 2227892.4, 2242777.72, 2199836.36, 1425743.42, 1431284.44, 2234108.23, 2250605.68, 2203737.19, 2257456.9, 2265415.46, 1426184.75, 1422022.32, 2227035.71], "Margin %": [51.7835, 51.9185, 51.929, 51.765, 51.856, 51.5595, 51.818, 52.1615, 51.9675, 52.363, 52.1435, 51.9795, 51.891, 51.8775, 52.056], "R&D Spend": [418317.48, 432658.22, 434012.55, 432792.13, 430953.51, 278350.87, 281704.88, 419660.86, 435575.02, 413776.29, 433670.62, 438201.07, 275855.05, 276969.37, 426336.92], "Marketing Spend": [248629.83, 256234.23, 260622.21, 260524.33, 254422.77, 176298.91, 164158.72, 254057.65, 251173.94, 245526.76, 249035.14, 265136.89, 167902.98, 169561.81, 259613.95], "Units Sold": [44334.0, 47229.0, 45288.0, 45993.0, 44864.0, 29525.0, 29349.0, 44856.0, 45497.0, 44627.0, 44738.0, 45263.0, 29215.0, 28940.0, 44841.0], "New Prescriptions": [11193.0, 11357.0, 11102.0, 11761.0, 11224.0, 7665.0, 7286.0, 11272.0, 11033.0, 11396.0, 11273.0, 10880.0, 7170.0, 6855.0, 11480.0], "Repeat Prescriptions": [33511.0, 35667.0, 34675.0, 33878.0, 33534.0, 22112.0, 22895.0, 33809.0, 33478.0, 33843.0, 34577.0, 32740.0, 21667.0, 21467.0, 33749.0], "Avg Selling Price": [94.6825, 92.527, 94.6485, 94.6655, 94.5435, 94.6235, 95.0905, 95.8525, 95.8465, 93.9385, 96.4105, 96.151, 94.406, 94.722, 95.4995], "Market Share %": [13.709, 13.627, 13.714, 13.6465, 13.5875, 13.491, 13.549, 13.5535, 13.6525, 13.445, 13.6655, 13.6295, 13.5275, 13.587, 13.6325], "Patient Adherence %": [67.9605, 73.8115, 69.2705, 70.3015, 68.282, 67.724, 69.416, 65.679, 70.643, 66.7055, 67.7585, 70.5915, 69.81, 66.842, 72.948], "Returns": [68216.17, 66103.37, 74907.5, 60122.38, 65469.22, 38315.82, 38260.58, 60415.06, 62069.0, 67228.03, 70030.22, 53243.42, 40544.09, 39233.14, 65302.55], "Samples Distributed": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "Adverse Events": [70.0, 74.0, 65.0, 71.0, 74.0, 33.0, 51.0, 71.0, 70.0, 77.0, 56.0, 75.0, 40.0, 48.0, 55.0], "Gross Margin %": [51.7588, 51.7872, 51.9597, 51.7621, 51.8409, 51.3969, 51.6268, 52.0047, 51.9658, 52.4332, 52.1509, 51.947, 51.9491, 51.6708, 52.0283]}, "Branded": {"Revenue": [8099131.68, 7721960.75, 7669521.68, 7770639.91, 8154426.02, 5123435.22, 5182851.06, 7739418.8, 7736830.23, 7791301.7, 7819358.4, 7777075.83, 5110687.47, 5099419.65, 7898826.43], "COGS": [2617743.11, 2462052.76, 2447132.02, 2458330.18, 2622535.72, 1629864.12, 1689777.48, 2492344.64, 2472483.22, 2482898.93, 2499355.39, 2495238.85, 1626999.88, 1642569.49, 2523020.36], "Gross Profit": [5481388.57, 5259908.01, 5222389.7, 5312309.7, 5531890.32, 3493571.1, 3493073.54, 5247074.16, 5264347.05, 5308402.81, 5320003.01, 5281837.0, 3483687.57, 3456850.16, 5375806.05], "Margin %": [67.6405, 68.041, 68.0935, 68.2965, 67.892, 68.1635, 67.5305, 67.7635, 68.004, 68.057, 68.026, 67.9435, 68.129, 67.908, 67.9615], "R&D Spend": [1467330.07, 1425303.51, 1375847.33, 1397375.71, 1451102.75, 925099.72, 951931.49, 1419553.32, 1391976.77, 1391457.01, 1446722.39, 1407883.84, 926516.61, 875061.4, 1452858.92], "Marketing Spend": [997409.33, 963867.62, 900892.64, 939691.39, 994981.31, 601010.58, 615394.95, 944628.5, 965910.65, 908657.17, 953433.26, 932999.21, 614613.89, 621331.4, 932079.2], "Units Sold": [28636.0, 27760.0, 27500.0, 27481.0, 29223.0, 17963.0, 18665.0, 27691.0, 27841.0, 27842.0, 28292.0, 27744.0, 18529.0, 17874.0, 28445.0], "New Prescriptions": [7128.0, 7068.0, 6766.0, 6889.0, 7362.0, 4468.0, 4581.0, 7018.0, 6552.0, 7051.0, 7086.0, 6821.0, 4777.0, 4520.0, 6821.0], "Repeat Prescriptions": [22076.0, 20945.0, 20728.0, 20095.0, 21614.0, 13107.0, 14470.0, 20295.0, 20398.0, 21557.0, 20750.0, 20683.0, 13955.0, 12915.0, 22133.0], "Avg Selling Price": [282.472, 279.1735, 279.349, 283.515, 277.841, 284.819, 279.7325, 281.5435, 279.076, 280.771, 278.4205, 279.6465, 277.93, 285.004, 277.195], "Market Share %": [27.0015, 26.9665, 26.966, 26.9955, 26.965, 27.0375, 26.9135, 27.017, 27.0105, 26.998, 26.774, 26.831, 27.054, 26.892, 27.0065], "Patient Adherence %": [76.579, 77.4765, 75.79, 75.1185, 75.02, 75.978, 74.725, 75.4655, 76.627, 76.522, 74.449, 75.3525, 77.6135, 74.2285, 75.5045], "Returns": [145186.28, 119315.5, 118066.5, 122345.8, 134441.53, 76760.75, 71217.86, 112200.09, 132410.93, 110956.18, 128775.22, 112278.75, 75810.06, 68874.76, 106469.76], "Samples Distributed": [1562.0, 1640.0, 1541.0, 1604.0, 1482.0, 926.0, 1027.0, 1420.0, 1628.0, 1543.0, 1564.0, 1587.0, 1008.0, 1001.0, 1558.0], "Adverse Events": [41.0, 51.0, 42.0, 44.0, 41.0, 21.0, 23.0, 48.0, 38.0, 32.0, 40.0, 38.0, 20.0, 21.0, 41.0], "Gross Margin %": [67.6787, 68.1162, 68.0928, 68.3639, 67.8391, 68.1881, 67.3968, 67.7967, 68.0427, 68.1324, 68.0363, 67.9155, 68.1648, 67.7891, 68.0583]}, "Generic": {"Revenue": [2730930.1, 2713185.01, 2760992.57, 2696346.1, 2683891.61, 1836566.26, 1766713.62, 2754629.43, 2829614.3, 2688909.88, 2709184.54, 2663577.86, 1769495.05, 1808529.24, 2787832.68], "COGS": [1570337.17, 1579272.68, 1586682.99, 1573645.23, 1550405.31, 1066609.22, 1024158.9, 1602291.38, 1622882.82, 1550644.1, 1581219.23, 1540610.34, 1034184.76, 1042200.48, 1609986.92], "Gross Profit": [1160592.91, 1133912.29, 1174309.61, 1122700.87, 1133486.29, 769957.03, 742554.7, 1152338.0, 1206731.5, 1138265.84, 1127965.29, 1122967.5, 735310.27, 766328.79, 1177845.73], "Margin %": [42.247, 41.881, 42.3705, 41.6965, 42.3515, 41.8725, 41.893, 41.868, 42.5605, 42.04, 41.6405, 42.3255, 41.708, 42.376, 42.2865], "R&D Spend": [109344.44, 105748.35, 109887.8, 109274.33, 106912.36, 72346.15, 70474.32, 108387.26, 114379.93, 107274.36, 106287.66, 109075.47, 72654.78, 72509.45, 111947.81], "Marketing Spend": [80935.2, 79606.41, 83587.49, 80394.44, 79455.61, 53629.94, 51839.54, 81860.62, 85588.65, 79724.25, 82784.62, 80347.2, 52799.0, 54419.9, 84029.71], "Units Sold": [60247.0, 61519.0, 62536.0, 60120.0, 58818.0, 40894.0, 38887.0, 61544.0, 63921.0, 59946.0, 60661.0, 59504.0, 38891.0, 40147.0, 61902.0], "New Prescriptions": [14794.0, 15518.0, 15527.0, 14915.0, 14900.0, 10203.0, 9908.0, 15724.0, 16343.0, 15531.0, 15726.0, 15590.0, 9630.0, 9712.0, 15138.0], "Repeat Prescriptions": [44918.0, 48085.0, 47220.0, 45545.0, 44053.0, 29483.0, 29739.0, 46679.0, 45910.0, 45952.0, 44088.0, 43636.0, 28965.0, 30208.0, 46974.0], "Avg Selling Price": [45.2745, 44.701, 44.286, 44.956, 45.512, 44.708, 45.6095, 44.785, 44.524, 45.0325, 44.4, 45.1055, 45.267, 45.2945, 45.225], "Market Share %": [19.696, 19.651, 19.64, 19.5255, 19.486, 19.572, 19.7275, 19.6105, 19.703, 19.4985, 19.6775, 19.5875, 19.503, 19.5525, 19.6905], "Patient Adherence %": [69.7985, 72.8535, 70.8055, 66.5235, 71.739, 70.1295, 69.455, 66.3565, 70.2255, 68.9315, 70.128, 72.7045, 69.067, 67.6935, 69.5725], "Returns": [41292.47, 35411.73, 42201.08, 47530.65, 35062.82, 23860.64, 27347.81, 44935.69, 37820.46, 44781.5, 36799.47, 41254.89, 25884.2, 32181.02, 44773.35], "Samples Distributed": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "Adverse Events": [98.0, 98.0, 122.0, 95.0, 105.0, 66.0, 50.0, 99.0, 88.0, 84.0, 83.0, 100.0, 71.0, 53.0, 96.0], "Gross Margin %": [42.4981, 41.7927, 42.5322, 41.6379, 42.2329, 41.9237, 42.0303, 41.8328, 42.6465, 42.3319, 41.6349, 42.1601, 41.5548, 42.373, 42.2495]}}};
+var ARIA_SC_ORIG_SERIES   = {"Revenue": [15019565.44, 14797976.91, 14718249.16, 14799843.71, 15081757.28, 9733986.32, 9721934.06, 14790019.79, 14897378.27, 14683153.78, 14857247.42, 14801667.95, 9625532.86, 9660029.6, 14967086.54], "Gross Profit": [8810418.84, 8653208.12, 8624591.71, 8677788.29, 8865212.97, 5689271.55, 5666912.68, 8633520.39, 8721684.23, 8650405.84, 8705425.2, 8670219.96, 5645182.59, 5645201.27, 8780687.49], "Market Share %": [20.1355, 20.0815, 20.1067, 20.0558, 20.0128, 20.0335, 20.0633, 20.0603, 20.122, 19.9805, 20.039, 20.016, 20.0282, 20.0105, 20.1098], "New Prescriptions": [33115.0, 33943.0, 33395.0, 33565.0, 33486.0, 22336.0, 21775.0, 34014.0, 33928.0, 33978.0, 34085.0, 33291.0, 21577.0, 21087.0, 33439.0]};
+var ARIA_SC_ORIG_LABELS   = {"Revenue": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "Gross Profit": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "Market Share %": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], "New Prescriptions": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"]};
+
+/* format a raw pct number → {text, color} */
+function _ariaPct(p) {
+    if (p === null || p === undefined) return {text:'—', color:'#888'};
+    var s = p >= 0 ? '▲' : '▼';
+    var c = p >= 0 ? '#34D399' : '#F87171';
+    return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
+}
+
+function ariaFilter(sel) {
+    var dim = sel.getAttribute('data-dim');
+    var val = sel.value;
+    var mData = (val === 'All') ? null :
+                ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
+    var mSeries = (val === 'All') ? null :
+                  ((ARIA_SC_MEMBER_SERIES[dim] || {})[val] || null);
+
+    ARIA_KPI_ORDER.forEach(function(kn, i) {
+        var kd = mData ? (mData[kn] || null) : null;
+
+        /* ── main value ── */
+        var ve = document.getElementById('sc_kv_' + i);
+        if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
+                                    : ve.getAttribute('data-orig');
+
+        /* ── MoM ── */
+        var me = document.getElementById('sc_md_' + i);
+        if (me) {
+            if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
+                var rm = _ariaPct(kd.mom_pct);
+                me.textContent = rm.text + ' MoM';
+                me.style.color = rm.color;
+            } else {
+                me.textContent = me.getAttribute('data-orig') || '— MoM';
+                me.style.color = me.getAttribute('data-oc') || '#888';
+            }
+        }
+
+        /* ── YoY ── */
+        var ye = document.getElementById('sc_yd_' + i);
+        if (ye) {
+            if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
+                var ry = _ariaPct(kd.yoy_pct);
+                ye.textContent = ry.text + ' YoY';
+                ye.style.color = ry.color;
+            } else {
+                ye.textContent = ye.getAttribute('data-orig') || '— YoY';
+                ye.style.color = ye.getAttribute('data-oc') || '#888';
+            }
+        }
+
+        /* ── sparkline ── */
+        var chart = ARIA_CHARTS['sc_spark_' + i];
+        if (chart) {
+            var usingMember = (mSeries && mSeries[kn] && mSeries[kn].length > 1);
+            var newSeries = usingMember ? mSeries[kn] : (ARIA_SC_ORIG_SERIES[kn] || null);
+            if (newSeries && newSeries.length > 1) {
+                chart.data.datasets[0].data = newSeries;
+                /* Restore original date labels on "All"; use indices for member series */
+                var origLbls = ARIA_SC_ORIG_LABELS[kn];
+                chart.data.labels = (!usingMember && origLbls && origLbls.length > 0)
+                    ? origLbls
+                    : newSeries.map(function(_, j) { return j; });
+                chart.update('none');
+            }
+        }
+    });
+}
+
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    ARIA_CHARTS['sc_spark_0'] = new Chart(document.getElementById('sc_spark_0'), {
+        type:'line',
+        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[15019565.44, 14797976.91, 14718249.16, 14799843.71, 15081757.28, 9733986.32, 9721934.06, 14790019.79, 14897378.27, 14683153.78, 14857247.42, 14801667.95, 9625532.86, 9660029.6, 14967086.54],
+            borderColor:'#8B5CF6', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
+            fill:true, backgroundColor:'#8B5CF618', tension:0.4 }] },
+        options:{ responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{display:false},
+                tooltip:{
+                    enabled:true, mode:'index', intersect:false,
+                    backgroundColor:'rgba(10,10,20,0.88)',
+                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
+                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
+                    padding:7, cornerRadius:5, caretSize:4,
+                    callbacks:{
+                        label:function(ctx){
+                            var v=ctx.parsed.y;
+                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
+                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
+                            return v%1===0 ? String(v) : v.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales:{ x:{display:false}, y:{display:false} },
+            animation:{duration:0},
+            interaction:{mode:'index',intersect:false}
+        }
+    });
+    ARIA_CHARTS['sc_spark_1'] = new Chart(document.getElementById('sc_spark_1'), {
+        type:'line',
+        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[8810418.84, 8653208.12, 8624591.71, 8677788.29, 8865212.97, 5689271.55, 5666912.68, 8633520.39, 8721684.23, 8650405.84, 8705425.2, 8670219.96, 5645182.59, 5645201.27, 8780687.49],
+            borderColor:'#8B5CF6', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
+            fill:true, backgroundColor:'#8B5CF618', tension:0.4 }] },
+        options:{ responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{display:false},
+                tooltip:{
+                    enabled:true, mode:'index', intersect:false,
+                    backgroundColor:'rgba(10,10,20,0.88)',
+                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
+                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
+                    padding:7, cornerRadius:5, caretSize:4,
+                    callbacks:{
+                        label:function(ctx){
+                            var v=ctx.parsed.y;
+                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
+                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
+                            return v%1===0 ? String(v) : v.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales:{ x:{display:false}, y:{display:false} },
+            animation:{duration:0},
+            interaction:{mode:'index',intersect:false}
+        }
+    });
+    ARIA_CHARTS['sc_spark_2'] = new Chart(document.getElementById('sc_spark_2'), {
+        type:'line',
+        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[20.14, 20.08, 20.11, 20.06, 20.01, 20.03, 20.06, 20.06, 20.12, 19.98, 20.04, 20.02, 20.03, 20.01, 20.11],
+            borderColor:'#8B5CF6', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
+            fill:true, backgroundColor:'#8B5CF618', tension:0.4 }] },
+        options:{ responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{display:false},
+                tooltip:{
+                    enabled:true, mode:'index', intersect:false,
+                    backgroundColor:'rgba(10,10,20,0.88)',
+                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
+                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
+                    padding:7, cornerRadius:5, caretSize:4,
+                    callbacks:{
+                        label:function(ctx){
+                            var v=ctx.parsed.y;
+                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
+                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
+                            return v%1===0 ? String(v) : v.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales:{ x:{display:false}, y:{display:false} },
+            animation:{duration:0},
+            interaction:{mode:'index',intersect:false}
+        }
+    });
+    ARIA_CHARTS['sc_spark_3'] = new Chart(document.getElementById('sc_spark_3'), {
+        type:'line',
+        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15"], datasets:[{ data:[33115.0, 33943.0, 33395.0, 33565.0, 33486.0, 22336.0, 21775.0, 34014.0, 33928.0, 33978.0, 34085.0, 33291.0, 21577.0, 21087.0, 33439.0],
+            borderColor:'#8B5CF6', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
+            fill:true, backgroundColor:'#8B5CF618', tension:0.4 }] },
+        options:{ responsive:true, maintainAspectRatio:false,
+            plugins:{ legend:{display:false},
+                datalabels:{display:false},
+                tooltip:{
+                    enabled:true, mode:'index', intersect:false,
+                    backgroundColor:'rgba(10,10,20,0.88)',
+                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
+                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
+                    padding:7, cornerRadius:5, caretSize:4,
+                    callbacks:{
+                        label:function(ctx){
+                            var v=ctx.parsed.y;
+                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
+                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
+                            return v%1===0 ? String(v) : v.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales:{ x:{display:false}, y:{display:false} },
+            animation:{duration:0},
+            interaction:{mode:'index',intersect:false}
+        }
+    });
+});
+</script>
+</body>
+</html>
