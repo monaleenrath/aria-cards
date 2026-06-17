@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Province', 'Category'] first_dim=Province tmpl=scorecard | yoy_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Province'] | df_shape=[65760, 16] | kpi_map=[('Revenue', 'Revenue_CAD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('Cost', 'COGS_CAD', 'sum', ''), ('Transactions', 'Transactions', 'sum', ''), ('Avg Basket', 'Avg_Basket_CAD', 'mean', ''), ('Loyalty Redemptions', 'Loyalty_Redemptions', 'sum', ''), ('Loyalty Members', 'Loyalty_Members', 'mean', ''), ('New Loyalty Members', 'New_Loyalty_Members', 'sum', ''), ('Waste %', 'Waste_Pct', 'mean', ''), ('Promo Revenue', 'Promo_Revenue_CAD', 'sum', ''), ('Gross Profit', 'Gross_Profit_CAD', 'sum', ''), ('Cost-to-Revenue %', 'DERIVED', 'ratio', 'COGS_CAD'), ('Gross Margin %', 'DERIVED', 'ratio', 'Gross_Profit_CAD'), ('Promo Mix %', 'DERIVED', 'ratio', 'Promo_Revenue_CAD')] | yoy_summary={'Revenue': 12, 'Units Sold': 12, 'Cost': 12, 'Transactions': 12, 'Avg Basket': 12, 'Loyalty Redemptions': 12, 'Loyalty Members': 12, 'New Loyalty Members': 12, 'Waste %': 12, 'Promo Revenue': 12, 'Gross Profit': 12, 'Cost-to-Revenue %': 12, 'Gross Margin %': 12, 'Promo Mix %': 12} | yoy_diag.effective_dims=['Province', 'Category'] | yoy_diag.kpis=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-16 | yoy_diag.curr_df_len=960 yoy_diag.prior_df_len=960 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Province yoy_diag.spot_cfg={'column': 'Revenue_CAD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('Alberta', 5769536.58), ('British Columbia', 6270247.48), ('Manitoba', 2205478.46)] | df_cat_cols={'Province': 'str/6', 'Category': 'str/10'} -->
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=12 dim_gs_keys=['Province', 'Category'] first_dim=Province tmpl=dossier | yoy_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] yoy_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | dod_keys=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] dod_lens=[12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Province'] | df_shape=[65760, 16] | kpi_map=[('Revenue', 'Revenue_CAD', 'sum', ''), ('Units Sold', 'Units_Sold', 'sum', ''), ('Cost', 'COGS_CAD', 'sum', ''), ('Transactions', 'Transactions', 'sum', ''), ('Avg Basket', 'Avg_Basket_CAD', 'mean', ''), ('Loyalty Redemptions', 'Loyalty_Redemptions', 'sum', ''), ('Loyalty Members', 'Loyalty_Members', 'mean', ''), ('New Loyalty Members', 'New_Loyalty_Members', 'sum', ''), ('Waste %', 'Waste_Pct', 'mean', ''), ('Promo Revenue', 'Promo_Revenue_CAD', 'sum', ''), ('Gross Profit', 'Gross_Profit_CAD', 'sum', ''), ('Cost-to-Revenue %', 'DERIVED', 'ratio', 'COGS_CAD'), ('Gross Margin %', 'DERIVED', 'ratio', 'Gross_Profit_CAD'), ('Promo Mix %', 'DERIVED', 'ratio', 'Promo_Revenue_CAD')] | yoy_summary={'Revenue': 12, 'Units Sold': 12, 'Cost': 12, 'Transactions': 12, 'Avg Basket': 12, 'Loyalty Redemptions': 12, 'Loyalty Members': 12, 'New Loyalty Members': 12, 'Waste %': 12, 'Promo Revenue': 12, 'Gross Profit': 12, 'Cost-to-Revenue %': 12, 'Gross Margin %': 12, 'Promo Mix %': 12} | yoy_diag.effective_dims=['Province', 'Category'] | yoy_diag.kpis=['Revenue', 'Units Sold', 'Cost', 'Transactions', 'Avg Basket', 'Loyalty Redemptions', 'Loyalty Members', 'New Loyalty Members', 'Waste %', 'Promo Revenue', 'Gross Profit', 'Cost-to-Revenue %', 'Gross Margin %', 'Promo Mix %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-16 | yoy_diag.curr_df_len=960 yoy_diag.prior_df_len=960 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Province yoy_diag.spot_cfg={'column': 'Revenue_CAD', 'agg': 'sum'} yoy_diag.spot_agg_len=6 yoy_diag.spot_agg_sample=[('Alberta', 5769536.58), ('British Columbia', 6270247.48), ('Manitoba', 2205478.46)] | df_cat_cols={'Province': 'str/6', 'Category': 'str/10'} -->
 <html>
 <head>
 <meta charset="utf-8">
 <style>
 
 * { margin:0; padding:0; box-sizing:border-box; }
-html { background:#F5F0E8; }
+html { background:#0B1220; }
 body {
-    background:#F5F0E8; color:#1A1410;
+    background:#0B1220; color:#F8FAFC;
     font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
     font-size:13px; line-height:1.5;
 }
 .card {
-    width:100%; max-width:900px; background:#F5F0E8;
+    width:100%; max-width:900px; background:#0B1220;
     margin:0 auto; display:flex; flex-direction:column;
     padding:20px 28px 0;
 }
 /* ─ Masthead ──────────────────────────────── */
 .mast {
     display:flex; align-items:center; justify-content:space-between;
-    border-bottom:1px solid #D0C8BC; padding-bottom:10px; margin-bottom:14px;
+    border-bottom:1px solid #1F2937; padding-bottom:10px; margin-bottom:14px;
     gap:8px; flex-wrap:wrap;
 }
 .mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
-.mast-mid   { flex:1; text-align:center; color:#8B7D70; font-size:8px;
+.mast-mid   { flex:1; text-align:center; color:#64748B; font-size:8px;
                letter-spacing:3px; font-weight:600; }
 .mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
 .aria-logo  { color:#F59E0B; font-size:11px; font-weight:800; letter-spacing:4px; }
-.date-lbl   { color:#8B7D70; font-size:9px; letter-spacing:2px; font-weight:600; }
-.date-range { color:#8B7D70; font-size:8px; opacity:0.7; }
+.date-lbl   { color:#64748B; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#64748B; font-size:8px; opacity:0.7; }
 
 /* ─ Section labels ────────────────────────── */
 .sec { font-size:8px; font-weight:700; letter-spacing:3px;
@@ -38,14 +38,14 @@ body {
 /* ─ KPI tiles (original — used by other contexts) ── */
 .kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
 .kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
-              background:#FFFFFF; border:1px solid #D0C8BC;
+              background:#111827; border:1px solid #1F2937;
               border-radius:8px; padding:10px 12px; position:relative;
               overflow:hidden; }
 .kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
               border-radius:50%; }
 .kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
-              color:#8B7D70; text-transform:uppercase; margin-bottom:5px; }
-.kpi-val   { font-size:20px; font-weight:700; color:#1A1410;
+              color:#64748B; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#F8FAFC;
               font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
 .kpi-val.sm{ font-size:15px; }
 .kpi-d     { font-size:9px; font-weight:600; }
@@ -53,18 +53,18 @@ body {
 
 /* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
 .kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-.kpi-tile-v2  { background:#FFFFFF; border:1px solid #D0C8BC;
+.kpi-tile-v2  { background:#111827; border:1px solid #1F2937;
                  border-radius:10px; padding:14px 16px; position:relative;
                  overflow:hidden; }
 .kpi-spark-v2 { height:64px; margin:8px 0 4px; }
 
 /* ─ Mini KPI row (Dossier top) ───────────── */
 .mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
-.mkpi      { flex:1; background:#FFFFFF; border:1px solid #D0C8BC;
+.mkpi      { flex:1; background:#111827; border:1px solid #1F2937;
               border-radius:6px; padding:8px 10px; min-width:0; }
 .mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
-              color:#8B7D70; text-transform:uppercase; margin-bottom:3px; }
-.mkpi-val  { font-size:14px; font-weight:700; color:#1A1410;
+              color:#64748B; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#F8FAFC;
               font-family:Georgia,serif; white-space:nowrap;
               overflow:hidden; text-overflow:ellipsis; }
 .mkpi-d    { font-size:8px; font-weight:600; }
@@ -74,8 +74,8 @@ body {
 canvas     { display:block; }
 
 /* ─ Narrative ────────────────────────────── */
-.narr { font-size:11px; color:#4A3F35; line-height:1.6; }
-.narr strong { color:#1A1410; }
+.narr { font-size:11px; color:#CBD5E1; line-height:1.6; }
+.narr strong { color:#F8FAFC; }
 .stat-pill {
     display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
     font-size:9px; font-weight:700; vertical-align:middle;
@@ -85,10 +85,10 @@ canvas     { display:block; }
 /* ─ Filter panel ─────────────────────────── */
 .filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
 .filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
-                 color:#8B7D70; text-transform:uppercase; }
+                 color:#64748B; text-transform:uppercase; }
 .filter-sel   {
-    font-size:9px; background:#FFFFFF; color:#1A1410;
-    border:1px solid #D0C8BC; border-radius:5px;
+    font-size:9px; background:#1F2937; color:#F8FAFC;
+    border:1px solid #1F2937; border-radius:5px;
     padding:4px 8px; cursor:pointer; outline:none;
     font-family:inherit;
 }
@@ -104,33 +104,33 @@ canvas     { display:block; }
                 border-radius:8px; padding:12px 14px; }
 .action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
                 color:#F59E0B; margin-bottom:6px; }
-.action-text { font-size:11px; font-weight:700; color:#1A1410;
+.action-text { font-size:11px; font-weight:700; color:#F8FAFC;
                 line-height:1.4; margin-bottom:4px; }
-.action-meta { font-size:9px; color:#8B7D70; }
+.action-meta { font-size:9px; color:#64748B; }
 
 /* ─ Footer ───────────────────────────────── */
-.footer      { background:#EDE8DF; margin:14px -28px 0;
-                padding:10px 28px 24px; border-top:1px solid #D0C8BC; }
+.footer      { background:#111827; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #1F2937; }
 .footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
                 color:#F59E0B; margin-bottom:4px; }
-.footer-text { font-size:9px; color:#4A3F35; font-style:italic;
+.footer-text { font-size:9px; color:#CBD5E1; font-style:italic;
                 font-family:Georgia,serif; opacity:0.85;
                 line-height:1.6; overflow:visible; white-space:normal; }
 
 /* ─ Editorial specific ───────────────────── */
 .ed-hero     { display:flex; align-items:center; gap:18px;
-                padding:14px 0 12px; border-bottom:1px solid #D0C8BC;
+                padding:14px 0 12px; border-bottom:1px solid #1F2937;
                 margin-bottom:14px; }
-.ed-headline { font-size:20px; font-weight:700; color:#1A1410;
+.ed-headline { font-size:20px; font-weight:700; color:#F8FAFC;
                 font-family:Georgia,serif; line-height:1.25;
                 flex:1; }
-.ed-sub      { font-size:11px; color:#8B7D70; font-style:italic;
+.ed-sub      { font-size:11px; color:#64748B; font-style:italic;
                 margin-top:5px; }
 .ed-col      { flex:1; }
-.ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
-.ed-col + .ed-col + .ed-col { border-left:1px solid #D0C8BC; padding-left:16px; }
+.ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
 .ed-cols     { display:flex; gap:0; }
-.ed-body     { font-size:11px; color:#4A3F35; line-height:1.65;
+.ed-body     { font-size:11px; color:#CBD5E1; line-height:1.65;
                 font-family:Georgia,serif; }
 .ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
 
@@ -138,7 +138,7 @@ canvas     { display:block; }
 .ed-dim-pill {
     font-size:9px; font-weight:700; letter-spacing:0.8px;
     text-transform:uppercase; background:transparent;
-    border:1px solid #D0C8BC; color:#8B7D70;
+    border:1px solid #1F2937; color:#64748B;
     border-radius:10px; padding:3px 10px; cursor:pointer;
     font-family:inherit; transition:all 0.15s;
 }
@@ -166,109 +166,86 @@ canvas     { display:block; }
   </div>
 </div>
   <div class="filter-panel" style="margin:8px 0 10px"><span class="filter-lbl">View by</span> <select class="filter-sel" data-dim="Province" onchange="ariaFilter(this)"><option value="All">Province: All</option><option value="Ontario">Ontario</option><option value="Quebec">Quebec</option><option value="British Columbia">British Columbia</option><option value="Alberta">Alberta</option><option value="Manitoba">Manitoba</option><option value="Nova Scotia">Nova Scotia</option></select> </div>
-  <div class="sec">Performance Scorecard</div>
-  <div class="kpi-grid-v2">
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Revenue</div>
-  <div class="kpi-val sm" id="sc_kv_0" data-orig="$33,482,686">$33,482,686</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_0"></canvas></div>
-  <div class="kpi-d" id="sc_md_0" data-orig="▲ 2.9% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.9% MoM</div>
-  <div class="kpi-d" id="sc_yd_0" data-orig="▲ 3.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.4% YoY</div>
-  
+  <div class="sec">Analytics Dossier</div>
+  <div class="mkpi-row">
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Revenue</div>
+  <div class="mkpi-val" id="ds_kv_0" data-orig="$33,482,686">$33,482,686</div>
+  <div class="mkpi-d" id="ds_md_0" data-orig="▲ 2.9% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.9% MoM</div>
+  <div class="mkpi-d" id="ds_yd_0" data-orig="▲ 3.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.4% YoY</div>
 </div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Promo Revenue</div>
-  <div class="kpi-val sm" id="sc_kv_1" data-orig="$3,343,846">$3,343,846</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_1"></canvas></div>
-  <div class="kpi-d" id="sc_md_1" data-orig="▲ 127.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 127.4% MoM</div>
-  <div class="kpi-d" id="sc_yd_1" data-orig="▲ 3.7% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.7% YoY</div>
-  
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Promo Revenue</div>
+  <div class="mkpi-val" id="ds_kv_1" data-orig="$3,343,846">$3,343,846</div>
+  <div class="mkpi-d" id="ds_md_1" data-orig="▲ 127.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 127.4% MoM</div>
+  <div class="mkpi-d" id="ds_yd_1" data-orig="▲ 3.7% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.7% YoY</div>
 </div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Gross Profit</div>
-  <div class="kpi-val sm" id="sc_kv_2" data-orig="$10,047,036">$10,047,036</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_2"></canvas></div>
-  <div class="kpi-d" id="sc_md_2" data-orig="▲ 3.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 3.0% MoM</div>
-  <div class="kpi-d" id="sc_yd_2" data-orig="▲ 3.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.3% YoY</div>
-  
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Gross Profit</div>
+  <div class="mkpi-val" id="ds_kv_2" data-orig="$10,047,036">$10,047,036</div>
+  <div class="mkpi-d" id="ds_md_2" data-orig="▲ 3.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 3.0% MoM</div>
+  <div class="mkpi-d" id="ds_yd_2" data-orig="▲ 3.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.3% YoY</div>
 </div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Cost-to-Revenue %</div>
-  <div class="kpi-val " id="sc_kv_3" data-orig="70.0%">70.0%</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_3"></canvas></div>
-  <div class="kpi-d" id="sc_md_3" data-orig="▼ 0.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.0% MoM</div>
-  <div class="kpi-d" id="sc_yd_3" data-orig="▲ 0.0% YoY" data-oc="#34D399" style="color:#34D399">▲ 0.0% YoY</div>
-  
+<div class="mkpi" style="border-top:2px solid #FBBF24">
+  <div class="mkpi-name">Cost-to-Revenue %</div>
+  <div class="mkpi-val" id="ds_kv_3" data-orig="70.0%">70.0%</div>
+  <div class="mkpi-d" id="ds_md_3" data-orig="▼ 0.0% MoM" data-oc="#F87171" style="color:#F87171">▼ 0.0% MoM</div>
+  <div class="mkpi-d" id="ds_yd_3" data-orig="▲ 0.0% YoY" data-oc="#34D399" style="color:#34D399">▲ 0.0% YoY</div>
 </div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#F87171"></div>
-  <div class="kpi-name">Gross Margin %</div>
-  <div class="kpi-val " id="sc_kv_4" data-orig="30.0%">30.0%</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_4"></canvas></div>
-  <div class="kpi-d" id="sc_md_4" data-orig="▲ 0.1% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.1% MoM</div>
-  <div class="kpi-d" id="sc_yd_4" data-orig="▼ 0.1% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.1% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Units Sold</div>
-  <div class="kpi-val sm" id="sc_kv_5" data-orig="8,063,724">8,063,724</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_5"></canvas></div>
-  <div class="kpi-d" id="sc_md_5" data-orig="▲ 4.0% MoM" data-oc="#34D399" style="color:#34D399">▲ 4.0% MoM</div>
-  <div class="kpi-d" id="sc_yd_5" data-orig="▲ 4.3% YoY" data-oc="#34D399" style="color:#34D399">▲ 4.3% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Cost</div>
-  <div class="kpi-val sm" id="sc_kv_6" data-orig="$23,435,651">$23,435,651</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_6"></canvas></div>
-  <div class="kpi-d" id="sc_md_6" data-orig="▲ 2.8% MoM" data-oc="#34D399" style="color:#34D399">▲ 2.8% MoM</div>
-  <div class="kpi-d" id="sc_yd_6" data-orig="▲ 3.4% YoY" data-oc="#34D399" style="color:#34D399">▲ 3.4% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Transactions</div>
-  <div class="kpi-val " id="sc_kv_7" data-orig="620,348">620,348</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_7"></canvas></div>
-  <div class="kpi-d" id="sc_md_7" data-orig="▲ 4.4% MoM" data-oc="#34D399" style="color:#34D399">▲ 4.4% MoM</div>
-  <div class="kpi-d" id="sc_yd_7" data-orig="▲ 4.2% YoY" data-oc="#34D399" style="color:#34D399">▲ 4.2% YoY</div>
-  
-</div>
-<div class="kpi-tile-v2">
-  <div class="kpi-rag" style="background:#FBBF24"></div>
-  <div class="kpi-name">Avg Basket</div>
-  <div class="kpi-val " id="sc_kv_8" data-orig="$56">$56</div>
-  <div class="kpi-spark-v2"><canvas id="sc_spark_8"></canvas></div>
-  <div class="kpi-d" id="sc_md_8" data-orig="▼ 1.1% MoM" data-oc="#F87171" style="color:#F87171">▼ 1.1% MoM</div>
-  <div class="kpi-d" id="sc_yd_8" data-orig="▲ 0.1% YoY" data-oc="#34D399" style="color:#34D399">▲ 0.1% YoY</div>
-  
+<div class="mkpi" style="border-top:2px solid #F87171">
+  <div class="mkpi-name">Gross Margin %</div>
+  <div class="mkpi-val" id="ds_kv_4" data-orig="30.0%">30.0%</div>
+  <div class="mkpi-d" id="ds_md_4" data-orig="▲ 0.1% MoM" data-oc="#34D399" style="color:#34D399">▲ 0.1% MoM</div>
+  <div class="mkpi-d" id="ds_yd_4" data-orig="▼ 0.1% YoY" data-oc="#F87171" style="color:#F87171">▼ 0.1% YoY</div>
 </div></div>
   
-<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #D0C8BC;padding-top:14px">
-  <div style="flex:1;padding-right:14px;border-right:1px solid #D0C8BC">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-trend-title" class="sec">Revenue — Monthly (12M)</div>
+    
+<div class="chart-box" style="height:160px">
+  <canvas id="ds_trend"></canvas>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-dim-title" class="sec">Province Breakdown</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_dimbar"></canvas></div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-donut-title" class="sec">Contribution Mix</div>
+    
+<div style="display:flex;gap:8px;align-items:flex-start">
+  <div class="chart-box" style="height:160px;flex:0 0 160px">
+    <canvas id="ds_donut"></canvas>
+  </div>
+  <div id="ds-donut-legend" style="flex:1;overflow:hidden;padding-top:8px"><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F59E0B;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Ontario</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#34D399;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Quebec</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#60A5FA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">British Columbia</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#F87171;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Alberta</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#A78BFA;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Manitoba</div></div><div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="width:7px;height:7px;border-radius:50%;background:#FBBF24;flex-shrink:0"></div><div style="font-size:8px;color:#CBD5E1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">Nova Scotia</div></div></div>
+</div>
+  </div>
+  <div style="background:#111827;border:1px solid #1F2937;border-radius:8px;padding:12px">
+    <div id="ds-wfall-title" class="sec">Period-over-Period Waterfall</div>
+    <div class="chart-box" style="height:160px"><canvas id="ds_wfall"></canvas></div>
+  </div>
+</div>
+  
+<div style="display:flex;gap:0;margin-top:14px;border-top:1px solid #1F2937;padding-top:14px">
+  <div style="flex:1;padding-right:14px;border-right:1px solid #1F2937">
     <div class="sec">Strategic Overview</div>
     <div class="ed-stat-row"><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Revenue: ▲ 2.9% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.4%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Promo Revenue: ▲ 127.4% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.7%</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">Gross Profit: ▲ 3.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 3.3%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Cost-to-Revenue %: ▼ 0.0% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 0.0%</span></div>
-    <div class="narr">Revenue reached $33.5M MTD, up 2.9% MoM and 3.4% YoY, though recent daily performance shows deceleration. This growth is driven by increased Units Sold and Transactions, but Average Basket value decreased by 1.1% MoM, coinciding with a 127.4% MoM surge in Promo Revenue. This indi</div>
+    <div class="narr">Revenue reached $33.48 million this month, showing steady growth of 2.87% month-over-month. This growth is primarily driven by increased transaction volume, particularly in Ontario, but average basket size decreased by 1.09% month-over-month, coinciding with a 121.1% surge in pro</div>
   </div>
-  <div style="flex:1;padding:0 14px;border-right:1px solid #D0C8BC">
+  <div style="flex:1;padding:0 14px;border-right:1px solid #1F2937">
     <div class="sec">Boardroom Signals</div>
-    <div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → Ontario increased Revenue by $333,195 (3.4% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → Quebec increased Revenue by $219,004 (3.3% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → British Columbia increased Revenue by $212,745 (3.5% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;margin-right:4px">▶</span>Category → Meat &amp; Seafood increased Revenue by $170,740 (3.3% vs prior).</div>
+    <div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → Ontario increased Revenue by $333,195 (3.37% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → Quebec increased Revenue by $219,004 (3.26% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → British Columbia increased Revenue by $212,745 (3.51% vs prior).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Province → Ontario decreased Avg Basket by $0.77 (-1.37% vs prior).</div>
   </div>
   <div style="flex:1;padding-left:14px">
     <div class="sec">Executive Directive</div>
-    <div style="margin-bottom:6px;font-size:10px;color:#4A3F35;"><span style="color:#F59E0B;font-weight:700;margin-right:5px">▶</span>Review promotional strategy and pricing models. Owner: Chief Marketing Officer. Deadline: Next 7 days. Success metric: Stabilize Average Basket value and reduce Promo Mix % by 20 basis points.</div>
+    <div style="margin-bottom:6px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;font-weight:700;margin-right:5px">▶</span>Re-evaluate promotional strategy. Owner: Head of Marketing. Deadline: Next 30 days. Success metric: Stabilize average basket value and reduce promo mix % by 5 percentage points.</div>
   </div>
 </div>
   
 <div class="footer">
   <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
-  <div class="footer-text">The first question you will ask is: &#x27;Is growth coming at the cost of margin — is this structurally sound?&#x27; My answer is: &#x27;Yes, our growth is heavily reliant on promotions, eroding the quality of our revenue.&#x27; A bright spot is that Loyalty Members are growing, up 6.3% YoY.</div>
+  <div class="footer-text">The first question Chief Executive Officer will ask is: &#x27;Is growth coming at the cost of margin — is this structurally sound?&#x27; Our growth is currently volume-driven, with average basket size shrinking and promotional activity surging, indicating a potential trade-off on margin quality. A bright spot is the continued growth in our loyalty program, with Loyalty Members up 6.29% year-over-year.</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -279,78 +256,181 @@ if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
 /* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
 var ARIA_CHARTS = {};
 
-var ARIA_KPI_ORDER        = ["Revenue", "Promo Revenue", "Gross Profit", "Cost-to-Revenue %", "Gross Margin %", "Units Sold", "Cost", "Transactions", "Avg Basket"];
-var ARIA_DIM_MEMBER_KPIS  = {"Province": {"Alberta": {"Revenue": {"value": 5769536.58, "value_fmt": "$5.8M", "mom_pct": 2.63, "yoy_pct": 3.16}, "Units Sold": {"value": 1372093.0, "value_fmt": "1,372,093", "mom_pct": 2.83, "yoy_pct": 2.69}, "Cost": {"value": 4035027.91, "value_fmt": "$4.0M", "mom_pct": 2.62, "yoy_pct": 2.99}, "Transactions": {"value": 106197.0, "value_fmt": "106,197", "mom_pct": 2.99, "yoy_pct": 3.34}, "Avg Basket": {"value": 56.0986, "value_fmt": "$56", "mom_pct": -0.08, "yoy_pct": 0.23}, "Loyalty Redemptions": {"value": 37306.0, "value_fmt": "37,306", "mom_pct": 4.65, "yoy_pct": 4.87}, "Loyalty Members": {"value": 22828.2375, "value_fmt": "22,828", "mom_pct": 1.07, "yoy_pct": 5.39}, "New Loyalty Members": {"value": 36220.0, "value_fmt": "36,220", "mom_pct": 0.23, "yoy_pct": 4.45}, "Waste %": {"value": 3.4326, "value_fmt": "343.3%", "mom_pct": -0.38, "yoy_pct": 0.87}, "Promo Revenue": {"value": 575455.53, "value_fmt": "$575K", "mom_pct": 122.73, "yoy_pct": 4.5}, "Gross Profit": {"value": 1734508.67, "value_fmt": "$1.7M", "mom_pct": 2.65, "yoy_pct": 3.56}, "Cost-to-Revenue %": {"value": 0.6994, "value_fmt": "69.9%", "mom_pct": -0.01, "yoy_pct": -0.16}, "Gross Margin %": {"value": 0.3006, "value_fmt": "30.1%", "mom_pct": 0.02, "yoy_pct": 0.39}, "Promo Mix %": {"value": 0.0997, "value_fmt": "10.0%", "mom_pct": 117.03, "yoy_pct": 1.3}}, "British Columbia": {"Revenue": {"value": 6270247.48, "value_fmt": "$6.3M", "mom_pct": 3.07, "yoy_pct": 3.51}, "Units Sold": {"value": 1510065.0, "value_fmt": "1,510,065", "mom_pct": 4.32, "yoy_pct": 5.33}, "Cost": {"value": 4391525.65, "value_fmt": "$4.4M", "mom_pct": 3.0, "yoy_pct": 3.55}, "Transactions": {"value": 116921.0, "value_fmt": "116,921", "mom_pct": 5.36, "yoy_pct": 4.26}, "Avg Basket": {"value": 55.5413, "value_fmt": "$56", "mom_pct": -1.9, "yoy_pct": -0.14}, "Loyalty Redemptions": {"value": 40500.0, "value_fmt": "40,500", "mom_pct": 4.16, "yoy_pct": 3.65}, "Loyalty Members": {"value": 23058.8063, "value_fmt": "23,058", "mom_pct": -0.38, "yoy_pct": 5.14}, "New Loyalty Members": {"value": 35257.0, "value_fmt": "35,257", "mom_pct": -4.7, "yoy_pct": 3.76}, "Waste %": {"value": 3.3666, "value_fmt": "336.7%", "mom_pct": 0.62, "yoy_pct": -1.13}, "Promo Revenue": {"value": 617261.7, "value_fmt": "$617K", "mom_pct": 127.81, "yoy_pct": 2.36}, "Gross Profit": {"value": 1878721.83, "value_fmt": "$1.9M", "mom_pct": 3.22, "yoy_pct": 3.42}, "Cost-to-Revenue %": {"value": 0.7004, "value_fmt": "70.0%", "mom_pct": -0.06, "yoy_pct": 0.04}, "Gross Margin %": {"value": 0.2996, "value_fmt": "30.0%", "mom_pct": 0.15, "yoy_pct": -0.09}, "Promo Mix %": {"value": 0.0984, "value_fmt": "9.8%", "mom_pct": 121.03, "yoy_pct": -1.12}}, "Manitoba": {"Revenue": {"value": 2205478.46, "value_fmt": "$2.2M", "mom_pct": 3.07, "yoy_pct": 3.45}, "Units Sold": {"value": 519506.0, "value_fmt": "519,506", "mom_pct": 0.46, "yoy_pct": 3.1}, "Cost": {"value": 1546372.33, "value_fmt": "$1.5M", "mom_pct": 3.1, "yoy_pct": 3.62}, "Transactions": {"value": 40532.0, "value_fmt": "40,532", "mom_pct": 3.59, "yoy_pct": 3.4}, "Avg Basket": {"value": 56.2718, "value_fmt": "$56", "mom_pct": 0.62, "yoy_pct": 1.02}, "Loyalty Redemptions": {"value": 14085.0, "value_fmt": "14,085", "mom_pct": 3.07, "yoy_pct": 3.88}, "Loyalty Members": {"value": 23374.0625, "value_fmt": "23,374", "mom_pct": 2.84, "yoy_pct": 9.52}, "New Loyalty Members": {"value": 17778.0, "value_fmt": "17,778", "mom_pct": 2.51, "yoy_pct": 4.72}, "Waste %": {"value": 3.3518, "value_fmt": "335.2%", "mom_pct": -1.51, "yoy_pct": -1.9}, "Promo Revenue": {"value": 216354.67, "value_fmt": "$216K", "mom_pct": 121.36, "yoy_pct": -0.71}, "Gross Profit": {"value": 659106.13, "value_fmt": "$659K", "mom_pct": 2.99, "yoy_pct": 3.06}, "Cost-to-Revenue %": {"value": 0.7012, "value_fmt": "70.1%", "mom_pct": 0.03, "yoy_pct": 0.16}, "Gross Margin %": {"value": 0.2988, "value_fmt": "29.9%", "mom_pct": -0.07, "yoy_pct": -0.38}, "Promo Mix %": {"value": 0.0981, "value_fmt": "9.8%", "mom_pct": 114.76, "yoy_pct": -4.02}}, "Nova Scotia": {"Revenue": {"value": 2091103.94, "value_fmt": "$2.1M", "mom_pct": 2.96, "yoy_pct": 3.5}, "Units Sold": {"value": 497561.0, "value_fmt": "497,561", "mom_pct": 5.15, "yoy_pct": -0.08}, "Cost": {"value": 1462915.32, "value_fmt": "$1.5M", "mom_pct": 2.63, "yoy_pct": 3.74}, "Transactions": {"value": 38475.0, "value_fmt": "38,475", "mom_pct": 6.53, "yoy_pct": 2.41}, "Avg Basket": {"value": 56.177, "value_fmt": "$56", "mom_pct": -3.11, "yoy_pct": 1.11}, "Loyalty Redemptions": {"value": 13198.0, "value_fmt": "13,198", "mom_pct": 5.74, "yoy_pct": 0.69}, "Loyalty Members": {"value": 23053.775, "value_fmt": "23,053", "mom_pct": 1.2, "yoy_pct": 6.35}, "New Loyalty Members": {"value": 18079.0, "value_fmt": "18,079", "mom_pct": -5.31, "yoy_pct": 3.16}, "Waste %": {"value": 3.394, "value_fmt": "339.4%", "mom_pct": 0.34, "yoy_pct": -0.03}, "Promo Revenue": {"value": 211359.89, "value_fmt": "$211K", "mom_pct": 137.35, "yoy_pct": 3.61}, "Gross Profit": {"value": 628188.62, "value_fmt": "$628K", "mom_pct": 3.76, "yoy_pct": 2.95}, "Cost-to-Revenue %": {"value": 0.6996, "value_fmt": "70.0%", "mom_pct": -0.33, "yoy_pct": 0.23}, "Gross Margin %": {"value": 0.3004, "value_fmt": "30.0%", "mom_pct": 0.77, "yoy_pct": -0.53}, "Promo Mix %": {"value": 0.1011, "value_fmt": "10.1%", "mom_pct": 130.52, "yoy_pct": 0.1}}, "Ontario": {"Revenue": {"value": 10218664.35, "value_fmt": "$10.2M", "mom_pct": 2.73, "yoy_pct": 3.37}, "Units Sold": {"value": 2498206.0, "value_fmt": "2,498,206", "mom_pct": 4.76, "yoy_pct": 5.88}, "Cost": {"value": 7145495.21, "value_fmt": "$7.1M", "mom_pct": 2.51, "yoy_pct": 3.29}, "Transactions": {"value": 190472.0, "value_fmt": "190,472", "mom_pct": 4.79, "yoy_pct": 5.29}, "Avg Basket": {"value": 55.4668, "value_fmt": "$55", "mom_pct": -1.6, "yoy_pct": -1.37}, "Loyalty Redemptions": {"value": 65610.0, "value_fmt": "65,610", "mom_pct": 3.27, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22964.725, "value_fmt": "22,964", "mom_pct": 0.88, "yoy_pct": 6.1}, "New Loyalty Members": {"value": 55008.0, "value_fmt": "55,008", "mom_pct": 1.78, "yoy_pct": 7.5}, "Waste %": {"value": 3.4209, "value_fmt": "342.1%", "mom_pct": 0.18, "yoy_pct": 0.94}, "Promo Revenue": {"value": 1024294.87, "value_fmt": "$1.0M", "mom_pct": 126.92, "yoy_pct": 4.34}, "Gross Profit": {"value": 3073169.14, "value_fmt": "$3.1M", "mom_pct": 3.26, "yoy_pct": 3.57}, "Cost-to-Revenue %": {"value": 0.6993, "value_fmt": "69.9%", "mom_pct": -0.22, "yoy_pct": -0.08}, "Gross Margin %": {"value": 0.3007, "value_fmt": "30.1%", "mom_pct": 0.51, "yoy_pct": 0.19}, "Promo Mix %": {"value": 0.1002, "value_fmt": "10.0%", "mom_pct": 120.89, "yoy_pct": 0.93}}, "Quebec": {"Revenue": {"value": 6927655.63, "value_fmt": "$6.9M", "mom_pct": 3.01, "yoy_pct": 3.26}, "Units Sold": {"value": 1666293.0, "value_fmt": "1,666,293", "mom_pct": 4.42, "yoy_pct": 3.92}, "Cost": {"value": 4854314.15, "value_fmt": "$4.9M", "mom_pct": 3.28, "yoy_pct": 3.48}, "Transactions": {"value": 127751.0, "value_fmt": "127,751", "mom_pct": 3.89, "yoy_pct": 4.06}, "Avg Basket": {"value": 56.0207, "value_fmt": "$56", "mom_pct": -0.41, "yoy_pct": -0.22}, "Loyalty Redemptions": {"value": 43956.0, "value_fmt": "43,956", "mom_pct": 3.84, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22728.2938, "value_fmt": "22,728", "mom_pct": -0.39, "yoy_pct": 5.32}, "New Loyalty Members": {"value": 45402.0, "value_fmt": "45,402", "mom_pct": 2.65, "yoy_pct": 6.36}, "Waste %": {"value": 3.4159, "value_fmt": "341.6%", "mom_pct": 0.83, "yoy_pct": 1.22}, "Promo Revenue": {"value": 699119.48, "value_fmt": "$699K", "mom_pct": 130.75, "yoy_pct": 4.92}, "Gross Profit": {"value": 2073341.48, "value_fmt": "$2.1M", "mom_pct": 2.39, "yoy_pct": 2.76}, "Cost-to-Revenue %": {"value": 0.7007, "value_fmt": "70.1%", "mom_pct": 0.26, "yoy_pct": 0.21}, "Gross Margin %": {"value": 0.2993, "value_fmt": "29.9%", "mom_pct": -0.61, "yoy_pct": -0.49}, "Promo Mix %": {"value": 0.1009, "value_fmt": "10.1%", "mom_pct": 124.0, "yoy_pct": 1.6}}}};
-var ARIA_SC_MEMBER_SERIES = {"Province": {"Alberta": {"Revenue": [339213.38, 336316.63, 342289.37, 341989.55, 365537.93, 411344.57, 415687.26, 334409.87, 337644.96, 334667.96, 341940.6, 368942.04, 413829.85, 412846.63, 339145.47, 333730.51], "Units Sold": [82579.0, 76930.0, 80076.0, 82750.0, 92054.0, 104421.0, 94558.0, 82933.0, 78426.0, 77268.0, 81777.0, 88686.0, 96869.0, 93966.0, 80099.0, 78701.0], "Cost": [234804.26, 235404.91, 238271.49, 236856.14, 256600.18, 287356.1, 291581.65, 233519.67, 236324.03, 234441.97, 241616.27, 258545.27, 288567.66, 290085.77, 237216.7, 233835.84], "Transactions": [6334.0, 6034.0, 6689.0, 6311.0, 6993.0, 7735.0, 7433.0, 6006.0, 6081.0, 6232.0, 6156.0, 6760.0, 7587.0, 7511.0, 6128.0, 6207.0], "Avg Basket": [56.947, 56.639, 53.291, 54.934, 54.433, 55.041, 58.257, 56.637, 56.535, 56.076, 58.152, 56.035, 55.533, 57.184, 55.201, 56.682], "Loyalty Redemptions": [2296.0, 2091.0, 2464.0, 2298.0, 2419.0, 2721.0, 2629.0, 2042.0, 2108.0, 2241.0, 2241.0, 2301.0, 2520.0, 2671.0, 2188.0, 2076.0], "Loyalty Members": [22246.3, 23524.3, 23362.4, 23707.0, 22735.5, 22759.4, 22661.7, 23672.6, 21942.4, 22788.5, 22737.8, 20816.5, 21792.3, 23793.1, 23552.1, 23159.9], "New Loyalty Members": [2153.0, 2126.0, 2438.0, 2348.0, 2467.0, 2085.0, 2291.0, 2277.0, 2243.0, 2236.0, 2460.0, 2189.0, 1855.0, 2415.0, 2423.0, 2214.0], "Waste %": [3.325, 3.367, 3.323, 3.606, 3.577, 3.581, 3.381, 3.313, 3.559, 3.369, 3.408, 3.399, 3.408, 3.472, 3.469, 3.364], "Promo Revenue": [34043.83, 35320.78, 32428.74, 35372.4, 36089.0, 39091.89, 40592.8, 33810.92, 34003.35, 32432.04, 33643.92, 39314.93, 40658.76, 44125.8, 33080.98, 31445.39], "Gross Profit": [104409.12, 100911.72, 104017.88, 105133.41, 108937.75, 123988.47, 124105.61, 100890.2, 101320.93, 100225.99, 100324.33, 110396.77, 125262.19, 122760.86, 101928.77, 99894.67], "Cost-to-Revenue %": [0.6922, 0.7, 0.6961, 0.6926, 0.702, 0.6986, 0.7014, 0.6983, 0.6999, 0.7005, 0.7066, 0.7008, 0.6973, 0.7026, 0.6995, 0.7007], "Gross Margin %": [0.3078, 0.3, 0.3039, 0.3074, 0.298, 0.3014, 0.2986, 0.3017, 0.3001, 0.2995, 0.2934, 0.2992, 0.3027, 0.2974, 0.3005, 0.2993], "Promo Mix %": [0.1004, 0.105, 0.0947, 0.1034, 0.0987, 0.095, 0.0977, 0.1011, 0.1007, 0.0969, 0.0984, 0.1066, 0.0982, 0.1069, 0.0975, 0.0942]}, "British Columbia": {"Revenue": [367578.94, 373120.62, 368715.45, 366871.24, 395186.92, 449754.72, 445761.48, 373810.36, 369389.19, 364802.78, 365562.42, 397116.03, 448050.18, 446269.55, 370133.77, 368123.83], "Units Sold": [82550.0, 89365.0, 83646.0, 85828.0, 100787.0, 113991.0, 124933.0, 86932.0, 82866.0, 75997.0, 87546.0, 94358.0, 109351.0, 113163.0, 84620.0, 94132.0], "Cost": [257210.85, 260334.22, 258998.23, 256597.88, 276798.54, 312585.87, 310716.2, 262154.15, 258984.74, 255735.75, 257068.22, 280841.41, 312626.25, 312448.3, 258554.88, 259870.16], "Transactions": [6752.0, 6689.0, 6727.0, 6692.0, 7602.0, 9055.0, 9083.0, 6892.0, 6666.0, 6451.0, 6728.0, 7074.0, 8335.0, 8611.0, 6834.0, 6730.0], "Avg Basket": [56.085, 57.355, 57.078, 56.074, 53.878, 51.767, 51.566, 55.537, 56.214, 57.704, 55.44, 57.613, 55.41, 53.036, 55.495, 58.408], "Loyalty Redemptions": [2367.0, 2348.0, 2319.0, 2364.0, 2651.0, 3134.0, 3134.0, 2386.0, 2268.0, 2116.0, 2309.0, 2511.0, 2968.0, 2961.0, 2354.0, 2310.0], "Loyalty Members": [23148.2, 23345.6, 22756.2, 22900.7, 23542.2, 22984.6, 22157.8, 23882.6, 22360.7, 22602.5, 23338.6, 22477.9, 22612.1, 22358.7, 24901.8, 23570.7], "New Loyalty Members": [2395.0, 2156.0, 2257.0, 2284.0, 2349.0, 2139.0, 2180.0, 2403.0, 2032.0, 2133.0, 2036.0, 2292.0, 2062.0, 1823.0, 2498.0, 2218.0], "Waste %": [3.312, 3.388, 3.377, 3.274, 3.356, 3.161, 3.434, 3.348, 3.457, 3.428, 3.412, 3.409, 3.384, 3.366, 3.36, 3.4], "Promo Revenue": [37303.42, 34830.08, 39615.45, 37274.03, 36898.17, 42661.97, 42626.74, 36346.46, 36839.72, 35718.83, 34717.8, 40190.62, 44446.94, 44940.7, 37433.37, 35417.4], "Gross Profit": [110368.09, 112786.4, 109717.22, 110273.36, 118388.38, 137168.85, 135045.28, 111656.21, 110404.45, 109067.03, 108494.2, 116274.62, 135423.93, 133821.25, 111578.89, 108253.67], "Cost-to-Revenue %": [0.6997, 0.6977, 0.7024, 0.6994, 0.7004, 0.695, 0.697, 0.7013, 0.7011, 0.701, 0.7032, 0.7072, 0.6977, 0.7001, 0.6985, 0.7059], "Gross Margin %": [0.3003, 0.3023, 0.2976, 0.3006, 0.2996, 0.305, 0.303, 0.2987, 0.2989, 0.299, 0.2968, 0.2928, 0.3023, 0.2999, 0.3015, 0.2941], "Promo Mix %": [0.1015, 0.0933, 0.1074, 0.1016, 0.0934, 0.0949, 0.0956, 0.0972, 0.0997, 0.0979, 0.095, 0.1012, 0.0992, 0.1007, 0.1011, 0.0962]}, "Manitoba": {"Revenue": [128923.94, 130080.81, 129123.37, 126969.91, 138258.17, 159144.84, 158602.22, 129994.39, 130901.37, 130277.74, 130322.15, 140553.81, 155962.85, 158283.11, 129723.12, 128356.66], "Units Sold": [31516.0, 29037.0, 29203.0, 28164.0, 31733.0, 38063.0, 38601.0, 30695.0, 29743.0, 32965.0, 33367.0, 30373.0, 38655.0, 36187.0, 29336.0, 31868.0], "Cost": [90314.03, 91744.4, 90846.77, 89357.48, 96504.97, 111782.66, 110881.54, 90961.04, 91902.55, 91290.65, 91154.62, 98526.42, 109233.35, 111400.43, 90693.03, 89778.39], "Transactions": [2469.0, 2261.0, 2386.0, 2243.0, 2563.0, 2961.0, 3099.0, 2237.0, 2399.0, 2317.0, 2357.0, 2631.0, 2840.0, 2882.0, 2451.0, 2436.0], "Avg Basket": [53.995, 59.868, 55.363, 56.008, 56.017, 57.458, 54.139, 61.009, 56.9, 57.671, 55.354, 54.748, 56.537, 55.475, 54.538, 55.269], "Loyalty Redemptions": [864.0, 861.0, 787.0, 730.0, 901.0, 1000.0, 1090.0, 788.0, 826.0, 813.0, 747.0, 954.0, 1006.0, 980.0, 849.0, 889.0], "Loyalty Members": [20959.9, 23792.0, 24308.5, 22675.4, 23491.4, 21908.7, 22726.5, 24970.5, 24080.0, 23259.7, 23364.6, 22598.1, 25330.7, 23234.6, 22902.6, 24381.8], "New Loyalty Members": [916.0, 1094.0, 1195.0, 1007.0, 1097.0, 1135.0, 1031.0, 1337.0, 1194.0, 1071.0, 1238.0, 1148.0, 1038.0, 980.0, 1084.0, 1213.0], "Waste %": [3.477, 3.258, 3.219, 3.277, 3.433, 3.15, 3.471, 3.254, 3.144, 3.566, 3.372, 3.143, 3.443, 3.461, 3.615, 3.345], "Promo Revenue": [12936.51, 13338.13, 12502.32, 12723.94, 13423.91, 14489.89, 17395.55, 11611.37, 12563.36, 13318.04, 12727.17, 13762.12, 16823.04, 15538.74, 11064.03, 12136.55], "Gross Profit": [38609.91, 38336.41, 38276.6, 37612.43, 41753.2, 47362.18, 47720.68, 39033.35, 38998.82, 38987.09, 39167.53, 42027.39, 46729.5, 46882.68, 39030.09, 38578.27], "Cost-to-Revenue %": [0.7005, 0.7053, 0.7036, 0.7038, 0.698, 0.7024, 0.6991, 0.6997, 0.7021, 0.7007, 0.6995, 0.701, 0.7004, 0.7038, 0.6991, 0.6994], "Gross Margin %": [0.2995, 0.2947, 0.2964, 0.2962, 0.302, 0.2976, 0.3009, 0.3003, 0.2979, 0.2993, 0.3005, 0.299, 0.2996, 0.2962, 0.3009, 0.3006], "Promo Mix %": [0.1003, 0.1025, 0.0968, 0.1002, 0.0971, 0.091, 0.1097, 0.0893, 0.096, 0.1022, 0.0977, 0.0979, 0.1079, 0.0982, 0.0853, 0.0946]}, "Nova Scotia": {"Revenue": [123213.6, 120875.3, 122885.97, 121891.1, 132354.26, 149461.3, 148649.1, 123225.73, 121823.89, 123769.45, 123551.07, 133441.01, 149151.8, 150419.52, 121420.7, 124970.14], "Units Sold": [26462.0, 28850.0, 30106.0, 31454.0, 32736.0, 36234.0, 38884.0, 30731.0, 26761.0, 28193.0, 28643.0, 31183.0, 33989.0, 36524.0, 27504.0, 29307.0], "Cost": [85760.17, 84448.8, 86487.37, 85136.79, 94326.74, 104993.69, 104211.36, 85739.88, 84664.91, 86702.54, 85584.76, 93281.2, 103848.61, 105069.64, 86063.43, 86595.43], "Transactions": [2279.0, 2011.0, 2255.0, 2306.0, 2398.0, 2873.0, 2943.0, 2359.0, 2236.0, 2265.0, 2401.0, 2419.0, 2611.0, 2694.0, 2173.0, 2252.0], "Avg Basket": [56.483, 60.492, 55.711, 55.811, 56.206, 54.337, 52.308, 52.706, 56.011, 56.924, 54.334, 56.991, 58.071, 58.119, 57.713, 56.615], "Loyalty Redemptions": [805.0, 746.0, 747.0, 784.0, 791.0, 1028.0, 1032.0, 884.0, 782.0, 733.0, 859.0, 722.0, 845.0, 927.0, 703.0, 810.0], "Loyalty Members": [22347.4, 22902.2, 22150.1, 23825.3, 21901.0, 24043.2, 21387.6, 22379.8, 26576.2, 22786.4, 21353.6, 23143.4, 23162.5, 24355.9, 22837.4, 23708.4], "New Loyalty Members": [1119.0, 1171.0, 1244.0, 1176.0, 1135.0, 1060.0, 866.0, 1098.0, 1162.0, 1139.0, 1069.0, 1099.0, 1170.0, 1233.0, 1152.0, 1186.0], "Waste %": [3.657, 3.405, 3.335, 3.367, 3.365, 3.382, 3.523, 3.363, 3.35, 3.307, 3.397, 3.393, 3.323, 3.273, 3.437, 3.427], "Promo Revenue": [12354.39, 12441.12, 12592.08, 11771.03, 14054.57, 13829.78, 16491.86, 11324.8, 12455.96, 12968.27, 12668.88, 13601.54, 15226.68, 14178.19, 11769.22, 13631.52], "Gross Profit": [37453.43, 36426.5, 36398.6, 36754.31, 38027.52, 44467.61, 44437.74, 37485.85, 37158.98, 37066.91, 37966.31, 40159.81, 45303.19, 45349.88, 35357.27, 38374.71], "Cost-to-Revenue %": [0.696, 0.6986, 0.7038, 0.6985, 0.7127, 0.7025, 0.7011, 0.6958, 0.695, 0.7005, 0.6927, 0.699, 0.6963, 0.6985, 0.7088, 0.6929], "Gross Margin %": [0.304, 0.3014, 0.2962, 0.3015, 0.2873, 0.2975, 0.2989, 0.3042, 0.305, 0.2995, 0.3073, 0.301, 0.3037, 0.3015, 0.2912, 0.3071], "Promo Mix %": [0.1003, 0.1029, 0.1025, 0.0966, 0.1062, 0.0925, 0.1109, 0.0919, 0.1022, 0.1048, 0.1025, 0.1019, 0.1021, 0.0943, 0.0969, 0.1091]}, "Ontario": {"Revenue": [594378.69, 602832.51, 602132.99, 599700.16, 648792.22, 736066.99, 737011.05, 593066.07, 601191.84, 605371.69, 600992.22, 649386.23, 732040.56, 728096.96, 591060.74, 596543.43], "Units Sold": [142623.0, 151953.0, 150695.0, 140162.0, 159619.0, 175399.0, 168710.0, 145761.0, 144116.0, 149968.0, 145815.0, 151521.0, 187381.0, 192894.0, 145577.0, 146012.0], "Cost": [414776.13, 420340.93, 420816.99, 419187.88, 453516.82, 514369.95, 514382.99, 415031.2, 423331.49, 421890.79, 418972.81, 455909.76, 510481.31, 511721.44, 414315.39, 416449.33], "Transactions": [11454.0, 11327.0, 11112.0, 10938.0, 12294.0, 13600.0, 13218.0, 10772.0, 10852.0, 11210.0, 11045.0, 12314.0, 13882.0, 14357.0, 10929.0, 11168.0], "Avg Basket": [53.986, 54.559, 55.604, 56.925, 53.998, 56.367, 57.666, 56.004, 57.026, 55.708, 56.422, 55.296, 53.889, 52.787, 55.151, 56.08], "Loyalty Redemptions": [3814.0, 3968.0, 3938.0, 3628.0, 4166.0, 4775.0, 4559.0, 3682.0, 3649.0, 3818.0, 3886.0, 4133.0, 4859.0, 5006.0, 3808.0, 3921.0], "Loyalty Members": [23679.9, 23078.6, 21684.4, 22778.3, 23291.2, 22652.4, 22465.9, 23340.5, 22824.8, 23143.2, 23823.5, 23095.3, 23054.0, 23502.4, 22701.3, 22319.9], "New Loyalty Members": [3408.0, 3499.0, 3125.0, 3284.0, 3476.0, 3181.0, 3213.0, 3557.0, 3600.0, 3445.0, 3706.0, 3492.0, 3419.0, 3629.0, 3460.0, 3514.0], "Waste %": [3.355, 3.458, 3.475, 3.523, 3.316, 3.47, 3.439, 3.464, 3.482, 3.413, 3.3, 3.542, 3.343, 3.327, 3.43, 3.397], "Promo Revenue": [58935.6, 61022.6, 61108.53, 63555.12, 65998.92, 72001.39, 73443.24, 58903.24, 59150.95, 63711.37, 62856.27, 62157.33, 69218.6, 75195.63, 56564.41, 60471.67], "Gross Profit": [179602.56, 182491.58, 181316.0, 180512.28, 195275.4, 221697.04, 222628.06, 178034.87, 177860.35, 183480.9, 182019.41, 193476.47, 221559.25, 216375.52, 176745.35, 180094.1], "Cost-to-Revenue %": [0.6978, 0.6973, 0.6989, 0.699, 0.699, 0.6988, 0.6979, 0.6998, 0.7042, 0.6969, 0.6971, 0.7021, 0.6973, 0.7028, 0.701, 0.6981], "Gross Margin %": [0.3022, 0.3027, 0.3011, 0.301, 0.301, 0.3012, 0.3021, 0.3002, 0.2958, 0.3031, 0.3029, 0.2979, 0.3027, 0.2972, 0.299, 0.3019], "Promo Mix %": [0.0992, 0.1012, 0.1015, 0.106, 0.1017, 0.0978, 0.0997, 0.0993, 0.0984, 0.1052, 0.1046, 0.0957, 0.0946, 0.1033, 0.0957, 0.1014]}, "Quebec": {"Revenue": [411490.82, 403337.16, 405216.67, 408674.89, 437688.48, 492838.76, 493855.06, 407527.56, 408861.51, 405185.45, 404741.55, 442211.36, 498838.73, 493943.92, 410182.07, 403061.64], "Units Sold": [102064.0, 100661.0, 100444.0, 94864.0, 114202.0, 123143.0, 119642.0, 97181.0, 98965.0, 94740.0, 94216.0, 106669.0, 110584.0, 112981.0, 97378.0, 98559.0], "Cost": [287638.79, 282634.41, 285437.12, 285389.73, 307437.14, 346551.29, 347627.78, 284213.17, 286259.72, 283530.94, 282465.9, 309930.52, 349152.49, 345648.13, 288949.03, 281447.99], "Transactions": [7508.0, 7627.0, 7415.0, 7637.0, 8191.0, 9436.0, 9254.0, 7240.0, 7567.0, 7315.0, 7432.0, 8440.0, 8624.0, 8949.0, 7950.0, 7166.0], "Avg Basket": [55.407, 54.337, 56.801, 55.175, 56.581, 54.52, 54.93, 58.079, 55.444, 57.676, 56.224, 53.769, 58.648, 56.718, 54.028, 57.995], "Loyalty Redemptions": [2646.0, 2644.0, 2493.0, 2629.0, 2759.0, 3257.0, 3205.0, 2520.0, 2532.0, 2562.0, 2567.0, 2985.0, 2989.0, 2975.0, 2762.0, 2431.0], "Loyalty Members": [22177.1, 22756.9, 23740.4, 21759.4, 22078.3, 22718.0, 22806.5, 23365.5, 22324.4, 22877.3, 23626.6, 22627.2, 23195.5, 22582.4, 22793.5, 22223.7], "New Loyalty Members": [2874.0, 2860.0, 2793.0, 2702.0, 2498.0, 3009.0, 3071.0, 2883.0, 2735.0, 2980.0, 3042.0, 2680.0, 3030.0, 2656.0, 2839.0, 2750.0], "Waste %": [3.462, 3.458, 3.505, 3.278, 3.527, 3.372, 3.504, 3.549, 3.333, 3.376, 3.418, 3.348, 3.326, 3.408, 3.48, 3.311], "Promo Revenue": [41299.94, 40815.66, 43069.86, 38883.34, 44183.77, 49122.46, 49444.09, 38772.12, 41752.78, 40639.45, 41590.88, 44150.33, 49980.94, 55325.68, 40181.0, 39907.18], "Gross Profit": [123852.03, 120702.75, 119779.55, 123285.16, 130251.34, 146287.47, 146227.28, 123314.39, 122601.79, 121654.51, 122275.65, 132280.84, 149686.24, 148295.79, 121233.04, 121613.65], "Cost-to-Revenue %": [0.699, 0.7007, 0.7044, 0.6983, 0.7024, 0.7032, 0.7039, 0.6974, 0.7001, 0.6998, 0.6979, 0.7009, 0.6999, 0.6998, 0.7044, 0.6983], "Gross Margin %": [0.301, 0.2993, 0.2956, 0.3017, 0.2976, 0.2968, 0.2961, 0.3026, 0.2999, 0.3002, 0.3021, 0.2991, 0.3001, 0.3002, 0.2956, 0.3017], "Promo Mix %": [0.1004, 0.1012, 0.1063, 0.0951, 0.1009, 0.0997, 0.1001, 0.0951, 0.1021, 0.1003, 0.1028, 0.0998, 0.1002, 0.112, 0.098, 0.099]}}};
-var ARIA_SC_ORIG_SERIES   = {"Revenue": [1964799.37, 1966563.03, 1970363.82, 1966096.85, 2117817.98, 2398611.18, 2399566.17, 1962033.98, 1969812.76, 1964075.07, 1967110.01, 2131650.48, 2397873.97, 2389859.69, 1961665.87, 1954786.21], "Promo Revenue": [196873.69, 197768.37, 201316.98, 199579.86, 210648.34, 231197.38, 239994.28, 190768.91, 196766.12, 198788.0, 198204.92, 213176.87, 236354.96, 249304.74, 190093.01, 193009.71], "Gross Profit": [594295.14, 591655.36, 589505.85, 593570.95, 632633.59, 720971.62, 720164.65, 590414.87, 588345.32, 590482.43, 590247.43, 634615.9, 723964.3, 713485.98, 585873.41, 586809.07], "Cost-to-Revenue %": [0.6975, 0.6991, 0.7008, 0.6981, 0.7013, 0.6994, 0.6999, 0.6991, 0.7013, 0.6994, 0.6999, 0.7023, 0.6981, 0.7015, 0.7013, 0.6998], "Gross Margin %": [0.3025, 0.3009, 0.2992, 0.3019, 0.2987, 0.3006, 0.3001, 0.3009, 0.2987, 0.3006, 0.3001, 0.2977, 0.3019, 0.2985, 0.2987, 0.3002], "Units Sold": [467794.0, 476796.0, 474170.0, 463222.0, 531131.0, 591251.0, 585328.0, 474233.0, 460877.0, 459131.0, 471364.0, 502790.0, 576829.0, 585715.0, 464514.0, 478579.0], "Cost": [1370504.23, 1374907.67, 1380857.97, 1372525.9, 1485184.39, 1677639.56, 1679401.52, 1371619.11, 1381467.44, 1373592.64, 1376862.58, 1497034.58, 1673909.67, 1676373.71, 1375792.46, 1367977.14], "Transactions": [36796.0, 35949.0, 36584.0, 36127.0, 40041.0, 45660.0, 45030.0, 35506.0, 35801.0, 35790.0, 36119.0, 39638.0, 43879.0, 45004.0, 36465.0, 35959.0], "Avg Basket": [55.4838, 57.2083, 55.6413, 55.8212, 55.1855, 54.915, 54.811, 56.662, 56.355, 56.9598, 55.9877, 55.742, 56.348, 55.5532, 55.3543, 56.8415]};
-var ARIA_SC_ORIG_LABELS   = {"Revenue": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Promo Revenue": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Gross Profit": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Cost-to-Revenue %": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Gross Margin %": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Units Sold": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Cost": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Transactions": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], "Avg Basket": ["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"]};
+var ARIA_DS_KPIS              = ["Revenue", "Promo Revenue", "Gross Profit", "Cost-to-Revenue %", "Gross Margin %"];
+var ARIA_DIM_MEMBER_KPIS      = {"Province": {"Alberta": {"Revenue": {"value": 5769536.58, "value_fmt": "$5.8M", "mom_pct": 2.63, "yoy_pct": 3.16}, "Units Sold": {"value": 1372093.0, "value_fmt": "1,372,093", "mom_pct": 2.83, "yoy_pct": 2.69}, "Cost": {"value": 4035027.91, "value_fmt": "$4.0M", "mom_pct": 2.62, "yoy_pct": 2.99}, "Transactions": {"value": 106197.0, "value_fmt": "106,197", "mom_pct": 2.99, "yoy_pct": 3.34}, "Avg Basket": {"value": 56.0986, "value_fmt": "$56", "mom_pct": -0.08, "yoy_pct": 0.23}, "Loyalty Redemptions": {"value": 37306.0, "value_fmt": "37,306", "mom_pct": 4.65, "yoy_pct": 4.87}, "Loyalty Members": {"value": 22828.2375, "value_fmt": "22,828", "mom_pct": 1.07, "yoy_pct": 5.39}, "New Loyalty Members": {"value": 36220.0, "value_fmt": "36,220", "mom_pct": 0.23, "yoy_pct": 4.45}, "Waste %": {"value": 3.4326, "value_fmt": "343.3%", "mom_pct": -0.38, "yoy_pct": 0.87}, "Promo Revenue": {"value": 575455.53, "value_fmt": "$575K", "mom_pct": 122.73, "yoy_pct": 4.5}, "Gross Profit": {"value": 1734508.67, "value_fmt": "$1.7M", "mom_pct": 2.65, "yoy_pct": 3.56}, "Cost-to-Revenue %": {"value": 0.6994, "value_fmt": "69.9%", "mom_pct": -0.01, "yoy_pct": -0.16}, "Gross Margin %": {"value": 0.3006, "value_fmt": "30.1%", "mom_pct": 0.02, "yoy_pct": 0.39}, "Promo Mix %": {"value": 0.0997, "value_fmt": "10.0%", "mom_pct": 117.03, "yoy_pct": 1.3}}, "British Columbia": {"Revenue": {"value": 6270247.48, "value_fmt": "$6.3M", "mom_pct": 3.07, "yoy_pct": 3.51}, "Units Sold": {"value": 1510065.0, "value_fmt": "1,510,065", "mom_pct": 4.32, "yoy_pct": 5.33}, "Cost": {"value": 4391525.65, "value_fmt": "$4.4M", "mom_pct": 3.0, "yoy_pct": 3.55}, "Transactions": {"value": 116921.0, "value_fmt": "116,921", "mom_pct": 5.36, "yoy_pct": 4.26}, "Avg Basket": {"value": 55.5413, "value_fmt": "$56", "mom_pct": -1.9, "yoy_pct": -0.14}, "Loyalty Redemptions": {"value": 40500.0, "value_fmt": "40,500", "mom_pct": 4.16, "yoy_pct": 3.65}, "Loyalty Members": {"value": 23058.8063, "value_fmt": "23,058", "mom_pct": -0.38, "yoy_pct": 5.14}, "New Loyalty Members": {"value": 35257.0, "value_fmt": "35,257", "mom_pct": -4.7, "yoy_pct": 3.76}, "Waste %": {"value": 3.3666, "value_fmt": "336.7%", "mom_pct": 0.62, "yoy_pct": -1.13}, "Promo Revenue": {"value": 617261.7, "value_fmt": "$617K", "mom_pct": 127.81, "yoy_pct": 2.36}, "Gross Profit": {"value": 1878721.83, "value_fmt": "$1.9M", "mom_pct": 3.22, "yoy_pct": 3.42}, "Cost-to-Revenue %": {"value": 0.7004, "value_fmt": "70.0%", "mom_pct": -0.06, "yoy_pct": 0.04}, "Gross Margin %": {"value": 0.2996, "value_fmt": "30.0%", "mom_pct": 0.15, "yoy_pct": -0.09}, "Promo Mix %": {"value": 0.0984, "value_fmt": "9.8%", "mom_pct": 121.03, "yoy_pct": -1.12}}, "Manitoba": {"Revenue": {"value": 2205478.46, "value_fmt": "$2.2M", "mom_pct": 3.07, "yoy_pct": 3.45}, "Units Sold": {"value": 519506.0, "value_fmt": "519,506", "mom_pct": 0.46, "yoy_pct": 3.1}, "Cost": {"value": 1546372.33, "value_fmt": "$1.5M", "mom_pct": 3.1, "yoy_pct": 3.62}, "Transactions": {"value": 40532.0, "value_fmt": "40,532", "mom_pct": 3.59, "yoy_pct": 3.4}, "Avg Basket": {"value": 56.2718, "value_fmt": "$56", "mom_pct": 0.62, "yoy_pct": 1.02}, "Loyalty Redemptions": {"value": 14085.0, "value_fmt": "14,085", "mom_pct": 3.07, "yoy_pct": 3.88}, "Loyalty Members": {"value": 23374.0625, "value_fmt": "23,374", "mom_pct": 2.84, "yoy_pct": 9.52}, "New Loyalty Members": {"value": 17778.0, "value_fmt": "17,778", "mom_pct": 2.51, "yoy_pct": 4.72}, "Waste %": {"value": 3.3518, "value_fmt": "335.2%", "mom_pct": -1.51, "yoy_pct": -1.9}, "Promo Revenue": {"value": 216354.67, "value_fmt": "$216K", "mom_pct": 121.36, "yoy_pct": -0.71}, "Gross Profit": {"value": 659106.13, "value_fmt": "$659K", "mom_pct": 2.99, "yoy_pct": 3.06}, "Cost-to-Revenue %": {"value": 0.7012, "value_fmt": "70.1%", "mom_pct": 0.03, "yoy_pct": 0.16}, "Gross Margin %": {"value": 0.2988, "value_fmt": "29.9%", "mom_pct": -0.07, "yoy_pct": -0.38}, "Promo Mix %": {"value": 0.0981, "value_fmt": "9.8%", "mom_pct": 114.76, "yoy_pct": -4.02}}, "Nova Scotia": {"Revenue": {"value": 2091103.94, "value_fmt": "$2.1M", "mom_pct": 2.96, "yoy_pct": 3.5}, "Units Sold": {"value": 497561.0, "value_fmt": "497,561", "mom_pct": 5.15, "yoy_pct": -0.08}, "Cost": {"value": 1462915.32, "value_fmt": "$1.5M", "mom_pct": 2.63, "yoy_pct": 3.74}, "Transactions": {"value": 38475.0, "value_fmt": "38,475", "mom_pct": 6.53, "yoy_pct": 2.41}, "Avg Basket": {"value": 56.177, "value_fmt": "$56", "mom_pct": -3.11, "yoy_pct": 1.11}, "Loyalty Redemptions": {"value": 13198.0, "value_fmt": "13,198", "mom_pct": 5.74, "yoy_pct": 0.69}, "Loyalty Members": {"value": 23053.775, "value_fmt": "23,053", "mom_pct": 1.2, "yoy_pct": 6.35}, "New Loyalty Members": {"value": 18079.0, "value_fmt": "18,079", "mom_pct": -5.31, "yoy_pct": 3.16}, "Waste %": {"value": 3.394, "value_fmt": "339.4%", "mom_pct": 0.34, "yoy_pct": -0.03}, "Promo Revenue": {"value": 211359.89, "value_fmt": "$211K", "mom_pct": 137.35, "yoy_pct": 3.61}, "Gross Profit": {"value": 628188.62, "value_fmt": "$628K", "mom_pct": 3.76, "yoy_pct": 2.95}, "Cost-to-Revenue %": {"value": 0.6996, "value_fmt": "70.0%", "mom_pct": -0.33, "yoy_pct": 0.23}, "Gross Margin %": {"value": 0.3004, "value_fmt": "30.0%", "mom_pct": 0.77, "yoy_pct": -0.53}, "Promo Mix %": {"value": 0.1011, "value_fmt": "10.1%", "mom_pct": 130.52, "yoy_pct": 0.1}}, "Ontario": {"Revenue": {"value": 10218664.35, "value_fmt": "$10.2M", "mom_pct": 2.73, "yoy_pct": 3.37}, "Units Sold": {"value": 2498206.0, "value_fmt": "2,498,206", "mom_pct": 4.76, "yoy_pct": 5.88}, "Cost": {"value": 7145495.21, "value_fmt": "$7.1M", "mom_pct": 2.51, "yoy_pct": 3.29}, "Transactions": {"value": 190472.0, "value_fmt": "190,472", "mom_pct": 4.79, "yoy_pct": 5.29}, "Avg Basket": {"value": 55.4668, "value_fmt": "$55", "mom_pct": -1.6, "yoy_pct": -1.37}, "Loyalty Redemptions": {"value": 65610.0, "value_fmt": "65,610", "mom_pct": 3.27, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22964.725, "value_fmt": "22,964", "mom_pct": 0.88, "yoy_pct": 6.1}, "New Loyalty Members": {"value": 55008.0, "value_fmt": "55,008", "mom_pct": 1.78, "yoy_pct": 7.5}, "Waste %": {"value": 3.4209, "value_fmt": "342.1%", "mom_pct": 0.18, "yoy_pct": 0.94}, "Promo Revenue": {"value": 1024294.87, "value_fmt": "$1.0M", "mom_pct": 126.92, "yoy_pct": 4.34}, "Gross Profit": {"value": 3073169.14, "value_fmt": "$3.1M", "mom_pct": 3.26, "yoy_pct": 3.57}, "Cost-to-Revenue %": {"value": 0.6993, "value_fmt": "69.9%", "mom_pct": -0.22, "yoy_pct": -0.08}, "Gross Margin %": {"value": 0.3007, "value_fmt": "30.1%", "mom_pct": 0.51, "yoy_pct": 0.19}, "Promo Mix %": {"value": 0.1002, "value_fmt": "10.0%", "mom_pct": 120.89, "yoy_pct": 0.93}}, "Quebec": {"Revenue": {"value": 6927655.63, "value_fmt": "$6.9M", "mom_pct": 3.01, "yoy_pct": 3.26}, "Units Sold": {"value": 1666293.0, "value_fmt": "1,666,293", "mom_pct": 4.42, "yoy_pct": 3.92}, "Cost": {"value": 4854314.15, "value_fmt": "$4.9M", "mom_pct": 3.28, "yoy_pct": 3.48}, "Transactions": {"value": 127751.0, "value_fmt": "127,751", "mom_pct": 3.89, "yoy_pct": 4.06}, "Avg Basket": {"value": 56.0207, "value_fmt": "$56", "mom_pct": -0.41, "yoy_pct": -0.22}, "Loyalty Redemptions": {"value": 43956.0, "value_fmt": "43,956", "mom_pct": 3.84, "yoy_pct": 3.88}, "Loyalty Members": {"value": 22728.2938, "value_fmt": "22,728", "mom_pct": -0.39, "yoy_pct": 5.32}, "New Loyalty Members": {"value": 45402.0, "value_fmt": "45,402", "mom_pct": 2.65, "yoy_pct": 6.36}, "Waste %": {"value": 3.4159, "value_fmt": "341.6%", "mom_pct": 0.83, "yoy_pct": 1.22}, "Promo Revenue": {"value": 699119.48, "value_fmt": "$699K", "mom_pct": 130.75, "yoy_pct": 4.92}, "Gross Profit": {"value": 2073341.48, "value_fmt": "$2.1M", "mom_pct": 2.39, "yoy_pct": 2.76}, "Cost-to-Revenue %": {"value": 0.7007, "value_fmt": "70.1%", "mom_pct": 0.26, "yoy_pct": 0.21}, "Gross Margin %": {"value": 0.2993, "value_fmt": "29.9%", "mom_pct": -0.61, "yoy_pct": -0.49}, "Promo Mix %": {"value": 0.1009, "value_fmt": "10.1%", "mom_pct": 124.0, "yoy_pct": 1.6}}}};
+var ARIA_DIM_MONTHLY          = {"Province": {"Alberta": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [10161211.37, 9174617.07, 10638128.08, 10258117.18, 10815272.03, 10863765.8, 11282443.54, 11450587.52, 10452697.65, 10914335.89, 12535827.09, 12882758.81]}, "British Columbia": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [10988314.7, 9966267.41, 11496023.31, 11144115.33, 11694564.08, 11798758.56, 12213788.75, 12412936.12, 11348507.55, 11877895.26, 13555505.77, 13982735.32]}, "Manitoba": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [3876317.78, 3502329.36, 4046411.09, 3913207.61, 4127905.04, 4148076.68, 4313071.73, 4380109.34, 3995587.5, 4180061.54, 4800117.57, 4923515.77]}, "Nova Scotia": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [3659902.0, 3321506.62, 3846596.01, 3712143.67, 3902658.36, 3930806.62, 4069748.68, 4128257.36, 3780817.07, 3949975.01, 4518803.08, 4649701.16]}, "Ontario": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [17949976.24, 16272371.55, 18837696.54, 18190519.64, 19126939.94, 19261278.16, 19991677.31, 20291961.67, 18523086.69, 19362969.12, 22210564.54, 22791131.42]}, "Quebec": {"labels": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], "values": [12180291.26, 10984931.27, 12721796.9, 12312974.16, 12922917.87, 13024580.8, 13504586.91, 13687354.44, 12556810.26, 13096194.56, 14996776.68, 15424654.53]}}};
+var ARIA_ACCENT               = '#F59E0B';
+var ARIA_PALETTE              = ["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24", "#F97316", "#14B8A6"];
+var ARIA_DIM_DATA             = {"Province": {"labels": ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], "values": [10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94]}, "Category": {"labels": ["Meat & Seafood", "Grocery & Pantry", "Fresh Produce", "Health & Beauty", "Household & Cleaning", "Snacks & Confectionery"], "values": [5357466.31, 5011431.58, 4676748.36, 2347544.18, 2021726.04, 2011520.0]}};
+var ARIA_DIM_DRIVERS          = {"Province": [{"member": "Ontario", "delta": 333194.86, "value": 10218664.35}, {"member": "Quebec", "delta": 219003.75, "value": 6927655.63}, {"member": "British Columbia", "delta": 212744.68, "value": 6270247.48}, {"member": "Nova Scotia", "delta": 70758.02, "value": 2091103.94}, {"member": "Manitoba", "delta": 73599.05, "value": 2205478.46}, {"member": "Alberta", "delta": 176890.29, "value": 5769536.58}], "Category": [{"member": "Meat & Seafood", "delta": 170740.37, "value": 5357466.31}, {"member": "Grocery & Pantry", "delta": 157134.49, "value": 5011431.58}, {"member": "Fresh Produce", "delta": 138227.76, "value": 4676748.36}, {"member": "Snacks & Confectionery", "delta": 70211.64, "value": 2011520.0}, {"member": "Health & Beauty", "delta": 78484.69, "value": 2347544.18}, {"member": "Household & Cleaning", "delta": 78962.5, "value": 2021726.04}]};
+var _ARIA_MONTHLY_LABELS      = ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"];
+var _ARIA_MONTHLY_VALUES      = [58816013.35, 53222023.28, 61586651.93, 59531077.59, 62590257.32, 63027266.62, 65375316.92, 66351206.45, 60657506.72, 63381431.38, 72617594.73, 74654497.01];
+var _ARIA_PRIOR_VAL           = 32548302.97;
+var _ARIA_CURR_VAL            = 33482686.44;
+var _ARIA_TC                  = '#64748B';
+var _ARIA_SUB                 = '#CBD5E1';
 
-/* format a raw pct number → {text, color} */
 function _ariaPct(p) {
     if (p === null || p === undefined) return {text:'—', color:'#888'};
     var s = p >= 0 ? '▲' : '▼';
     var c = p >= 0 ? '#34D399' : '#F87171';
     return {text: s + ' ' + Math.abs(p).toFixed(1) + '%', color: c};
 }
+function _fmtVal(v) {
+    return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':v>=1e3?'$'+(v/1e3).toFixed(1)+'K':v.toFixed(2);
+}
 
 function ariaFilter(sel) {
     var dim = sel.getAttribute('data-dim');
     var val = sel.value;
+
+    /* ── 1. KPI mini tiles ── */
     var mData = (val === 'All') ? null :
                 ((ARIA_DIM_MEMBER_KPIS[dim] || {})[val] || null);
-    var mSeries = (val === 'All') ? null :
-                  ((ARIA_SC_MEMBER_SERIES[dim] || {})[val] || null);
-
-    ARIA_KPI_ORDER.forEach(function(kn, i) {
+    ARIA_DS_KPIS.forEach(function(kn, i) {
         var kd = mData ? (mData[kn] || null) : null;
-
-        /* ── main value ── */
-        var ve = document.getElementById('sc_kv_' + i);
+        var ve = document.getElementById('ds_kv_' + i);
         if (ve) ve.textContent = kd ? (kd.value_fmt || ve.getAttribute('data-orig'))
                                     : ve.getAttribute('data-orig');
-
-        /* ── MoM ── */
-        var me = document.getElementById('sc_md_' + i);
+        var me = document.getElementById('ds_md_' + i);
         if (me) {
             if (kd && kd.mom_pct !== undefined && kd.mom_pct !== null) {
-                var rm = _ariaPct(kd.mom_pct);
-                me.textContent = rm.text + ' MoM';
-                me.style.color = rm.color;
-            } else {
-                me.textContent = me.getAttribute('data-orig') || '— MoM';
-                me.style.color = me.getAttribute('data-oc') || '#888';
-            }
+                var rm = _ariaPct(kd.mom_pct); me.textContent = rm.text+' MoM'; me.style.color = rm.color;
+            } else { me.textContent = me.getAttribute('data-orig')||'— MoM'; me.style.color = me.getAttribute('data-oc')||'#888'; }
         }
-
-        /* ── YoY ── */
-        var ye = document.getElementById('sc_yd_' + i);
+        var ye = document.getElementById('ds_yd_' + i);
         if (ye) {
             if (kd && kd.yoy_pct !== undefined && kd.yoy_pct !== null) {
-                var ry = _ariaPct(kd.yoy_pct);
-                ye.textContent = ry.text + ' YoY';
-                ye.style.color = ry.color;
-            } else {
-                ye.textContent = ye.getAttribute('data-orig') || '— YoY';
-                ye.style.color = ye.getAttribute('data-oc') || '#888';
-            }
-        }
-
-        /* ── sparkline ── */
-        var chart = ARIA_CHARTS['sc_spark_' + i];
-        if (chart) {
-            var usingMember = (mSeries && mSeries[kn] && mSeries[kn].length > 1);
-            var newSeries = usingMember ? mSeries[kn] : (ARIA_SC_ORIG_SERIES[kn] || null);
-            if (newSeries && newSeries.length > 1) {
-                chart.data.datasets[0].data = newSeries;
-                /* Restore original date labels on "All"; use indices for member series */
-                var origLbls = ARIA_SC_ORIG_LABELS[kn];
-                chart.data.labels = (!usingMember && origLbls && origLbls.length > 0)
-                    ? origLbls
-                    : newSeries.map(function(_, j) { return j; });
-                chart.update('none');
-            }
+                var ry = _ariaPct(kd.yoy_pct); ye.textContent = ry.text+' YoY'; ye.style.color = ry.color;
+            } else { ye.textContent = ye.getAttribute('data-orig')||'— YoY'; ye.style.color = ye.getAttribute('data-oc')||'#888'; }
         }
     });
+
+    /* ── 2. Bar chart — switch dim, highlight member, update target markers ── */
+    var d = ARIA_DIM_DATA[dim];
+    if (d) {
+        var barChart = ARIA_CHARTS['ds_dimbar'];
+        if (barChart) {
+            barChart.data.labels = d.labels;
+            barChart.data.datasets[0].data = d.values;
+            barChart.data.datasets[0].backgroundColor = (val === 'All')
+                ? d.labels.map(function(l, idx) { return ARIA_PALETTE[idx % ARIA_PALETTE.length]; })
+                : d.labels.map(function(l) { return l === val ? ARIA_ACCENT : ARIA_ACCENT+'28'; });
+            barChart.update('none');
+            var bt = document.getElementById('ds-dim-title');
+            if (bt) bt.textContent = dim+' Breakdown'+(val!=='All'?' • '+val:'');
+        }
+    }
+
+    /* ── 3. Donut — switch to selected dim's contribution mix ── */
+    if (d) {
+        var donutChart = ARIA_CHARTS['ds_donut'];
+        if (donutChart) {
+            var dColors = d.labels.map(function(l, idx) {
+                var base = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                return (val !== 'All' && l !== val) ? base+'55' : base;
+            });
+            donutChart.data.labels = d.labels;
+            donutChart.data.datasets[0].data = d.values;
+            donutChart.data.datasets[0].backgroundColor = dColors;
+            donutChart.update('none');
+            var dt = document.getElementById('ds-donut-title');
+            if (dt) dt.textContent = dim+' Mix'+(val!=='All'?' • '+val:'');
+            var dl = document.getElementById('ds-donut-legend');
+            if (dl) {
+                dl.innerHTML = d.labels.map(function(l, idx) {
+                    var c = ARIA_PALETTE[idx % ARIA_PALETTE.length];
+                    return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">'
+                         + '<div style="width:7px;height:7px;border-radius:50%;background:'+c+';flex-shrink:0"></div>'
+                         + '<div style="font-size:8px;color:'+_ARIA_SUB+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px">'
+                         + l.substring(0,18)+'</div></div>';
+                }).join('');
+            }
+        }
+    }
+
+    /* ── 4. Waterfall — rebuild using ALL dim members from ARIA_DIM_DATA ── */
+    /* ARIA_DIM_DRIVERS only holds top-N drivers and may omit members with small deltas.
+       Instead, start from ARIA_DIM_DATA (complete member list + current values) and
+       merge deltas from ARIA_DIM_DRIVERS; missing members get delta = 0. */
+    var d4    = ARIA_DIM_DATA[dim];
+    var drvList4 = ARIA_DIM_DRIVERS[dim] || [];
+    var drvMap4  = {};
+    drvList4.forEach(function(s) { drvMap4[s.member] = s; });
+    var wfLabels, wfData, wfColors;
+    if (d4 && d4.labels && d4.labels.length > 0) {
+        var allSteps4 = d4.labels.map(function(m, idx) {
+            var drv = drvMap4[m];
+            return { member: m,
+                      value:  drv ? drv.value : (d4.values[idx] || 0),
+                      delta:  drv ? drv.delta : 0 };
+        });
+        var curr4  = allSteps4.reduce(function(a,s){ return a+(s.value||0);  }, 0);
+        var prior4 = allSteps4.reduce(function(a,s){ return a+((s.value||0)-(s.delta||0)); }, 0);
+        var lifts4 = allSteps4.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags4 = allSteps4.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps4 = lifts4.concat(drags4);
+        /* Always include selected member even if its delta is 0 */
+        if (val!=='All' && !steps4.some(function(s){return s.member===val;})) {
+            var sel4 = allSteps4.find(function(s){return s.member===val;});
+            if (sel4) steps4.push(sel4);
+        }
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior4*100)/100]]; wfColors=['#60A5FA'];
+        var cum4=prior4;
+        steps4.forEach(function(s) {
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum4*100)/100, Math.round((cum4+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0 ? (hi?'#10B981':'#34D399') : (hi?'#EF4444':'#F87171'));
+            cum4+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr4*100)/100]); wfColors.push('#60A5FA');
+    } else {
+        /* Fallback to driver list if ARIA_DIM_DATA unavailable for this dim */
+        var drvs=drvList4, curr_total=0, prior_total=0;
+        drvs.forEach(function(s){curr_total+=(s.value||0);prior_total+=((s.value||0)-(s.delta||0));});
+        var lifts=drvs.filter(function(x){return x.delta>0;}).sort(function(a,b){return b.delta-a.delta;}).slice(0,3);
+        var drags=drvs.filter(function(x){return x.delta<0;}).sort(function(a,b){return a.delta-b.delta;}).slice(0,2);
+        var steps=lifts.concat(drags);
+        wfLabels=['Prior']; wfData=[[0,Math.round(prior_total*100)/100]]; wfColors=['#60A5FA'];
+        var cum=prior_total;
+        steps.forEach(function(s){
+            var hi=(val!=='All'&&s.member===val);
+            wfLabels.push(s.member.substring(0,12));
+            wfData.push([Math.round(cum*100)/100,Math.round((cum+s.delta)*100)/100]);
+            wfColors.push(s.delta>=0?(hi?'#10B981':'#34D399'):(hi?'#EF4444':'#F87171'));
+            cum+=s.delta;
+        });
+        wfLabels.push('Current'); wfData.push([0,Math.round(curr_total*100)/100]); wfColors.push('#60A5FA');
+    }
+    var wfChart = ARIA_CHARTS['ds_wfall'];
+    if (wfChart) {
+        wfChart.data.labels = wfLabels;
+        wfChart.data.datasets[0].data = wfData;
+        wfChart.data.datasets[0].backgroundColor = wfColors;
+        wfChart.update('none');
+        var wt = document.getElementById('ds-wfall-title');
+        if (wt) wt.textContent = dim+' Waterfall'+(val!=='All'?' • '+val:'');
+    }
+
+    /* ── 5. Line trend — switch to member's monthly series, restore on All ── */
+    var trendChart = ARIA_CHARTS['ds_trend'];
+    if (trendChart) {
+        var mMonthly = (val === 'All') ? null :
+                       ((ARIA_DIM_MONTHLY[dim] || {})[val] || null);
+        if (mMonthly && mMonthly.values && mMonthly.values.length >= 2) {
+            trendChart.data.labels   = mMonthly.labels;
+            trendChart.data.datasets[0].data = mMonthly.values;
+        } else {
+            trendChart.data.labels   = _ARIA_MONTHLY_LABELS;
+            trendChart.data.datasets[0].data = _ARIA_MONTHLY_VALUES;
+        }
+        trendChart.update('none');
+        var tt = document.getElementById('ds-trend-title');
+        if (tt) tt.textContent = (val === 'All')
+            ? (_ARIA_MONTHLY_LABELS.length ? 'Revenue — Monthly (12M)' : 'Trend')
+            : dim + ' → ' + val + ' Monthly Trend';
+    }
 }
 
 </script>
@@ -358,267 +438,145 @@ function ariaFilter(sel) {
 /* ── Chart init — runs after DOM is ready so canvas elements exist ── */
 document.addEventListener('DOMContentLoaded', function() {
     
-    ARIA_CHARTS['sc_spark_0'] = new Chart(document.getElementById('sc_spark_0'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[1964799.37, 1966563.03, 1970363.82, 1966096.85, 2117817.98, 2398611.18, 2399566.17, 1962033.98, 1969812.76, 1964075.07, 1967110.01, 2131650.48, 2397873.97, 2389859.69, 1961665.87, 1954786.21],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
+    (function(){
+        var ctx = document.getElementById('ds_trend');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_trend'] = new Chart(ctx, {
+            type:'line',
+            data:{ labels:["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"], datasets:[{
+                data:[58816013.35, 53222023.28, 61586651.93, 59531077.59, 62590257.32, 63027266.62, 65375316.92, 66351206.45, 60657506.72, 63381431.38, 72617594.73, 74654497.01], borderColor:'#F59E0B', borderWidth:2,
+                pointRadius:0, fill:true,
+                backgroundColor:'#F59E0B22', tension:0.35
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{display:false},
+                    datalabels:{display:false},
+                    tooltip:{ mode:'index', intersect:false,
+                        callbacks:{ label: function(ctx) {
+                            var v = ctx.raw;
+                            return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(2);
+                        } } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:8}, maxTicksLimit:6 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ ticks:{ color:'#64748B', font:{size:8} },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
+    (function(){
+        var ctx = document.getElementById('ds_dimbar');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_dimbar'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], datasets:[{ data:[10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94],
+                backgroundColor:["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24"], borderRadius:4, borderWidth:0 }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':
+                                   v>=1e3?'$'+(v/1e3).toFixed(1)+'K':
+                                   v.toFixed(0);
+                        },
+                        color:'#64748B', font:{size:8,weight:'600'}
+                    },
+                    tooltip:{ callbacks:{ label: ctx =>
+                        (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                         ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                         ctx.raw.toFixed(1)) } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9}, maxRotation:30 },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ display:false, grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:300} }
+        });
+    })();
+    ARIA_CHARTS['ds_donut'] = new Chart(document.getElementById('ds_donut'), {
+        type:'doughnut',
+        data:{ labels:["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", "Nova Scotia"], datasets:[{ data:[10218664.35, 6927655.63, 6270247.48, 5769536.58, 2205478.46, 2091103.94],
+            backgroundColor:["#F59E0B", "#34D399", "#60A5FA", "#F87171", "#A78BFA", "#FBBF24"], borderWidth:2, borderColor:'transparent',
+            hoverOffset:4 }] },
+        options:{ cutout:'62%', responsive:true, maintainAspectRatio:false,
             plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
+                datalabels:{
+                    display:true,
+                    formatter:function(v, ctx){
+                        var total = ctx.dataset.data.reduce(function(a,b){return a+b;},0);
+                        return total>0 ? (v/total*100).toFixed(1)+'%' : '';
+                    },
+                    color:'#fff',
+                    font:{size:8, weight:'700'},
+                    textStrokeColor:'rgba(0,0,0,0.35)',
+                    textStrokeWidth:2,
+                },
+                tooltip:{ callbacks:{ label: ctx => ' '+ctx.label+': '+
+                    (ctx.raw>=1e6?'$'+(ctx.raw/1e6).toFixed(1)+'M':
+                     ctx.raw>=1e3?'$'+(ctx.raw/1e3).toFixed(1)+'K':
+                     ctx.raw.toFixed(0)) } } },
+            animation:{duration:0} }
     });
-    ARIA_CHARTS['sc_spark_1'] = new Chart(document.getElementById('sc_spark_1'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[196873.69, 197768.37, 201316.98, 199579.86, 210648.34, 231197.38, 239994.28, 190768.91, 196766.12, 198788.0, 198204.92, 213176.87, 236354.96, 249304.74, 190093.01, 193009.71],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
+    (function(){
+        var ctx = document.getElementById('ds_wfall');
+        if(!ctx) return;
+        ARIA_CHARTS['ds_wfall'] = new Chart(ctx, {
+            type:'bar',
+            data:{ labels:["Prior", "Ontario", "Quebec", "British Colu", "Current"], datasets:[{
+                data:[[0, 32396495.79], [32396495.79, 32729690.65], [32729690.65, 32948694.4], [32948694.4, 33161439.08], [0, 33482686.44]],
+                backgroundColor:["#60A5FA", "#34D399", "#34D399", "#34D399", "#60A5FA"],
+                borderRadius:3, borderWidth:0
+            }] },
+            options:{ responsive:true, maintainAspectRatio:false,
+                layout:{padding:{top:18}},
+                plugins:{ legend:{display:false},
+                    datalabels:{
+                        display:true,
+                        anchor:'end', align:'top',
+                        formatter:function(v){
+                            if(!Array.isArray(v)) return '';
+                            var diff = v[1] - v[0];
+                            /* Prior/Current anchors: show absolute value */
+                            if(v[0]===0) {
+                                return Math.abs(v[1])>=1e6?'$'+(v[1]/1e6).toFixed(1)+'M':
+                                       Math.abs(v[1])>=1e3?'$'+(v[1]/1e3).toFixed(1)+'K':
+                                       '$'+v[1].toFixed(0);
+                            }
+                            /* Delta bars: show signed change */
+                            var s = diff>=0?'+':'-';
+                            var a = Math.abs(diff);
+                            return s+(a>=1e6?(a/1e6).toFixed(1)+'M':
+                                      a>=1e3?(a/1e3).toFixed(1)+'K':
+                                      a.toFixed(0));
+                        },
+                        color:'#64748B', font:{size:8, weight:'600'},
+                    },
+                    tooltip:{ callbacks:{
+                        label: ctx => {
+                            var a=ctx.raw, v=Array.isArray(a)?a[1]-a[0]:a;
+                            return (v>=0?'+':'')+
+                                (Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                                 Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'K':
+                                 v.toFixed(0));
                         }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_2'] = new Chart(document.getElementById('sc_spark_2'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[594295.14, 591655.36, 589505.85, 593570.95, 632633.59, 720971.62, 720164.65, 590414.87, 588345.32, 590482.43, 590247.43, 634615.9, 723964.3, 713485.98, 585873.41, 586809.07],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_3'] = new Chart(document.getElementById('sc_spark_3'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_4'] = new Chart(document.getElementById('sc_spark_4'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_5'] = new Chart(document.getElementById('sc_spark_5'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[467794.0, 476796.0, 474170.0, 463222.0, 531131.0, 591251.0, 585328.0, 474233.0, 460877.0, 459131.0, 471364.0, 502790.0, 576829.0, 585715.0, 464514.0, 478579.0],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_6'] = new Chart(document.getElementById('sc_spark_6'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[1370504.23, 1374907.67, 1380857.97, 1372525.9, 1485184.39, 1677639.56, 1679401.52, 1371619.11, 1381467.44, 1373592.64, 1376862.58, 1497034.58, 1673909.67, 1676373.71, 1375792.46, 1367977.14],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_7'] = new Chart(document.getElementById('sc_spark_7'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[36796.0, 35949.0, 36584.0, 36127.0, 40041.0, 45660.0, 45030.0, 35506.0, 35801.0, 35790.0, 36119.0, 39638.0, 43879.0, 45004.0, 36465.0, 35959.0],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
-    ARIA_CHARTS['sc_spark_8'] = new Chart(document.getElementById('sc_spark_8'), {
-        type:'line',
-        data:{ labels:["2026-06-01", "2026-06-02", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-07", "2026-06-08", "2026-06-09", "2026-06-10", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-14", "2026-06-15", "2026-06-16"], datasets:[{ data:[55.48, 57.21, 55.64, 55.82, 55.19, 54.91, 54.81, 56.66, 56.35, 56.96, 55.99, 55.74, 56.35, 55.55, 55.35, 56.84],
-            borderColor:'#F59E0B', borderWidth:1.5, pointRadius:0, pointHoverRadius:3,
-            fill:true, backgroundColor:'#F59E0B18', tension:0.4 }] },
-        options:{ responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false},
-                datalabels:{display:false},
-                tooltip:{
-                    enabled:true, mode:'index', intersect:false,
-                    backgroundColor:'rgba(10,10,20,0.88)',
-                    titleColor:'rgba(255,255,255,0.55)', titleFont:{size:9},
-                    bodyColor:'#fff', bodyFont:{size:11,weight:'bold'},
-                    padding:7, cornerRadius:5, caretSize:4,
-                    callbacks:{
-                        label:function(ctx){
-                            var v=ctx.parsed.y;
-                            if(Math.abs(v)>=1e6) return (v/1e6).toFixed(1)+'M';
-                            if(Math.abs(v)>=1e3) return (v/1e3).toFixed(0)+'K';
-                            return v%1===0 ? String(v) : v.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales:{ x:{display:false}, y:{display:false} },
-            animation:{duration:0},
-            interaction:{mode:'index',intersect:false}
-        }
-    });
+                    } } },
+                scales:{
+                    x:{ ticks:{ color:'#64748B', font:{size:9} },
+                         grid:{display:false}, border:{display:false} },
+                    y:{ min:0,
+                         ticks:{ color:'#64748B', font:{size:8},
+                             callback: v => v>=1e6?'$'+(v/1e6).toFixed(0)+'M':
+                                          v>=1e3?'$'+(v/1e3).toFixed(0)+'K':v },
+                         grid:{display:false}, border:{display:false} }
+                },
+                animation:{duration:0} }
+        });
+    })();
 });
 </script>
 </body>
