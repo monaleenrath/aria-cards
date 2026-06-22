@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!-- ARIA_DEPLOY_VERSION=2026-06-14-v33 | all_drivers=19 dim_gs_keys=['Plan_Type', 'Region', 'Content_Type', 'Genre'] first_dim=Genre tmpl=editorial | yoy_keys=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] yoy_lens=[19, 19, 19, 19, 19, 19, 19, 19, 19] | dod_keys=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] dod_lens=[19, 19, 19, 19, 19, 19, 19, 19, 19] | da_ver=2026-06-12-v3-robust-autodetect | cfg_dims=['Plan_Type', 'Region', 'Content_Type'] | df_shape=[16440, 16] | kpi_map=[('Revenue', 'Revenue_USD', 'sum', ''), ('Active Subscribers', 'Active_Subscribers', 'sum', ''), ('New Subscriptions', 'New_Subscriptions', 'sum', ''), ('Cancellations', 'Cancellations', 'sum', ''), ('Avg Watch Hours', 'Avg_Watch_Hours_Per_User', 'mean', ''), ('Content Cost', 'Content_Cost_USD', 'sum', ''), ('Ops Cost', 'Ops_Cost_USD', 'sum', ''), ('Titles Available', 'Titles_Available', 'mean', ''), ('Churn Rate %', 'DERIVED', 'ratio', 'Cancellations')] | yoy_summary={'Revenue': 19, 'Active Subscribers': 19, 'New Subscriptions': 19, 'Cancellations': 19, 'Avg Watch Hours': 19, 'Content Cost': 19, 'Ops Cost': 19, 'Titles Available': 19, 'Churn Rate %': 19} | yoy_diag.effective_dims=['Plan_Type', 'Region', 'Content_Type', 'Genre'] | yoy_diag.kpis=['Revenue', 'Active Subscribers', 'New Subscriptions', 'Cancellations', 'Avg Watch Hours', 'Content Cost', 'Ops Cost', 'Titles Available', 'Churn Rate %'] | yoy_diag.curr_start=2026-06-01 yoy_diag.prior_start=2025-06-01 yoy_diag.prior_end=2025-06-22 | yoy_diag.curr_df_len=330 yoy_diag.prior_df_len=330 | yoy_diag.spot_kpi=Revenue yoy_diag.spot_dim=Plan_Type yoy_diag.spot_cfg={'column': 'Revenue_USD', 'agg': 'sum'} yoy_diag.spot_agg_len=3 yoy_diag.spot_agg_sample=[('Basic (Ads)', 47345025.25), ('Premium', 118104063.6), ('Standard', 129291919.35)] | df_cat_cols={'Region': 'str/5', 'Plan_Type': 'str/3', 'Content_Type': 'str/5', 'Genre': 'str/10'} -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { background:#0B1220; }
+body {
+    background:#0B1220; color:#F8FAFC;
+    font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;
+    font-size:13px; line-height:1.5;
+}
+.card {
+    width:100%; max-width:900px; background:#0B1220;
+    margin:0 auto; display:flex; flex-direction:column;
+    padding:20px 28px 0;
+}
+/* ─ Masthead ──────────────────────────────── */
+.mast {
+    display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid #1F2937; padding-bottom:10px; margin-bottom:14px;
+    gap:8px; flex-wrap:wrap;
+}
+.mast-left  { display:flex; align-items:center; gap:0; flex-shrink:0; }
+.mast-mid   { flex:1; text-align:center; color:#64748B; font-size:8px;
+               letter-spacing:3px; font-weight:600; }
+.mast-right { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.aria-logo  { color:#F59E0B; font-size:11px; font-weight:800; letter-spacing:4px; }
+.date-lbl   { color:#64748B; font-size:9px; letter-spacing:2px; font-weight:600; }
+.date-range { color:#64748B; font-size:8px; opacity:0.7; }
+
+/* ─ Section labels ────────────────────────── */
+.sec { font-size:8px; font-weight:700; letter-spacing:3px;
+        color:#F59E0B; text-transform:uppercase; margin-bottom:7px; }
+
+/* ─ KPI tiles (original — used by other contexts) ── */
+.kpi-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.kpi-tile  { flex:1 1 150px; min-width:130px; max-width:220px;
+              background:#111827; border:1px solid #1F2937;
+              border-radius:8px; padding:10px 12px; position:relative;
+              overflow:hidden; }
+.kpi-rag   { position:absolute; top:9px; right:9px; width:8px; height:8px;
+              border-radius:50%; }
+.kpi-name  { font-size:8px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:5px; }
+.kpi-val   { font-size:20px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; line-height:1.1; margin-bottom:3px; }
+.kpi-val.sm{ font-size:15px; }
+.kpi-d     { font-size:9px; font-weight:600; }
+.kpi-spark { height:32px; margin:4px 0 2px; }
+
+/* ─ KPI tiles v2 (Scorecard — 3-per-row grid, taller sparkline) ── */
+.kpi-grid-v2  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.kpi-tile-v2  { background:#111827; border:1px solid #1F2937;
+                 border-radius:10px; padding:14px 16px; position:relative;
+                 overflow:hidden; }
+.kpi-spark-v2 { height:64px; margin:8px 0 4px; }
+
+/* ─ Mini KPI row (Dossier top) ───────────── */
+.mkpi-row  { display:flex; gap:8px; margin-bottom:14px; }
+.mkpi      { flex:1; background:#111827; border:1px solid #1F2937;
+              border-radius:6px; padding:8px 10px; min-width:0; }
+.mkpi-name { font-size:7px; font-weight:700; letter-spacing:1.5px;
+              color:#64748B; text-transform:uppercase; margin-bottom:3px; }
+.mkpi-val  { font-size:14px; font-weight:700; color:#F8FAFC;
+              font-family:Georgia,serif; white-space:nowrap;
+              overflow:hidden; text-overflow:ellipsis; }
+.mkpi-d    { font-size:8px; font-weight:600; }
+
+/* ─ Charts ───────────────────────────────── */
+.chart-box { position:relative; }
+canvas     { display:block; }
+
+/* ─ Narrative ────────────────────────────── */
+.narr { font-size:11px; color:#CBD5E1; line-height:1.6; }
+.narr strong { color:#F8FAFC; }
+.stat-pill {
+    display:inline-block; border-radius:4px; padding:1px 7px; margin:1px 2px;
+    font-size:9px; font-weight:700; vertical-align:middle;
+    border:1px solid;
+}
+
+/* ─ Filter panel ─────────────────────────── */
+.filter-panel { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.filter-lbl   { font-size:7px; font-weight:700; letter-spacing:3px;
+                 color:#64748B; text-transform:uppercase; }
+.filter-sel   {
+    font-size:9px; background:#1F2937; color:#F8FAFC;
+    border:1px solid #1F2937; border-radius:5px;
+    padding:4px 8px; cursor:pointer; outline:none;
+    font-family:inherit;
+}
+.filter-chip  {
+    font-size:8px; font-weight:700; letter-spacing:1px;
+    background:#F59E0B22; border:1px solid #F59E0B55;
+    color:#F59E0B; border-radius:12px; padding:2px 9px;
+    display:none;
+}
+
+/* ─ Action box ───────────────────────────── */
+.action-box  { background:#F59E0B15; border:1px solid #F59E0B40;
+                border-radius:8px; padding:12px 14px; }
+.action-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#F59E0B; margin-bottom:6px; }
+.action-text { font-size:11px; font-weight:700; color:#F8FAFC;
+                line-height:1.4; margin-bottom:4px; }
+.action-meta { font-size:9px; color:#64748B; }
+
+/* ─ Footer ───────────────────────────────── */
+.footer      { background:#111827; margin:14px -28px 0;
+                padding:10px 28px 24px; border-top:1px solid #1F2937; }
+.footer-lbl  { font-size:7px; font-weight:700; letter-spacing:4px;
+                color:#F59E0B; margin-bottom:4px; }
+.footer-text { font-size:9px; color:#CBD5E1; font-style:italic;
+                font-family:Georgia,serif; opacity:0.85;
+                line-height:1.6; overflow:visible; white-space:normal; }
+
+/* ─ Editorial specific ───────────────────── */
+.ed-hero     { display:flex; align-items:center; gap:18px;
+                padding:14px 0 12px; border-bottom:1px solid #1F2937;
+                margin-bottom:14px; }
+.ed-headline { font-size:20px; font-weight:700; color:#F8FAFC;
+                font-family:Georgia,serif; line-height:1.25;
+                flex:1; }
+.ed-sub      { font-size:11px; color:#64748B; font-style:italic;
+                margin-top:5px; }
+.ed-col      { flex:1; }
+.ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-col + .ed-col + .ed-col { border-left:1px solid #1F2937; padding-left:16px; }
+.ed-cols     { display:flex; gap:0; }
+.ed-body     { font-size:11px; color:#CBD5E1; line-height:1.65;
+                font-family:Georgia,serif; }
+.ed-stat-row { display:flex; flex-wrap:wrap; gap:5px; margin:10px 0 6px; }
+
+/* ─ Editorial dimension pills ───────────────── */
+.ed-dim-pill {
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    text-transform:uppercase; background:transparent;
+    border:1px solid #1F2937; color:#64748B;
+    border-radius:10px; padding:3px 10px; cursor:pointer;
+    font-family:inherit; transition:all 0.15s;
+}
+.ed-dim-pill-active, .ed-dim-pill:hover {
+    background:#F59E0B20; border-color:#F59E0B80; color:#F59E0B;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  
+<div class="mast">
+  <div class="mast-left">
+    <span class="aria-logo">ARIA</span>
+  </div>
+  <div class="mast-mid">CEO  ·  EXECUTIVE BRIEFING</div>
+  <div class="mast-right">
+    
+    <div>
+      <div class="date-lbl">MON JUN 22 2026</div>
+      <span class="date-range"> &nbsp;Jun 01 → Jun 22 </span>
+    </div>
+  </div>
+</div>
+
+  <!-- ── TOP: headline + secondary KPIs (left) | primary KPI tall box (right) ── -->
+  <div style="display:flex;gap:0;align-items:flex-start;margin-bottom:10px;padding-bottom:10px;
+              border-bottom:1px solid #1F2937">
+    <!-- Left: icon + headline + subtitle + secondary KPIs -->
+    <div style="flex:1;padding-right:20px">
+      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+        <div style="width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="28" width="8" height="12" rx="1" fill="#F59E0B" opacity="0.5"/><rect x="20" y="20" width="8" height="20" rx="1" fill="#F59E0B" opacity="0.75"/><rect x="32" y="12" width="8" height="28" rx="1" fill="#F59E0B"/><path d="M8 8l32 0" stroke="#F59E0B" stroke-width="1" opacity="0.3"/></svg></div>
+        <div style="flex:1">
+          <div class="ed-headline">Revenue plateauing at $294.7M MoM, with growth masking retention challenges YoY.</div>
+          <div class="ed-sub">Revenue reached $294.</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;padding-left:4px"><div style="border-left:3px solid #F59E0B;padding-left:8px;"><div style="font-size:7px;color:#64748B;letter-spacing:1px;text-transform:uppercase">Active Subscribers</div><div style="font-size:12px;font-weight:700;color:#F8FAFC;font-family:Georgia,serif">745,874,303</div><div style="font-size:8px;font-weight:600;color:#F87171">▼ 4.3% MoM</div></div><div style="border-left:3px solid #F59E0B;padding-left:8px;"><div style="font-size:7px;color:#64748B;letter-spacing:1px;text-transform:uppercase">New Subscriptions</div><div style="font-size:12px;font-weight:700;color:#F8FAFC;font-family:Georgia,serif">1,828,570</div><div style="font-size:8px;font-weight:600;color:#F87171">▼ 4.8% MoM</div></div><div style="border-left:3px solid #F59E0B;padding-left:8px;"><div style="font-size:7px;color:#64748B;letter-spacing:1px;text-transform:uppercase">Cancellations</div><div style="font-size:12px;font-weight:700;color:#F8FAFC;font-family:Georgia,serif">1,122,276</div><div style="font-size:8px;font-weight:600;color:#F87171">▼ 5.5% MoM</div></div><div style="border-left:3px solid #F59E0B;padding-left:8px;"><div style="font-size:7px;color:#64748B;letter-spacing:1px;text-transform:uppercase">Avg Watch Hours</div><div style="font-size:12px;font-weight:700;color:#F8FAFC;font-family:Georgia,serif">2.37</div><div style="font-size:8px;font-weight:600;color:#F87171">▼ 6.9% MoM</div></div></div>
+    </div>
+    <!-- Right: primary KPI tall box -->
+    <div style="flex:0 0 175px;padding-left:16px;border-left:1px solid #1F2937">
+      <div style="font-size:9px;font-weight:700;color:#64748B;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Revenue</div><div style="font-size:32px;font-weight:800;color:#F8FAFC;font-family:Georgia,serif;line-height:1.0;margin-bottom:10px">$294,741,008</div><div style="display:flex;gap:6px;flex-wrap:wrap"><div style="flex:1;min-width:58px;border:1px solid #F8717155;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">MoM</div><div style="font-size:12px;font-weight:800;color:#F87171;margin-top:2px">▼ 4.2%</div></div><div style="flex:1;min-width:58px;border:1px solid #34D39955;border-radius:6px;padding:5px 8px;text-align:center;"><div style="font-size:7px;font-weight:700;letter-spacing:1.5px;color:#64748B;text-transform:uppercase">YoY</div><div style="font-size:12px;font-weight:800;color:#34D399;margin-top:2px">▲ 10.2%</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── BOTTOM: strategic overview (left) | signals+bar top, exec dir bottom (right) ── -->
+  <div style="display:flex;gap:0;align-items:flex-start">
+    <!-- Left col: Strategic Overview -->
+    <div style="flex:0 0 28%;padding-right:14px">
+      <div class="sec">Strategic Overview</div><div class="ed-stat-row"><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Revenue: ▼ 4.2% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.2%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Active Subscribers: ▼ 4.3% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 10.0%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">New Subscriptions: ▼ 4.8% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 9.2%</span><span class="stat-pill" style="background:#F8717122;border-color:#F8717166;color:#F87171">Cancellations: ▼ 5.5% MoM</span><span class="stat-pill" style="background:#34D39922;border-color:#34D39966;color:#34D399">YoY ▲ 11.3%</span></div><div class="narr">Revenue reached $294.7M, down 4.2% MoM, yet up 10.2% YoY. Kids &amp; Family content type reduced Revenue by $20.6M MoM, while overall YoY growth is offset by rising Cancellations and Churn. We must understand if the MoM decline is a seasonal dip or a deeper trend, and address the inc</div>
+    </div>
+    <!-- Vertical separator (always full height of whichever col is taller) -->
+    <div style="width:1px;background:#1F2937;flex-shrink:0;align-self:stretch"></div>
+    <!-- Middle-right: column flex — signals+bar on top, exec directive below -->
+    <div style="flex:1;padding-left:14px;display:flex;flex-direction:column">
+      <!-- Top row: Boardroom Signals | BAR Chart -->
+      <div style="display:flex;gap:0;padding-bottom:10px;border-bottom:1px solid #1F2937">
+        <div style="flex:1;padding-right:14px;border-right:1px solid #1F2937">
+          <div class="sec">Boardroom Signals</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Content_Type → Kids &amp; Family reduced Revenue by $20.6M (-27.88% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Content_Type → Original Series boosted Revenue by $6.2M (+11.36% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Genre → Reality lifted Revenue by $10.3M (+35.46% MoM).</div><div style="margin-bottom:5px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;margin-right:4px">▶</span>Genre → Romance reduced Revenue by $9.3M (-31.59% MoM).</div>
+        </div>
+        <div style="flex:0 0 200px;padding-left:14px">
+          <div style="margin-bottom:4px"><span id="ed-dim-title" class="sec" style="display:block;margin-bottom:5px">Genre Breakdown</span><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px"><button class="ed-dim-pill ed-dim-pill-active" data-dim="Genre" onclick="ariaEdDim(this)" style="--ed-accent:#F59E0B">Genre</button> <button class="ed-dim-pill " data-dim="Plan_Type" onclick="ariaEdDim(this)" style="--ed-accent:#F59E0B">Plan_Type</button> <button class="ed-dim-pill " data-dim="Region" onclick="ariaEdDim(this)" style="--ed-accent:#F59E0B">Region</button> <button class="ed-dim-pill " data-dim="Content_Type" onclick="ariaEdDim(this)" style="--ed-accent:#F59E0B">Content_Type</button> </div></div><div class="chart-box" style="height:176px"><canvas id="ed_bar"></canvas></div>
+        </div>
+      </div>
+      <!-- Bottom band: Executive Directive spanning full middle+right width -->
+      <div style="padding-top:8px">
+        <div class="sec">Executive Directive</div><div style="display:flex;flex-wrap:wrap"><div style="display:inline-block;margin-right:18px;margin-bottom:4px;font-size:10px;color:#CBD5E1;"><span style="color:#F59E0B;font-weight:700;margin-right:5px">▶</span>Initiate a cross-functional review of subscriber retention strategies. Owner: Chief Marketing Officer. Deadline: Next 30 days. Success metric: Churn Rate % reduction by 0.5 percentage points.</div></div>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="footer">
+  <div class="footer-lbl">Speaker Notes · What the Board Will Ask</div>
+  <div class="footer-text">Chief Executive Officer will ask if growth is coming at the cost of margin; costs are falling in line with revenue MoM, but YoY growth is masking rising churn. The bright spot is Original Series and Documentaries content types are driving strong revenue growth.</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script>
+/* ── Register chartjs-plugin-datalabels globally (bar value labels in PNG) ── */
+if (typeof ChartDataLabels !== 'undefined') { Chart.register(ChartDataLabels); }
+/* ── Global state — must be in window scope so inline onclick/onchange can find functions ── */
+var ARIA_CHARTS = {};
+
+var ARIA_DIM_DATA = {"Plan_Type": {"labels": ["Standard", "Premium", "Basic (Ads)"], "values": [129291919.35, 118104063.6, 47345025.25]}, "Region": {"labels": ["North America", "Europe", "Asia Pacific", "Latin America", "Middle East & Africa"], "values": [128997565.92, 80498088.71, 45097856.38, 27969371.02, 12178126.17]}, "Content_Type": {"labels": ["Documentaries", "Original Series", "Movies", "Kids & Family", "Licensed Content"], "values": [67864112.39, 61234362.74, 59432686.09, 53232807.37, 52977039.61]}, "Genre": {"labels": ["Drama", "Reality", "Action", "Animation", "Documentary", "Romance"], "values": [39822409.42, 39436809.12, 34834611.82, 31132212.7, 30272462.89, 20211951.38]}};
+function ariaEdDim(pill) {
+    var dim = pill.getAttribute('data-dim');
+    var d   = ARIA_DIM_DATA[dim];
+    if (!d) return;
+    var chart = ARIA_CHARTS['ed_bar'];
+    if (!chart) return;
+    chart.data.labels           = d.labels;
+    chart.data.datasets[0].data = d.values;
+    chart.update('none');
+    var t = document.getElementById('ed-dim-title');
+    if (t) t.textContent = dim + ' Breakdown';
+    document.querySelectorAll('.ed-dim-pill').forEach(function(p) {
+        p.classList.toggle('ed-dim-pill-active', p.getAttribute('data-dim') === dim);
+    });
+}
+</script>
+<script>
+/* ── Chart init — runs after DOM is ready so canvas elements exist ── */
+document.addEventListener('DOMContentLoaded', function() {
+    
+    ARIA_CHARTS['ed_bar'] = new Chart(document.getElementById('ed_bar'), {
+        type:'bar',
+        data:{ labels:["Drama", "Reality", "Action", "Animation", "Documentary", "Romance"], datasets:[{ data:[39822409.42, 39436809.12, 34834611.82, 31132212.7, 30272462.89, 20211951.38],
+            backgroundColor:["#34D399", "#34D399", "#34D399", "#34D399", "#34D399", "#34D399"], borderRadius:3, borderWidth:0 }] },
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+            layout:{padding:{right:42}},
+            plugins:{ legend:{display:false},
+                datalabels:{
+                    anchor:'end', align:'right',
+                    formatter:function(v){
+                        return Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':
+                               Math.abs(v)>=1e3?(v/1e3).toFixed(1)+'K':
+                               v.toFixed(0);
+                    },
+                    color:'#64748B', font:{size:8,weight:'600'}
+                },
+                tooltip:{ callbacks:{ label: ctx =>
+                    (Math.abs(ctx.raw)>=1e6
+                     ? (ctx.raw>=0?'+':'')+( ctx.raw/1e6).toFixed(1)+'M'
+                     : Math.abs(ctx.raw)>=1e3
+                     ? (ctx.raw>=0?'+':'')+(ctx.raw/1e3).toFixed(1)+'K'
+                     : ctx.raw.toFixed(0)) } } },
+            scales:{
+                x:{ display:false, grid:{display:false} },
+                y:{ ticks:{ color:'#64748B', font:{size:9} },
+                     grid:{display:false}, border:{display:false} }
+            },
+            animation:{duration:0} }
+    });
+});
+</script>
+</body>
+</html>
